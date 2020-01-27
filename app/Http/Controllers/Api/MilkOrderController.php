@@ -52,7 +52,7 @@ class MilkOrderController extends Controller
             $orderDetail->status = 1;
             $orderDetail->save();
 
-            $message = "Place order of $order->qty. Please deliver as earlist.";
+            $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
             // Send Notification to Lifter
             $notification = AndroidNotifications::to($request->user()->name, $message, $lifter->pushToken,[]);
             // All Done respones back to consumer

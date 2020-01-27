@@ -10,4 +10,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function consumer()
+    {
+        return $this->hasMany(User::class,'consumer_id');
+    }
 }
