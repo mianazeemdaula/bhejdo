@@ -13,6 +13,6 @@ class Order extends Model
 
     public function consumer()
     {
-        return $this->hasMany(User::class,'consumer_id');
+        return $this->hasMany(User::class);
     }
 }
