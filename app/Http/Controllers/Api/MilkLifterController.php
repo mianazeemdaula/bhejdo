@@ -10,6 +10,6 @@ class MilkLifterController extends Controller
 {
     public function getMilkLifters(Request $request)
     {
-        return User::role('milk-lifter')->getNearBy($request->lat, $request->lng, $request->distance)->get();
+        return User::getNearBy($request->lat, $request->lng, $request->distance)->get();
     }
 }
