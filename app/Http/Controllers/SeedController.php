@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
-
+use App\Events\NewLocation;
 class SeedController extends Controller
 {
     public function Seed()
@@ -60,5 +60,11 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('milk-lifter');
 
+    }
+
+    public function pusher($message)
+    {
+        event(new NewLocation($message));
+        return "Pushed";
     }
 }
