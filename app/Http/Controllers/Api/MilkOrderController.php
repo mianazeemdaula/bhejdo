@@ -49,7 +49,6 @@ class MilkOrderController extends Controller
             $orderDetail = new OrderDetail();
             $orderDetail->order_id = $order->id;
             $orderDetail->lifter_id = $request->lifter_id;
-            $orderDetail->_timestamp = $request->timestamp;
             $orderDetail->status = 1;
             $orderDetail->save();
 
