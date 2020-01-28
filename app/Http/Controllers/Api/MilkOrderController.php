@@ -82,6 +82,7 @@ class MilkOrderController extends Controller
             $order->status = 'accepted';
             $order->details()->insert([
                 'lifter_id' => $request->user()->id,
+                'order_id' => $request->order_id,
                 'status' => 'accepted',
             ]);
             $data = [ 'message' => "Order Accepted Sucessfully"];
