@@ -29,6 +29,24 @@ class ApiAuthController extends Controller
         }
     } 
 
+    public function loginLifter(Request $request){
+        $credentials = ['mobile' => $request->mobile, 'password' => $request->password];
+        if(Auth::attempt($credentials))
+        { 
+            if(Atuh::user()->hasRole('milk-lifter')){
+                $user = Auth::user();
+                $success['user'] = $user; 
+                $success['token'] = $user->createToken($user->account_type)->accessToken; 
+                return response()->json(['success' => $success], 200);
+            }
+            return response()->json(['error'=>'Not authorized to login'], 401); 
+        }
+        else
+        { 
+            return response()->json(['error'=>'Unauthorised'], 401); 
+        }
+    } 
+
     public function registerConsumer(Request $request) {
         try{
             $validator = Validator::make( $request->all(), [
