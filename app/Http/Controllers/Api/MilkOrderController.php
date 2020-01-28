@@ -66,9 +66,25 @@ class MilkOrderController extends Controller
     public function pendingMilkOrders(Request $request)
     {
         try{
-            $orders = Order::where('consumer_id',$request->user()->id)->get();
+            $orders = Order::where('consumer_id',$request->user()->id)->where('status','pending')->get();
             $orders = OrderResource::collection($orders);
             $data = [ 'orders' => $orders];
+            return response()->json(['status'=>true, 'data' => $data], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
+    public function confirmOrder(Request $request)
+    {
+        try{
+            $order = Order::findOrFail($request->order_id);
+            $order->status = 'accepted';
+            $order->details()->insert([
+                'lifter_id' => $request->user()->id,
+                'status' => 'accepted',
+            ]);
+            $data = [ 'message' => "Order Accepted Sucessfully"];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
