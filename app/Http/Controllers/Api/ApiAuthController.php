@@ -33,8 +33,8 @@ class ApiAuthController extends Controller
         $credentials = ['mobile' => $request->mobile, 'password' => $request->password];
         if(Auth::attempt($credentials))
         { 
-            if(Atuh::user()->hasRole('milk-lifter')){
-                $user = Auth::user();
+            $user = Auth::user();
+            if($user->hasRole('milk-lifter')){
                 $success['user'] = $user; 
                 $success['token'] = $user->createToken($user->account_type)->accessToken; 
                 return response()->json(['success' => $success], 200);
