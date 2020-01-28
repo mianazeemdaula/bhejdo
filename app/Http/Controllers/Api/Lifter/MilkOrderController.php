@@ -5,7 +5,13 @@ namespace App\Http\Controllers\Api\Lifter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\User;
 use App\Order;
+use App\Http\Resources\Milk\Order as OrderResource;
+use App\OrderDetail;
+use Illuminate\Support\Facades\Auth;
+use Validator;
+use App\Helpers\AndroidNotifications;
 
 class MilkOrderController extends Controller
 {
