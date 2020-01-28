@@ -38,7 +38,8 @@ class MilkOrderController extends Controller
             $lifter = User::findOrFail($request->lifter_id);
             
             $order = new Order();
-            $order->consumer_id = $request->consumer_id;
+            $order->lifter_id = $request->lifter_id;
+            $order->consumer_id = $request->user()->id;
             $order->qty = $request->qty;
             $order->price = $request->price;
             $order->address = $request->address;
