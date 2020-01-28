@@ -49,7 +49,7 @@ class MilkOrderController extends Controller
             $orderDetail = new OrderDetail();
             $orderDetail->order_id = $order->id;
             $orderDetail->lifter_id = $request->lifter_id;
-            $orderDetail->status = 1;
+            $orderDetail->status = 'pending';
             $orderDetail->save();
 
             $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
