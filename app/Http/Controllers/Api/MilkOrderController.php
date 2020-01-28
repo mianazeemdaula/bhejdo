@@ -80,6 +80,7 @@ class MilkOrderController extends Controller
         try{
             $order = Order::findOrFail($request->order_id);
             $order->status = 'accepted';
+            $order->save();
             $order->details()->insert([
                 'lifter_id' => $request->user()->id,
                 'order_id' => $request->order_id,
