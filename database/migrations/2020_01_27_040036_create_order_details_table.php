@@ -17,7 +17,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('order_id');
             $table->integer('lifter_id');
-            $table->enum('status',['pending','cancel','packed','picked','accepted','delivered'])->default('pending');
+            $table->string('status',15)->default('pending');
             $table->timestamps();
         });
     }

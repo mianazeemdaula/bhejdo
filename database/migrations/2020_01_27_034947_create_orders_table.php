@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
+            $table->string('status',15)->default('pending');
             $table->timestamps();
         });
     }
