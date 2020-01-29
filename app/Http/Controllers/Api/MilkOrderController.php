@@ -55,7 +55,7 @@ class MilkOrderController extends Controller
 
             $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
             // Send Notification to Lifter
-            $notification = AndroidNotifications::to($request->user()->name, $message, $lifter->pushToken,[]);
+            $notification = AndroidNotifications::toLifter($request->user()->name, $message, $lifter->pushToken,[]);
             // All Done respones back to consumer
             $success = ['msg' => 'Order Placed Successfully', 'notification' => $notification];
             return response()->json(['status'=>true, 'data' => $success], 200);
@@ -87,7 +87,9 @@ class MilkOrderController extends Controller
                 'order_id' => $request->order_id,
                 'status' => 'accepted',
             ]);
-            $data = [ 'message' => "Order Accepted Sucessfully"];
+            $message = 'You order is accepted';
+            $notification = AndroidNotifications::toConsumer($request->user()->name, $message, $order->consumer->pushToken,[]);
+            $data = [ 'message' => "Order Accepted Sucessfully", 'notification' => $notification];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
