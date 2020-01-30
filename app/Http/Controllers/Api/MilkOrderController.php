@@ -80,16 +80,16 @@ class MilkOrderController extends Controller
     {
         try{
             $order = Order::findOrFail($request->order_id);
-            $order->status = 'accepted';
+            $order->status = 'received';
             $order->save();
             $order->details()->insert([
                 'lifter_id' => $request->user()->id,
                 'order_id' => $request->order_id,
-                'status' => 'accepted',
+                'status' => 'received',
             ]);
-            $message = 'You order is accepted';
+            $message = 'Order received by customer';
             $notification = AndroidNotifications::toConsumer($request->user()->name, $message, $order->consumer->pushToken,[]);
-            $data = [ 'message' => "Order Accepted Sucessfully", 'notification' => $notification];
+            $data = [ 'message' => "Order received by customer", 'notification' => $notification];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);

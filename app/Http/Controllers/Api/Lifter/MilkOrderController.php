@@ -26,4 +26,24 @@ class MilkOrderController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
+
+    public function updateOrder(Request $request)
+    {
+        try{
+            $order = Order::findOrFail($request->order_id);
+            $order->status = $request->status;
+            $order->save();
+            $order->details()->insert([
+                'lifter_id' => $request->user()->id,
+                'order_id' => $request->order_id,
+                'status' => $request->status,
+            ]);
+            $message = 'You order is '.$request->status;
+            $notification = AndroidNotifications::toConsumer($request->user()->name, $message, $order->consumer->pushToken,[]);
+            $data = [ 'message' => "Order $request->status sucessfully", 'notification' => $notification];
+            return response()->json(['status'=>true, 'data' => $data], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
 }
