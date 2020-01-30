@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Permission;
 use App\User;
 use App\Order;
 use App\Http\Resources\Milk\Order as OrderResource;
-use App\OrderDetail;
+use App\Delivery;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Helpers\AndroidNotifications;
@@ -47,11 +47,11 @@ class MilkOrderController extends Controller
             $order->latitude = $request->latitude;
             $order->save();
 
-            $orderDetail = new OrderDetail();
-            $orderDetail->order_id = $order->id;
-            $orderDetail->lifter_id = $request->lifter_id;
-            $orderDetail->status = 'pending';
-            $orderDetail->save();
+            $delivery = new Delivery();
+            $delivery->order_id = $order->id;
+            $delivery->lifter_id = $request->lifter_id;
+            $delivery->status = 'pending';
+            $delivery->save();
 
             $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
             // Send Notification to Lifter

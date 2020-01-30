@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\Order;
+use Carbon\Carbon;
 
 class EveryMinute extends Command
 {
@@ -39,7 +40,9 @@ class EveryMinute extends Command
      */
     public function handle()
     {
-        Order::truncate();
-        echo 'All Orders Deleted';
+        $orders = Order::where('status', 'pending')->get();
+        foreach($orders as $orders){
+
+        }
     }
 }

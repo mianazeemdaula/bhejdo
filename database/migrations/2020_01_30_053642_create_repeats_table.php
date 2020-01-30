@@ -15,7 +15,7 @@ class CreateRepeatsTable extends Migration
     {
         Schema::create('repeats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->interger('order_id');
+            $table->integer('order_id');
             $table->json('duration');
             $table->boolean('active')->default(1);
             $table->timestamps();

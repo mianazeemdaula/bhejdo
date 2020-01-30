@@ -3,8 +3,8 @@
 namespace App\Http\Resources\Milk;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\User\Consumer;
-class Order extends JsonResource
+
+class Delivery extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,16 +16,10 @@ class Order extends JsonResource
     {
         return [
             'id' => $this->id,
-            'consumer' => new Consumer($this->consumer),
-            'qty' => $this->qty,
-            'price' => $this->price,
-            'address' => $this->address,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'delivery' => Delivery::collection($this->delivery)
+            'lifter' => new Lifter($this->lifter),
         ];
     }
 }
