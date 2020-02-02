@@ -18,7 +18,7 @@ Route::prefix('consumer')->group(function () {
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
         Route::post('/updatePushToken', 'Api\ApiAuthController@updatePushToken');
         Route::post('/place-order', 'Api\MilkOrderController@placeOrder'); 
-        Route::get('/pending-milk-orders', 'Api\MilkOrderController@pendingMilkOrders'); 
+        Route::post('/milk-orders', 'Api\MilkOrderController@milkOrders'); 
         Route::post('/confirm-milk-order', 'Api\MilkOrderController@confirmOrder'); 
     });
 });

@@ -32,7 +32,6 @@ class MilkOrderController extends Controller
     {
         try{
             DB::transaction(function () {
-            
                 $order = Order::findOrFail($request->order_id);
                 $order->status = $request->status;
                 $order->save();

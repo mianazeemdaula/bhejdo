@@ -64,10 +64,10 @@ class MilkOrderController extends Controller
         }
     }
 
-    public function pendingMilkOrders(Request $request)
+    public function milkOrders(Request $request)
     {
         try{
-            $orders = Order::where('consumer_id',$request->user()->id)->where('status','pending')->get();
+            $orders = Order::where('consumer_id',$request->user()->id)->where('status',$request->type)->get();
             $orders = OrderResource::collection($orders);
             $data = [ 'orders' => $orders];
             return response()->json(['status'=>true, 'data' => $data], 200);
