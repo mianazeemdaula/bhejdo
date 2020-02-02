@@ -37,7 +37,7 @@ class MilkOrderController extends Controller
                 $order = Order::findOrFail($request->order_id);
                 $order->status = $request->status;
                 $order->save();
-                $delivery = Delivery();
+                $delivery = new Delivery();
                 $delivery->lifter_id = $request->user()->id;
                 $delivery->order_id =  $request->order_id;
                 $delivery->status = $request->status;
