@@ -38,7 +38,7 @@ Route::prefix('lifter')->group(function () {
         Route::get('/pending-milk-orders', 'Api\Lifter\MilkOrderController@pendingOrders'); 
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
         Route::post('/place-order', 'Api\MilkOrderController@placeOrder'); 
-        Route::post('/update-milk-order', 'Api\MilkOrderController@updateOrder'); 
+        Route::post('/update-milk-order', 'Api\Lifter\MilkOrderController@updateOrder'); 
     });
 });
 
