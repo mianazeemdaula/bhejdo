@@ -31,7 +31,7 @@ class MilkOrderController extends Controller
     public function updateOrder(Request $request)
     {
         try{
-            DB::transaction(function () {
+            DB::transaction(function () use($request) {
                 $order = Order::findOrFail($request->order_id);
                 $order->status = $request->status;
                 $order->save();
