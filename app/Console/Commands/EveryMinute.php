@@ -40,9 +40,9 @@ class EveryMinute extends Command
      */
     public function handle()
     {
-        $orders = Order::where('status', 'pending')->get();
-        foreach($orders as $orders){
+        // $orders = Order::where('status', 'pending')->get();
+        // foreach($orders as $orders){
 
-        }
+        // }
     }
 }
