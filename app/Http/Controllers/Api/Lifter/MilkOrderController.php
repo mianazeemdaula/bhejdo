@@ -9,6 +9,7 @@ use App\User;
 use App\Order;
 use App\Http\Resources\Milk\Order as OrderResource;
 use App\OrderDetail;
+use App\Delivery;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Helpers\AndroidNotifications;
@@ -36,11 +37,11 @@ class MilkOrderController extends Controller
                 $order = Order::findOrFail($request->order_id);
                 $order->status = $request->status;
                 $order->save();
-                $order->delivery()->insert([
-                    'lifter_id' => $request->user()->id,
-                    'order_id' => $request->order_id,
-                    'status' => $request->status,
-                ]);
+                $delivery = Delivery();
+                $delivery->lifter_id = $request->user()->id;
+                $delivery->order_id =  $request->order_id;
+                $delivery->status = $request->status;
+                $delivery->save();
                 $message = 'You order is '.$request->status;
                 $notification = AndroidNotifications::toConsumer($request->user()->name, $message, $order->consumer->pushToken,[]);
                 $data = [ 'message' => "Order $request->status sucessfully", 'notification' => $notification];
