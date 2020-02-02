@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Milk;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\User\Lifter;
 
 class Delivery extends JsonResource
 {
