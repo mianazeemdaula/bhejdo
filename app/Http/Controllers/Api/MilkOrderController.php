@@ -16,11 +16,14 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Helpers\AndroidNotifications;
 
+use DB;
+
 class MilkOrderController extends Controller
 {
     public function placeOrder(Request $request)
     {
         try{
+            DB::beginTransaction();
             $validator = Validator::make( $request->all(), [
                 'consumer_id' => 'required',
                 'lifter_id' => 'required',
@@ -53,13 +56,17 @@ class MilkOrderController extends Controller
             $delivery->status = 'pending';
             $delivery->save();
 
+            DB::commit();
+
             $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
             // Send Notification to Lifter
-            $notification = AndroidNotifications::toLifter($request->user()->name, $message, $lifter->pushToken,[]);
+            $args =  ["type" => 'order', 'order_id' => $order->id ];
+            $notification = AndroidNotifications::toLifter($request->user()->name, $message, $lifter->pushToken,$args);
             // All Done respones back to consumer
             $success = ['msg' => 'Order Placed Successfully', 'notification' => $notification];
             return response()->json(['status'=>true, 'data' => $success], 200);
         }catch(Exception $ex){
+            DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
