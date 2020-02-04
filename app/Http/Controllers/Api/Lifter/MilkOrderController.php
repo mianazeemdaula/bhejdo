@@ -52,4 +52,16 @@ class MilkOrderController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
+
+    public function getOrder($orderId)
+    {
+        try{
+            $order = Order::findOrFail($orderId);
+            $order = new OrderResource($order);
+            $data = [ 'order' => $order];
+            return response()->json(['status'=>true, 'data' => $data], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
 }
