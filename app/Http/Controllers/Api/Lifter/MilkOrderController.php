@@ -42,7 +42,7 @@ class MilkOrderController extends Controller
             $delivery->order_id =  $request->order_id;
             $delivery->status = $request->status;
             $delivery->save();
-            $message = "Your Order #  $order->id of $order->qty ltr on dated $request->created_at is $request->status sucessfully";
+            $message = "Your Order #  $order->id of $order->qty ltr on dated $order->created_at is $request->status sucessfully";
             $notification = AndroidNotifications::toConsumer($request->user()->name, $message, $order->consumer->pushToken,[]);
             $data = [ 'message' => "Your Order #  $order->id is $request->status sucessfully", 'notification' => $notification];
             DB::commit();
