@@ -33,19 +33,19 @@ class MilkOrderController extends Controller
     {
         try{
             $data = [];
-            DB::transaction(function () use($request) {
-                $order = Order::findOrFail($request->order_id);
-                $order->status = $request->status;
-                $order->save();
-                $delivery = new Delivery();
-                $delivery->lifter_id = $request->user()->id;
-                $delivery->order_id =  $request->order_id;
-                $delivery->status = $request->status;
-                $delivery->save();
-                $message = 'You order is '.$request->status;
-                $notification = AndroidNotifications::toConsumer($request->user()->name, $message, $order->consumer->pushToken,[]);
-                $data = [ 'message' => "Order $request->status sucessfully", 'notification' => $notification];
-            }, 2);
+            DB::beginTransaction();
+            $order = Order::findOrFail($request->order_id);
+            $order->status = $request->status;
+            $order->save();
+            $delivery = new Delivery();
+            $delivery->lifter_id = $request->user()->id;
+            $delivery->order_id =  $request->order_id;
+            $delivery->status = $request->status;
+            $delivery->save();
+            $message = 'You order is '.$request->status;
+            $notification = AndroidNotifications::toConsumer($request->user()->name, $message, $order->consumer->pushToken,[]);
+            $data = [ 'message' => "Your Order #  $order->id is $request->status sucessfully", 'notification' => $notification];
+            DB::commit();
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
             DB::rollBack();
