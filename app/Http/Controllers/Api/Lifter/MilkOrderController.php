@@ -17,10 +17,11 @@ use DB;
 
 class MilkOrderController extends Controller
 {
-    public function pendingOrders(Request $request)
+    public function inProcessOrders(Request $request)
     {
         try{
-            $orders = Order::where('lifter_id',$request->user()->id)->where('status','pending')->get();
+            $orders = Order::where('lifter_id',$request->user()->id)
+            ->where('status','!=','delivered')->get();
             $orders = OrderResource::collection($orders);
             $data = [ 'orders' => $orders];
             return response()->json(['status'=>true, 'data' => $data], 200);

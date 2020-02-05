@@ -35,9 +35,7 @@ Route::prefix('lifter')->group(function () {
         });
         Route::post('/updatePushToken', 'Api\ApiAuthController@updatePushToken');
 
-        Route::get('/pending-milk-orders', 'Api\Lifter\MilkOrderController@pendingOrders'); 
-        Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
-        Route::post('/place-order', 'Api\MilkOrderController@placeOrder');
+        Route::get('/inprocess-milk-orders', 'Api\Lifter\MilkOrderController@inProcessOrders'); 
         Route::post('/update-milk-order', 'Api\Lifter\MilkOrderController@updateOrder');
         Route::get('/get-milk-order/{order_id}', 'Api\Lifter\MilkOrderController@getOrder');
     });
