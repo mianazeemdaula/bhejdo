@@ -130,9 +130,9 @@ class ApiAuthController extends Controller
         try{
             $user = User::where('mobile',$request->mobile)->first();
             if($user != null){
-                return response()->json(['status'=>true], 200);
+                return response()->json(['status'=>true, 'user' => $user], 200);
             }
-            return response()->json(['status'=>false], 200);
+            return response()->json(['status'=>false, 'data' => 'not valid'], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }
