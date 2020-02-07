@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 */
 
 
-Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
+
 Route::prefix('consumer')->group(function () {
+    Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
     Route::post('login', 'Api\ApiAuthController@login');
     Route::post('register', 'Api\ApiAuthController@registerConsumer');
 
