@@ -22,7 +22,7 @@ class ApiAuthController extends Controller
             if($user->hasRole('consumer')){
                 $success['user'] = $user; 
                 $success['token'] = $user->createToken($user->account_type)->accessToken; 
-                return response()->json(['data' => $success], 200);
+                return response()->json(['status'=>true, 'data' => $success], 200);
             }
             return response()->json(['error'=>'Not authorized to login'], 401);
         }
