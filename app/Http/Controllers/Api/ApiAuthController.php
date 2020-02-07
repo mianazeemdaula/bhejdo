@@ -67,7 +67,9 @@ class ApiAuthController extends Controller
             $user->name = $request->name;
             $user->mobile = $request->mobile;
             $user->password = bcrypt($request->password);
+            $user->email = $request->email;
             $user->address = $request->address;
+            $user->city = $request->city;
             $user->longitude = $request->longitude;
             $user->latitude = $request->latitude;
             $user->account_type = 'consumer';
