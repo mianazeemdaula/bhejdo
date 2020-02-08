@@ -19,10 +19,11 @@ class CreateOrdersTable extends Migration
             $table->integer('consumer_id');
             $table->integer('qty');
             $table->double('price');
+            $table->dateTime('delivery_time');
             $table->string('address');
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
-            $table->string('status',15)->default('pending');
+            $table->string('status',15)->default('created'); // created, canceled, accepted, shipped, delivered
             $table->timestamps();
         });
     }
