@@ -4,6 +4,7 @@ namespace App\Http\Resources\Milk;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\User\Consumer;
+use App\Http\Resources\User\Lifter;
 class Order extends JsonResource
 {
     /**
@@ -17,6 +18,7 @@ class Order extends JsonResource
         return [
             'id' => $this->id,
             'consumer' => new Consumer($this->consumer),
+            'lifter' => new Lifter($this->lifter),
             'qty' => $this->qty,
             'price' => $this->price,
             'address' => $this->address,
