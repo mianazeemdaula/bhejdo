@@ -11,8 +11,7 @@ class EventController extends Controller
 {
     public function lifterLocation(Request $request)
     {
-        $user = User::findOrFail($request->user()->id);
-        event(new NewLocation($user));
+        event(new NewLocation($request->user()));
         return "Pushed";
     }
 }

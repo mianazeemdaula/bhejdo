@@ -33,6 +33,6 @@ class NewLocation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('lifter_location.'.$this->user->id);
+        return new PrivateChannel('lifter_location');
     }
 }
