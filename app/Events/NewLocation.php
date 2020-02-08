@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\User;
+use App\Order;
 
 class NewLocation implements ShouldBroadcast
 {
@@ -34,5 +35,10 @@ class NewLocation implements ShouldBroadcast
     public function broadcastOn()
     {
         return new PrivateChannel('lifter_location-'.$this->user->id);
+    }
+
+    public function join(User $auth, Order $order)
+    {
+        return $auth->id === $order->consumer_id;
     }
 }
