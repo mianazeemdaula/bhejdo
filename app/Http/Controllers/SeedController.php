@@ -39,8 +39,8 @@ class SeedController extends Controller
         $user->assignRole('consumer');
 
         $user = new User();
-        $user->name = 'Zaheer Wattu';
-        $user->mobile = '03017374750';
+        $user->name = 'Ustad Manna';
+        $user->mobile = '03004103161';
         $user->password = bcrypt('123456');
         $user->address = 'Dhaki Deplapur, Depalpur';
         $user->latitude = 30.664448;
@@ -50,8 +50,8 @@ class SeedController extends Controller
         $user->assignRole('milk-lifter-shop');
 
         $user = new User();
-        $user->name = 'Bashir Ahmed';
-        $user->mobile = '03454484400';
+        $user->name = 'Phana Jutt';
+        $user->mobile = '03004103162';
         $user->password = bcrypt('123456');
         $user->address = 'Tara Sing, Depalpur';
         $user->latitude = 30.674908;
