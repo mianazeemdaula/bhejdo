@@ -34,7 +34,7 @@ class NewLocation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('lifter_location-'.$this->user->id);
+        return new PrivateChannel('lifter_location-'.$this->user->id);
     }
 
     public function join(User $auth, Order $order)
