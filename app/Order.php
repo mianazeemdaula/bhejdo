@@ -20,4 +20,9 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function lifter()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
