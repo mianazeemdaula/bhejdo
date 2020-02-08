@@ -44,7 +44,7 @@ class MilkOrderController extends Controller
             $order->lifter_id = $request->lifter_id;
             $order->consumer_id = $request->user()->id;
             $order->qty = $request->qty;
-            $order->delivery_date = $request->delivery_time;
+            $order->delivery_date = $request->delivery_date;
             $order->delivery_time = $request->delivery_time;
             $order->price = $request->price;
             $order->address = $request->address;
