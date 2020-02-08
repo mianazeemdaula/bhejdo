@@ -15,7 +15,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('lifter_location-{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('lifter_location-{id}', function ($user) {
+    return true;
 });
 
