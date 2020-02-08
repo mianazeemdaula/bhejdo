@@ -23,7 +23,7 @@ class Order extends JsonResource
             'price' => $this->price,
             'address' => $this->address,
             'delivery_date' => $this->delivery_date,
-            'delivery_date' => $this->delivery_date,
+            'delivery_time' => $this->delivery_time,
             'address' => $this->address,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
