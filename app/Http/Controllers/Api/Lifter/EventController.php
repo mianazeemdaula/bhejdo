@@ -26,6 +26,8 @@ class EventController extends Controller
             'type' => 'my_type',
             'id' => 'my_id',
         ];
+        $stats = \Elasticsearch::indices()->stats(['index' => 'my_index']);
+        return $stats;
         $return = \Elasticsearch::index($data);
         return $return;
     }
