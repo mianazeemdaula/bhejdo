@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 | User Registration Routes
 */
 
+Route::get('indexer', 'Api\Lifter\EventController@locationIndex');
 
 
 Route::prefix('consumer')->group(function () {
