@@ -5,7 +5,7 @@ return [
     /**
      * You can specify one of several different connections when building an
      * Elasticsearch client.
-     *
+     * just another comment
      * Here you may specify which of the connections below you wish to use
      * as your default connection when building an client. Of course you may
      * use create several clients at once, each with different configurations.
