@@ -66,6 +66,7 @@ class EventController extends Controller
                                 ]
                             ]
                         ]
+                    ]
                 ]
             ]
         ];
