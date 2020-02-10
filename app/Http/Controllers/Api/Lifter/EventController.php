@@ -52,14 +52,20 @@ class EventController extends Controller
         $params = [
             'index' => 'lifter_location',
             'body'  => [
-                "filter" =>  [
-                    "geo_distance" =>  [
-                      "distance" => "1000m",
-                      "location" => [
-                        "lat" =>  $lat,
-                        "lon" => $lon
+                "query" => [
+                    "fildtered" => [
+                        "query" => [ 
+                            "match_all" => []
+                        ],
+                        "filter" =>  [
+                            "geo_distance" =>  [
+                            "distance" => "1000m",
+                            "location.location" => [
+                                "lat" =>  $lat,
+                                "lon" => $lon
+                                ]
+                            ]
                         ]
-                    ]
                 ]
             ]
         ];
