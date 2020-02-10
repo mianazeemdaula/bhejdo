@@ -79,7 +79,7 @@ class EventController extends Controller
             'index' => 'lifter_location',
             'body'  => [
                 'query' => [
-                    'match' => [
+                    'must' => [
                         "match_all" => (Object)[]
                     ],
                     "filter"=> [
