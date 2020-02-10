@@ -67,6 +67,7 @@ class EventController extends Controller
                 ]
             ]
         ];
+        return json_encode($params);
         $stats = \Elasticsearch::search($params);
         return $stats;
     }
