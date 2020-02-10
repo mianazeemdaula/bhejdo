@@ -77,6 +77,9 @@ class EventController extends Controller
             'index' => 'lifter_location',
             'body'  => [
                 'query' => [
+                    'match' => [
+                        "match_all" => []
+                    ],
                     "filter"=> [
                         "geo_distance" => [
                             "distance" => "5km",
@@ -89,6 +92,7 @@ class EventController extends Controller
                 ]
             ]
         ];
+        return json_encode($params);
         $stats = \Elasticsearch::search($params);
         return $stats;
     }
