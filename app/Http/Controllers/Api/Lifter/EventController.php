@@ -80,9 +80,6 @@ class EventController extends Controller
             'body'  => [
                 'query' => [
                     'bool' => [
-                        'must' => [
-                            "match_all" => (Object)[]
-                        ],
                         "filter"=> [
                             "geo_distance" => [
                                 "distance" => "5km",
@@ -92,6 +89,7 @@ class EventController extends Controller
                                 ]
                             ]
                         ]
+                        
                     ]
                 ]
             ]
