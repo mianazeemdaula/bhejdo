@@ -16,9 +16,11 @@ class EventController extends Controller
         $currentMilliSecond = (int) (microtime(true) * 1000);
         $data = [
             'body' => [
-                'location' => [
-                    'lat' => $request->lat,
-                    'lon' => $request->lon,
+                "pin" => [
+                    'location' => [
+                        'lat' => $request->lat,
+                        'lon' => $request->lon,
+                    ]
                 ],
                 'last_update' => $currentMilliSecond,
                 'lifter_id' => $request->user()->id
@@ -83,7 +85,7 @@ class EventController extends Controller
                     "filter"=> [
                         "geo_distance" => [
                             "distance" => "5km",
-                            "location.location" => [
+                            "location" => [
                                 "lat" => 28.5402707,
                                 "lon" => 77.2289643
                             ]

@@ -13,8 +13,12 @@ class ElasticController extends Controller
             'body' => [
                 'mappings' => [
                     "properties" => [
-                        "location" => [
-                            "type" => "geo_point"
+                        "pin" => [
+                            "properties" => [
+                                "location" => [
+                                    "type" => "geo_point"
+                                ]
+                            ]
                         ],
                         "lifter_id" =>[
                             "type" => "integer"
