@@ -78,7 +78,7 @@ class EventController extends Controller
             'body'  => [
                 'query' => [
                     'match' => [
-                        "match_all" => ""
+                        "match_all" => (Object)[]
                     ],
                     "filter"=> [
                         "geo_distance" => [
