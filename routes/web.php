@@ -29,3 +29,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/seed', 'SeedController@Seed');
 Route::get('/pusher/{message}', 'SeedController@pusher');
+Route::get('/indexer/create', 'ElasticController@mapLocation');
+Route::get('/indexer/clear', 'ElasticController@clearIndices');
