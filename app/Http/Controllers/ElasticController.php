@@ -42,10 +42,12 @@ class ElasticController extends Controller
             ]
         ];
         $response = \Elasticsearch::indices()->create($params);
+        return $response;
     }
 
     public function clearIndices()
     {
         $response = \Elasticsearch::indices()->delete(['index' => 'lifter_location']);
+        return $response;
     }
 }
