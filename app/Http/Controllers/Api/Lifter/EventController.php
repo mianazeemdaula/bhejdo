@@ -87,8 +87,8 @@ class EventController extends Controller
                             "geo_distance" => [
                                 "distance" => "5km",
                                 "pin.location" => [
-                                    "lat" => 28.5402707,
-                                    "lon" => 77.2289643
+                                    "lat" => $lat,
+                                    "lon" => $lon
                                 ]
                             ]
                         ]
