@@ -46,4 +46,14 @@ class EventController extends Controller
         $return = \Elasticsearch::index($data);
         return $return;
     }
+
+    public function getLocation($id)
+    {
+        $params = [
+            'index' => 'lifter_location',
+            'id'    => 'lifter_'.$id
+        ];
+        $stats = \Elasticsearch::get($params);
+        return $stats;
+    }
 }
