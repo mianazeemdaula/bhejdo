@@ -56,4 +56,10 @@ class EventController extends Controller
         $stats = \Elasticsearch::get($params);
         return $stats;
     }
+
+    public function getStatus($id)
+    {
+        $stats = \Elasticsearch::cluster()->stats();
+        return $stats;
+    }
 }
