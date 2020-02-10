@@ -63,7 +63,7 @@ class EventController extends Controller
                             "filter"=> [
                                 "geo_distance" => [
                                     "distance" => "5km",
-                                    "location.location" => [
+                                    "pin.location" => [
                                         "lat" => 28.5402707,
                                         "lon" => 77.2289643
                                     ]
@@ -85,7 +85,7 @@ class EventController extends Controller
                     "filter"=> [
                         "geo_distance" => [
                             "distance" => "5km",
-                            "location" => [
+                            "pin.location" => [
                                 "lat" => 28.5402707,
                                 "lon" => 77.2289643
                             ]
