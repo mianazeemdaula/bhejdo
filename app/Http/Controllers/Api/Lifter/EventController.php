@@ -47,18 +47,29 @@ class EventController extends Controller
         return $return;
     }
 
-    public function getLocation($id)
+    public function getLocation($lat, $lon)
     {
         $params = [
             'index' => 'lifter_location',
-            'id'    => 'lifter_'.$id
+            'body'  => [
+                "filter" =>  [
+                    "geo_distance" =>  [
+                      "distance" => "1000m",
+                      "location" => [
+                        "lat" =>  $lat,
+                        "lon" => $lon
+                        ]
+                    ]
+                ]
+            ]
         ];
-        $stats = \Elasticsearch::get($params);
+        $stats = \Elasticsearch::search($params);
         return $stats;
     }
 
     public function getStatus()
     {
+        
         $stats = \Elasticsearch::cluster()->stats();
         return $stats;
     }
