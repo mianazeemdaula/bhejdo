@@ -12,8 +12,23 @@ class EventController extends Controller
 {
     public function lifterLocation(Request $request)
     {
-        event(new NewLocation($request->user()));
-        return "Pushed";
+        
+        $currentMilliSecond = (int) (microtime(true) * 1000);
+        $data = [
+            'body' => [
+                'location' => [
+                    'lat' => $request->lat,
+                    'lon' => $request->lon,
+                ],
+                'last_update' => $currentMilliSecond,
+                'lifter_id' => $request->user()->id
+            ],
+            'index' => 'lifter_location',
+            'id' => 'lifter_'.$request->user()->id,
+        ];
+        $return = \Elasticsearch::index($data);
+        event(new NewLocation($request->user()->id, $request->lat, $request->lon));
+        return $return;
     }
 
     public function locationIndex()

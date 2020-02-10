@@ -9,8 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\User;
-use App\Order;
 
 class NewLocation implements ShouldBroadcast
 {
@@ -21,10 +19,14 @@ class NewLocation implements ShouldBroadcast
      *
      * @return void
      */
-    public $user;
-    public function __construct(User $user)
+    public $id;
+    public $lat;
+    public $lon;
+    public function __construct($id, $lat, $lon)
     {
-        $this->user = $user;
+        $this->id = $id;
+        $this->lat = $lat;
+        $this->lon = $lon;
     }
 
     /**
@@ -34,7 +36,7 @@ class NewLocation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('lifter_location-'.$this->user->id);
+        return new Channel('lifter_location-'.$this->id);
     }
 
 }
