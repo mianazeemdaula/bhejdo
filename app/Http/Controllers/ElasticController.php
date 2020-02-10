@@ -41,8 +41,7 @@ class ElasticController extends Controller
                 ]
             ]
         ];
-        $client = \ClientBuilder::create()->build();
-        $response = $client->indices()->create($params);
+        $response = \Elasticsearch::indices()->create($params);
     }
 
     public function clearIndices()
