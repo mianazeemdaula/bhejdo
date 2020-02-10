@@ -79,15 +79,17 @@ class EventController extends Controller
             'index' => 'lifter_location',
             'body'  => [
                 'query' => [
-                    'must' => [
-                        "match_all" => (Object)[]
-                    ],
-                    "filter"=> [
-                        "geo_distance" => [
-                            "distance" => "5km",
-                            "pin.location" => [
-                                "lat" => 28.5402707,
-                                "lon" => 77.2289643
+                    'bool' => [
+                        'must' => [
+                            "match_all" => (Object)[]
+                        ],
+                        "filter"=> [
+                            "geo_distance" => [
+                                "distance" => "5km",
+                                "pin.location" => [
+                                    "lat" => 28.5402707,
+                                    "lon" => 77.2289643
+                                ]
                             ]
                         ]
                     ]
