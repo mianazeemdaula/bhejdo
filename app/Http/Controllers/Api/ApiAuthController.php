@@ -137,7 +137,27 @@ class ApiAuthController extends Controller
             $ordersCount = Order::where('lifter_id', $user->id)->where('status','delivered')->count();
             $ranking = LifterReview::whereIn('order_id',Order::where('lifter_id', $user->id)->get('id'))->avg('starts');
             $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
-            return response()->json(['status'=> $data], 200);
+            $indexData = [
+                'body' => [
+                    "pin" => [
+                        'location' => [
+                            'lat' => $request->lat,
+                            'lon' => $request->lon,
+                        ]
+                    ],
+                    'lifter_orders' => $ordersCount,
+                    'star_rating' => $ranking,
+                    'name' => $user->name,
+                    'avatar' => $user->avatar,
+                    'account_type' => 'milk-lifter',
+                    'last_update' => $currentMilliSecond = (int) (microtime(true) * 1000),
+                    'lifter_id' => $request->user()->id
+                ],
+                'index' => 'lifter_location',
+                'id' => 'lifter_'.$request->user()->id,
+            ];
+            $return = \Elasticsearch::index($indexData);
+            return response()->json(['status'=> true], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }
