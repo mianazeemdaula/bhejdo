@@ -59,7 +59,7 @@ class EventController extends Controller
                     'bool' => [
                         "filter"=> [
                             "geo_distance" => [
-                                "distance" => "5km",
+                                "distance" => "25km",
                                 "pin.location" => [
                                     "lat" => $lat,
                                     "lon" => $lon
