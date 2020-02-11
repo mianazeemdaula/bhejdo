@@ -34,19 +34,15 @@ class EventController extends Controller
         return $return;
     }
 
-    public function locationIndex()
+    public function getAll()
     {
         $data = [
-            'body' => [
-                'testField' => 'this is the test api'
-            ],
-            'index' => 'my_index',
-            'type' => 'my_type',
-            'id' => 'my_id',
+            'index' => 'lifter_location',
+            'body'  => [
+                "match_all" => (object)[]
+            ]
         ];
-        $stats = \Elasticsearch::indices()->stats(['index' => 'my_index']);
-        return $stats;
-        $return = \Elasticsearch::index($data);
+        $stats = \Elasticsearch::search($data);
         return $return;
     }
 
