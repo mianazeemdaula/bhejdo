@@ -10,6 +10,8 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 use App\User;
+use App\Order;
+use App\LifterReview;
 use Validator;
 
 class ApiAuthController extends Controller
@@ -127,6 +129,20 @@ class ApiAuthController extends Controller
         }
     }
 
+    public function updateLifterPushToken(Request $request) {
+        try{
+            $user = User::findOrFail($request->user()->id);
+            $user->pushToken = $request->pushToken;
+            $user->save();
+            $ordersCount = Order::where('lifter_id', $user->id)-where('status','delivered')->count();
+            $ranking = LifterReview::whereIn('order_id',Order::where('lifter_id', $user->id)->select('id')->toArray())->avg('starts');
+            $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
+            return response()->json(['status'=> $data], 200);
+        }catch(Exception $e){
+            return response()->json(['success'=>$e], 405);
+        }
+    }
+    
     public function phoneRegister(Request $request)
     {
         try{
