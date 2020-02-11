@@ -134,7 +134,7 @@ class ApiAuthController extends Controller
             $user = User::findOrFail($request->user()->id);
             $user->pushToken = $request->pushToken;
             $user->save();
-            $ordersCount = Order::where('lifter_id', $user->id)-where('status','delivered')->count();
+            $ordersCount = Order::where('lifter_id', $user->id)->where('status','delivered')->count();
             $ranking = LifterReview::whereIn('order_id',Order::where('lifter_id', $user->id)->select('id')->toArray())->avg('starts');
             $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
             return response()->json(['status'=> $data], 200);
