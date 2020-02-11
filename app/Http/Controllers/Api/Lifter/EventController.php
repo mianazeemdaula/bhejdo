@@ -29,7 +29,7 @@ class EventController extends Controller
             'index' => 'lifter_location',
             'id' => 'lifter_'.$request->user()->id,
         ];
-        $return = \Elasticsearch::index($data);
+        $return = \Elasticsearch::update($data);
         event(new NewLocation($request->user()->id, $request->lat, $request->lon));
         return $return;
     }
