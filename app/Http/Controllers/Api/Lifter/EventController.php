@@ -45,7 +45,7 @@ class EventController extends Controller
             ]
         ];
         $stats = \Elasticsearch::search($data);
-        return $return;
+        return $stats;
     }
 
     public function getLocation($lat, $lon)
