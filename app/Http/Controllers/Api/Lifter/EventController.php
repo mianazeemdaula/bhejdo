@@ -39,7 +39,7 @@ class EventController extends Controller
         $data = [
             'index' => 'lifter_location',
             'body'  => [
-                "match_all" => (object)[]
+                "match_all" => (Object)[]
             ]
         ];
         $stats = \Elasticsearch::search($data);
