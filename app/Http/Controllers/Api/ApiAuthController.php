@@ -139,13 +139,7 @@ class ApiAuthController extends Controller
             $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
             $indexData = [
                 'body' => [
-                    "pin" => [
-                        'location' => [
-                            'lat' => $request->lat,
-                            'lon' => $request->lon,
-                        ]
-                    ],
-                    'lifter_orders' => $ordersCount,
+                   'lifter_orders' => $ordersCount,
                     'star_rating' => $ranking,
                     'name' => $user->name,
                     'avatar' => $user->avatar,
