@@ -28,7 +28,6 @@ class MilkOrderController extends Controller
             DB::beginTransaction();
             $validator = Validator::make( $request->all(), [
                 'consumer_id' => 'required',
-                'lifter_id' => 'required',
                 'qty' => 'required',
                 'price' => 'required',
                 'address' => 'required',
