@@ -50,7 +50,7 @@ class OrderProcess {
             ]
         ];
         $stats = \Elasticsearch::search($params);
-        return json_decode($stats);
+        return $stats;
     }
 
     static public function toLifter($title, $messag, $token,Array $data)
