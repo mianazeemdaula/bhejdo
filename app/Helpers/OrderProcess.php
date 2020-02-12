@@ -11,7 +11,7 @@ class OrderProcess {
     static public function newOrder(OpenOrder $order)
     {
         try{
-            $nears = getNearMe($order->latitude, $order->longitude);
+            $nears = self::getNearMe($order->latitude, $order->longitude);
             $lifters = $nears['hits']['hits'];
             foreach ($lifters as $lifter) {
                 $data = $lifter['_source'];
