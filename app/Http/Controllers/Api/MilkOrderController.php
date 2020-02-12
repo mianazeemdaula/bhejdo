@@ -10,17 +10,57 @@ use Spatie\Permission\Models\Permission;
 
 use App\User;
 use App\Order;
+use App\OpenOrder;
 use App\Http\Resources\Milk\Order as OrderResource;
 use App\Delivery;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Helpers\AndroidNotifications;
+use App\Helpers\OrderProcess;
 
 use DB;
 
 class MilkOrderController extends Controller
 {
     public function placeOrder(Request $request)
+    {
+        try{
+            DB::beginTransaction();
+            $validator = Validator::make( $request->all(), [
+                'consumer_id' => 'required',
+                'lifter_id' => 'required',
+                'qty' => 'required',
+                'price' => 'required',
+                'address' => 'required',
+                'latitude' => 'required',
+                'longitude' => 'required',
+                'delivery_time' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json(['error'=>$validator->errors()], 401);
+            }
+            
+            $order = new OpenOrder();
+            $order->consumer_id = $request->user()->id;
+            $order->qty = $request->qty;
+            $order->delivery_time = $request->delivery_time;
+            $order->price = $request->price;
+            $order->address = $request->address;
+            $order->longitude = $request->longitude;
+            $order->latitude = $request->latitude;
+            $order->save();
+            DB::commit();
+            $response = OrderProcess::newOrder($order);
+            $data = ['msg' => 'Order Placed Successfully', 'response' => $response];
+            return response()->json(['status'=>true, 'data' => $data], 200);
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
+    public function placeOrderOld(Request $request)
     {
         try{
             DB::beginTransaction();
