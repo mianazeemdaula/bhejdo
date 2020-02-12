@@ -21,7 +21,7 @@ class MilkOrderController extends Controller
     public function getNewOrderDetails($orderid)
     {
         try{
-            $order = OpenOrder::with('consumer')->where($orderid)->get();
+            $order = OpenOrder::with('consumer')->where('id',$orderid)->get();
             if($order == null){
                 return response()->json(['status'=>false, 'data' => ['Order assigned to anotherone']], 200);
             }
