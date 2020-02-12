@@ -8,15 +8,58 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Order;
 use App\Http\Resources\Milk\Order as OrderResource;
-use App\OrderDetail;
-use App\Delivery;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Helpers\AndroidNotifications;
 use DB;
+use App\OpenOrder;
+use Carbon\Carbon;
 
 class MilkOrderController extends Controller
 {
+
+    public function getNewOrderDetails(Request $request)
+    {
+        try{
+            $order = OpenOrder::with('consumer')->where($request->orderid)->get();
+            if($order == null){
+                return response()->json(['status'=>false, 'data' => ['Order assigned to anotherone']], 200);
+            }
+            return response()->json(['status'=>true, 'data' => $order], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
+    public function orderAccept(Request $request)
+    {
+        try{
+            DB::beginTransaction();
+            $openOrder = OpenOrder::find($request->orderid);
+            if($openOrder == null){
+                return response()->json(['status'=>false, 'data' => ['Order accepted already']], 200);
+            }
+            $order = new Order();
+            $order->consumer_id = $openOrder->consumer_id;
+            $order->qty = $openOrder->qty;
+            $order->delivery_time = $openOrder->delivery_time;
+            $order->price = $openOrder->price;
+            $order->address = $openOrder->address;
+            $order->longitude = $openOrder->longitude;
+            $order->latitude = $openOrder->latitude;
+            $order->created_time = $openOrder->created_at;
+            $order->status = 'accepted';
+            $order->accepted_time = Carbon::now()->toDateTimeString();
+            $order->save();
+            $openOrder->delete();
+            DB::commit();
+            return response()->json(['status'=>true, 'data' => "Order Accepted"], 200);
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
     public function inProcessOrders(Request $request)
     {
         try{

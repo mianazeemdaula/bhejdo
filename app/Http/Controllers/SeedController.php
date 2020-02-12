@@ -60,6 +60,7 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('milk-lifter');
 
+        return "Data Added Successfully";
     }
 
     public function pusher($message)
