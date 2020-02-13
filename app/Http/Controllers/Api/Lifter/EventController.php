@@ -54,14 +54,16 @@ class EventController extends Controller
             'index' => 'lifter_location',
             'body'  => [
                 'query' => [
-                    "filter"=> [
-                        "geo_distance" => [
-                            "distance" => "25km",
-                            "pin.location" => [
-                                "lat" => $lat,
-                                "lon" => $lon
+                    'bool' => [
+                        "filter"=> [
+                            "geo_distance" => [
+                                "distance" => "25km",
+                                "pin.location" => [
+                                    "lat" => $lat,
+                                    "lon" => $lon
+                                ]
                             ]
-                        ]
+                        ]   
                     ],
                     "sort" =>  [
                         "_geo_distance" => [
@@ -69,10 +71,10 @@ class EventController extends Controller
                                 "lat" => $lat,
                                 "lon" => $lon
                             ],
-                          "order" => "asc",
-                          "unit" => "km"
+                            "order" => "asc",
+                            "unit" => "km"
                         ]
-                    ],
+                    ]
                 ]
             ]
         ];
