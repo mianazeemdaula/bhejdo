@@ -37,6 +37,7 @@ class MilkOrderController extends Controller
             DB::beginTransaction();
             $openOrder = OpenOrder::find($request->orderid);
             if($openOrder == null){
+                DB::rollBack();
                 return response()->json(['status'=>false, 'data' => ['Order accepted already']], 200);
             }
             $order = new Order();
