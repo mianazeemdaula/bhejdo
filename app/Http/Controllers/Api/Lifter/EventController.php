@@ -63,8 +63,17 @@ class EventController extends Controller
                                     "lon" => $lon
                                 ]
                             ]
-                        ]
-                        
+                        ],
+                        "sort" =>  [
+                            "_geo_distance" => [
+                                "pin.location" => [
+                                    "lat" => $lat,
+                                    "lon" => $lon
+                                ],
+                              "order" => "asc",
+                              "unit" => "km"
+                            ]
+                        ],
                     ]
                 ]
             ]
