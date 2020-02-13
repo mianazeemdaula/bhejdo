@@ -76,10 +76,10 @@ class EventController extends Controller
                         "unit" => "km"
                     ],
                     "lifter_orders" => [
-                        "order" => "des",
+                        "order" => "asc",
                     ],
                     "star_rating" => [
-                        "order" => "des",
+                        "order" => "asc",
                     ],
                 ],
                 //"size" => 1
