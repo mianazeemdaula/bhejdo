@@ -54,28 +54,25 @@ class EventController extends Controller
             'index' => 'lifter_location',
             'body'  => [
                 'query' => [
-                    'bool' => [
-                        "filter"=> [
-                            "geo_distance" => [
-                                "distance" => "25km",
-                                "pin.location" => [
-                                    "lat" => $lat,
-                                    "lon" => $lon
-                                ]
+                    "filter"=> [
+                        "geo_distance" => [
+                            "distance" => "25km",
+                            "pin.location" => [
+                                "lat" => $lat,
+                                "lon" => $lon
                             ]
-                        ],
-                        "sort" =>  [
-                            "_geo_distance" => [
-                                "pin.location" => [
-                                    "lat" => $lat,
-                                    "lon" => $lon
-                                ],
-                              "order" => "asc",
-                              "unit" => "km"
-                            ]
-                        ],
-                    ]
-                ]
+                        ]
+                    ],
+                    "sort" =>  [
+                        "_geo_distance" => [
+                            "pin.location" => [
+                                "lat" => $lat,
+                                "lon" => $lon
+                            ],
+                          "order" => "asc",
+                          "unit" => "km"
+                        ]
+                    ],
             ]
         ];
         $stats = \Elasticsearch::search($params);
