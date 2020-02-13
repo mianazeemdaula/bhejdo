@@ -25,7 +25,7 @@ class OrderProcess {
                 $notification = AndroidNotifications::toLifter("New Milk Order", $message, $_lifter->pushToken,$args);
                 $noti[] = $notification;
             }
-            return ['count' => $lCount, 'noti' => $noti];
+            return ['count' => $lCount, 'noti' => $noti, 'lat' => $order->latitude, 'lon' => $order->longitude];
         }catch(Exception $ex){
             return $ex;
         }
