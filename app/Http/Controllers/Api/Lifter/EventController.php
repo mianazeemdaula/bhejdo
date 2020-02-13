@@ -74,9 +74,15 @@ class EventController extends Controller
                         ],
                         "order" => "asc",
                         "unit" => "km"
-                    ]
+                    ],
+                    "lifter_orders" => [
+                        "order" => "des",
+                    ],
+                    "star_rating" => [
+                        "order" => "des",
+                    ],
                 ],
-                "size" => 1
+                //"size" => 1
 
             ]
         ];
