@@ -136,6 +136,7 @@ class ApiAuthController extends Controller
             $user->save();
             $ordersCount = Order::where('lifter_id', $user->id)->where('status','delivered')->count();
             $ranking = LifterReview::whereIn('order_id',Order::where('lifter_id', $user->id)->get('id'))->avg('starts');
+            $ranking = $ranking == null ? 0 : $ranking;
             $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
             $indexData = [
                 'body' => [
@@ -144,7 +145,7 @@ class ApiAuthController extends Controller
                     'name' => $user->name,
                     'avatar' => $user->avatar,
                     'account_type' => 'milk-lifter',
-                    'last_update' => $currentMilliSecond = (int) (microtime(true) * 1000),
+                    'last_update' => $currentMilliSecond = (int) (microtime(true) * 100),
                     'lifter_id' => $request->user()->id
                 ],
                 'index' => 'lifter_location',
