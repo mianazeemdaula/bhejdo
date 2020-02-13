@@ -12,7 +12,7 @@ class EventController extends Controller
 {
     public function lifterLocation(Request $request)
     {
-        $currentMilliSecond = (int) (microtime(true) * 100);
+        $currentMilliSecond = (int) (microtime(true));
         $data = [
             'body' => [
                 "doc" => [

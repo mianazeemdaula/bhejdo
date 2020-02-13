@@ -13,6 +13,8 @@ class OrderProcess {
         try{
             $nears = self::getNearMe($order->latitude, $order->longitude);
             $lifters = $nears['hits']['hits'];
+            $lCount = count($lifters);
+            $noti = [];
             foreach ($lifters as $lifter) {
                 $data = $lifter['_source'];
                 $lifterid = $data['lifter_id'];
@@ -21,7 +23,9 @@ class OrderProcess {
                 // Send Notification to Lifter
                 $args =  ["type" => 'new_order', 'order_id' => $order->id ];
                 $notification = AndroidNotifications::toLifter("New Milk Order", $message, $_lifter->pushToken,$args);
+                $noti[] = $notification;
             }
+            return ['count' => $lCount, 'noti' => $noti];
         }catch(Exception $ex){
             return $ex;
         }
