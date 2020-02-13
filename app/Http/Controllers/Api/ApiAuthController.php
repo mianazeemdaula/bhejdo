@@ -144,7 +144,7 @@ class ApiAuthController extends Controller
                     'star_rating' => $ranking,
                     'name' => $user->name,
                     'avatar' => $user->avatar,
-                    'account_type' => 'milk-lifter',
+                    'account_type' => $user->getRoleNames()[0],
                     'last_update' => $currentMilliSecond = (int) (microtime(true) * 100),
                     'lifter_id' => $request->user()->id
                 ],
