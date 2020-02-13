@@ -41,6 +41,7 @@ class MilkOrderController extends Controller
             }
             $order = new Order();
             $order->consumer_id = $openOrder->consumer_id;
+            $order->lifter_id = $request->user()->id;
             $order->qty = $openOrder->qty;
             $order->delivery_time = $openOrder->delivery_time;
             $order->price = $openOrder->price;
