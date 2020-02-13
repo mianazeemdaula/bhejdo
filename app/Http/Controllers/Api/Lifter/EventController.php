@@ -73,6 +73,7 @@ class EventController extends Controller
                           "unit" => "km"
                         ]
                     ],
+                ]
             ]
         ];
         $stats = \Elasticsearch::search($params);
