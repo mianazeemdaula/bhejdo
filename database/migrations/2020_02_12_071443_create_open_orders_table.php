@@ -16,6 +16,7 @@ class CreateOpenOrdersTable extends Migration
         Schema::create('open_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('consumer_id');
+            $table->integer('service_id');
             $table->integer('qty');
             $table->double('price');
             $table->dateTime('delivery_time');

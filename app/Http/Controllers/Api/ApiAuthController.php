@@ -145,6 +145,8 @@ class ApiAuthController extends Controller
                     'name' => $user->name,
                     'avatar' => $user->avatar,
                     'account_type' => $user->getRoleNames()[0],
+                    'level' => $user->level->id,
+                    'services' => $user->services->pluck('id')->toArray(),
                     'last_update' => $currentMilliSecond = (int) (microtime(true) * 100),
                     'lifter_id' => $request->user()->id
                 ],

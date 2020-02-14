@@ -8,17 +8,18 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+use Illuminate\Support\Facades\Auth;
+use Validator;
+use DB;
+
 use App\User;
 use App\Order;
 use App\OpenOrder;
-use App\Http\Resources\Milk\Order as OrderResource;
 use App\Delivery;
-use Illuminate\Support\Facades\Auth;
-use Validator;
 use App\Helpers\AndroidNotifications;
 use App\Helpers\OrderProcess;
+use App\Http\Resources\Milk\Order as OrderResource;
 
-use DB;
 
 class MilkOrderController extends Controller
 {
@@ -33,7 +34,8 @@ class MilkOrderController extends Controller
                 'address' => 'required',
                 'latitude' => 'required',
                 'longitude' => 'required',
-                'delivery_time' => 'required'
+                'delivery_time' => 'required',
+                'service_id' => 'required'
             ]);
     
             if ($validator->fails()) {
@@ -48,6 +50,7 @@ class MilkOrderController extends Controller
             $order->address = $request->address;
             $order->longitude = $request->longitude;
             $order->latitude = $request->latitude;
+            $order->service_id = $request->service_id;
             $order->save();
             DB::commit();
             $response = OrderProcess::newOrder($order);

@@ -39,6 +39,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function services()
+    {
+        return $this->belongsToMany('App\Service')->using('App\ServiceUser')->withPivot([
+            'service_id',
+            'user_id',
+        ]);
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
     public function scopeIsWithinMaxDistance($query, $location, $radius = 5) {
 
         $haversine = "(6371 * acos(cos(radians($location->latitude)) 

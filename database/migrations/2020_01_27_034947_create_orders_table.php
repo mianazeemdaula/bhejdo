@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->integer('lifter_id');
             $table->integer('consumer_id');
+            $table->integer('service_id');
             $table->integer('qty');
             $table->double('price');
             $table->dateTime('delivery_time');

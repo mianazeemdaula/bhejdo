@@ -8,13 +8,14 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
 use App\Events\NewLocation;
+use App\Service;
 class SeedController extends Controller
 {
     public function Seed()
     {
         $consumer = Role::firstOrCreate(['name' => 'consumer']);
-        $milkLifter = Role::firstOrCreate(['name' => 'milk-lifter']);
-        $milkLifterShop = Role::firstOrCreate(['name' => 'milk-lifter-shop']);
+        $milkLifter = Role::firstOrCreate(['name' => 'lifter']);
+        $milkLifterShop = Role::firstOrCreate(['name' => 'shop']);
 
         $user = new User();
         $user->name = 'Azeem Rehan';
@@ -23,9 +24,9 @@ class SeedController extends Controller
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->latitude = 30.672153;
         $user->longitude = 73.658889;
-        $user->account_type = 'milk-lifter';
+        $user->account_type = 'lifter';
         $user->save();
-        $user->assignRole('milk-lifter');
+        $user->assignRole('lifter');
 
         $user = new User();
         $user->name = 'Abdur Rehman';
@@ -45,9 +46,9 @@ class SeedController extends Controller
         $user->address = 'Dhaki Deplapur, Depalpur';
         $user->latitude = 30.664448;
         $user->longitude = 73.655799;
-        $user->account_type = 'milk-lifter-shop';
+        $user->account_type = 'shop';
         $user->save();
-        $user->assignRole('milk-lifter-shop');
+        $user->assignRole('shop');
 
         $user = new User();
         $user->name = 'Phana Jutt';
@@ -56,9 +57,36 @@ class SeedController extends Controller
         $user->address = 'Tara Sing, Depalpur';
         $user->latitude = 30.674908;
         $user->longitude = 73.625454;
-        $user->account_type = 'milk-lifter';
+        $user->account_type = 'lifter';
         $user->save();
-        $user->assignRole('milk-lifter');
+        $user->assignRole('lifter');
+
+        $service = new Service();
+        $service->s_name = 'Milk';
+        $service->min_qty = 5;
+        $service->max_qty = 25;
+        $service->s_price = 100;
+        $service->icon = 'milk_service';
+        $service->s_status = 'active';
+        $service->save();
+
+        $service = new Service();
+        $service->s_name = 'Dhahi';
+        $service->min_qty = 2;
+        $service->max_qty = 20;
+        $service->s_price = 120;
+        $service->icon = 'dhahi_service';
+        $service->s_status = 'active';
+        $service->save();
+
+        $service = new Service();
+        $service->s_name = 'Lasi';
+        $service->min_qty = 5;
+        $service->max_qty = 20;
+        $service->s_price = 80;
+        $service->icon = 'lasi_service';
+        $service->s_status = 'active';
+        $service->save();
 
         return "Data Added Successfully";
     }
