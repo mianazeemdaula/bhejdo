@@ -32,6 +32,7 @@ Route::prefix('consumer')->group(function () {
 
 
 Route::prefix('lifter')->group(function () {
+    Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
     Route::post('login', 'Api\ApiAuthController@loginLifter');
     Route::post('register', 'Api\ApiAuthController@registerConsumer');
     

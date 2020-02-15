@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('email')->unique()->nullable();
             $table->string('avatar')->nullable();
-            $table->string('mobile_verified_at')->nullable();
             $table->string('cnic_front')->nullable();
             $table->string('cnic_back')->nullable();
             $table->string('cnic_verified_at')->nullable();
@@ -30,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
             $table->string('pushToken')->nullable();
-            $table->integer('referred_by')->nullable();
+            $table->string('referred_by',11)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

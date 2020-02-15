@@ -47,6 +47,16 @@ class User extends Authenticatable
         ]);
     }
 
+    public function walet()
+    {
+        return $this->hasMany(Walet::class);
+    }
+
+    public function bonus()
+    {
+        return $this->hasMany(Bonus::class);
+    }
+
     public function level()
     {
         return $this->belongsTo(Level::class);

@@ -19,7 +19,7 @@ class ApiAuthController extends Controller
     public function login(Request $request){
         $credentials = ['mobile' => $request->mobile, 'password' => $request->password];
         if(Auth::attempt($credentials))
-        { 
+        {
             $user = Auth::user();
             if($user->hasRole('consumer')){
                 $success['user'] = $user; 
@@ -39,7 +39,7 @@ class ApiAuthController extends Controller
         if(Auth::attempt($credentials))
         { 
             $user = Auth::user();
-            if($user->hasRole('milk-lifter')){
+            if($user->hasRole('lifter|shope')){
                 $success['user'] = $user; 
                 $success['token'] = $user->createToken($user->account_type)->accessToken; 
                 return response()->json(['success' => $success], 200);
@@ -57,6 +57,7 @@ class ApiAuthController extends Controller
             $validator = Validator::make( $request->all(), [
                 'name' => 'required',
                 'mobile' => 'required|min:11|max:11|unique:users',
+                'email' => 'unique:users',
                 'password' => 'required',
                 'confirm_password' => 'required|same:password',
             ]);
@@ -91,8 +92,10 @@ class ApiAuthController extends Controller
             $validator = Validator::make( $request->all(), [
                 'name' => 'required',
                 'mobile' => 'required|min:11|max:11|unique:users',
+                'email' => 'unique:users|nullable',
                 'password' => 'required',
                 'confirm_password' => 'required|same:password',
+                'account_type' => ['required', Rule::in(['lifter', 'store'])]
             ]);
     
             if ($validator->fails()) {
@@ -106,10 +109,10 @@ class ApiAuthController extends Controller
             $user->address = $request->address;
             $user->longitude = $request->longitude;
             $user->latitude = $request->latitude;
-            $user->account_type = 'milk-lifter';
+            $user->account_type = $request->type;
             $user->save();
-            $role = Role::firstOrCreate(['name' => 'milk-lifter']);
-            $user->assignRole('milk-lifter');
+            $role = Role::firstOrCreate(['name' => $user->account_type]);
+            $user->assignRole($user->account_type);
             $success['token'] = $user->createToken($user->account_type)->accessToken;
             $success['user'] = $user;
             return response()->json(['status'=>true, 'data' => $success], 200);
