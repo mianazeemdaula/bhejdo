@@ -9,14 +9,18 @@ use Spatie\Permission\Models\Permission;
 use App\User;
 use App\Events\NewLocation;
 use App\Service;
+use App\Level;
 
 class SeedController extends Controller
 {
     public function Seed()
     {
+        $consumer = Role::firstOrCreate(['name' => 'super-admin']);
+        $consumer = Role::firstOrCreate(['name' => 'admin']);
+        $consumer = Role::firstOrCreate(['name' => 'branch']);
+        $consumer = Role::firstOrCreate(['name' => 'store']);
+        $consumer = Role::firstOrCreate(['name' => 'lifter']);
         $consumer = Role::firstOrCreate(['name' => 'consumer']);
-        $milkLifter = Role::firstOrCreate(['name' => 'lifter']);
-        $milkLifterShop = Role::firstOrCreate(['name' => 'store']);
 
         // $user = new User();
         // $user->name = 'Azeem Rehan';
@@ -66,6 +70,8 @@ class SeedController extends Controller
         $service->s_name = 'Milk';
         $service->min_qty = 5;
         $service->max_qty = 25;
+        $service->min_qty_charges = 50;
+        $service->s_charges = 10;
         $service->s_price = 100;
         $service->icon = 'milk_service';
         $service->s_status = 'active';
@@ -76,6 +82,8 @@ class SeedController extends Controller
         $service->min_qty = 2;
         $service->max_qty = 20;
         $service->s_price = 120;
+        $service->min_qty_charges = 50;
+        $service->s_charges = 8;
         $service->icon = 'dhahi_service';
         $service->s_status = 'active';
         $service->save();
@@ -85,9 +93,16 @@ class SeedController extends Controller
         $service->min_qty = 5;
         $service->max_qty = 20;
         $service->s_price = 80;
+        $service->min_qty_charges = 50;
+        $service->s_charges = 6;
         $service->icon = 'lasi_service';
         $service->s_status = 'active';
         $service->save();
+
+        $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Part Time', 'order_qty' => 25]);
+        $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Full Time', 'order_qty' => 50]);
+        $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Over Time', 'order_qty' => 75]);
+        $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Dual Time', 'order_qty' => 100]);
 
         return "Data Added Successfully";
     }

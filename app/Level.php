@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
-    public function users()
+    protected $fillable = [
+        'service_id', 'l_name', 'order_qty',
+    ];
+
+    public function service()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(Service::class);
     }
 }

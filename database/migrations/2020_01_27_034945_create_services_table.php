@@ -18,7 +18,9 @@ class CreateServicesTable extends Migration
             $table->string('s_name');
             $table->integer('min_qty');
             $table->integer('max_qty');
+            $table->integer('min_qty_charges');
             $table->double('s_price');
+            $table->double('s_charges');
             $table->string('icon');
             $table->string('s_status');
             $table->timestamps();
