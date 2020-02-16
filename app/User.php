@@ -47,6 +47,14 @@ class User extends Authenticatable
         ]);
     }
 
+    public function storelifter()
+    {
+        return $this->belongsToMany('App\User')->using('App\StoreLifter')->withPivot([
+            'store_id',
+            'lifter_id',
+        ]);
+    }
+
     public function walet()
     {
         return $this->hasMany(Walet::class);

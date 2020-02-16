@@ -13,7 +13,8 @@ class ServiceController extends Controller
     {
         $user = User::find(1);
         $user->services()->sync([1,3]);
+        $user->storelifter()->sync([2,3]);
         $service = Service::find(1);
-        return $user->services->pluck('s_name')->toArray();
+        return $user->storelifter;
     }
 }
