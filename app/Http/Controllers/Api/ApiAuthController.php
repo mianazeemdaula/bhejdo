@@ -15,6 +15,7 @@ use App\Order;
 use App\LifterReview;
 use App\Bonus;
 use Validator;
+use Illuminate\Validation\Rule;
 
 class ApiAuthController extends Controller
 {
