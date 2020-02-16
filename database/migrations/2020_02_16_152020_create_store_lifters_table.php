@@ -13,7 +13,7 @@ class CreateStoreLiftersTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_user', function (Blueprint $table) {
+        Schema::create('store_lifters', function (Blueprint $table) {
             $table->integer('store_id');
             $table->integer('lifter_id');
         });
