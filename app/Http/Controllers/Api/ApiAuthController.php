@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+use App\Helpers\BonusProcess;
 use App\User;
 use App\Order;
 use App\LifterReview;
+use App\Bonus;
 use Validator;
 
 class ApiAuthController extends Controller
@@ -110,12 +112,20 @@ class ApiAuthController extends Controller
             $user->longitude = $request->longitude;
             $user->latitude = $request->latitude;
             $user->account_type = $request->type;
+            $user->referred_by = $request->referred;
             $user->save();
-            $role = Role::firstOrCreate(['name' => $user->account_type]);
             $user->assignRole($user->account_type);
-            $success['token'] = $user->createToken($user->account_type)->accessToken;
-            $success['user'] = $user;
-            return response()->json(['status'=>true, 'data' => $success], 200);
+            $response['token'] = $user->createToken($user->account_type)->accessToken;
+            $response['user'] = $user;
+            
+            if($user->referred != null){
+                $refer = User::where('mobile',$request->referred)->first();
+                if($refer != null){
+                    $bonus = new BonusProcess();
+                    $response['bonuse'] = $bonus->lifterRegBonus($refer, $user->mobile);
+                }
+            }
+            return response()->json(['status'=>true, 'data' => $response], 200);
         }catch(Expection $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
