@@ -119,7 +119,7 @@ class ApiAuthController extends Controller
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
             
-            if($user->referred != null){
+            if($user->referred_by != null){
                 $refer = User::where('mobile',$request->referred)->first();
                 if($refer != null){
                     $bonus = new BonusProcess();
