@@ -17,6 +17,7 @@ class CreateBonusesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('description');
+            $table->string('type',10)->default('bonus');
             $table->double('debit')->defual(0.0);
             $table->double('credit')->defual(0.0);
             $table->double('balance')->defual(0.0);
