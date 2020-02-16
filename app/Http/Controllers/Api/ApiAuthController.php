@@ -94,10 +94,10 @@ class ApiAuthController extends Controller
             $validator = Validator::make( $request->all(), [
                 'name' => 'required',
                 'mobile' => 'required|min:11|max:11|unique:users',
-                'email' => 'unique:users|nullable',
+                'email' => 'unique:users|email',
                 'password' => 'required',
                 'confirm_password' => 'required|same:password',
-                'account_type' => ['required', Rule::in(['lifter', 'store'])]
+                'type' => ['required', Rule::in(['lifter', 'store'])]
             ]);
     
             if ($validator->fails()) {
