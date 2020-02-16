@@ -43,9 +43,9 @@ class ApiAuthController extends Controller
         { 
             $user = Auth::user();
             if($user->hasRole('lifter|shope')){
-                $success['user'] = $user; 
-                $success['token'] = $user->createToken($user->account_type)->accessToken; 
-                return response()->json(['success' => $success], 200);
+                $response['user'] = $user; 
+                $response['token'] = $user->createToken($user->account_type)->accessToken; 
+                return response()->json(['status'=>true, 'data' => $response], 200);
             }
             return response()->json(['error'=>'Not authorized to login'], 401); 
         }
