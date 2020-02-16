@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('cnic_verified_at')->nullable();
             $table->string('account_type')->default('consumer');
             $table->string('address')->default('Lahore');
-            $table->string('city')->default('Lahore');
+            $table->string('city')->nullable()->default('Lahore');
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
             $table->string('pushToken')->nullable();
