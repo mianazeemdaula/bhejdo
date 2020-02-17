@@ -14,7 +14,7 @@ use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/', function ($url) {
+Route::get('/', function () {
     return view('welcome');
 });
 
