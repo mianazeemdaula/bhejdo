@@ -84,7 +84,7 @@
                     Laravel
                 </div>
 
-                <img src="{{ \Storage::url('2_cnic_back.png') }}" />
+                <img src="{{ storage_path('2_cnic_back.png') }}" />
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
