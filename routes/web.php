@@ -14,10 +14,8 @@ use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/image/{url}', function ($url) {
-    //return view('welcome');
-    // Goto Hell
-    return \Storage::get($url);
+Route::get('/', function ($url) {
+    return view('welcome');
 });
 
 Auth::routes();
