@@ -191,15 +191,11 @@ class ApiAuthController extends Controller
     public function nicVerificaiton(Request $request)
     {
         try{
-            $nicFront = $request->nicFront;  // your base64 encoded
-            $nicFront = str_replace('data:image/png;base64,', '', $nicFront);
-            $nicFront = str_replace(' ', '+', $nicFront);
+            $nicFront = $request->nicFront;
             $frontImageName = $request->user()->id.'_cnic_front.'.'png';
             \Storage::disk('public')->put($frontImageName, base64_decode($nicFront));
 
-            $nicBack = $request->nicBack;  // your base64 encoded
-            $nicBack = str_replace('data:image/png;base64,', '', $nicBack);
-            $nicBack = str_replace(' ', '+', $nicBack);
+            $nicBack = $request->nicBack;
             $backImageName = $request->user()->id.'_cnic_back.'.'png';
             \Storage::disk('public')->put($backImageName, base64_decode($nicBack));
 
@@ -209,7 +205,7 @@ class ApiAuthController extends Controller
             $user->save();
             return response()->json(['status'=>true], 200);
         }catch(Exception $e){
-            return response()->json(['success'=>$e], 405);
+            return response()->json(['status'=>false, 'error' => "$e" ], 405);
         }
     }
 }
