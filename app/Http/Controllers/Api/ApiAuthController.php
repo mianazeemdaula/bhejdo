@@ -194,13 +194,13 @@ class ApiAuthController extends Controller
             $nicFront = $request->nicFront;  // your base64 encoded
             $nicFront = str_replace('data:image/png;base64,', '', $nicFront);
             $nicFront = str_replace(' ', '+', $nicFront);
-            $frontImageName = $request->user()->id.'cnic_front.'.'png';
+            $frontImageName = $request->user()->id.'_cnic_front.'.'png';
             \File::put(storage_path(). '/' . $frontImageName, base64_decode($nicFront));
 
             $nicBack = $request->nicBack;  // your base64 encoded
             $nicBack = str_replace('data:image/png;base64,', '', $nicBack);
             $nicBack = str_replace(' ', '+', $nicBack);
-            $backImageName = $request->user()->id.'cnic_back.'.'png';
+            $backImageName = $request->user()->id.'_cnic_back.'.'png';
             \File::put(storage_path(). '/' . $backImageName, base64_decode($nicBack));
 
             $user = User::findOrFail($request->user()->id);

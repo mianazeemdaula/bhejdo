@@ -12,16 +12,11 @@
 */
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
-Route::get('/', function () {
+Route::get('/image/{url}', function ($url) {
     //return view('welcome');
-    $user = User::find(1);
-    echo $user->created_at;
-    $to = Carbon::createFromFormat('Y-m-d H:s:i', $user->created_at);
-    $from = Carbon::now();
-    echo "<br>";
-    $diff_in_minutes = $from->diffInMinutes($to);
-    print_r($diff_in_minutes); // Output: 20
+    return Storage::url($url); // Output: 20
 });
 
 Auth::routes();
