@@ -36,11 +36,15 @@ Route::prefix('lifter')->group(function () {
     Route::post('login', 'Api\ApiAuthController@loginLifter');
     Route::post('register', 'Api\ApiAuthController@registerLifter');
     
+    
     Route::group(['middleware' => ['auth:api']], function(){
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
         Route::post('/updatePushToken', 'Api\ApiAuthController@updateLifterPushToken');
+
+        // Varifications
+        Route::post('nic-verification', 'Api\ApiAuthController@nicVerificaiton');
 
         // Orders
         Route::get('/new-order-details/{order_id}', 'Api\Lifter\MilkOrderController@getNewOrderDetails');
