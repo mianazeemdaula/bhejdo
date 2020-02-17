@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/image/{url}', function ($url) {
     //return view('welcome');
     // Goto Hell
-    return asset("storage/$url");
+    return \Storage::get($url);
 });
 
 Auth::routes();
