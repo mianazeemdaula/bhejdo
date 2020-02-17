@@ -201,6 +201,7 @@ class ApiAuthController extends Controller
             $nicBack = str_replace('data:image/png;base64,', '', $nicBack);
             $nicBack = str_replace(' ', '+', $nicBack);
             $backImageName = $request->user()->id.'_cnic_back.'.'png';
+            $path = $file->storeAs('files', $fileName);
             \File::put(storage_path(). '/' . $backImageName, base64_decode($nicBack));
 
             $user = User::findOrFail($request->user()->id);
