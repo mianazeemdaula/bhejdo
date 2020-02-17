@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->double('latitude')->default(0.0);
             $table->string('pushToken')->nullable();
             $table->string('referred_by',11)->nullable();
-            $table->string('status',10)->default('active');
+            $table->string('status',12)->default('unvarified');
             $table->rememberToken();
             $table->timestamps();
         });
