@@ -20,6 +20,7 @@ Route::get('/phpinfo', function () {
 });
 
 Route::get('/mongo', function(){
+    \DB::connection('mongodb')->collection('lifter_locations')->drop();
     App\LifterLocation::updateOrCreate(['address' => "Rasheed COlony", 'lifter_id' => 255]);
    return App\LifterLocation::all(); 
 });
