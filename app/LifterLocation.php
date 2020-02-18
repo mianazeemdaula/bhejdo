@@ -8,7 +8,7 @@ class LifterLocation extends Model
 {
     protected $collection = 'lifter_location';
     protected $connection = 'mongodb';
-    protected $primaryKey = 'id';
+    //protected $primaryKey = 'id';
     protected $fillable = [
         'address',
     ];
