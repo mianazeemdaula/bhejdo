@@ -19,6 +19,29 @@ Route::get('/phpinfo', function () {
     return phpinfo();
 });
 
+Route::get('/mongo', function(){
+    $arrMongo = [];
+        $connection = \DB::connection('mongodb');
+        try{
+            $dbs = $connection->getMongoClient()->listDatabases();
+
+        } catch (\MongoDB\Driver\Exception\ConnectionTimeoutException $mongoException) {
+            //
+        }
+        if(isset($mongoException)) {
+            $arrMongo = array(
+                'status'=>false,
+                'message' => 'Mongo connection failed'
+            );
+        }else{
+            $arrMongo = array(
+                'status'=>true,
+                'message' => 'Mongo connection OK'
+            );
+        }
+        return $arrMongo;
+});
+
 Auth::routes(['register' => false]);
 
 
