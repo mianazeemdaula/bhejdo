@@ -101,7 +101,7 @@ class ApiAuthController extends Controller
                 'mobile' => 'required|min:11|max:11|unique:users',
                 'email' => 'unique:users|email|nullable',
                 'password' => 'required',
-                'reffer_id' => 'exists:users,reffer_id|nullable',
+                'referred' => 'exists:users,reffer_id|nullable',
                 'confirm_password' => 'required|same:password',
                 'type' => ['required', Rule::in(['lifter', 'store'])]
             ]);
