@@ -20,26 +20,7 @@ Route::get('/phpinfo', function () {
 });
 
 Route::get('/mongo', function(){
-    // $arrMongo = [];
-    //     $connection = \DB::connection('mongodb');
-    //     try{
-    //         $dbs = $connection->getMongoClient()->listDatabases();
-
-    //     } catch (\MongoDB\Driver\Exception\ConnectionTimeoutException $mongoException) {
-    //         return $mongoException;
-    //     }
-    //     if(isset($mongoException)) {
-    //         $arrMongo = array(
-    //             'status'=>false,
-    //             'message' => 'Mongo connection failed'
-    //         );
-    //     }else{
-    //         $arrMongo = array(
-    //             'status'=>true,
-    //             'message' => 'Mongo connection OK'
-    //         );
-    //     }
-    //     return $arrMongo;
+    LifterLocation::create(['address' => 'Rasheed Colony']);
    return App\LifterLocation::all(); 
 });
 
