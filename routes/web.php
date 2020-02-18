@@ -21,9 +21,9 @@ Route::get('/phpinfo', function () {
 
 Route::get('/mongo', function(){
     App\LifterLocation::truncate();
-    App\LifterLocation::updateOrCreate(['address' => "Rasheed COlony", 'lifter_id' => 255]);
-    App\LifterLocation::updateOrCreate(['address' => "Rasheed COlony", 'lifter_id' => 255]);
-    App\LifterLocation::updateOrCreate(['address' => "Rasheed COlony", 'lifter_id' => 255]);
+    App\LifterLocation::create(['address' => "Rasheed COlony", 'lifter_id' => 255]);
+    App\LifterLocation::where('lifter_id',255)->update(['address' => "Rasheed COlony", 'lifter_id' => 255]);
+    App\LifterLocation::where('lifter_id',255)->update(['address' => "Rasheed COlony", 'lifter_id' => 255]);
    return App\LifterLocation::all(); 
 });
 
