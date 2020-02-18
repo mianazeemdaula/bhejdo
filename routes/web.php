@@ -20,7 +20,9 @@ Route::get('/phpinfo', function () {
 });
 
 Route::get('/mongo', function(){
-    App\LifterLocation::create([ 'id' => 1, 'address' => 'Rasheed Colony']);
+    $l = new App\LifterLocation();
+    $l->address = "Rasheed Colony";
+    $l->save();
    return App\LifterLocation::all(); 
 });
 
