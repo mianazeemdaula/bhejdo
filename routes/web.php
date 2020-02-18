@@ -26,7 +26,7 @@ Route::get('/mongo', function(){
             $dbs = $connection->getMongoClient()->listDatabases();
 
         } catch (\MongoDB\Driver\Exception\ConnectionTimeoutException $mongoException) {
-            //
+            return $mongoException;
         }
         if(isset($mongoException)) {
             $arrMongo = array(
