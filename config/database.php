@@ -71,7 +71,7 @@ return [
             'username' => env('DB_USERNAME_SECOND', 'homestead'),
             'password' => env('DB_PASSWORD_SECOND', 'secret'),
             'options' => [
-               'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo 3+
+               'database' => env('DB_AUTHENTICATION_DATABASE', 'rtdb'), // required with Mongo 3+
             ],
         ],
 
