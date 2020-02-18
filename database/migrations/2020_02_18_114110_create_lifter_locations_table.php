@@ -15,7 +15,7 @@ class CreateLifterLocationsTable extends Migration
     {
         Schema::connection('mongodb')->create('lifter_locations', function (Blueprint $table) {
             $table->unique('lifter_id');
-            $table->geospatial('location', '2d');
+            //$table->geospatial('location', '2d');
         });
     }
 

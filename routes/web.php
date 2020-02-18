@@ -22,6 +22,7 @@ Route::get('/phpinfo', function () {
 Route::get('/mongo', function(){
     $l = new App\LifterLocation();
     $l->address = "Rasheed Colony";
+    $l->lifter_id = 255;
     $l->save();
    return App\LifterLocation::all(); 
 });
