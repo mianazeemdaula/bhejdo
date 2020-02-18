@@ -121,7 +121,7 @@ class ApiAuthController extends Controller
             $response['user'] = $user;
             
             if($user->referred_by != null){
-                $refer = User::where('mobile',$request->referred)->first();
+                $refer = User::where('mobile',$user->referred_by)->first();
                 if($refer != null){
                     $bonus = new BonusProcess();
                     $response['bonuse'] = $bonus->lifterRegBonus($refer, $user->mobile);
