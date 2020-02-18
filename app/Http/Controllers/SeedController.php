@@ -17,21 +17,22 @@ class SeedController extends Controller
     {
         $consumer = Role::firstOrCreate(['name' => 'super-admin']);
         $consumer = Role::firstOrCreate(['name' => 'admin']);
+        $consumer = Role::firstOrCreate(['name' => 'support']);
         $consumer = Role::firstOrCreate(['name' => 'branch']);
         $consumer = Role::firstOrCreate(['name' => 'store']);
         $consumer = Role::firstOrCreate(['name' => 'lifter']);
         $consumer = Role::firstOrCreate(['name' => 'consumer']);
 
-        // $user = new User();
-        // $user->name = 'Azeem Rehan';
-        // $user->mobile = '03004103160';
-        // $user->password = bcrypt('123456');
-        // $user->address = 'Rasheed u din colony, Depalpur';
-        // $user->latitude = 30.672153;
-        // $user->longitude = 73.658889;
-        // $user->account_type = 'store';
-        // $user->save();
-        // $user->assignRole('store');
+        $user = new User();
+        $user->name = 'Azeem Rehan';
+        $user->mobile = '03004103160';
+        $user->email = 'mazeemrehan@gmail.com';
+        $user->password = bcrypt('8m8a2r4w');
+        $user->address = 'Rasheed u din colony, Depalpur';
+        $user->account_type = 'super-admin';
+        $user->reffer_id = "azeem00001";
+        $user->save();
+        $user->assignRole('super-admin');
 
         // $user = new User();
         // $user->name = 'Abdur Rehman';

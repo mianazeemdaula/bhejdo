@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+
 use App\Helpers\BonusProcess;
 use App\User;
 use App\Order;
@@ -97,7 +98,7 @@ class ApiAuthController extends Controller
                 'mobile' => 'required|min:11|max:11|unique:users',
                 'email' => 'unique:users|email|nullable',
                 'password' => 'required',
-                'referred' => 'exists:users,mobile|nullable',
+                'reffer_id' => 'exists:users,reffer_id|nullable',
                 'confirm_password' => 'required|same:password',
                 'type' => ['required', Rule::in(['lifter', 'store'])]
             ]);
@@ -105,17 +106,22 @@ class ApiAuthController extends Controller
             if ($validator->fails()) {
                 return response()->json(['error'=>$validator->errors()], 401);
             }
-            
+
             $user = new User();
             $user->name = $request->name;
             $user->mobile = $request->mobile;
             $user->password = bcrypt($request->password);
             $user->address = $request->address;
-            $user->longitude = $request->longitude;
-            $user->latitude = $request->latitude;
             $user->account_type = $request->type;
             $user->referred_by = $request->referred;
+            $user->reffer_id = UserHelper::gerateId($request->name);
             $user->save();
+
+            $profile = $user->profile()->create([
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude
+            ]);
+            
             $user->assignRole($user->account_type);
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
