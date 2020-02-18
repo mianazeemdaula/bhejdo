@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 
 
 use App\Helpers\BonusProcess;
+use App\Helpers\UserHelper;
 use App\User;
 use App\Order;
 use App\LifterReview;
