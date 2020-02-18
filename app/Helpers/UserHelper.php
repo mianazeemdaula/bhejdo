@@ -7,7 +7,7 @@ use App\User;
 
 class UserHelper{
     static public function gerateId($username){
-        $refferid = Str::before($username," ");
+        $refferid = Str::limit($username,5);
         $newid = Str::random(10 - strlen($refferid));
         $isAvaialbe = User::where('reffer_id', $newid)->first();
         if($isAvaialbe == null){
