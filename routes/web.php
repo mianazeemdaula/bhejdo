@@ -20,26 +20,27 @@ Route::get('/phpinfo', function () {
 });
 
 Route::get('/mongo', function(){
-    $arrMongo = [];
-        $connection = \DB::connection('mongodb');
-        try{
-            $dbs = $connection->getMongoClient()->listDatabases();
+    // $arrMongo = [];
+    //     $connection = \DB::connection('mongodb');
+    //     try{
+    //         $dbs = $connection->getMongoClient()->listDatabases();
 
-        } catch (\MongoDB\Driver\Exception\ConnectionTimeoutException $mongoException) {
-            return $mongoException;
-        }
-        if(isset($mongoException)) {
-            $arrMongo = array(
-                'status'=>false,
-                'message' => 'Mongo connection failed'
-            );
-        }else{
-            $arrMongo = array(
-                'status'=>true,
-                'message' => 'Mongo connection OK'
-            );
-        }
-        return $arrMongo;
+    //     } catch (\MongoDB\Driver\Exception\ConnectionTimeoutException $mongoException) {
+    //         return $mongoException;
+    //     }
+    //     if(isset($mongoException)) {
+    //         $arrMongo = array(
+    //             'status'=>false,
+    //             'message' => 'Mongo connection failed'
+    //         );
+    //     }else{
+    //         $arrMongo = array(
+    //             'status'=>true,
+    //             'message' => 'Mongo connection OK'
+    //         );
+    //     }
+    //     return $arrMongo;
+   return App\LifterLocation::all(); 
 });
 
 Auth::routes(['register' => false]);
