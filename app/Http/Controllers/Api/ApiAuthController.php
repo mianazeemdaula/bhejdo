@@ -18,6 +18,7 @@ use App\LifterReview;
 use App\Bonus;
 use Validator;
 use Illuminate\Validation\Rule;
+use DB;
 
 class ApiAuthController extends Controller
 {
@@ -94,6 +95,7 @@ class ApiAuthController extends Controller
 
     public function registerLifter(Request $request) {
         try{
+            DB::beginTransaction();
             $validator = Validator::make( $request->all(), [
                 'name' => 'required',
                 'mobile' => 'required|min:11|max:11|unique:users',
@@ -134,8 +136,10 @@ class ApiAuthController extends Controller
                     $response['bonuse'] = $bonus->lifterRegBonus($refer, $user->mobile);
                 }
             }
+            DB::commit();
             return response()->json(['status'=>true, 'data' => $response], 200);
         }catch(Expection $ex){
+            DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
