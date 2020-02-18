@@ -177,6 +177,7 @@ return [
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
     ],
 
     /*
