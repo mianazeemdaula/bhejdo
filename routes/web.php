@@ -27,3 +27,6 @@ Route::get('/indexer/create', 'ElasticController@mapLocation');
 Route::get('/indexer/clear', 'ElasticController@clearIndices');
 
 Route::get('/service', 'ServiceController@setservice');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
