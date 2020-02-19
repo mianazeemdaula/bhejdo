@@ -45,7 +45,7 @@ class ApiAuthController extends Controller
         if(Auth::attempt($credentials))
         { 
             $user = Auth::user();
-            if($user->hasRole('lifter|shope')){
+            if($user->hasRole('lifter|store')){
                 $response['user'] = $user; 
                 $response['token'] = $user->createToken($user->account_type)->accessToken; 
                 return response()->json(['status'=>true, 'data' => $response], 200);
