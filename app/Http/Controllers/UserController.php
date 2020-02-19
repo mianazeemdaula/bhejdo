@@ -58,8 +58,9 @@ class UserController extends Controller
         //
     }
 
-    public function approved(User $user)
+    public function approved($id)
     {
+        $user = User::find($id);
         $user->profile()->update([
             'cnic_verified_at' => Carbon::now()->toDateTimeString()
         ]);
