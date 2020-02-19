@@ -59,8 +59,8 @@
 
               <strong><i class="fas fa-pencil-alt mr-1"></i> CNIC</strong>
               <p class="text-muted">
-                <p class="text-muted">{{ $user->profile->cnic_front }}</p>
-                <p class="text-muted">{{ $user->profile->cnic_back }}</p>
+                <p class="text-muted"><a href="{{ asset("storage/".$user->profile->cnic_front) }}">Front</a></p>
+                <p class="text-muted"><a href="{{ asset("storage/".$user->profile->cnic_back) }}">Back</a></p>
               </p>
 
               <hr>
