@@ -14,20 +14,22 @@
 
                <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
-              <p class="text-muted text-center">Software Engineer</p>
+              <p class="text-muted text-center">{{ $item->getRoleNames() }}</p>
 
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                  <b>Followers</b> <a class="float-right">1,322</a>
+                  <b>Orders</b> <a class="float-right">1,322</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Following</b> <a class="float-right">543</a>
+                    <b>Rating</b> <a class="float-right">3.5</a>
+                  </li>
+                <li class="list-group-item">
+                  <b>Bonus</b> <a class="float-right">2522</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Friends</b> <a class="float-right">13,287</a>
+                  <b>Cash</b> <a class="float-right">13,287</a>
                 </li>
               </ul>
-
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
             </div>
             <!-- /.card-body -->
@@ -37,32 +39,28 @@
           <!-- About Me Box -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">About Me</h3>
+              <h3 class="card-title">Profile</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
               <p class="text-muted">
                 B.S. in Computer Science from the University of Tennessee at Knoxville
               </p>
-
               <hr>
-
               <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-              <p class="text-muted">Malibu, California</p>
-
+              <p class="text-muted">{{ $user->profile->address }}</p>
+              <hr>
+              <strong><i class="fas fa-map-marker-alt mr-1"></i> CNIC</strong>
+              <p class="text-muted">{{ $user->profile->cnic }}</p>
+              <p class="text-muted">{{ $user->profile->cnic_expiry }}</p>
+              <p class="text-muted">{{ $user->profile->dob }}</p>
               <hr>
 
-              <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
+              <strong><i class="fas fa-pencil-alt mr-1"></i> CNIC</strong>
               <p class="text-muted">
-                <span class="tag tag-danger">UI Design</span>
-                <span class="tag tag-success">Coding</span>
-                <span class="tag tag-info">Javascript</span>
-                <span class="tag tag-warning">PHP</span>
-                <span class="tag tag-primary">Node.js</span>
+                <p class="text-muted">{{ $user->profile->cnic_front }}</p>
+                <p class="text-muted">{{ $user->profile->cnic_back }}</p>
               </p>
 
               <hr>
