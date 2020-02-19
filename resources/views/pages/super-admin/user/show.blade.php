@@ -52,9 +52,9 @@
               <p class="text-muted">{{ $user->address }}</p>
               <hr>
               <strong><i class="fas fa-map-marker-alt mr-1"></i> CNIC</strong>
-              <p class="text-muted">{{ $user->profile->cnic }}</p>
+              {{-- <p class="text-muted">{{ $user->profile->cnic }}</p>
               <p class="text-muted">{{ $user->profile->cnic_expiry }}</p>
-              <p class="text-muted">{{ $user->profile->dob }}</p>
+              <p class="text-muted">{{ $user->profile->dob }}</p> --}}
               <hr>
 
               <strong><i class="fas fa-pencil-alt mr-1"></i> CNIC</strong>
