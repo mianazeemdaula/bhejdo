@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use Carbon\Carbon;
+
 class UserController extends Controller
 {
     public function index()
@@ -54,6 +56,16 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function approved(User $user)
+    {
+        $user->profile()->update([
+            'cnic_verified_at' => Carbon::now()->toDateTimeString()
+        ]);
+        $user->status = 'active';
+        $user->save();
+        return redirect()->back()->with('status', 'Account Approved Successfully!');
     }
 
     /**

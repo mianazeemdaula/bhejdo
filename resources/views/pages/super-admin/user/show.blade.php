@@ -61,6 +61,7 @@
               <p class="text-muted">
                 <p class="text-muted"><a href="{{ asset("storage/".$user->profile->cnic_front) }}">Front</a></p>
                 <p class="text-muted"><a href="{{ asset("storage/".$user->profile->cnic_back) }}">Back</a></p>
+                <a href="{{ URL::to("user/approved/{id}", [$user->id])}}">Approved</a>
               </p>
 
               <hr>
