@@ -44,6 +44,7 @@ Route::prefix('lifter')->group(function () {
         Route::post('/updatePushToken', 'Api\ApiAuthController@updateLifterPushToken');
 
         // Varifications
+        Route::get('account-status', 'Api\ApiAuthController@accountStatus');
         Route::post('nic-verification', 'Api\ApiAuthController@nicVerificaiton');
 
         // Orders

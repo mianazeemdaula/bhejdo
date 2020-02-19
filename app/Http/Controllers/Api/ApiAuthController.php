@@ -118,6 +118,7 @@ class ApiAuthController extends Controller
             $user->address = $request->address;
             $user->account_type = $request->type;
             $user->referred_by = $request->referred;
+            $user->status = 'unvarified';
             $user->reffer_id = UserHelper::gerateId($request->name);
             $user->save();
 
@@ -142,6 +143,14 @@ class ApiAuthController extends Controller
         }catch(Expection $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
+    public function accountStatus(Request $request) {
+        try{
+            return response()->json(['status'=>true, 'data' => $request->user()], 200);
+        }catch(Exception $e){
+            return response()->json(['success'=>$e], 405);
         }
     }
 
