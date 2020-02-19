@@ -49,7 +49,7 @@
                                     <td> {{ $item->updated_at}} </td>
                                     <td> 
                                       <div class="btn-group">
-                                        <button type="button" class="btn btn-default"><i class="fas fa-eye"></i></button>
+                                        <a href="{{ route('user.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('user.edit',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-edit"></i></a>
                                         <button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button>
                                       </div>

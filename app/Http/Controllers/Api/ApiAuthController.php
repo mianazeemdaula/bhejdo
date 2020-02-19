@@ -130,14 +130,6 @@ class ApiAuthController extends Controller
             $user->assignRole($user->account_type);
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
-            
-            if($user->referred_by != null){
-                $refer = User::where('mobile',$user->referred_by)->first();
-                if($refer != null){
-                    $bonus = new BonusProcess();
-                    $response['bonuse'] = $bonus->lifterRegBonus($refer, $user->mobile);
-                }
-            }
             DB::commit();
             return response()->json(['status'=>true, 'data' => $response], 200);
         }catch(Expection $ex){
@@ -221,9 +213,10 @@ class ApiAuthController extends Controller
             \Storage::disk('public')->put($backImageName, base64_decode($nicBack));
 
             $user = User::findOrFail($request->user()->id);
-            $user->cnic_front = $frontImageName;
-            $user->cnic_back = $backImageName;
-            $user->save();
+            $profile = $user->profile();
+            $profile->cnic_front = $frontImageName;
+            $profile->cnic_back = $backImageName;
+            $profile->save();
             return response()->json(['status'=>true], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
