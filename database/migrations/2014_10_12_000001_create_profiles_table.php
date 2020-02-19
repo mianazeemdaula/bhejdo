@@ -16,8 +16,11 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
+            $table->string('dob')->nullable();
+            $table->string('cnic')->nullable();
             $table->string('cnic_front')->nullable();
             $table->string('cnic_back')->nullable();
+            $table->string('cnic_expiry')->nullable();
             $table->string('cnic_verified_at')->nullable();
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
