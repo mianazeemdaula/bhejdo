@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('/user', 'UserController');
-    Route::post('/user/approved/{id}', 'UserController@approved');
+    Route::get('/user/approved/{id}', 'UserController@approved');
     Route::resource('/bonus', 'BonusController');
 });
 
