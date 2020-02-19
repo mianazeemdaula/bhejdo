@@ -212,11 +212,10 @@ class ApiAuthController extends Controller
             $backImageName = $request->user()->id.'_cnic_back.'.'png';
             \Storage::disk('public')->put($backImageName, base64_decode($nicBack));
 
-            $user = User::findOrFail($request->user()->id);
-            $profile = $user->profile();
-            $profile->cnic_front = $frontImageName;
-            $profile->cnic_back = $backImageName;
-            $profile->save();
+            $user = User::findOrFail($request->user()->id)->profile()->update([
+                'cnic_front' => $frontImageName,
+                'cnic_back' => $backImageName
+            ]);
             return response()->json(['status'=>true], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "$e" ], 405);

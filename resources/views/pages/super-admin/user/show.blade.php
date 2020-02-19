@@ -49,7 +49,7 @@
               </p>
               <hr>
               <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-              <p class="text-muted">{{ $user->profile->address }}</p>
+              <p class="text-muted">{{ $user->address }}</p>
               <hr>
               <strong><i class="fas fa-map-marker-alt mr-1"></i> CNIC</strong>
               <p class="text-muted">{{ $user->profile->cnic }}</p>
