@@ -102,7 +102,7 @@ class EventController extends Controller
                     floatval($lon), // latitude
                 ],
             ],
-            '$maxDistance' => 1000,
+            '$maxDistance' => 5,
         ])->get();
         return $bars;
     }
