@@ -34,17 +34,7 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('super-admin');
 
-        $user = new User();
-        $user->name = 'Azeem Rehan';
-        $user->mobile = '03004103160';
-        $user->email = 'mazeemrehan@gmail.com';
-        $user->password = bcrypt('123456');
-        $user->address = 'Rasheed u din colony, Depalpur';
-        $user->account_type = 'lifter';
-        $user->reffer_id = "azeemlifte";
-        $user->save();
-        $user->assignRole('lifter');
-        $user->services->sync([1]);
+        
 
         // $user = new User();
         // $user->name = 'Abdur Rehman';
@@ -116,6 +106,18 @@ class SeedController extends Controller
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Full Time', 'order_qty' => 50]);
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Over Time', 'order_qty' => 75]);
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Dual Time', 'order_qty' => 100]);
+
+        $user = new User();
+        $user->name = 'Azeem Rehan';
+        $user->mobile = '03004103160';
+        $user->email = 'mazeemrehan@gmail.com';
+        $user->password = bcrypt('123456');
+        $user->address = 'Rasheed u din colony, Depalpur';
+        $user->account_type = 'lifter';
+        $user->reffer_id = "azeemlifte";
+        $user->save();
+        $user->assignRole('lifter');
+        $user->services->sync([1]);
 
         return "Data Added Successfully";
     }
