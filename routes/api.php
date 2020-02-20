@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 Route::get('indexer', 'Api\Lifter\EventController@locationIndex');
 Route::get('indexer/all', 'Api\Lifter\EventController@getAll');
-Route::get('/indexer/doc/{lat}/{lon}', 'Api\Lifter\EventController@getLocation');
+Route::get('/indexer/doc/{lat}/{lon}/{dis}', 'Api\Lifter\EventController@getLocation');
 Route::get('/indexer/status', 'Api\Lifter\EventController@getStatus');
 
 Route::prefix('consumer')->group(function () {

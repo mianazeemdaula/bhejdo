@@ -54,7 +54,7 @@ class EventController extends Controller
         return $stats;
     }
 
-    public function getLocation($lat, $lon)
+    public function getLocation($lat, $lon, $distance)
     {
         // $params = [
         //     'index' => 'lifter_location',
@@ -102,7 +102,7 @@ class EventController extends Controller
                     floatval($lon), // latitude
                 ],
             ],
-            '$maxDistance' => 5,
+            '$maxDistance' => $distance,
         ])->get();
         return $bars;
     }
