@@ -110,7 +110,7 @@ class SeedController extends Controller
         $user = new User();
         $user->name = 'Azeem Rehan';
         $user->mobile = '03004103160';
-        $user->email = 'mazeemrehan@gmail.com';
+        $user->email = 'abc@gmail.com';
         $user->password = bcrypt('123456');
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->account_type = 'lifter';
