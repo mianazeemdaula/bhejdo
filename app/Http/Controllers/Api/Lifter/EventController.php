@@ -52,44 +52,55 @@ class EventController extends Controller
 
     public function getLocation($lat, $lon)
     {
-        $params = [
-            'index' => 'lifter_location',
-            'body'  => [
-                'query' => [
-                    'bool' => [
-                        "filter"=> [
-                            "geo_distance" => [
-                                "distance" => "5km",
-                                "pin.location" => [
-                                    "lat" => $lat,
-                                    "lon" => $lon
-                                ]
-                            ]
-                        ]   
-                    ]
-                ],
-                "sort" =>  [
-                    "_geo_distance" => [
-                        "pin.location" => [
-                            "lat" => $lat,
-                            "lon" => $lon
-                        ],
-                        "order" => "asc",
-                        "unit" => "km"
-                    ],
-                    "lifter_orders" => [
-                        "order" => "desc",
-                    ],
-                    "star_rating" => [
-                        "order" => "desc",
-                    ],
-                ],
-                //"size" => 1
+        // $params = [
+        //     'index' => 'lifter_location',
+        //     'body'  => [
+        //         'query' => [
+        //             'bool' => [
+        //                 "filter"=> [
+        //                     "geo_distance" => [
+        //                         "distance" => "5km",
+        //                         "pin.location" => [
+        //                             "lat" => $lat,
+        //                             "lon" => $lon
+        //                         ]
+        //                     ]
+        //                 ]   
+        //             ]
+        //         ],
+        //         "sort" =>  [
+        //             "_geo_distance" => [
+        //                 "pin.location" => [
+        //                     "lat" => $lat,
+        //                     "lon" => $lon
+        //                 ],
+        //                 "order" => "asc",
+        //                 "unit" => "km"
+        //             ],
+        //             "lifter_orders" => [
+        //                 "order" => "desc",
+        //             ],
+        //             "star_rating" => [
+        //                 "order" => "desc",
+        //             ],
+        //         ],
+        //         //"size" => 1
 
-            ]
-        ];
-        $stats = \Elasticsearch::search($params);
-        return $stats;
+        //     ]
+        // ];
+        // $stats = \Elasticsearch::search($params);
+
+        $bars = lifterLocation::where('location', 'near', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    $lat, // longitude
+                    $lon, // latitude
+                ],
+            ],
+            '$maxDistance' => 1000,
+        ])->get();
+        return $bars;
     }
 
     public function getStatus()
