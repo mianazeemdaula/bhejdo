@@ -117,7 +117,7 @@ class SeedController extends Controller
         $user->reffer_id = "azeemlifte";
         $user->save();
         $user->assignRole('lifter');
-        $user->services->sync([1]);
+        $user->services()->sync([1]);
 
         return "Data Added Successfully";
     }
