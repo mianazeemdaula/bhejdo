@@ -94,8 +94,8 @@ class EventController extends Controller
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
-                    $lat, // longitude
-                    $lon, // latitude
+                    floatval($lat), // longitude
+                    floatval($lon), // latitude
                 ],
             ],
             '$maxDistance' => 1000,
