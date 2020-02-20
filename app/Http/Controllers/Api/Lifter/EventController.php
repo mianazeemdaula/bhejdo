@@ -94,17 +94,29 @@ class EventController extends Controller
         // ];
         // $stats = \Elasticsearch::search($params);
 
-        $bars = lifterLocation::where('location', 'near', [
-            '$geometry' => [
-                'type' => 'Point',
-                'coordinates' => [
+        // $bars = lifterLocation::where('location', 'near', [
+        //     '$geometry' => [
+        //         'type' => 'Point',
+        //         'coordinates' => [
+        //             floatval($lat), // longitude
+        //             floatval($lon), // latitude
+        //         ],
+        //     ],
+        //     '$maxDistance' => 1000,
+        // ])->get();
+        $mongodb = \DB::getMongoDB();
+        $near = $mongodb->command(array( 
+            'geoNear' => "lifter_locations", 
+            'near' => array( 
+                'type' => "Point", 
+                'coordinates' => array(
                     floatval($lat), // longitude
                     floatval($lon), // latitude
-                ],
-            ],
-            '$maxDistance' => 1000,
-        ])->get();
-        return $bars;
+                    )
+                ), 
+            'spherical' => true, 
+            'maxDistance' => 2500 ));
+        return $near;
     }
 
     public function getStatus()
