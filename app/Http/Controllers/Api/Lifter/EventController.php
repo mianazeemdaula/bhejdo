@@ -94,17 +94,17 @@ class EventController extends Controller
         // ];
         // $stats = \Elasticsearch::search($params);
 
-        // $bars = lifterLocation::where('location', 'near', [
-        //     '$geometry' => [
-        //         'type' => 'Point',
-        //         'coordinates' => [
-        //             floatval($lat), // longitude
-        //             floatval($lon), // latitude
-        //         ],
-        //     ],
-        //     '$maxDistance' => 1000,
-        // ])->get();
-        return $near;
+        $bars = lifterLocation::where('location', 'near', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    floatval($lat), // longitude
+                    floatval($lon), // latitude
+                ],
+            ],
+            '$maxDistance' => 1000,
+        ])->get();
+        return $bars;
     }
 
     public function getStatus()
