@@ -94,7 +94,7 @@ class EventController extends Controller
         // ];
         // $stats = \Elasticsearch::search($params);
 
-        $bars = lifterLocation::where('location', 'near', [
+        $bars = lifterLocation::where('location', 'nearSphere', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
