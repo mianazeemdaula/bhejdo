@@ -34,6 +34,18 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('super-admin');
 
+        $user = new User();
+        $user->name = 'Azeem Rehan';
+        $user->mobile = '03004103160';
+        $user->email = 'mazeemrehan@gmail.com';
+        $user->password = bcrypt('123456');
+        $user->address = 'Rasheed u din colony, Depalpur';
+        $user->account_type = 'lifter';
+        $user->reffer_id = "azeemlifte";
+        $user->save();
+        $user->assignRole('lifter');
+        $user->services->sync([1]);
+
         // $user = new User();
         // $user->name = 'Abdur Rehman';
         // $user->mobile = '03334103160';
