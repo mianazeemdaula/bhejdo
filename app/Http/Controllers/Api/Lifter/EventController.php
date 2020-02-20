@@ -7,29 +7,31 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Events\NewLocation;
 use Elasticsearch\ClientBuilder;
+use App\LifterLocation;
 
 class EventController extends Controller
 {
     public function lifterLocation(Request $request)
     {
-        $currentMilliSecond = (int) (microtime(true));
-        $data = [
-            'body' => [
-                "doc" => [
-                    "pin" => [
-                        'location' => [
-                            'lat' => $request->lat,
-                            'lon' => $request->lon,
-                        ]
-                    ],
-                    'last_update' => $currentMilliSecond,
-                    'lifter_id' => $request->user()->id
-                ]
-            ],
-            'index' => 'lifter_location',
-            'id' => 'lifter_'.$request->user()->id,
-        ];
-        $return = \Elasticsearch::update($data);
+        // $currentMilliSecond = (int) (microtime(true));
+        // $data = [
+        //     'body' => [
+        //         "doc" => [
+        //             "pin" => [
+        //                 'location' => [
+        //                     'lat' => $request->lat,
+        //                     'lon' => $request->lon,
+        //                 ]
+        //             ],
+        //             'last_update' => $currentMilliSecond,
+        //             'lifter_id' => $request->user()->id
+        //         ]
+        //     ],
+        //     'index' => 'lifter_location',
+        //     'id' => 'lifter_'.$request->user()->id,
+        // ];
+        // $return = \Elasticsearch::update($data);
+        LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=>[$request->lat, $request->lon]]);
         event(new NewLocation($request->user()->id, $request->lat, $request->lon));
         return $return;
     }

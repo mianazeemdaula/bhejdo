@@ -15,10 +15,12 @@ use App\Helpers\UserHelper;
 use App\User;
 use App\Order;
 use App\LifterReview;
+use App\LifterLocation;
 use App\Bonus;
 use Validator;
 use Illuminate\Validation\Rule;
 use DB;
+use Carbon\Carbon;
 
 class ApiAuthController extends Controller
 {
@@ -166,22 +168,38 @@ class ApiAuthController extends Controller
             $ranking = LifterReview::whereIn('order_id',Order::where('lifter_id', $user->id)->get('id'))->avg('starts');
             $ranking = $ranking == null ? 0 : $ranking;
             $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
-            $indexData = [
-                'body' => [
-                   'lifter_orders' => $ordersCount,
-                    'star_rating' => $ranking,
-                    'name' => $user->name,
-                    'avatar' => $user->avatar,
-                    'account_type' => $user->getRoleNames()[0],
-                    'level' => $user->level->id,
-                    'services' => $user->services->pluck('id')->toArray(),
-                    'last_update' => $currentMilliSecond = (int) (microtime(true) * 100),
-                    'lifter_id' => $request->user()->id
-                ],
-                'index' => 'lifter_location',
-                'id' => 'lifter_'.$request->user()->id,
+            // $indexData = [
+            //     'body' => [
+            //        'lifter_orders' => $ordersCount,
+            //         'star_rating' => $ranking,
+            //         'name' => $user->name,
+            //         'avatar' => $user->avatar,
+            //         'account_type' => $user->getRoleNames()[0],
+            //         'level' => $user->level->id,
+            //         'services' => $user->services->pluck('id')->toArray(),
+            //         'last_update' => $currentMilliSecond = (int) (microtime(true) * 100),
+            //         'lifter_id' => $request->user()->id
+            //     ],
+            //     'index' => 'lifter_location',
+            //     'id' => 'lifter_'.$request->user()->id,
+            // ];
+            // $return = \Elasticsearch::index($indexData);
+            $data = [
+                'orders' => $ordersCount,
+                'rating' => $ranking,
+                'name' => $user->name,
+                'avatar' => $user->avatar,
+                'account_type' => $user->getRoleNames()[0],
+                'services' => $user->services->pluck('id')->toArray(),
+                'last_update' => Carbon::now()->timestamp,
+                'lifter_id' => $request->user()->id
             ];
-            $return = \Elasticsearch::index($indexData);
+            $location = LifterLocation::where('lifter_id', $request->user()->id )->first();
+            if($location == null){
+                LifterLocation::create($data);
+            }else{
+                $location->update($data);
+            }
             return response()->json(['status'=> true], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);

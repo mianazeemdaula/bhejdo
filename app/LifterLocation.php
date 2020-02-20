@@ -10,7 +10,7 @@ class LifterLocation extends Model
     protected $connection = 'mongodb';
     //protected $primaryKey = 'id';
     protected $fillable = [
-        'address', 'lifter_id'
+        'lifter_id', 'orders', 'rating', 'name', 'avatar', 'account_type', 'services', 'last_update'
     ];
     public $timestamps = false;
 }
