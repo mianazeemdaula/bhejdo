@@ -20,11 +20,10 @@ Route::get('/phpinfo', function () {
 });
 
 Route::get('/mongo', function(){
-    // App\LifterLocation::truncate();
-    // App\LifterLocation::create(['address' => "Rasheed COlony", 'lifter_id' => 255]);
-    // App\LifterLocation::where('lifter_id',255)->update(['address' => "Rasheed COlony", 'lifter_id' => 255]);
-    // App\LifterLocation::where('lifter_id',255)->update(['address' => "Rasheed COlony", 'lifter_id' => 255]);
    return App\LifterLocation::all(); 
+});
+Route::get('/mongot', function(){
+   return App\LifterLocation::truncate();
 });
 
 Auth::routes(['register' => false]);
