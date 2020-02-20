@@ -104,18 +104,6 @@ class EventController extends Controller
         //     ],
         //     '$maxDistance' => 1000,
         // ])->get();
-        $mongodb = \DB::getMongoDB();
-        $near = $mongodb->command(array( 
-            'geoNear' => "lifter_locations", 
-            'near' => array( 
-                'type' => "Point", 
-                'coordinates' => array(
-                    floatval($lat), // longitude
-                    floatval($lon), // latitude
-                    )
-                ), 
-            'spherical' => true, 
-            'maxDistance' => 2500 ));
         return $near;
     }
 
