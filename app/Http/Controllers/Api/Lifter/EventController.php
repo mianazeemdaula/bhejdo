@@ -31,7 +31,11 @@ class EventController extends Controller
         //     'id' => 'lifter_'.$request->user()->id,
         // ];
         // $return = \Elasticsearch::update($data);
-        LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=>[$request->lat, $request->lon]]);
+        $location =  [
+            'type' => 'Point',
+            'coordinates' => ['lng' => floatval($request->lon), 'lat' => floatval($request->lat)]
+        ];
+        LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location ]);
         event(new NewLocation($request->user()->id, $request->lat, $request->lon));
         return $return;
     }
