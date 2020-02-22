@@ -17,6 +17,7 @@ class MilkLifterController extends Controller
 
     public function getNearMe(Request $request)
     {
+        return $request->all();
         // $params = [
         //     'index' => 'lifter_location',
         //     'body'  => [
