@@ -62,6 +62,7 @@ class ApiAuthController extends Controller
 
     public function registerConsumer(Request $request) {
         try{
+            DB::beginTransaction();
             $validator = Validator::make( $request->all(), [
                 'name' => 'required',
                 'mobile' => 'required|min:11|max:11|unique:users',
@@ -73,24 +74,32 @@ class ApiAuthController extends Controller
             if ($validator->fails()) {
                 return response()->json(['error'=>$validator->errors()], 401);
             }
-            
+
             $user = new User();
             $user->name = $request->name;
             $user->mobile = $request->mobile;
-            $user->password = bcrypt($request->password);
             $user->email = $request->email;
+            $user->password = bcrypt($request->password);
             $user->address = $request->address;
-            $user->city = $request->city;
-            $user->longitude = $request->longitude;
-            $user->latitude = $request->latitude;
             $user->account_type = 'consumer';
+            $user->referred_by = $request->referred;
+            $user->status = 'varified';
+            $user->reffer_id = UserHelper::gerateId($request->name);
             $user->save();
-            $role = Role::firstOrCreate(['name' => 'consumer']);
+
+            $profile = $user->profile()->create([
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude
+            ]);
+            
             $user->assignRole('consumer');
+
             $success['token'] = $user->createToken($user->account_type)->accessToken;
             $success['user'] = $user;
+            DB::commit();
             return response()->json(['status'=>true, 'data' => $success], 200);
         }catch(Expection $ex){
+            DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }

@@ -8,6 +8,7 @@ use App\User;
 use App\Events\NewLocation;
 use Elasticsearch\ClientBuilder;
 use App\LifterLocation;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -31,13 +32,17 @@ class EventController extends Controller
         //     'id' => 'lifter_'.$request->user()->id,
         // ];
         // $return = \Elasticsearch::update($data);
-        $location =  [
-            'type' => 'Point',
-            'coordinates' => [floatval($request->lat), floatval($request->lon)]
-        ];
-        LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location ]);
-        event(new NewLocation($request->user()->id, $request->lat, $request->lon));
-        return $return;
+        try{
+            $location =  [
+                'type' => 'Point',
+                'coordinates' => [floatval($request->lat), floatval($request->lon)]
+            ];
+            LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location,'last_update' => Carbon::now()->timestamp ]);
+            event(new NewLocation($request->user()->id, $request->lat, $request->lon));
+            return response()->json(['status'=> true], 200);
+        }catch(Exception $e){
+            return response()->json(['success'=>$e], 405);
+        }
     }
 
     public function getAll()
