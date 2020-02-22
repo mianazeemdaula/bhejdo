@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\lifterLocation;
 class MilkLifterController extends Controller
 {
     public function getMilkLifters(Request $request)
@@ -35,7 +36,7 @@ class MilkLifterController extends Controller
         //     ]
         // ];
         // $stats = \Elasticsearch::search($params);
-        $bars = App\lifterLocation::where('location', 'nearSphere', [
+        $bars = lifterLocation::where('location', 'nearSphere', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
