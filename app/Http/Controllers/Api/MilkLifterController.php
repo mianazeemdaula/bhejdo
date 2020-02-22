@@ -15,26 +15,37 @@ class MilkLifterController extends Controller
 
     public function getNearMe(Request $request)
     {
-        $params = [
-            'index' => 'lifter_location',
-            'body'  => [
-                'query' => [
-                    'bool' => [
-                        "filter"=> [
-                            "geo_distance" => [
-                                "distance" => "5km",
-                                "pin.location" => [
-                                    "lat" => $request->lat,
-                                    "lon" => $request->lon
-                                ]
-                            ]
-                        ]
+        // $params = [
+        //     'index' => 'lifter_location',
+        //     'body'  => [
+        //         'query' => [
+        //             'bool' => [
+        //                 "filter"=> [
+        //                     "geo_distance" => [
+        //                         "distance" => "5km",
+        //                         "pin.location" => [
+        //                             "lat" => $request->lat,
+        //                             "lon" => $request->lon
+        //                         ]
+        //                     ]
+        //                 ]
                         
-                    ]
-                ]
-            ]
-        ];
-        $stats = \Elasticsearch::search($params);
-        return $stats;
+        //             ]
+        //         ]
+        //     ]
+        // ];
+        // $stats = \Elasticsearch::search($params);
+        $bars = App\lifterLocation::where('location', 'nearSphere', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    floatval($request->lat), // longitude
+                    floatval($request->lon), // latitude
+                ],
+            ],
+            '$maxDistance' => intval($distance),
+        ])->get();
+        return $bars;
+        //return $stats;
     }
 }
