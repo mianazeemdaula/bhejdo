@@ -17,7 +17,7 @@ class MilkLifterController extends Controller
 
     public function getNearMe(Request $request)
     {
-        return $request->all();
+        //return $request->all();
         // $params = [
         //     'index' => 'lifter_location',
         //     'body'  => [
@@ -46,7 +46,7 @@ class MilkLifterController extends Controller
                     floatval($request->lon), // latitude
                 ],
             ],
-            '$maxDistance' => intval($$request->distance * 1000),
+            '$maxDistance' => intval($request->distance * 1000),
         ])->get();
         return $lifters;
         //return $stats;
