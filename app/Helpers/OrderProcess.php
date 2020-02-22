@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\OpenOrder;
 use App\Helpers\AndroidNotifications;
 use App\User;
+use App\lifterLocation;
 
 class OrderProcess {
 
