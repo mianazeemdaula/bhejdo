@@ -36,7 +36,7 @@ class MilkLifterController extends Controller
         //     ]
         // ];
         // $stats = \Elasticsearch::search($params);
-        $bars = lifterLocation::where('location', 'nearSphere', [
+        $lifters = lifterLocation::where('location', 'nearSphere', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
@@ -46,7 +46,7 @@ class MilkLifterController extends Controller
             ],
             '$maxDistance' => intval($$request->distance * 1000),
         ])->get();
-        return $bars;
+        return $lifters;
         //return $stats;
     }
 }
