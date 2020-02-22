@@ -12,11 +12,9 @@ class OrderProcess {
     {
         try{
             $nears = self::getNearMe($order->latitude, $order->longitude);
-            $lifters = $nears['hits']['hits'];
-            $lCount = count($lifters);
+            $lCount = count($nears);
             $noti = [];
             foreach ($lifters as $lifter) {
-                $data = $lifter['_source'];
                 $lifterid = $data['lifter_id'];
                 $_lifter = User::findOrFail($lifterid); 
                 $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
@@ -32,7 +30,7 @@ class OrderProcess {
         return true;
     }
 
-    static public function getNearMe($lat, $lon)
+    static public function getNearMeElastic($lat, $lon)
     {
         $params = [
             'index' => 'lifter_location',
@@ -57,106 +55,18 @@ class OrderProcess {
         return $stats;
     }
 
-    static public function toLifter($title, $messag, $token,Array $data)
+    static public function getNearMe($lat, $lon)
     {
-        $pushKey = 'AIzaSyCvnrtqXFcB7ZfYfVT-kuugsEKvmHP7iok';
-        $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-
-        $notification = [
-            'title' => $title,
-            'body' => $messag,
-            'badge' => 1, 
-            'sound' => 'default'
-        ];
-        $fcmNotification = [
-            'to'        => $token, //single token
-            'notification' => $notification,
-            'data' => array_merge([ 'click_action' => 'FLUTTER_NOTIFICATION_CLICK'], $data)
-        ];
-        $headers = [
-            'Authorization: key='. $pushKey,
-            'Content-Type: application/json'
-        ];
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$fcmUrl);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
-    }
-
-    static public function MultipleConsumer($tokenList, $messag, $token, Array $data)
-    {
-        $pushKey = 'AIzaSyDt9hhxcjoDSd6Tf5KHz7CkMTh8hTsECVo';
-        $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-
-        $notification = [
-            'title' => $title,
-            'body' => $messag,
-            'badge' => 1, 
-            'sound' => 'default'
-        ];
-        
-        $fcmNotification = [
-            'registration_ids' => $tokenList, //multple token array
-            'notification' => $notification,
-            'data' => $data
-        ];
-
-        $headers = [
-            'Authorization: key='. $pushKey,
-            'Content-Type: application/json'
-        ];
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$fcmUrl);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
-    }
-
-    static public function MultipleLifter($tokenList, $messag, $token, Array $data)
-    {
-        $pushKey = 'AIzaSyCvnrtqXFcB7ZfYfVT-kuugsEKvmHP7iok';
-        $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-
-        $notification = [
-            'title' => $title,
-            'body' => $messag,
-            'badge' => 1, 
-            'sound' => 'default'
-        ];
-        
-        $fcmNotification = [
-            'registration_ids' => $tokenList, //multple token array
-            'notification' => $notification,
-            'data' => $data
-        ];
-
-        $headers = [
-            'Authorization: key='. $pushKey,
-            'Content-Type: application/json'
-        ];
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$fcmUrl);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
+        $lifters = lifterLocation::where('location', 'nearSphere', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    floatval($request->lat), // longitude
+                    floatval($request->lon), // latitude
+                ],
+            ],
+            '$maxDistance' => intval($request->distance * 1000),
+        ])->get();
+        return $lifters;
     }
 }

@@ -20,11 +20,13 @@ Route::prefix('consumer')->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
+        // Lifters
         Route::post('/milk-lifters-near', 'Api\MilkLifterController@getNearMe');
-        
+        // Place Order
+        Route::post('/place-order', 'Api\MilkOrderController@placeOrder'); 
+
         Route::post('/updatePushToken', 'Api\ApiAuthController@updatePushToken');
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
-        Route::post('/place-order', 'Api\MilkOrderController@placeOrder'); 
         Route::get('/pending-milk-orders', 'Api\MilkOrderController@pendingMilkOrders'); 
         Route::post('/milk-orders', 'Api\MilkOrderController@milkOrders'); 
         Route::post('/confirm-milk-order', 'Api\MilkOrderController@confirmOrder'); 
