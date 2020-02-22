@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
-use App\lifterLocation;
+use App\LifterLocation;
+
 class MilkLifterController extends Controller
 {
     public function getMilkLifters(Request $request)
