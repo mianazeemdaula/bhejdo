@@ -43,7 +43,7 @@ class MilkLifterController extends Controller
                     floatval($request->lon), // latitude
                 ],
             ],
-            '$maxDistance' => intval($distance),
+            '$maxDistance' => intval($$request->distance * 1000),
         ])->get();
         return $bars;
         //return $stats;
