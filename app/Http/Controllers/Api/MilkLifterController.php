@@ -48,7 +48,7 @@ class MilkLifterController extends Controller
             ],
             '$maxDistance' => intval($request->distance * 1000),
         ])->get();
-        return $lifters;
+        return ['status' => true, 'data' => $lifters];
         //return $stats;
     }
 }
