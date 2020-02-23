@@ -49,7 +49,7 @@ class MilkLifterController extends Controller
             ],
             '$maxDistance' => intval($request->distance * 1000),
         ])->where('last_update', '>', Carbon::now()->subSeconds(15)->timestamp)
-        ->where('services','all',[$request->service])->get()->get();
+        ->where('services','all',[intval($request->service)])->get();
         return ['status' => true, 'data' => $lifters];
         //return $stats;
     }
