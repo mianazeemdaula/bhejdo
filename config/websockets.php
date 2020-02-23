@@ -116,7 +116,7 @@ return [
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => "/etc/letsencrypt/live/bhejdo.org/privkey.key",
+        'local_pk' => "/etc/letsencrypt/live/bhejdo.org/privkey.pem",
 
         /*
          * Passphrase for your local_cert file.
