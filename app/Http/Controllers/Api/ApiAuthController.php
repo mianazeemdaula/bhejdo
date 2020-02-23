@@ -211,9 +211,9 @@ class ApiAuthController extends Controller
                 'services' => $user->services->pluck('id')->toArray(),
                 'services_details' => $_services, 
                 'last_update' => Carbon::now()->timestamp,
-                'id' => $request->user()->id
+                'lifter_id' => $request->user()->id
             ];
-            $location = LifterLocation::find($request->user()->id);
+            $location = LifterLocation::where('lifter_id',$request->user()->id)->first();
             if($location == null){
                 LifterLocation::create($data);
             }else{

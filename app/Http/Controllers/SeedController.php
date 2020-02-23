@@ -115,6 +115,7 @@ class SeedController extends Controller
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->account_type = 'lifter';
         $user->reffer_id = "azeemlifte";
+        $user->status = "active";
         $user->save();
         $user->assignRole('lifter');
         $user->services()->sync([1]);
