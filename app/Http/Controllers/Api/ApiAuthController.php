@@ -202,8 +202,8 @@ class ApiAuthController extends Controller
                 $_services[$service->id] = ['orders' => count($ids), 'rate' => $rate];
             }
             $data = [
-                'orders' => $ordersCount,
-                'rating' => $ranking,
+                // 'orders' => $ordersCount,
+                // 'rating' => $ranking,
                 'name' => $user->name,
                 'avatar' => $user->avatar,
                 'account_type' => $user->getRoleNames()[0],
