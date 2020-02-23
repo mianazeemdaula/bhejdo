@@ -110,13 +110,13 @@ return [
          * certificate chain of issuers. The private key also may be contained
          * in a separate file specified by local_pk.
          */
-        'local_cert' => "/etc/letsencrypt/live/bhejdo.org/fullchain.pem",
+        'local_cert' => null, //"/etc/letsencrypt/live/bhejdo.org/fullchain.pem",
 
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => "/etc/letsencrypt/live/bhejdo.org/privkey.key",
+        'local_pk' => null, // "/etc/letsencrypt/live/bhejdo.org/privkey.key",
 
         /*
          * Passphrase for your local_cert file.
