@@ -16,7 +16,7 @@ class OrderProcess {
             $lCount = count($lifters);
             $noti = [];
             foreach ($lifters as $lifter) {
-                $lifterid = $data['lifter_id'];
+                $lifterid = $lifter['lifter_id'];
                 $_lifter = User::findOrFail($lifterid); 
                 $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
                 // Send Notification to Lifter
