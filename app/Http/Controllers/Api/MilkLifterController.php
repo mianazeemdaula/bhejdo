@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\LifterLocation;
+use Carbon\Carbon;
 
 class MilkLifterController extends Controller
 {
@@ -47,7 +48,8 @@ class MilkLifterController extends Controller
                 ],
             ],
             '$maxDistance' => intval($request->distance * 1000),
-        ])->get();
+        ])->where('last_update', '>', Carbon::now()->subSeconds(15)->timestamp)
+        ->where('services','all',[$request->service])->get()->get();
         return ['status' => true, 'data' => $lifters];
         //return $stats;
     }

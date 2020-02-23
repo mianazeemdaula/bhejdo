@@ -13,7 +13,7 @@ class OrderProcess {
     static public function newOrder(OpenOrder $order)
     {
         try{
-            $lifters = self::getNearMe($order->latitude, $order->longitude, 5);
+            $lifters = self::getNearMe($order->latitude, $order->longitude, 5, $order->service_id);
             $lCount = count($lifters);
             $noti = [];
             foreach ($lifters as $lifter) {
@@ -57,7 +57,7 @@ class OrderProcess {
         return $stats;
     }
 
-    static public function getNearMe($lat, $lon, $distance)
+    static public function getNearMe($lat, $lon, $distance, $service)
     {
         $lifters = lifterLocation::where('location', 'nearSphere', [
             '$geometry' => [
@@ -68,7 +68,8 @@ class OrderProcess {
                 ],
             ],
             '$maxDistance' => intval($distance * 1000),
-        ])->where('last_update', '>', Carbon::now()->subMinutes(1)->timestamp)->get();
+        ])->where('last_update', '>', Carbon::now()->subSeconds(15)->timestamp)
+        ->where('services','all',[$service])->get();
         return $lifters;
     }
 }
