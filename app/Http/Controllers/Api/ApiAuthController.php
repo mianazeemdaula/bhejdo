@@ -209,16 +209,18 @@ class ApiAuthController extends Controller
                 'avatar' => $user->avatar,
                 'account_type' => $user->getRoleNames()[0],
                 'services' => $user->services->pluck('id')->toArray(),
-                'services_details' => $_services, 
+                'services_details' => [], 
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id
             ];
-            $location = LifterLocation::where('lifter_id',$request->user()->id)->first();
-            if($location == null){
-                LifterLocation::create($data);
+            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
+            if($lifter == null){
+                $lifter = LifterLocation::create($data);
             }else{
-                $location->update($data);
+                $lifter->update($data);
             }
+            $lifter->unset('services_details');
+            $lifter->push('services_details', $_services, true);
             return response()->json(['status'=> true, 'data' => $data], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
