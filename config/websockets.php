@@ -96,7 +96,7 @@ return [
          * Use an DNS resolver to make the requests to the statistics logger
          * default is to resolve everything to 127.0.0.1.
          */
-        'perform_dns_lookup' => true,
+        'perform_dns_lookup' => false,
     ],
 
     /*
@@ -110,19 +110,19 @@ return [
          * certificate chain of issuers. The private key also may be contained
          * in a separate file specified by local_pk.
          */
-        'local_cert' => null, //"/etc/letsencrypt/live/bhejdo.org/fullchain.pem",
+        'local_cert' => "/etc/letsencrypt/live/bhejdo.org/fullchain.pem",
 
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => null, // "/etc/letsencrypt/live/bhejdo.org/privkey.key",
+        'local_pk' => "/etc/letsencrypt/live/bhejdo.org/privkey.key",
 
         /*
          * Passphrase for your local_cert file.
          */
         'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
-        //'verify_peer' => false,
+        'verify_peer' => false,
     ],
 
     
