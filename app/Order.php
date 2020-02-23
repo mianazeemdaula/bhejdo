@@ -25,4 +25,9 @@ class Order extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    public function review()
+    {
+        return $this->hasOne('App\LifterReview');
+    }
 }

@@ -175,11 +175,11 @@ class ApiAuthController extends Controller
             $user = User::findOrFail($request->user()->id);
             $user->pushToken = $request->pushToken;
             $user->save();
-            $ordersCount = Order::where('lifter_id', $user->id)->where('status','delivered')->count();
-            $ranking = LifterReview::whereIn('order_id',Order::where('lifter_id', $user->id)->get('id'))->avg('starts');
-            $ranking = $ranking == null ? 0 : $ranking;
-            $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
-            // $indexData = [
+            // $ordersCount = Order::where('lifter_id', $user->id)->where('status','delivered')->count();
+            // $ranking = LifterReview::whereIn('order_id',Order::where('lifter_id', $user->id)->get('id'))->avg('starts');
+            // $ranking = $ranking == null ? 0 : $ranking;
+            // $data = ['user' => $user , 'stars' => $ranking, 'count' => $ordersCount];
+            // // $indexData = [
             //     'body' => [
             //        'lifter_orders' => $ordersCount,
             //         'star_rating' => $ranking,
@@ -195,6 +195,12 @@ class ApiAuthController extends Controller
             //     'id' => 'lifter_'.$request->user()->id,
             // ];
             // $return = \Elasticsearch::index($indexData);
+            $_services = [];
+            foreach($user->services as $service){
+                $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
+                $rate = LifterReview::whereIn('order_id', $ids)->avg('starts');
+                $_services[$service->id] = ['orders' => count($count), 'rate' => $rate];
+            }
             $data = [
                 'orders' => $ordersCount,
                 'rating' => $ranking,
@@ -202,6 +208,7 @@ class ApiAuthController extends Controller
                 'avatar' => $user->avatar,
                 'account_type' => $user->getRoleNames()[0],
                 'services' => $user->services->pluck('id')->toArray(),
+                'services_details' => $_services, 
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id
             ];
