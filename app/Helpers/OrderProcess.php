@@ -58,7 +58,7 @@ class OrderProcess {
 
     static public function getNearMe($lat, $lon)
     {
-        $lifters = lifterLocation::where('location', 'nearSphere', [
+        $lifters = \App\lifterLocation::where('location', 'nearSphere', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
