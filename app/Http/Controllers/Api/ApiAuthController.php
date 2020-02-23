@@ -218,7 +218,7 @@ class ApiAuthController extends Controller
             }else{
                 $location->update($data);
             }
-            return response()->json(['status'=> true], 200);
+            return response()->json(['status'=> true, 'data' => $data], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }
