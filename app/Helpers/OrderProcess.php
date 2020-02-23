@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Carbon\Carbon;
 use App\OpenOrder;
 use App\Helpers\AndroidNotifications;
 use App\User;
@@ -67,7 +68,7 @@ class OrderProcess {
                 ],
             ],
             '$maxDistance' => intval($distance * 1000),
-        ])->get();
+        ])->where('last_update', '>', Carbon::now()->subMinutes(1)->timestamp)->get();
         return $lifters;
     }
 }
