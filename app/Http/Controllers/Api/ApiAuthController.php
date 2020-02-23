@@ -199,7 +199,7 @@ class ApiAuthController extends Controller
             foreach($user->services as $service){
                 $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
                 $rate = LifterReview::whereIn('order_id', $ids)->avg('starts');
-                $_services[$service->id] = ['orders' => count($count), 'rate' => $rate];
+                $_services[$service->id] = ['orders' => count($ids), 'rate' => $rate];
             }
             $data = [
                 'orders' => $ordersCount,
