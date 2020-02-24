@@ -5,6 +5,8 @@ namespace App\Http\Resources\Milk;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\User\Consumer;
 use App\Http\Resources\User\Lifter;
+use App\Http\Resources\Service;
+
 class Order extends JsonResource
 {
     /**
@@ -19,10 +21,13 @@ class Order extends JsonResource
             'id' => $this->id,
             'consumer' => new Consumer($this->consumer),
             'lifter' => new Lifter($this->lifter),
+            'service' => [
+                'id' => $this->service->id,
+                'name' => $this->service->s_name,
+            ],
             'qty' => $this->qty,
             'price' => $this->price,
             'address' => $this->address,
-            'delivery_date' => $this->delivery_date,
             'delivery_time' => $this->delivery_time,
             'address' => $this->address,
             'latitude' => $this->latitude,
@@ -30,7 +35,10 @@ class Order extends JsonResource
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'delivery' => Delivery::collection($this->delivery)
+            'created_time' => $this->created_time,
+            'accepted_time' => $this->accepted_time,
+            'shipped_time' => $this->shipped_time,
+            'delivered_time' => $this->delivered_time,
         ];
     }
 }
