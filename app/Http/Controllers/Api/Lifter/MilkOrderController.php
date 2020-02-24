@@ -5,15 +5,14 @@ namespace App\Http\Controllers\Api\Lifter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use App\Helpers\AndroidNotifications;
+use Carbon\Carbon;
+use App\Http\Resources\Milk\Order as OrderResource;
 use App\User;
 use App\Order;
-use App\Http\Resources\Milk\Order as OrderResource;
-use Illuminate\Support\Facades\Auth;
 use Validator;
-use App\Helpers\AndroidNotifications;
 use DB;
-use App\OpenOrder;
-use Carbon\Carbon;
 
 class MilkOrderController extends Controller
 {
@@ -35,26 +34,15 @@ class MilkOrderController extends Controller
     {
         try{
             DB::beginTransaction();
-            $openOrder = OpenOrder::find($request->orderid);
-            if($openOrder == null){
+            $order = Order::find($request->orderid);
+            if($order == null){
                 DB::rollBack();
                 return response()->json(['status'=>false, 'data' => false ], 200);
             }
-            $order = new Order();
-            $order->consumer_id = $openOrder->consumer_id;
             $order->lifter_id = $request->user()->id;
-            $order->service_id = $openOrder->service_id;
-            $order->qty = $openOrder->qty;
-            $order->delivery_time = $openOrder->delivery_time;
-            $order->price = $openOrder->price;
-            $order->address = $openOrder->address;
-            $order->longitude = $openOrder->longitude;
-            $order->latitude = $openOrder->latitude;
-            $order->created_time = $openOrder->created_at;
             $order->status = 'accepted';
             $order->accepted_time = Carbon::now()->toDateTimeString();
             $order->save();
-            $openOrder->delete();
             DB::commit();
             return response()->json(['status'=>true, 'data' => "Order Accepted"], 200);
         }catch(Exception $ex){

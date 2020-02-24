@@ -21,13 +21,15 @@ class CreateOrdersTable extends Migration
             $table->integer('qty');
             $table->double('price');
             $table->dateTime('delivery_time');
+            $table->string('care_of')->nullable();
             $table->string('address');
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
-            $table->dateTime('created_time')->nullable();
             $table->dateTime('accepted_time')->nullable();
             $table->dateTime('shipped_time')->nullable();
             $table->dateTime('delivered_time')->nullable();
+            $table->dateTime('cencel_time')->nullable();
+            $table->string('cencel_desc')->nullable();
             $table->string('status',15)->default('created');
             $table->timestamps();
         });

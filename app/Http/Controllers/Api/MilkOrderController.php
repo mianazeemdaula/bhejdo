@@ -42,15 +42,16 @@ class MilkOrderController extends Controller
                 return response()->json(['error'=>$validator->errors()], 401);
             }
             
-            $order = new OpenOrder();
+            $order = new Order();
             $order->consumer_id = $request->user()->id;
-            $order->qty = $request->qty;
-            $order->delivery_time = $request->delivery_time;
-            $order->price = $request->price;
-            $order->address = $request->address;
-            $order->longitude = $request->longitude;
-            $order->latitude = $request->latitude;
-            $order->service_id = $request->service_id;
+            $order->lifter_id = 2;
+            $order->service_id = $openOrder->service_id;
+            $order->qty = $openOrder->qty;
+            $order->price = $openOrder->price;
+            $order->delivery_time = $openOrder->delivery_time;
+            $order->address = $openOrder->address;
+            $order->longitude = $openOrder->longitude;
+            $order->latitude = $openOrder->latitude;
             $order->save();
             $response = OrderProcess::newOrder($order);
             DB::commit();

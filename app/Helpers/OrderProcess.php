@@ -3,14 +3,14 @@
 namespace App\Helpers;
 
 use Carbon\Carbon;
-use App\OpenOrder;
+use App\Order;
 use App\Helpers\AndroidNotifications;
 use App\User;
 use App\LifterLocation;
 
 class OrderProcess {
 
-    static public function newOrder(OpenOrder $order)
+    static public function newOrder(Order $order)
     {
         try{
             $lifters = self::getNearMe($order->latitude, $order->longitude, 5, $order->service_id);
@@ -68,8 +68,8 @@ class OrderProcess {
                 ],
             ],
             '$maxDistance' => intval($distance * 1000),
-        ])->where('last_update', '>', Carbon::now()->subSeconds(15)->timestamp)->get();
-        //->where('services','all',[$service])->get();
+        ])->where('last_update', '>', Carbon::now()->subSeconds(15)->timestamp)
+        ->where('services','all',[$service])->get();
         return $lifters;
     }
 }

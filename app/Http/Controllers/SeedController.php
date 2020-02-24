@@ -108,9 +108,9 @@ class SeedController extends Controller
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Dual Time', 'order_qty' => 100]);
 
         $user = new User();
-        $user->name = 'Azeem Rehan';
-        $user->mobile = '03004103160';
-        $user->email = 'abc@gmail.com';
+        $user->name = 'BhejDo Store';
+        $user->mobile = '03001234567';
+        $user->email = 'admin@bhejdo.com';
         $user->password = bcrypt('123456');
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->account_type = 'lifter';
