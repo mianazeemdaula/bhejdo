@@ -19,7 +19,7 @@ class OrderProcess {
             foreach ($lifters as $lifter) {
                 $lifterid = $lifter['lifter_id'];
                 $_lifter = User::findOrFail($lifterid); 
-                $message = "Place order of $order->qty liter of milk. Please deliver as earlist.";
+                $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earlist.";
                 // Send Notification to Lifter
                 $args =  ["type" => 'new_order', 'order_id' => $order->id ];
                 $notification = AndroidNotifications::toLifter("New Milk Order", $message, $_lifter->pushToken,$args);
@@ -68,8 +68,8 @@ class OrderProcess {
                 ],
             ],
             '$maxDistance' => intval($distance * 1000),
-        ])->where('last_update', '>', Carbon::now()->subSeconds(15)->timestamp)
-        ->where('services','all',[$service])->get();
+        ])->where('last_update', '>', Carbon::now()->subSeconds(15)->timestamp)->get();
+        //->where('services','all',[$service])->get();
         return $lifters;
     }
 }

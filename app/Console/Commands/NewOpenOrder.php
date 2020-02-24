@@ -4,26 +4,25 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Order;
 use App\OpenOrder;
 use Carbon\Carbon;
 use App\Helpers\OrderProcess;
 
-class EveryMinute extends Command
+class NewOpenOrder extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'every:mintue';
+    protected $signature = 'openorder:notifications';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Process Orders on every minute';
+    protected $description = 'Open Orders which are not assigned or no lifter avaialable in that area';
 
     /**
      * Create a new command instance.
@@ -46,5 +45,6 @@ class EveryMinute extends Command
         foreach($orders as $order){
             $response = OrderProcess::newOrder($order);
         }
+        $this->info('Notifications send to every lifter');
     }
 }

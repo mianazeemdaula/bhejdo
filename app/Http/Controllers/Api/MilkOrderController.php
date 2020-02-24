@@ -54,6 +54,8 @@ class MilkOrderController extends Controller
             $order->save();
             DB::commit();
             $response = OrderProcess::newOrder($order);
+            $order->notifications = $request['count'];
+            $order->save();
             $data = ['msg' => 'Order Placed Successfully', 'response' => $response];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
