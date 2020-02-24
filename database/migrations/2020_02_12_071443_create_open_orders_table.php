@@ -23,7 +23,6 @@ class CreateOpenOrdersTable extends Migration
             $table->string('address');
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
-            $table->integer('notifications')->default(0);
             $table->timestamps();
         });
     }

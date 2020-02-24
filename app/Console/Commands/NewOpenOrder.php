@@ -41,11 +41,9 @@ class NewOpenOrder extends Command
      */
     public function handle()
     {
-        $orders = OpenOrder::where('notifications', 0)->get();
+        $orders = OpenOrder::where('created_at', '<', Carbon::now()->subSeconds(60)->toDateTimeString())->get();
         foreach($orders as $order){
             $response = OrderProcess::newOrder($order);
-            $order->notifications = $response['count'];
-            $order->save();
         }
         $this->info('Notifications send to every lifter');
     }

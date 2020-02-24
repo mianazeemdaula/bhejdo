@@ -221,7 +221,7 @@ class ApiAuthController extends Controller
             }
             $lifter->unset('services_details');
             $lifter->push('services_details', $_services, true);
-            return response()->json(['status'=> true, 'data' => $data], 200);
+            return response()->json(['status'=> true, 'data' => $lifter], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }

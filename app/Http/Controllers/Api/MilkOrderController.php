@@ -52,10 +52,8 @@ class MilkOrderController extends Controller
             $order->latitude = $request->latitude;
             $order->service_id = $request->service_id;
             $order->save();
-            DB::commit();
             $response = OrderProcess::newOrder($order);
-            $order->notifications = $request['count'];
-            $order->save();
+            DB::commit();
             $data = ['msg' => 'Order Placed Successfully', 'response' => $response];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
