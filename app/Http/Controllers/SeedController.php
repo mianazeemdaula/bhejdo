@@ -117,8 +117,18 @@ class SeedController extends Controller
         $user->reffer_id = "azeemlifte";
         $user->status = "active";
         $user->save();
-        $user->assignRole('lifter');
-        $user->services()->sync([1]);
+
+        $user = new User();
+        $user->name = 'Mian AR Rehman';
+        $user->mobile = '03334103160';
+        $user->email = 'arrehman@gmail.com';
+        $user->password = bcrypt('123456');
+        $user->address = 'Rasheed u din colony, Depalpur';
+        $user->account_type = 'consumer';
+        $user->reffer_id = "arrehman01";
+        $user->status = "active";
+        $user->save();
+        $user->assignRole('consumer');
 
         return "Data Added Successfully";
     }
