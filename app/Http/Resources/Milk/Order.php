@@ -21,10 +21,7 @@ class Order extends JsonResource
             'id' => $this->id,
             'consumer' => new Consumer($this->consumer),
             'lifter' => new Lifter($this->lifter),
-            'service' => [
-                'id' => $this->service->id,
-                'name' => $this->service->s_name,
-            ],
+            'service' => new Service($this->service),
             'qty' => $this->qty,
             'price' => $this->price,
             'address' => $this->address,
