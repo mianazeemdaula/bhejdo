@@ -44,6 +44,8 @@ class NewOpenOrder extends Command
         $orders = OpenOrder::where('notifications', 0)->get();
         foreach($orders as $order){
             $response = OrderProcess::newOrder($order);
+            $order->notifications = $response['count'];
+            $order->save();
         }
         $this->info('Notifications send to every lifter');
     }
