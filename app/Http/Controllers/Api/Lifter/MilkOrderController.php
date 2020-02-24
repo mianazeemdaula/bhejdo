@@ -68,7 +68,8 @@ class MilkOrderController extends Controller
         try{
             $orders = Order::where('lifter_id',$request->user()->id)
             ->where('status','!=','delivered')->get();
-            $data = [ 'orders' => new OrderResource($orders)];
+            $orders =  OrderResource::collection($orders);
+            $data = [ 'orders' => $orders];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
