@@ -52,9 +52,14 @@ Route::prefix('lifter')->group(function () {
         Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
         Route::post('/nic-verification', 'Api\ApiAuthController@nicVerificaiton');
 
-        // Orders
+        /*
+            Orders 
+        */
+        // Accept Order
+        Route::post('/new-order-accept', 'Api\Lifter\OrderController@openOrderCreated');
+        // Get Order
         Route::get('/new-order-details/{order_id}', 'Api\Lifter\MilkOrderController@getNewOrderDetails');
-        Route::post('/new-order-accept', 'Api\Lifter\MilkOrderController@orderAccept');
+        
         Route::get('/inprocess-milk-orders', 'Api\Lifter\MilkOrderController@inProcessOrders'); 
         Route::post('/update-milk-order', 'Api\Lifter\MilkOrderController@updateOrder');
         Route::get('/get-milk-order/{order_id}', 'Api\Lifter\MilkOrderController@getOrder');
