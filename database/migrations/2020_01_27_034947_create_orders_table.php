@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->dateTime('accepted_time')->nullable();
             $table->dateTime('shipped_time')->nullable();
             $table->dateTime('delivered_time')->nullable();
+            $table->dateTime('confirmed_time')->nullable();
             $table->dateTime('cancel_time')->nullable();
             $table->string('cancel_desc')->nullable();
             $table->string('status',15)->default('created');

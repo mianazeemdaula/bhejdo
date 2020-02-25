@@ -42,11 +42,7 @@ Route::prefix('lifter')->group(function () {
     
     
     Route::group(['middleware' => ['auth:api']], function(){
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
         
-
         // User Infor (Profile)
         Route::post('/updatePushToken', 'Api\ApiAuthController@updateLifterPushToken');
         Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
@@ -55,14 +51,16 @@ Route::prefix('lifter')->group(function () {
         /*
             Orders 
         */
-        // Accept Order
-        Route::post('/new-order-accept', 'Api\Lifter\OrderController@openOrderCreated');
+        // Accept Open Order
+        Route::post('/open-order-accept', 'Api\Lifter\OrderController@openOrderCreate');
+        Route::post('/schedule-order-accept', 'Api\Lifter\OrderController@scheduleOrderCreate');
         // Get Order
-        Route::get('/get-order/{orderid}', 'Api\Lifter\OrderController@show');
+        Route::get('/get-order/{id}', 'Api\Lifter\OrderController@show');
+        // Update Order
+        Route::post('/update-order', 'Api\Lifter\OrderController@update');
         
         Route::get('/inprocess-milk-orders', 'Api\Lifter\MilkOrderController@inProcessOrders'); 
-        Route::post('/update-milk-order', 'Api\Lifter\MilkOrderController@updateOrder');
-        Route::get('/get-milk-order/{order_id}', 'Api\Lifter\MilkOrderController@getOrder');
+        Route::get('/get-milk-order/{id}', 'Api\Lifter\MilkOrderController@getOrder');
 
         // Events
         Route::post('/pushLocation', 'Api\Lifter\EventController@lifterLocation');
