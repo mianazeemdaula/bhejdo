@@ -21,6 +21,7 @@ class CreateServicesTable extends Migration
             $table->integer('min_qty_charges');
             $table->double('s_price');
             $table->double('s_charges');
+            $table->integer('s_sample_qty')->defaul(1);
             $table->string('icon');
             $table->string('s_status');
             $table->timestamps();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepeatsTable extends Migration
+class CreateRepeatOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateRepeatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('repeats', function (Blueprint $table) {
+        Schema::create('repeat_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('order_id');
-            $table->json('duration');
-            $table->boolean('active')->default(1);
+            $table->integer('r_day');
+            $table->time('r_time');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateRepeatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repeats');
+        Schema::dropIfExists('repeat_orders');
     }
 }

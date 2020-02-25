@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Validator;  
 use DB;
 
 use App\User;

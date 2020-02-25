@@ -10,7 +10,7 @@ use App\LifterLocation;
 
 class OrderProcess {
 
-    static public function newOrder(Order $order)
+    static public function orderCreated(Order $order)
     {
         try{
             $lifters = self::getNearMe($order->latitude, $order->longitude, 5, $order->service_id);

@@ -43,7 +43,7 @@ class NewOpenOrder extends Command
     {
         $orders = OpenOrder::where('created_at', '<', Carbon::now()->subSeconds(60)->toDateTimeString())->get();
         foreach($orders as $order){
-            $response = OrderProcess::newOrder($order);
+            $response = OrderProcess::orderCreated($order);
         }
         $this->info('Notifications send to every lifter');
     }

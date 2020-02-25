@@ -17,15 +17,16 @@ Route::prefix('consumer')->group(function () {
     Route::post('register', 'Api\ApiAuthController@registerConsumer');
 
     Route::group(['middleware' => ['auth:api']], function(){
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
+        // User Info (Profile)
+        Route::post('/updatePushToken', 'Api\ApiAuthController@updatePushToken');
+
         // Lifters
         Route::post('/milk-lifters-near', 'Api\MilkLifterController@getNearMe');
-        // Place Order
-        Route::post('/place-order', 'Api\MilkOrderController@placeOrder'); 
 
-        Route::post('/updatePushToken', 'Api\ApiAuthController@updatePushToken');
+        // Open Orders
+        Route::post('/place-order', 'Api\Consumer\OpenOrderController@create');
+
+        
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
         Route::get('/pending-milk-orders', 'Api\MilkOrderController@pendingMilkOrders'); 
         Route::post('/milk-orders', 'Api\MilkOrderController@milkOrders'); 
@@ -44,11 +45,12 @@ Route::prefix('lifter')->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
-        Route::post('/updatePushToken', 'Api\ApiAuthController@updateLifterPushToken');
+        
 
-        // Varifications
-        Route::get('account-status', 'Api\ApiAuthController@accountStatus');
-        Route::post('nic-verification', 'Api\ApiAuthController@nicVerificaiton');
+        // User Infor (Profile)
+        Route::post('/updatePushToken', 'Api\ApiAuthController@updateLifterPushToken');
+        Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
+        Route::post('/nic-verification', 'Api\ApiAuthController@nicVerificaiton');
 
         // Orders
         Route::get('/new-order-details/{order_id}', 'Api\Lifter\MilkOrderController@getNewOrderDetails');
