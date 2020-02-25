@@ -58,7 +58,7 @@ Route::prefix('lifter')->group(function () {
         // Accept Order
         Route::post('/new-order-accept', 'Api\Lifter\OrderController@openOrderCreated');
         // Get Order
-        Route::get('/new-order-details/{order_id}', 'Api\Lifter\MilkOrderController@getNewOrderDetails');
+        Route::get('/get-order/{orderid}', 'Api\Lifter\OrderController@get');
         
         Route::get('/inprocess-milk-orders', 'Api\Lifter\MilkOrderController@inProcessOrders'); 
         Route::post('/update-milk-order', 'Api\Lifter\MilkOrderController@updateOrder');

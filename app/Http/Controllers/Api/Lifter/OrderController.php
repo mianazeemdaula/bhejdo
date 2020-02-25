@@ -47,4 +47,17 @@ class OrderController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
+
+    public function show($orderid)
+    {
+        try{
+            $order = OpenOrder::with('consumer')->where('id',$orderid)->first();
+            if($order == null){
+                return response()->json(['status'=>false, 'data' => ['Order assigned to anotherone']], 200);
+            }
+            return response()->json(['status'=>true, 'data' => $order], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
 }
