@@ -4,13 +4,14 @@ namespace App\Helpers;
 
 use Carbon\Carbon;
 use App\Order;
+use App\OpenOrder;
 use App\Helpers\AndroidNotifications;
 use App\User;
 use App\LifterLocation;
 
 class OrderProcess {
 
-    static public function orderCreated(Order $order)
+    static public function orderCreated(OpenOrder $order)
     {
         try{
             $lifters = self::getNearMe($order->latitude, $order->longitude, 5, $order->service_id);
