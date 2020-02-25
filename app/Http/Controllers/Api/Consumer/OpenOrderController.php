@@ -9,6 +9,7 @@ use DB;
 use Validator;
 
 use App\OpenOrder;
+use App\Service;
 use App\Helpers\OrderProcess;
 
 class OpenOrderController extends Controller
