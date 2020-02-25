@@ -9,6 +9,7 @@ use DB;
 use App\Order;
 use App\OpenOrder;
 use Carbon\Carbon;
+use Validator;
 
 use App\Helpers\AndroidNotifications;
 
