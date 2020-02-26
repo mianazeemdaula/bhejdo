@@ -18,7 +18,7 @@ Route::get('/redis', function () {
     $redis = PRedis::command('lrange', ['user', 5, 10]);
     $app->set('user', App\User::with('services')->get()->toJson());
     //return $app->get('user');
-    return $redis;
+    dd($redis);
 });
 
 Route::get('/', function () {
