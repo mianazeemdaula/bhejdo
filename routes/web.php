@@ -20,7 +20,7 @@ Route::get('/redis', function () {
     $redis = PRedis::command('GEOADD',['locations' , 30.692198, 73.639817, 'lifter-2']);
     $redis = PRedis::command('GEOADD', ['locations' , 28.986565 , 74.656655, 'lifter-3']);
     //return $app->get('user');
-    dd(PRedis::command('GEODIST',['locations' ,'lifter-1' , 'lifter-2', 'km', 'WITHDIST','WITHCOORD']));
+    dd(PRedis::command('GEORADIUSBYMEMBER',['locations' ,'lifter-1' , 'lifter-2', 'km', 'WITHDIST','WITHCOORD']));
 });
 
 Route::get('/', function () {
