@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Redis;
 
 Route::get('/redis', function () {
     $app = Redis::connection();
-    $app->set('user', App\User::find(1)->toJson());
+    $app->set('user', App\Service::all()->toJson());
     return $app->get('user');
 });
 
