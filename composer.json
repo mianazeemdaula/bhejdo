@@ -20,7 +20,8 @@
         "laravel/passport": "^8.2",
         "laravel/tinker": "^2.0",
         "nesbot/carbon": "^2.29",
-        "spatie/laravel-permission": "^3.6"
+        "spatie/laravel-permission": "^3.6",
+        "vetruvet/laravel-phpredis": "1.*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
