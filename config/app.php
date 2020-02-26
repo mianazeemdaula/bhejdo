@@ -178,7 +178,6 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
-        Vetruvet\PhpRedis\PhpRedisServiceProvider::class,
     ],
 
     /*
