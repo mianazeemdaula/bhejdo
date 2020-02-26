@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Redis;
 Route::get('/redis', function () {
     $app = PRedis::connection();
     $app->set('user', App\User::with('services')->get()->toJson());
-    $redis = PRedis::command('GEOADD', 'locations' , 33.656565 , 73.656655, 'lifter-1');
-    $redis = PRedis::command('GEOADD', 'locations' , 35.78885 , 62.656655, 'lifter-2');
-    $redis = PRedis::command('GEOADD', 'locations' , 28.986565 , 74.656655, 'lifter-3');
+    $redis = PRedis::command('GEOADD',['locations' , 33.656565 , 73.656655, 'lifter-1']);
+    $redis = PRedis::command('GEOADD',['locations' , 35.78885 , 62.656655, 'lifter-2']);
+    $redis = PRedis::command('GEOADD', ['locations' , 28.986565 , 74.656655, 'lifter-3']);
     //return $app->get('user');
-    dd(PRedis::command('GEODIST', 'locations' ,'lifter-1' , 'lifter-2', 'km'));
+    dd(PRedis::command('GEODIST',['locations' ,'lifter-1' , 'lifter-2', 'km']));
 });
 
 Route::get('/', function () {
