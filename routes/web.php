@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Redis;
 
 Route::get('/redis', function () {
     $app = PRedis::connection();
-    $redis = PRedis::command('lrange', ['user', 5, 10]);
     $app->set('user', App\User::with('services')->get()->toJson());
+    $redis = PRedis::command('lrange', ['user', 5, 10]);
     //return $app->get('user');
     dd($redis);
 });
