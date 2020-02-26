@@ -11,6 +11,13 @@
 |
 */
 
+use Illuminate\Support\Facades\Redis;
+
+Route::get('/redis', function () {
+    $user = Redis::set('user', ['how to congig', 'sdfsdfdsd']);
+    return Redis::get('user');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,6 +32,7 @@ Route::get('/mongo', function(){
 Route::get('/mongot', function(){
    return App\LifterLocation::truncate();
 });
+
 
 Auth::routes(['register' => false]);
 
