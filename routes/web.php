@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Redis;
 
 Route::get('/redis', function () {
-    $app = RedisManager::connection();
+    $app = Redis::connection();
     $app->set('user', ['how to congig', 'sdfsdfdsd']);
     return $app->get('user');
 });
