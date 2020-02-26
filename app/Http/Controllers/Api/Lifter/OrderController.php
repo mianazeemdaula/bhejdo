@@ -91,9 +91,9 @@ class OrderController extends Controller
     public function show($orderid)
     {
         try{
-            $order = OpenOrder::with(['consumer','service'])->where('id',$orderid)->first();
+            $order = Order::with(['consumer','service'])->where('id',$orderid)->first();
             if($order == null){
-                return response()->json(['status'=>false, 'data' => ['Order assigned to anotherone']], 200);
+                return response()->json(['status'=>false, 'data' => ['Order not found']], 200);
             }
             return response()->json(['status'=>true, 'data' => $order], 200);
         }catch(Exception $ex){
