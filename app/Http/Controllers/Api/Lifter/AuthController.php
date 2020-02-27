@@ -107,14 +107,16 @@ class AuthController extends Controller
                 $lifter->update($data);
             }
             $lifter->unset('services_details');
+            $scoreData = [];
             foreach($user->services as $service){
                 $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
                 $rate = LifterReview::whereIn('order_id', $ids)->avg('starts');
                 $rate = $rate == null ? 0 : $rate;
                 $data = ['orders' => count($ids), 'rate' => $rate];
-                $lifter->push('services_details', $service->id, true);
-                $lifter->services_details->push($service->id, $data, true);;
+                
+                $scoreData[$service->id] = $data;
             }
+            $lifter->push('services_details', $scoreData, true);
             return response()->json(['status'=> true, 'data' => $lifter], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
