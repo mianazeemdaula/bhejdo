@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Consumer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\lifterLocation;
+use App\LifterLocation;
 use App\Service;
 use Carbon\Carbon;
 
@@ -13,7 +13,7 @@ class LifterController extends Controller
 {
     public function getNearMe(Request $request)
     {
-        $lifters = lifterLocation::where('location', 'nearSphere', [
+        $lifters = LifterLocation::where('location', 'nearSphere', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
