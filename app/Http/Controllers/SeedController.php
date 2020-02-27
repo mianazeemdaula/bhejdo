@@ -118,7 +118,7 @@ class SeedController extends Controller
         $user->status = "active";
         $user->save();
         $user->assignRole('lifter');
-        $user->services()->sync([1]);
+        $user->services()->sync([1,2,3]);
 
         $user = new User();
         $user->name = 'Mian AR Rehman';

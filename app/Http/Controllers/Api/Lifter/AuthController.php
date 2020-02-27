@@ -73,7 +73,7 @@ class AuthController extends Controller
             ]);
 
             $user->assignRole($user->account_type);
-            $user->services()->sync([1]);
+            $user->services()->sync([1,2,3]);
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
             DB::commit();
