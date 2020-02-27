@@ -45,7 +45,7 @@ class OpenOrderController extends Controller
             $order->address = $request->address;
             $order->longitude = $request->longitude;
             $order->latitude = $request->latitude;
-            if($order->exists('sample')){
+            if($order->has('sample')){
                 $order->type = 3;
             }
             if($service->min_qty < $request->qty){
