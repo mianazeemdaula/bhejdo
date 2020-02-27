@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api\Consumer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\lifterLocation;
+use App\Service;
+use Carbon\Carbon;
+
 class LifterController extends Controller
 {
     public function getNearMe(Request $request)
@@ -20,8 +24,8 @@ class LifterController extends Controller
             '$maxDistance' => intval($request->distance * 1000),
         ])->where('last_update', '>', Carbon::now()->subSeconds(21)->timestamp)
         ->where('services','all',[intval($request->service)])->get();
-        $services = Service::all();
-        return ['status' => true, 'data' => ['lifters' => $lifters, 'service' => $services]];
+        $service = Service::find($request->service);
+        return ['status' => true, 'data' => ['lifters' => $lifters, 'service' => $service]];
         //return $stats;
     }
 }

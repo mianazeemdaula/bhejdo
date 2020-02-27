@@ -13,12 +13,12 @@ Route::get('/indexer/status', 'Api\Lifter\EventController@getStatus');
 
 Route::prefix('consumer')->group(function () {
     Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
-    Route::post('login', 'Api\ApiAuthController@login');
-    Route::post('register', 'Api\ApiAuthController@registerConsumer');
+    Route::post('login', 'Api\Consumer\AuthController@login');
+    Route::post('register', 'Api\Consumer\AuthController@register');
 
     Route::group(['middleware' => ['auth:api']], function(){
         // User Info (Profile)
-        Route::post('/updatePushToken', 'Api\ApiAuthController@updatePushToken');
+        Route::post('/updatePushToken', 'Api\Consumer\AuthController@pushToken');
 
         // Lifters
         Route::post('/milk-lifters-near', 'Api\MilkLifterController@getNearMe');
@@ -37,16 +37,16 @@ Route::prefix('consumer')->group(function () {
 
 Route::prefix('lifter')->group(function () {
     Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
-    Route::post('login', 'Api\ApiAuthController@loginLifter');
-    Route::post('register', 'Api\ApiAuthController@registerLifter');
+    Route::post('login', 'Api\Lifter\AuthController@login');
+    Route::post('register', 'Api\Lifter\AuthController@register');
     
     
     Route::group(['middleware' => ['auth:api']], function(){
         
         // User Infor (Profile)
-        Route::post('/updatePushToken', 'Api\ApiAuthController@updateLifterPushToken');
         Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
-        Route::post('/nic-verification', 'Api\ApiAuthController@nicVerificaiton');
+        Route::post('/updatePushToken', 'Api\Lifter\AuthController@pushToken');
+        Route::post('/nic-verification', 'Api\Lifter\AuthController@nicVerificaiton');
 
         /*
             Orders 
