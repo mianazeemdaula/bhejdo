@@ -31,6 +31,7 @@ Route::prefix('consumer')->group(function () {
             Route::get('inprocess', 'Api\Consumer\OrderController@inprocess'); 
             Route::get('all', 'Api\Consumer\OrderController@all'); 
             Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
+            Route::get('get/{id}', 'Api\Consumer\OrderController@getOrder'); 
         });
             
         

@@ -57,4 +57,15 @@ class OrderController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
+
+    public function getOrder(Request $request, $orderid)
+    {
+        try{
+            $order = Order::find($orderid);
+            $order =  new OrderResource($order);
+            return response()->json(['status'=>true, 'data' => ['order' => $order ]], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
 }
