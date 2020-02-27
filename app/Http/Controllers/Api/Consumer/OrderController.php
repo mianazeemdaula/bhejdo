@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function open(Request $request)
     {
         try{
-            $oders = OpenOrder::where('consumer_id', $request->user()->id)->get();
+            $orders = OpenOrder::where('consumer_id', $request->user()->id)->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
@@ -27,7 +27,7 @@ class OrderController extends Controller
     public function schedule(Request $request)
     {
         try{
-            $oders = ScheduleOrder::where('consumer_id', $request->user()->id)->get();
+            $orders = ScheduleOrder::where('consumer_id', $request->user()->id)->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
@@ -38,7 +38,7 @@ class OrderController extends Controller
     public function inprocess(Request $request)
     {
         try{
-            $oders = Order::where('consumer_id', $request->user()->id)
+            $orders = Order::where('consumer_id', $request->user()->id)
             ->where('status', '!=' ,'confirmed')->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
@@ -50,7 +50,7 @@ class OrderController extends Controller
     public function all(Request $request)
     {
         try{
-            $oders = Order::where('consumer_id', $request->user()->id)->get();
+            $orders = Order::where('consumer_id', $request->user()->id)->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
