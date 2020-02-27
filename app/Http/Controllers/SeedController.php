@@ -70,7 +70,7 @@ class SeedController extends Controller
         // $user->assignRole('lifter');
 
         $service = new Service();
-        $service->s_name = 'Milk';
+        $service->s_name = 'Dhodo';
         $service->min_qty = 5;
         $service->max_qty = 25;
         $service->min_qty_charges = 50;
@@ -81,24 +81,24 @@ class SeedController extends Controller
         $service->save();
 
         $service = new Service();
-        $service->s_name = 'Dhahi';
-        $service->min_qty = 2;
-        $service->max_qty = 20;
-        $service->s_price = 120;
+        $service->s_name = 'Dhodo +';
+        $service->min_qty = 5;
+        $service->max_qty = 25;
+        $service->s_price = 110;
         $service->min_qty_charges = 50;
-        $service->s_charges = 8;
-        $service->icon = 'dhahi_service';
+        $service->s_charges = 11;
+        $service->icon = 'milk_service';
         $service->s_status = 'active';
         $service->save();
 
         $service = new Service();
-        $service->s_name = 'Lasi';
+        $service->s_name = 'Dhodo ++';
         $service->min_qty = 5;
-        $service->max_qty = 20;
-        $service->s_price = 80;
+        $service->max_qty = 25;
+        $service->s_price = 130;
         $service->min_qty_charges = 50;
-        $service->s_charges = 6;
-        $service->icon = 'lasi_service';
+        $service->s_charges = 13;
+        $service->icon = 'milk_service';
         $service->s_status = 'active';
         $service->save();
 
