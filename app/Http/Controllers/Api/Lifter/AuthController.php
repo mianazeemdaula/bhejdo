@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 // Models
 use DB;
 use App\User;
+use App\LifterLocation;
+use App\LifterReview;
 
 // Helpers
 use App\Helpers\BonusProcess;
@@ -92,7 +94,7 @@ class AuthController extends Controller
             $_services = [];
             foreach($user->services as $service){
                 $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
-                $rate = App\LifterReview::whereIn('order_id', $ids)->avg('starts');
+                $rate = LifterReview::whereIn('order_id', $ids)->avg('starts');
                 $rate = $rate == null ? 0 : $rate;
                 $_services[$service->id] = ['orders' => count($ids), 'rate' => $rate];
             }
@@ -105,9 +107,9 @@ class AuthController extends Controller
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id
             ];
-            $lifter = App\LifterLocation::where('lifter_id',$request->user()->id)->first();
+            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             if($lifter == null){
-                $lifter = App\LifterLocation::create($data);
+                $lifter = LifterLocation::create($data);
             }else{
                 $lifter->update($data);
             }
