@@ -88,7 +88,6 @@ class AuthController extends Controller
             $user = User::findOrFail($request->user()->id);
             $user->pushToken = $request->pushToken;
             $user->save();
-            
             $_services = [];
             foreach($user->services as $service){
                 $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
