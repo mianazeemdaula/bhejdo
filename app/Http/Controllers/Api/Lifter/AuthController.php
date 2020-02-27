@@ -91,13 +91,7 @@ class AuthController extends Controller
             $user = User::findOrFail($request->user()->id);
             $user->pushToken = $request->pushToken;
             $user->save();
-            $_services = [];
-            foreach($user->services as $service){
-                $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
-                $rate = LifterReview::whereIn('order_id', $ids)->avg('starts');
-                $rate = $rate == null ? 0 : $rate;
-                $_services[$service->id] = ['orders' => count($ids), 'rate' => $rate];
-            }
+            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             $data = [
                 'name' => $user->name,
                 'avatar' => $user->avatar,
@@ -107,14 +101,20 @@ class AuthController extends Controller
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id
             ];
-            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             if($lifter == null){
                 $lifter = LifterLocation::create($data);
             }else{
                 $lifter->update($data);
             }
             $lifter->unset('services_details');
-            $lifter->push('services_details', $_services, true);
+            foreach($user->services as $service){
+                $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
+                $rate = LifterReview::whereIn('order_id', $ids)->avg('starts');
+                $rate = $rate == null ? 0 : $rate;
+                $data = ['orders' => count($ids), 'rate' => $rate];
+                $lifter->push('services_details', $service->id, true);
+                $lifter->services_details->push($service->id, $data, true);;
+            }
             return response()->json(['status'=> true, 'data' => $lifter], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
