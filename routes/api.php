@@ -25,10 +25,16 @@ Route::prefix('consumer')->group(function () {
 
         // Open Orders
         Route::post('/place-order', 'Api\Consumer\OpenOrderController@create');
-
+        
+        Route::prefix('order')->group(function () {
+            Route::get('open', 'Api\Consumer\OrderController@open'); 
+            Route::get('inprocess', 'Api\Consumer\OrderController@inprocess'); 
+            Route::get('all', 'Api\Consumer\OrderController@all'); 
+            Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
+        });
+            
         
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
-        Route::get('/pending-milk-orders', 'Api\MilkOrderController@pendingMilkOrders'); 
         Route::post('/milk-orders', 'Api\MilkOrderController@milkOrders'); 
         Route::post('/confirm-milk-order', 'Api\MilkOrderController@confirmOrder'); 
     });
