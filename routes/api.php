@@ -21,7 +21,7 @@ Route::prefix('consumer')->group(function () {
         Route::post('/updatePushToken', 'Api\Consumer\AuthController@pushToken');
 
         // Lifters
-        Route::post('/milk-lifters-near', 'Api\MilkLifterController@getNearMe');
+        Route::post('/lifters-near', 'Api\Consumer\LifterController@getNearMe');
 
         // Open Orders
         Route::post('/place-order', 'Api\Consumer\OpenOrderController@create');
