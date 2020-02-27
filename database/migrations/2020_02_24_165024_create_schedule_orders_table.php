@@ -20,6 +20,7 @@ class CreateScheduleOrdersTable extends Migration
             $table->integer('service_id');
             $table->integer('qty');
             $table->double('price');
+            $table->integer('charges');
             $table->dateTime('delivery_time');
             $table->string('address');
             $table->double('longitude')->default(0.0);

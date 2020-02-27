@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->integer('service_id');
             $table->integer('qty');
             $table->double('price');
+            $table->integer('charges');
             $table->dateTime('delivery_time');
             $table->string('note')->nullable();
             $table->string('address');
