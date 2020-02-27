@@ -19,7 +19,7 @@ class CreateOpenOrdersTable extends Migration
             $table->integer('service_id');
             $table->integer('qty');
             $table->double('price');
-            $table->integer('charges');
+            $table->integer('charges')->default(0);
             $table->dateTime('delivery_time');
             $table->string('address');
             $table->string('note')->nullable();
