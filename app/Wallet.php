@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Walet extends Model
+class Wallet extends Model
 {
     public function user()
     {
