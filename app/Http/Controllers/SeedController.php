@@ -107,6 +107,16 @@ class SeedController extends Controller
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Over Time', 'order_qty' => 75]);
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Dual Time', 'order_qty' => 100]);
 
+        $level = Level::firstOrCreate(['service_id' => 2,'l_name' => 'Part Time', 'order_qty' => 25]);
+        $level = Level::firstOrCreate(['service_id' => 2,'l_name' => 'Full Time', 'order_qty' => 50]);
+        $level = Level::firstOrCreate(['service_id' => 2,'l_name' => 'Over Time', 'order_qty' => 75]);
+        $level = Level::firstOrCreate(['service_id' => 2,'l_name' => 'Dual Time', 'order_qty' => 100]);
+
+        $level = Level::firstOrCreate(['service_id' => 3,'l_name' => 'Part Time', 'order_qty' => 25]);
+        $level = Level::firstOrCreate(['service_id' => 3,'l_name' => 'Full Time', 'order_qty' => 50]);
+        $level = Level::firstOrCreate(['service_id' => 3,'l_name' => 'Over Time', 'order_qty' => 75]);
+        $level = Level::firstOrCreate(['service_id' => 3,'l_name' => 'Dual Time', 'order_qty' => 100]);
+
         $user = new User();
         $user->name = 'BhejDo Store';
         $user->mobile = '03001234567';
@@ -118,7 +128,9 @@ class SeedController extends Controller
         $user->status = "active";
         $user->save();
         $user->assignRole('lifter');
-        $user->services()->sync([1,2,3]);
+        $user->services()->attach(1, ['level_id' => 1]);
+        $user->services()->attach(2, ['level_id' => 5]);
+        $user->services()->attach(3, ['level_id' => 9]);
 
         $user = new User();
         $user->name = 'Mian AR Rehman';

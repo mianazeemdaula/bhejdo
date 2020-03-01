@@ -46,9 +46,16 @@ class User extends Authenticatable
 
     public function services()
     {
+        // WOrking well before new pivot
+        // return $this->belongsToMany('App\Service')->using('App\ServiceUser')->withPivot([
+        //     'service_id',
+        //     'user_id',
+        // ]);
+
         return $this->belongsToMany('App\Service')->using('App\ServiceUser')->withPivot([
             'service_id',
             'user_id',
+            'level_id'
         ]);
     }
 
@@ -57,9 +64,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User', 'store_lifters', 'store_id', 'lifter_id');
     }
 
-    public function walet()
+    public function wallet()
     {
-        return $this->hasMany(Walet::class);
+        return $this->hasMany(WaLlet::class);
     }
 
     public function bonus()
@@ -67,9 +74,9 @@ class User extends Authenticatable
         return $this->hasMany(Bonus::class);
     }
 
-    public function level()
+    public function serviceCharges()
     {
-        return $this->belongsTo(Level::class);
+        return $this->hasMany(ServiceCharge::class);
     }
 
     public function scopeIsWithinMaxDistance($query, $location, $radius = 5) {

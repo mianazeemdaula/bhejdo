@@ -12,6 +12,7 @@ use App\Order;
 use App\OpenOrder;
 use App\ScheduleOrder;
 use App\Wallet;
+use App\ServiceCharge;
 
 use App\Http\Resources\Milk\Order as OrderResource;
 use App\Helpers\AndroidNotifications;
@@ -74,7 +75,7 @@ class OrderController extends Controller
         }
     }
 
-    public function confirmOrder(Request $request)
+    public function update(Request $request)
     {
         DB::beginTransaction();
         try{
@@ -89,18 +90,17 @@ class OrderController extends Controller
                 $order->status = 'confirmed';
                 $order->payment = $request->paymentType;
                 $order->confirmed_time = $dateTime;
-                $lastTrans = Wallet::where('user_id', $request->lifter->id)->latest('id')->first();
+                $lastTrans = ServiceCharge::where('user_id', $request->lifter->id)->latest('id')->first();
                 $amount = 0;
                 if($lastTrans != null){
                     $amount = $lastTrans->amount;
                 }
                 $debit = $order->service->s_charges * $order->qty;
-                $wallet = new Wallet();
-                $wallet->user_id = $order->lifter->id;
-                $wallet->description = "Fee of order #{$order->id}";
-                $wallet->type = "order";
-                $wallet->amount = $amount - $debit;
-                $wallet->save();
+                $order->lifter->serviceCharges()->create([
+                    'description' => "Service charges of order #{$order->id}",
+                    'type' => 'order',
+                    'amount' => $amount - $debit
+                ]);
             }
             $order->save();
             DB::commit();

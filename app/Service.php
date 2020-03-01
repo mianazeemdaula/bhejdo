@@ -8,9 +8,16 @@ class Service extends Model
 {
     public function users()
     {
+        // WOrking before new pivot
+        // return $this->belongsToMany('App\User')->using('App\ServiceUser')->withPivot([
+        //     'service_id',
+        //     'user_id',
+        // ]);
+
         return $this->belongsToMany('App\User')->using('App\ServiceUser')->withPivot([
             'service_id',
             'user_id',
+            'level_id'
         ]);
     }
 

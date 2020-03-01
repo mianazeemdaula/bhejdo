@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserService extends Migration
+class CreateServiceChargesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class UserService extends Migration
      */
     public function up()
     {
-        Schema::create('service_user', function (Blueprint $table) {
+        Schema::create('service_charges', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('service_id');
-            $table->integer('level_id');
+            $table->string('type',10)->default('order');
+            $table->string('description');
+            $table->double('amount')->defual(0.0);
         });
     }
 
@@ -27,6 +29,6 @@ class UserService extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('service_charges');
     }
 }
