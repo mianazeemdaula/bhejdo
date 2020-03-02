@@ -39,6 +39,8 @@ Route::get('/mongot', function(){
    return App\LifterLocation::truncate();
 });
 
+Route::get('/dbtest', 'SeedController@test');
+
 
 Auth::routes(['register' => false]);
 

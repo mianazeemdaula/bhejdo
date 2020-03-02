@@ -14,9 +14,4 @@ class Level extends Model
     {
         return $this->belongsTo(Service::class);
     }
-
-    public function userService()
-    {
-        return $this->belongsTo(ServiceUser::class);
-    }
 }

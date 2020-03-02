@@ -30,4 +30,9 @@ class Service extends Model
     {
         return $this->hasMany(Level::class);
     }
+
+    public function userlevels()
+    {
+        return $this->hasMany(Level::class);
+    }
 }

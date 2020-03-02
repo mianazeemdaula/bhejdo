@@ -13,11 +13,11 @@ class CreateLifterLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('lifter_locations', function (Blueprint $table) {
-           // $table->index('id');
-            $table->unique('lifter_id');
-            $table->index(['location' => '2dsphere']);
-        });
+        // Schema::connection('mongodb')->create('lifter_locations', function (Blueprint $table) {
+        //    // $table->index('id');
+        //     $table->unique('lifter_id');
+        //     $table->index(['location' => '2dsphere']);
+        // });
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateLifterLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lifter_locations');
+        //Schema::dropIfExists('lifter_locations');
     }
 }

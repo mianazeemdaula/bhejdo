@@ -17,6 +17,7 @@ class UserService extends Migration
             $table->integer('user_id');
             $table->integer('service_id');
             $table->integer('level_id');
+            $table->primary(['user_id','service_id']);
         });
     }
 
@@ -27,6 +28,6 @@ class UserService extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('service_user');
     }
 }

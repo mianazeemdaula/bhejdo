@@ -102,6 +102,17 @@ class SeedController extends Controller
         $service->s_status = 'active';
         $service->save();
 
+        $service = new Service();
+        $service->s_name = 'Chiken';
+        $service->min_qty = 2;
+        $service->max_qty = 10;
+        $service->s_price = 250;
+        $service->min_qty_charges = 50;
+        $service->s_charges = 25;
+        $service->icon = 'milk_service';
+        $service->s_status = 'inactive';
+        $service->save();
+
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Part Time', 'order_qty' => 25]);
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Full Time', 'order_qty' => 50]);
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Over Time', 'order_qty' => 75]);
@@ -128,9 +139,10 @@ class SeedController extends Controller
         $user->status = "active";
         $user->save();
         $user->assignRole('lifter');
-        $user->services()->attach(1, ['level_id' => 1]);
-        $user->services()->attach(2, ['level_id' => 5]);
-        $user->services()->attach(3, ['level_id' => 9]);
+        //$user->services()->sync([1,['level_id' => 1]],[2, ['level_id' => 5]], [3, ['level_id' => 9]]);
+        $user->services()->attach([3 =>  ['level_id' => 9]]);
+        $user->services()->attach([1 => ['level_id' => 1]]);
+        $user->services()->attach([2 => ['level_id' => 5]]);
 
         $user = new User();
         $user->name = 'Mian AR Rehman';
@@ -153,4 +165,12 @@ class SeedController extends Controller
         event(new NewLocation($message));
         return "Pushed";
     }
+
+    public function test()
+    {
+        $user = User::find(2);
+        return $user->services()->find(2)->pivot->level->toJson();
+        //return $user->services()->wherePivot("service_id",2)->get();
+    }
+
 }
