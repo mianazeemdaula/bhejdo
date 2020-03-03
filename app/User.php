@@ -46,12 +46,6 @@ class User extends Authenticatable
 
     public function services()
     {
-        // WOrking well before new pivot
-        // return $this->belongsToMany('App\Service')->using('App\ServiceUser')->withPivot([
-        //     'service_id',
-        //     'user_id',
-        // ]);
-
         return $this->belongsToMany('App\Service')->using('App\ServiceUser')->withPivot([
             'service_id',
             'user_id',

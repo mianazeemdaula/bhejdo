@@ -140,7 +140,7 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('lifter');
         //$user->services()->sync([1,['level_id' => 1]],[2, ['level_id' => 5]], [3, ['level_id' => 9]]);
-        $user->services()->attach([3 =>  ['level_id' => 9]]);
+        $user->services()->attach([3 => ['level_id' => 9]]);
         $user->services()->attach([1 => ['level_id' => 1]]);
         $user->services()->attach([2 => ['level_id' => 5]]);
 
@@ -168,6 +168,20 @@ class SeedController extends Controller
 
     public function test()
     {
+        $lifters = App\lifterLocation::where('location', 'nearSphere', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    floatval(30.672922), // longitude
+                    floatval(73.662561), // latitude
+                ],
+            ],
+            '$maxDistance' => intval(5 * 1000),
+            'distanceField' =>  "dist.calculated",
+            'spherical' =>  true,
+        ])->get();
+        return $lifters;
+
         $user = User::find(2);
         return $user->services()->find(2)->pivot->level->toJson();
         //return $user->services()->wherePivot("service_id",2)->get();

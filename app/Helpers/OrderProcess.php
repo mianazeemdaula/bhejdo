@@ -69,6 +69,8 @@ class OrderProcess {
                 ],
             ],
             '$maxDistance' => intval($distance * 1000),
+            'distanceField' =>  "dist.calculated",
+            'spherical' =>  true,
         ])->where('last_update', '>', Carbon::now()->subSeconds(20)->timestamp)
         ->where('services','all',[$service])->get();
         return $lifters;
