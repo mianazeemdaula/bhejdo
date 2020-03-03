@@ -33,9 +33,10 @@ class CreateOrdersTable extends Migration
             $table->dateTime('confirmed_time')->nullable();
             $table->dateTime('canceled_time')->nullable();
             $table->string('cancel_desc')->nullable();
-            $table->string('payment')->default('cod');
+            $table->string('payment_id')->default(1);
             $table->string('status',15)->default('created');
             $table->integer('type')->default(1); // 1- Open, 2-Schedule, 3-Sample
+            $table->boolean('bonus')->default(0);
             $table->timestamps();
         });
     }

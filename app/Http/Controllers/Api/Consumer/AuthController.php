@@ -74,6 +74,12 @@ class AuthController extends Controller
             
             $user->assignRole('consumer');
 
+            $user->bonus()->create([
+                'description' => 'Signup bonus',
+                'type' => 'signup',
+                'amount' => 500
+            ]);
+
             $success['token'] = $user->createToken($user->account_type)->accessToken;
             $success['user'] = $user;
             DB::commit();

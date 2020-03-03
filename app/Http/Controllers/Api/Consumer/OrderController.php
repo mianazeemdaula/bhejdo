@@ -103,6 +103,9 @@ class OrderController extends Controller
                 ]);
             }
             $order->save();
+            // Logic for reffer bonus
+                
+            //
             DB::commit();
             $message = "Order for {$order->service->s_name} of {$order->qty} is {$status}.";
             $data = ['order_id' => $order->id, 'type' => 'order'];
