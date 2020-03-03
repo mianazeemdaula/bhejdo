@@ -177,6 +177,7 @@ class SeedController extends Controller
                 ],
             ],
             '$maxDistance' => intval(5 * 1000),
+            '$distanceField' => 'distance',
         ])->get();
         return $lifters;
 
