@@ -33,6 +33,10 @@ Route::prefix('consumer')->group(function () {
             Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
             Route::get('get/{id}', 'Api\Consumer\OrderController@getOrder'); 
         });
+
+        Route::prefix('bonus')->group(function () {
+            Route::resource('/', 'Api\Consumer\BonusController@open');
+        });
             
         
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
@@ -67,8 +71,6 @@ Route::prefix('lifter')->group(function () {
         // Update Order
         Route::post('/update-order', 'Api\Lifter\OrderController@update');
         
-        Route::get('/inprocess-milk-orders', 'Api\Lifter\MilkOrderController@inProcessOrders'); 
-        Route::get('/get-milk-order/{id}', 'Api\Lifter\MilkOrderController@getOrder');
 
         // Events
         Route::post('/pushLocation', 'Api\Lifter\EventController@lifterLocation');
