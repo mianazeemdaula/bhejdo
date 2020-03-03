@@ -168,7 +168,7 @@ class SeedController extends Controller
 
     public function test()
     {
-        $lifters = App\lifterLocation::where('location', 'nearSphere', [
+        $lifters = App\LifterLocation::where('location', 'nearSphere', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
