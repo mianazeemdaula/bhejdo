@@ -32,6 +32,7 @@ Route::prefix('consumer')->group(function () {
             Route::get('all', 'Api\Consumer\OrderController@all'); 
             Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
             Route::get('get/{id}', 'Api\Consumer\OrderController@getOrder'); 
+            Route::post('update', 'Api\Consumer\OrderController@update'); 
         });
 
         Route::prefix('bonus')->group(function () {
