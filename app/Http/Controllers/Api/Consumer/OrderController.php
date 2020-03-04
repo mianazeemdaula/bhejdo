@@ -90,7 +90,7 @@ class OrderController extends Controller
                 $order->canceled_time = $dateTime;
             }else if($status == 'confirmed'){
                 $order->status = 'confirmed';
-                $order->payment = $request->paymentType;
+                $order->payment_id = $request->paymentType;
                 $order->confirmed_time = $dateTime;
                 $lastTrans = ServiceCharge::where('user_id', $order->lifter->id)->latest('id')->first();
                 $amount = 0;
