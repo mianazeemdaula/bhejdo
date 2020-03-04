@@ -20,6 +20,7 @@ class CreateWalletsTable extends Migration
             $table->string('type',10)->default('transfer');
             $table->double('amount')->defual(0.0);
             $table->double('balance')->defual(0.0);
+            $table->timestamps();
         });
     }
 

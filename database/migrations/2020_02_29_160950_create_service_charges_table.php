@@ -20,6 +20,8 @@ class CreateServiceChargesTable extends Migration
             $table->string('description');
             $table->double('amount')->defual(0.0);
             $table->double('balance')->defual(0.0);
+            $table->timestamps();
+
         });
     }
 
