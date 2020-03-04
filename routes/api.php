@@ -66,11 +66,11 @@ Route::prefix('lifter')->group(function () {
         Route::post('/nic-verification', 'Api\Lifter\AuthController@nicVerificaiton');
 
         Route::prefix('order')->group(function () {
-            Route::get('inprocess', 'Api\Lifter\OrderController@inprocess'); 
+            Route::get('inprocess', 'Api\Lifter\OrderController@inprocess');
             Route::get('open', 'Api\Consumer\OrderController@open'); 
             Route::get('all', 'Api\Consumer\OrderController@all'); 
             Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
-            Route::get('get/{id}', 'Api\Consumer\OrderController@getOrder'); 
+            Route::post('update', 'Api\Consumer\OrderController@update'); 
         });
         // Accept Open Order
         Route::post('/open-order-accept', 'Api\Lifter\OrderController@openOrderCreate');

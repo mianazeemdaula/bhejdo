@@ -99,7 +99,8 @@ class OrderController extends Controller
                 $order->lifter->serviceCharges()->create([
                     'description' => "Service charges of order #{$order->id}",
                     'type' => 'order',
-                    'amount' => $amount - $debit
+                    'amount' => -$debit,
+                    'balance' => $amount - $debit
                 ]);
             }
             $order->save();
