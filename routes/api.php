@@ -38,6 +38,11 @@ Route::prefix('consumer')->group(function () {
             Route::resource('/', 'Api\Consumer\BonusController');
             Route::get('/balance', 'Api\Consumer\BonusController@balance');
         });
+
+        Route::prefix('wallet')->group(function () {
+            Route::resource('/', 'Api\Consumer\WalletController');
+            Route::get('/balance', 'Api\Consumer\WalletController@balance');
+        });
         
         
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
