@@ -92,7 +92,7 @@ class OrderController extends Controller
                 $order->status = 'confirmed';
                 $order->payment = $request->paymentType;
                 $order->confirmed_time = $dateTime;
-                $lastTrans = ServiceCharge::where('user_id', $request->lifter->id)->latest('id')->first();
+                $lastTrans = ServiceCharge::where('user_id', $order->lifter->id)->latest('id')->first();
                 $amount = 0;
                 if($lastTrans != null){
                     $amount = $lastTrans->amount;
