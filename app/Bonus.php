@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bonus extends Model
 {
     protected $fillable = [
-        'user_id', 'description', 'amount', 'type'
+        'user_id', 'description', 'amount', 'type', 'balance'
     ];
 
     public function user()

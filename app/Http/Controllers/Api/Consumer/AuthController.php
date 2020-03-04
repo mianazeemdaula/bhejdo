@@ -77,7 +77,8 @@ class AuthController extends Controller
             $user->bonus()->create([
                 'description' => 'Signup bonus',
                 'type' => 'signup',
-                'amount' => 500
+                'amount' => 500,
+                'balance' => 500
             ]);
 
             $success['token'] = $user->createToken($user->account_type)->accessToken;
