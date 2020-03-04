@@ -36,7 +36,7 @@ Route::prefix('consumer')->group(function () {
 
         Route::prefix('bonus')->group(function () {
             Route::resource('/', 'Api\Consumer\BonusController');
-            Route::resource('/balance', 'Api\Consumer\BonusController@balance');
+            Route::get('/balance', 'Api\Consumer\BonusController@balance');
         });
         
         
