@@ -65,9 +65,13 @@ Route::prefix('lifter')->group(function () {
         Route::post('/updatePushToken', 'Api\Lifter\AuthController@pushToken');
         Route::post('/nic-verification', 'Api\Lifter\AuthController@nicVerificaiton');
 
-        /*
-            Orders 
-        */
+        Route::prefix('order')->group(function () {
+            Route::get('inprocess', 'Api\Lifter\OrderController@inprocess'); 
+            Route::get('open', 'Api\Consumer\OrderController@open'); 
+            Route::get('all', 'Api\Consumer\OrderController@all'); 
+            Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
+            Route::get('get/{id}', 'Api\Consumer\OrderController@getOrder'); 
+        });
         // Accept Open Order
         Route::post('/open-order-accept', 'Api\Lifter\OrderController@openOrderCreate');
         Route::post('/schedule-order-accept', 'Api\Lifter\OrderController@scheduleOrderCreate');
