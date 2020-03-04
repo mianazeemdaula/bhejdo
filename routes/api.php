@@ -35,9 +35,10 @@ Route::prefix('consumer')->group(function () {
         });
 
         Route::prefix('bonus')->group(function () {
-            Route::resource('/', 'Api\Consumer\BonusController@open');
+            Route::resource('/', 'Api\Consumer\BonusController');
+            Route::resource('/balance', 'Api\Consumer\BonusController@balance');
         });
-            
+        
         
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
         Route::post('/milk-orders', 'Api\MilkOrderController@milkOrders'); 

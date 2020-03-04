@@ -57,8 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/seed', 'SeedController@Seed');
 Route::get('/pusher/{message}', 'SeedController@pusher');
-Route::get('/indexer/create', 'ElasticController@mapLocation');
-Route::get('/indexer/clear', 'ElasticController@clearIndices');
 
 Route::get('/service', 'ServiceController@setservice');
 

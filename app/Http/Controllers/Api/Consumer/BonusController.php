@@ -9,7 +9,7 @@ use App\Bonus;
 
 class BonusController extends Controller
 {
-    public function show(Request $request)
+    public function balance(Request $request)
     {
         try{
             $bonus = Bonus::where("user_id", $request->user()->id)->latest('id')->first();
