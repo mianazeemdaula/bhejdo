@@ -168,21 +168,12 @@ class SeedController extends Controller
 
     public function test()
     {
-        $lifters = \App\LifterLocation::where('location', 'nearSphere', [
-            '$geometry' => [
-                'type' => 'Point',
-                'coordinates' => [
-                    floatval(30.672922), // longitude
-                    floatval(73.662561), // latitude
-                ],
-            ],
-            '$maxDistance' => intval(5 * 1000),
-            '$distanceField' => 'distance',
-        ])->get();
-        return $lifters;
+        $ue = "";
+        $balance = \App\Bonus::deduct(2, "Test Fee", "reffer", 20);
 
-        $user = User::find(2);
-        return $user->services()->find(2)->pivot->level->toJson();
+        return $balance;
+        // $user = User::find(2);
+        // return $user->services()->find(2)->pivot->level->toJson();
         //return $user->services()->wherePivot("service_id",2)->get();
     }
 
