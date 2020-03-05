@@ -38,7 +38,7 @@ class AndroidNotifications {
 
     static public function toLifter($title, $messag, $token,Array $data)
     {
-        $pushKey = 'AIzaSyCvnrtqXFcB7ZfYfVT-kuugsEKvmHP7iok';
+        $pushKey = 'AIzaSyCxbfd3GJUrfy7cC_hbO4ym0sxkUQlQjPY';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
@@ -106,7 +106,7 @@ class AndroidNotifications {
 
     static public function MultipleLifter($tokenList, $messag, $token, Array $data)
     {
-        $pushKey = 'AIzaSyCvnrtqXFcB7ZfYfVT-kuugsEKvmHP7iok';
+        $pushKey = 'AIzaSyCxbfd3GJUrfy7cC_hbO4ym0sxkUQlQjPY';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
