@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
-    public function post()
+    public function order()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Order');
     }
 }

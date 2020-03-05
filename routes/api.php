@@ -73,6 +73,22 @@ Route::prefix('lifter')->group(function () {
             Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
             Route::post('update', 'Api\Consumer\OrderController@update'); 
         });
+
+        Route::prefix('bonus')->group(function () {
+            Route::resource('/', 'Api\LIfter\BonusController');
+            Route::get('/balance', 'Api\LIfter\BonusController@balance');
+        });
+
+        Route::prefix('wallet')->group(function () {
+            Route::resource('/', 'Api\LIfter\WalletController');
+            Route::get('/balance', 'Api\LIfter\WalletController@balance');
+        });
+
+        Route::prefix('servicecharge')->group(function () {
+            Route::resource('/', 'Api\LIfter\ServiceChargesController');
+            Route::get('/balance', 'Api\LIfter\ServiceChargesController@balance');
+        });
+
         // Accept Open Order
         Route::post('/open-order-accept', 'Api\Lifter\OrderController@openOrderCreate');
         Route::post('/schedule-order-accept', 'Api\Lifter\OrderController@scheduleOrderCreate');

@@ -28,6 +28,6 @@ class Order extends Model
 
     public function review()
     {
-        return $this->hasOne('App\LifterReview');
+        return $this->hasOne('App\Review');
     }
 }
