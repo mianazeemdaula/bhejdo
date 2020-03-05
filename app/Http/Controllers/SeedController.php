@@ -146,7 +146,7 @@ class SeedController extends Controller
 
         $user = new User();
         $user->name = 'Mian AR Rehman';
-        $user->mobile = '03334103160';
+        $user->mobile = '03014103160';
         $user->email = 'arrehman@gmail.com';
         $user->password = bcrypt('123456');
         $user->address = 'Rasheed u din colony, Depalpur';
