@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(ServiceCharge::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
     public function scopeIsWithinMaxDistance($query, $location, $radius = 5) {
 
         $haversine = "(6371 * acos(cos(radians($location->latitude)) 

@@ -14,9 +14,9 @@ class UserService extends Migration
     public function up()
     {
         Schema::create('service_user', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->integer('service_id');
-            $table->integer('level_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('level_id');
             $table->primary(['user_id','service_id']);
         });
     }

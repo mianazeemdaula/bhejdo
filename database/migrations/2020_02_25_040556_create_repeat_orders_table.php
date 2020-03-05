@@ -15,7 +15,7 @@ class CreateRepeatOrdersTable extends Migration
     {
         Schema::create('repeat_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('order_id');
+            $table->unsignedBigInteger('order_id');
             $table->integer('r_day');
             $table->time('r_time');
             $table->timestamps();

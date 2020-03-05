@@ -14,8 +14,8 @@ class CreateStoreLiftersTable extends Migration
     public function up()
     {
         Schema::create('store_lifters', function (Blueprint $table) {
-            $table->integer('store_id');
-            $table->integer('lifter_id');
+            $table->unsignedBigInteger('store_id');
+            $table->unsignedBigInteger('lifter_id');
         });
     }
 

@@ -15,7 +15,7 @@ class CreateLevelsTable extends Migration
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('service_id');
+            $table->unsignedBigInteger('service_id');
             $table->string('l_name');
             $table->integer('order_qty')->default(25);
             $table->timestamps();

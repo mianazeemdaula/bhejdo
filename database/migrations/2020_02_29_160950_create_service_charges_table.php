@@ -15,7 +15,7 @@ class CreateServiceChargesTable extends Migration
     {
         Schema::create('service_charges', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('type',10)->default('order');
             $table->string('description');
             $table->double('amount')->defual(0.0);
