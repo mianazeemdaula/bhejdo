@@ -37,7 +37,7 @@ class CreateOrdersTable extends Migration
             $table->string('status',15)->default('created');
             $table->integer('type')->default(1); // 1- Open, 2-Schedule, 3-Sample
             $table->boolean('bonus_paid')->default(0);
-            $table->double('payable_amount')->defualt(0);
+            $table->double('payable_amount')->default(0);
             $table->timestamps();
         });
     }
