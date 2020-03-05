@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 use App\User;
 use App\LifterLocation;
-use App\LifterReview;
+use App\Review;
 
 // Helpers
 use App\Helpers\BonusProcess;
@@ -118,8 +118,8 @@ class AuthController extends Controller
             $lifter->unset('services_details');
             $scoreData = [];
             foreach($user->services as $service){
-                $ids = $service->orders()->where('status','delivered')->pluck('id')->toArray();
-                $rate = LifterReview::whereIn('order_id', $ids)->avg('starts');
+                $ids = $service->orders()->where('status','confirmed')->pluck('id')->toArray();
+                $rate = Review::whereIn('order_id', $ids)->avg('starts');
                 $rate = $rate == null ? 0 : $rate;
                 $data = ['orders' => count($ids), 'rate' => $rate];
                 
