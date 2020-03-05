@@ -75,18 +75,18 @@ Route::prefix('lifter')->group(function () {
         });
 
         Route::prefix('bonus')->group(function () {
-            Route::resource('/', 'Api\LIfter\BonusController');
-            Route::get('/balance', 'Api\LIfter\BonusController@balance');
+            Route::resource('/', 'Api\Lifter\BonusController');
+            Route::get('/balance', 'Api\Lifter\BonusController@balance');
         });
 
         Route::prefix('wallet')->group(function () {
-            Route::resource('/', 'Api\LIfter\WalletController');
-            Route::get('/balance', 'Api\LIfter\WalletController@balance');
+            Route::resource('/', 'Api\Lifter\WalletController');
+            Route::get('/balance', 'Api\Lifter\WalletController@balance');
         });
 
         Route::prefix('servicecharge')->group(function () {
-            Route::resource('/', 'Api\LIfter\ServiceChargesController');
-            Route::get('/balance', 'Api\LIfter\ServiceChargesController@balance');
+            Route::resource('/', 'Api\Lifter\ServiceChargesController');
+            Route::get('/balance', 'Api\Lifter\ServiceChargesController@balance');
         });
 
         // Accept Open Order
