@@ -76,6 +76,7 @@ class OrderController extends Controller
             $order->latitude = $openOrder->latitude;
             $order->type = $openOrder->type;
             $order->status = 'accepted';
+            $order->payable_amount = 0.0;
             $order->accepted_time = Carbon::now()->toDateTimeString();
             $order->save();
             $openOrder->delete();
