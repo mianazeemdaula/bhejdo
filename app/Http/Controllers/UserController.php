@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\ServiceCharge;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -61,11 +62,19 @@ class UserController extends Controller
     public function approved($id)
     {
         $user = User::find($id);
+        if($user->cnic_verified_at == null){
+            return redirect()->back()->with('status', 'Account already approved!');
+        }
         $user->profile()->update([
             'cnic_verified_at' => Carbon::now()->toDateTimeString()
         ]);
         $user->status = 'active';
         $user->save();
+        if($user->hasRole('store')){
+            ServiceCharge::add($user->id, "Signup Bonus", "bonus", 5000);
+        }else if($user->hasRole('lifter')){
+            ServiceCharge::add($user->id, "Signup Bonus", "bonus", 3000);
+        }
         return redirect()->back()->with('status', 'Account Approved Successfully!');
     }
 
