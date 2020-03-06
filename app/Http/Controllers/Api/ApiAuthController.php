@@ -31,4 +31,20 @@ class ApiAuthController extends Controller
             return response()->json(['success'=>$e], 405);
         }
     }
+
+    public function phoneRegisterLifter(Request $request)
+    {
+        try{
+            $user = User::where('mobile',$request->mobile)->first();
+            if($user != null){
+                if($user->hasRole('lifter')){
+                    return response()->json(['status'=>true], 200);
+                }
+                return response()->json(['status'=>false, 'data' => 'You account is not an lifter account'], 401);
+            }
+            return response()->json(['status'=>false, 'data' => 'User not registered' ], 401);
+        }catch(Exception $e){
+            return response()->json(['success'=>$e], 405);
+        }
+    }
 }

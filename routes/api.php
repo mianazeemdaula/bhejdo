@@ -54,7 +54,7 @@ Route::prefix('consumer')->group(function () {
 
 
 Route::prefix('lifter')->group(function () {
-    Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
+    Route::post('phone-register', 'Api\ApiAuthController@phoneRegisterLifter');
     Route::post('login', 'Api\Lifter\AuthController@login');
     Route::post('register', 'Api\Lifter\AuthController@register');
     Route::post('forgetpassword', 'Api\Lifter\AuthController@updateForgetPassword'); 
