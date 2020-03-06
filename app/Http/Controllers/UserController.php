@@ -62,7 +62,7 @@ class UserController extends Controller
     public function approved($id)
     {
         $user = User::find($id);
-        if($user->cnic_verified_at == null){
+        if($user->cnic_verified_at != null){
             return redirect()->back()->with('status', 'Account already approved!');
         }
         $user->profile()->update([
