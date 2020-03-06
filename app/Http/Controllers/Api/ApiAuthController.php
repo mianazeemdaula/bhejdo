@@ -26,7 +26,7 @@ class ApiAuthController extends Controller
             if($user != null){
                 return response()->json(['status'=>true], 200);
             }
-            return response()->json(['status'=>false, 'data' => 'User not registered' ], 200);
+            return response()->json(['status'=>false, 'data' => 'User not registered' ], 401);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }
