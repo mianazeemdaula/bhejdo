@@ -38,11 +38,11 @@ class ApiAuthController extends Controller
             $user = User::where('mobile',$request->mobile)->first();
             if($user != null){
                 if($user->hasRole('lifter')){
-                    return response()->json(['status'=>true], 200);
+                    return response()->json(['status'=>true, 'isregister' => true], 200);
                 }
-                return response()->json(['status'=>false, 'data' => 'You account is not an lifter account'], 401);
+                return response()->json(['status'=>false, 'data' => 'You account is not an lifter account'], 200);
             }
-            return response()->json(['status'=>false, 'data' => 'User not registered' ], 401);
+            return response()->json(['status'=>false, 'isregister' => false ], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }
