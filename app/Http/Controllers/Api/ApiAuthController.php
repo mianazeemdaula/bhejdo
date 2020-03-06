@@ -40,7 +40,7 @@ class ApiAuthController extends Controller
                 if($user->hasRole('lifter')){
                     return response()->json(['status'=>true, 'isregister' => true], 200);
                 }
-                return response()->json(['status'=>false, 'data' => 'You account is not an lifter account'], 200);
+                return response()->json(['status'=>true, 'isregister' => true, 'role' => false], 200);
             }
             return response()->json(['status'=>false, 'isregister' => false ], 200);
         }catch(Exception $e){
