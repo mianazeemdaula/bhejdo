@@ -59,6 +59,9 @@ Route::get('/seed', 'SeedController@Seed');
 Route::get('/pusher/{message}', 'SeedController@pusher');
 
 Route::get('/service', 'ServiceController@setservice');
+Route::get('/pages/terms', function(){
+    return view('posts/terms_and_policies');
+});
 
 use Illuminate\Support\Str;
 Route::get('id/{id}', function($username){
