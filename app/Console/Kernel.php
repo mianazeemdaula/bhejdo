@@ -27,6 +27,11 @@ class Kernel extends ConsoleKernel
     {
         //$schedule->command('every:mintue')->everyMinute();
         $schedule->command('openorder:notifications')->everyMinute();
+        
+        
+        // Backup 
+        $schedule->command('backup:clean')->daily()->at('01:00');
+        $schedule->command('backup:run')->daily()->at('01:20');
     }
 
     /**
