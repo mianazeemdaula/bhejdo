@@ -57,13 +57,13 @@ Route::prefix('lifter')->group(function () {
     Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
     Route::post('login', 'Api\Lifter\AuthController@login');
     Route::post('register', 'Api\Lifter\AuthController@register');
-    
+    Route::post('forgetpassword', 'Api\Lifter\AuthController@updateForgetPassword'); 
     
     Route::group(['middleware' => ['auth:api']], function(){
         
         // User Infor (Profile)
         Route::prefix('profile')->group(function () {
-            Route::post('forgetpassword', 'Api\Lifter\AuthController@updateForgetPassword'); 
+            
         });
 
         Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
