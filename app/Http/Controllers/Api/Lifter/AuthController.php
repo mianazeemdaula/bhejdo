@@ -114,7 +114,7 @@ class AuthController extends Controller
 
             $user = User::where('mobile', $request->mobile)->first();
             if($user == null){
-                return response()->json(['status'=> false, 'data' => 'User not found'], 405);
+                return response()->json(['status'=> false, 'data' => $request->all()], 405);
             }
             $user->password = bcrypt($request->password);
             $user->save();
