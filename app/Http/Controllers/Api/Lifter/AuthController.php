@@ -39,7 +39,10 @@ class AuthController extends Controller
         { 
             return response()->json(['error'=>'Unauthorised'], 401); 
         }
-    } 
+    }
+
+
+    
 
     public function register(Request $request) {
         try{
@@ -94,6 +97,34 @@ class AuthController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
+
+    public function updateForgetPassword(Request $request){
+        DB::beginTransaction();
+        try{
+            
+            $validator = Validator::make( $request->all(), [
+                'mobile' => 'required|min:11|max:11',
+                'password' => 'required|min:6',
+                'confirm_password' => 'required|same:password',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json(['error'=>$validator->errors()], 401);
+            }
+
+            $user = User::where('mobile', $request->mobile)->first();
+            if($user == null){
+                return response()->json(['status'=> false, 'data' => 'User not found'], 405);
+            }
+            $user->password = bcrypt($request->password);
+            $user->save();
+            DB::commit();
+            return response()->json(['status'=> true, 'data' => 'updated'], 200);
+        }catch(Exception $e){
+            DB::rollBack();
+            return response()->json(['success'=>$e], 405);
+        }
+    } 
 
     public function pushToken(Request $request) {
         try{

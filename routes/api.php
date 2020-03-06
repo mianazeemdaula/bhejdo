@@ -62,6 +62,10 @@ Route::prefix('lifter')->group(function () {
     Route::group(['middleware' => ['auth:api']], function(){
         
         // User Infor (Profile)
+        Route::prefix('profile')->group(function () {
+            Route::post('forgetpassword', 'Api\Lifter\AuthController@updateForgetPassword'); 
+        });
+
         Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
         Route::post('/updatePushToken', 'Api\Lifter\AuthController@pushToken');
         Route::post('/nic-verification', 'Api\Lifter\AuthController@nicVerificaiton');
