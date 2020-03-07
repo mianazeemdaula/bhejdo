@@ -73,7 +73,7 @@ class UserController extends Controller
         if($user->hasRole('store')){
             ServiceCharge::add($user->id, "Signup Bonus", "bonus", 5000);
         }else if($user->hasRole('lifter')){
-            ServiceCharge::add($user->id, "Signup Bonus", "bonus", 3000);
+            ServiceCharge::add($user->id, "Signup Bonus", "bonus", 1000);
         }
         return redirect()->back()->with('status', 'Account Approved Successfully!');
     }

@@ -37,7 +37,7 @@ class ApiAuthController extends Controller
         try{
             $user = User::where('mobile',$request->mobile)->first();
             if($user != null){
-                if($user->hasRole('lifter')){
+                if($user->hasRole('lifter|store')){
                     return response()->json(['status'=>true, 'isregister' => true], 200);
                 }
                 return response()->json(['status'=>true, 'isregister' => true, 'role' => false], 200);
