@@ -21,7 +21,7 @@ class ServicesController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function store(Request $request)
     {
         return response()->json(['status'=>true, 'data' => $request->all()], 200);
     }
