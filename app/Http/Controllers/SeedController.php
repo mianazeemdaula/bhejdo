@@ -171,8 +171,8 @@ class SeedController extends Controller
         $ue = "";
         $balance = \App\Bonus::deduct(2, "Test Fee", "reffer", 20);
 
-        return $balance;
-        // $user = User::find(2);
+        //return $balance;
+        return $user = User::find(2)->services;
         // return $user->services()->find(2)->pivot->level->toJson();
         //return $user->services()->wherePivot("service_id",2)->get();
     }
