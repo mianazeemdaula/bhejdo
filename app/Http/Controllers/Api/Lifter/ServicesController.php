@@ -13,7 +13,7 @@ class ServicesController extends Controller
     {
         try{
             $subscribe = $request->user()->services->pluck('id')->toArray();
-            $services = Service::where('status', 'active')->get();
+            $services = Service::where('s_status', 'active')->get();
             $data = ['subscribe' => $services, 'services' => $services];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
