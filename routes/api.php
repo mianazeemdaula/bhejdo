@@ -93,6 +93,10 @@ Route::prefix('lifter')->group(function () {
             Route::get('/balance', 'Api\Lifter\ServiceChargesController@balance');
         });
 
+        Route::prefix('services')->group(function () {
+            Route::resource('/', 'Api\Lifter\ServiceChargesController');
+        });
+
         // Accept Open Order
         Route::post('/open-order-accept', 'Api\Lifter\OrderController@openOrderCreate');
         Route::post('/schedule-order-accept', 'Api\Lifter\OrderController@scheduleOrderCreate');
