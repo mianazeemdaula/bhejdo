@@ -13,7 +13,7 @@ class ServicesController extends Controller
     public function index(Request $request)
     {
         try{
-            $subscribe = $request->user()->services->pluck('id')->toArray();
+            $subscribe = $request->user()->services()->wherePivot('status',1)->pluck('id')->toArray();
             $services = Service::where('s_status', 'active')->get();
             $data = ['subscribe' => $subscribe, 'services' => $services];
             return response()->json(['status'=>true, 'data' => $data], 200);
