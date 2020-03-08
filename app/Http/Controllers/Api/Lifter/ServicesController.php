@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Service;
+use DB;
 
 class ServicesController extends Controller
 {
@@ -23,6 +24,14 @@ class ServicesController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json(['status'=>true, 'data' => $request->all()], 200);
+        try{
+            $services = json_decode($request->services);
+            foreach($services as $service){
+                
+            }            
+            return response()->json(['status'=>true, 'data' => 'updated' ], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
     }
 }

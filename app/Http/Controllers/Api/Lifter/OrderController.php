@@ -17,32 +17,18 @@ use App\Helpers\AndroidNotifications;
 class OrderController extends Controller
 {
     
-    public function openOrderCreate(Request $request)
+    public function acceptOrder(Request $request)
     {
         DB::beginTransaction();
         try{
 
-            $openOrder = OpenOrder::find($request->orderid);
-            if($openOrder == null){
+            $order = Order::find($request->orderid);
+            if($order == null){
                 return response()->json(['status'=>false, 'data' => false ], 200);
             }
-            $order = new Order();
             $order->lifter_id = $request->user()->id;
-            $order->consumer_id = $openOrder->consumer_id;
-            $order->service_id = $openOrder->service_id;
-            $order->qty = $openOrder->qty;
-            $order->price = $openOrder->price;
-            $order->delivery_time = $openOrder->delivery_time;
-            $order->address = $openOrder->address;
-            $order->longitude = $openOrder->longitude;
-            $order->latitude = $openOrder->latitude;
-            $order->type = $openOrder->type;
-            $order->note = $openOrder->note;
-            $order->charges = $openOrder->charges;
-            $order->status = 'accepted';
             $order->accepted_time = Carbon::now()->toDateTimeString();
             $order->save();
-            $openOrder->delete();
             DB::commit();
             // Notifications
             $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";

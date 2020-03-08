@@ -26,7 +26,6 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->double('longitude')->default(0.0);
             $table->double('latitude')->default(0.0);
-            $table->dateTime('created_time')->nullable();
             $table->dateTime('accepted_time')->nullable();
             $table->dateTime('shipped_time')->nullable();
             $table->dateTime('delivered_time')->nullable();

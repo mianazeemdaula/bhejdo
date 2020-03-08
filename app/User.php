@@ -49,7 +49,6 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Service')->using('App\ServiceUser')->withPivot([
             'service_id',
             'user_id',
-            'level_id'
         ]);
     }
 

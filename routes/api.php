@@ -23,10 +23,11 @@ Route::prefix('consumer')->group(function () {
         // Lifters
         Route::post('/lifters-near', 'Api\Consumer\LifterController@getNearMe');
 
-        // Open Orders
-        Route::post('/place-order', 'Api\Consumer\OpenOrderController@create');
+        
         
         Route::prefix('order')->group(function () {
+            Route::post('/place-order', 'Api\Consumer\OrderController@create');
+            
             Route::get('open', 'Api\Consumer\OrderController@open'); 
             Route::get('inprocess', 'Api\Consumer\OrderController@inprocess'); 
             Route::get('all', 'Api\Consumer\OrderController@all'); 
