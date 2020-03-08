@@ -94,7 +94,7 @@ Route::prefix('lifter')->group(function () {
         });
 
         Route::prefix('services')->group(function () {
-            Route::resource('/', 'Api\Lifter\ServiceChargesController');
+            Route::resource('/', 'Api\Lifter\ServicesController');
         });
 
         // Accept Open Order
