@@ -14,7 +14,7 @@ class ServicesController extends Controller
         try{
             $subscribe = $request->user()->services->pluck('id')->toArray();
             $services = Service::where('s_status', 'active')->get();
-            $data = ['subscribe' => $services, 'services' => $services];
+            $data = ['subscribe' => $subscribe, 'services' => $services];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
