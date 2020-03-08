@@ -20,4 +20,9 @@ class ServicesController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
+
+    public function update(Request $request)
+    {
+        return response()->json(['status'=>true, 'data' => $request->all()], 200);
+    }
 }
