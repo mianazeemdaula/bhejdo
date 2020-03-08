@@ -140,10 +140,7 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('lifter');
         //$user->services()->sync([1,['level_id' => 1]],[2, ['level_id' => 5]], [3, ['level_id' => 9]]);
-        $user->services()->attach([3 => ['level_id' => 9]]);
-        $user->services()->attach([1 => ['level_id' => 1]]);
-        $user->services()->attach([2 => ['level_id' => 5]]);
-
+        $user->services()->sync(1,2,3);
         $user = new User();
         $user->name = 'Mian AR Rehman';
         $user->mobile = '03014103160';
