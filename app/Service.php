@@ -12,6 +12,8 @@ class Service extends Model
         return $this->belongsToMany('App\User')->using('App\ServiceUser')->withPivot([
             'service_id',
             'user_id',
+            'level_id',
+            'status',
         ]);
     }
 

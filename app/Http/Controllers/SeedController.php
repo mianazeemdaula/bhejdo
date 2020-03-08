@@ -10,6 +10,7 @@ use App\User;
 use App\Events\NewLocation;
 use App\Service;
 use App\Level;
+use Illuminate\Support\Arr;
 
 class SeedController extends Controller
 {
@@ -128,6 +129,8 @@ class SeedController extends Controller
         $level = Level::firstOrCreate(['service_id' => 3,'l_name' => 'Over Time', 'order_qty' => 75]);
         $level = Level::firstOrCreate(['service_id' => 3,'l_name' => 'Dual Time', 'order_qty' => 100]);
 
+        $level = Level::firstOrCreate(['service_id' => 4,'l_name' => 'Part Time', 'order_qty' => 25]);
+
         $user = new User();
         $user->name = 'OhYes Store';
         $user->mobile = '03001234567';
@@ -140,7 +143,10 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('lifter');
         //$user->services()->sync([1,['level_id' => 1]],[2, ['level_id' => 5]], [3, ['level_id' => 9]]);
-        $user->services()->sync(1,2,3);
+        $user->services()->attach([3 => ['level_id' => 9, 'status'=> 1]]);
+        $user->services()->attach([1 => ['level_id' => 1, 'status'=> 1]]);
+        $user->services()->attach([2 => ['level_id' => 5, 'status'=> 1]]);
+
         $user = new User();
         $user->name = 'Mian AR Rehman';
         $user->mobile = '03014103160';
@@ -165,12 +171,32 @@ class SeedController extends Controller
 
     public function test()
     {
-        $ue = "";
-        $balance = \App\Bonus::deduct(2, "Test Fee", "reffer", 20);
+        // $ue = "";
+        // $balance = \App\Bonus::deduct(2, "Test Fee", "reffer", 20);
 
-        //return $balance;
-        return $user = User::find(2)->services->pluk('id');
-        // return $user->services()->find(2)->pivot->level->toJson();
+        // //return $balance;
+        // return $user = User::find(2)->services->pluk('id');
+        
+        $user = User::find(2);
+        
+        // $user->services->save();
+        // $updated = [2,3,4];
+        // $index = 0;
+        // foreach($user->services as $service){
+        //     if(in_array($service->id,$updated)){
+        //         $user->services()->updateExistingPivot($service->id, ['status' => 1]);
+        //         $key = array_search($service->id,$updated);
+        //         unset($updated[$key]);
+        //     }else{
+        //         $user->services()->updateExistingPivot($service->id, ['status' => 0]);   
+        //     }
+        // }
+        // foreach($updated as $u){
+        //     $level = Level::where('service_id',$u)->first();
+        //     $user->services()->attach($u, ['status' => 1, 'level_id' => $level->id]);
+        // }
+        // print_r($updated);
+        return $user->services;
         //return $user->services()->wherePivot("service_id",2)->get();
     }
 

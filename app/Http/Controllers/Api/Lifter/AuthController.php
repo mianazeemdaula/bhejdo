@@ -85,9 +85,9 @@ class AuthController extends Controller
             // }
 
             $user->assignRole($user->account_type);
-            $user->services()->attach([1 => ['level_id' => 1]]);
-            $user->services()->attach([2 => ['level_id' => 5]]);
-            $user->services()->attach([3 => ['level_id' => 9]]);
+            $user->services()->attach([1 => ['level_id' => 1, 'status' => 1]]);
+            // $user->services()->attach([2 => ['level_id' => 5]]);
+            // $user->services()->attach([3 => ['level_id' => 9]]);
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
             DB::commit();
@@ -136,7 +136,7 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'avatar' => $user->avatar,
                 'account_type' => $user->getRoleNames()[0],
-                'services' => $user->services->pluck('id')->toArray(),
+                'services' => $user->services()->wherePivot('status',1)->pluck('id'),
                 'services_details' => [], 
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id

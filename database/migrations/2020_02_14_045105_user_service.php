@@ -16,6 +16,9 @@ class UserService extends Migration
         Schema::create('service_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('level_id');
+            $table->boolean('status')->default(1);
+            $table->primary(['user_id', 'service_id']);
         });
     }
 
