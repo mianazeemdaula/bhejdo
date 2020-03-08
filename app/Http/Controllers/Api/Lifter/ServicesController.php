@@ -26,6 +26,7 @@ class ServicesController extends Controller
     {
         try{
             $updated = json_decode($request->services);
+            $user = $request->user();
             foreach($user->services as $service){
                 if(in_array($service->id,$updated)){
                     $user->services()->updateExistingPivot($service->id, ['status' => 1]);
