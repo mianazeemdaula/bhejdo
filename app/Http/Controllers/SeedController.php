@@ -203,7 +203,7 @@ class SeedController extends Controller
 
         // Profile Resorce
         $profile = new \App\Http\Resources\Profile\LifterProfile($user);
-        PRedis::set('profile:'.$user->id, $profile);
+        \PRedis::set('profile:'.$user->id, $profile);
         return $profile;
     }
 
