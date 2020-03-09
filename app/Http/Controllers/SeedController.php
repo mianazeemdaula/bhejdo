@@ -212,10 +212,10 @@ class SeedController extends Controller
         // return $profile;
 
         \App\Wallet::add(2,'Topup', 'topup', 5000);
-        \App\Wallet::deduct(2,'Transfer to #asfsfsd', 'transfer', 5000);
-        \App\Wallet::add(2,'Topup', 'topup', 50);
-        \App\Wallet::deduct(2,'Transfer to service charges', 'transfer', 1200);
-        \App\Wallet::add(2,'Topup', 'topup', 250);
+        // \App\Wallet::deduct(2,'Transfer to #asfsfsd', 'transfer', 5000);
+        // \App\Wallet::add(2,'Topup', 'topup', 50);
+        // \App\Wallet::deduct(2,'Transfer to service charges', 'transfer', 1200);
+        // \App\Wallet::add(2,'Topup', 'topup', 250);
     }
 
 }
