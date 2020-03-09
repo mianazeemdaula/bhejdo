@@ -204,7 +204,7 @@ class SeedController extends Controller
         // Profile Resorce
         $exits = \PRedis::command('EXISTS',['profile:'.$user->id]);
         if($exits){
-            return response()->json(['status'=>true, 'data2' => \PRedis::get('profile:'.$user->id)], 200);
+            return response()->json(['status'=>true, 'data2' => json_encode(\PRedis::get('profile:'.$user->id))], 200);
         }
         $profile = new \App\Http\Resources\Profile\LifterProfile($user);
         \PRedis::set('profile:'.$user->id, $profile);
