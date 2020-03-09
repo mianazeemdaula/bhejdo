@@ -12,6 +12,8 @@ use App\Service;
 use App\Level;
 use Illuminate\Support\Arr;
 
+use Illuminate\Support\Facades\Redis;
+
 class SeedController extends Controller
 {
     public function Seed()
