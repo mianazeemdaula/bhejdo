@@ -191,8 +191,12 @@ class AuthController extends Controller
     {
         try{
             $user = $request->user();
+            $exits = \PRedis::command('EXISTS','profile:'.$user->id);
+            if($exits){
+                return response()->json(['status'=>true, 'data' => \PRedis::get('profile:'.$user->id)], 200);
+            }
             $profile = new \App\Http\Resources\Profile\LifterProfile($user);
-            Redis::set('profile:'.$user->id, $profile);
+            \PRedis::set('profile:'.$user->id, $profile);
             return response()->json(['status'=>true, 'data' => $profile], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
