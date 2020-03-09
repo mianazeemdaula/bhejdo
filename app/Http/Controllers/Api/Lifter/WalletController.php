@@ -20,7 +20,18 @@ class WalletController extends Controller
         }
 
     }
-    
+
+    public function show(Request $request, $id)
+    {
+        try{
+            $user = User::where('mobile', $id)->orWhere('reffer_id', $id)->first();
+            return response()->json(['status'=>true, 'data' => $user], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+
+    }
+
     public function balance(Request $request)
     {
         try{
