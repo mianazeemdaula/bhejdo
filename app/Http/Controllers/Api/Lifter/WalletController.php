@@ -21,7 +21,7 @@ class WalletController extends Controller
 
     }
 
-    public function store(Requst $request)
+    public function store(Request $request)
     {
         try{
             $user = \App\User::where('reffer_id', $request->account_id)->first();
