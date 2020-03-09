@@ -24,7 +24,7 @@ class WalletController extends Controller
     public function fetchaccount(Request $request)
     {
         try{
-            $user = \App\User::where('mobile', $id)->orWhere('reffer_id', $id)->first();
+            $user = \App\User::where('mobile',$request->account_id)->orWhere('reffer_id', $request->account_id)->first();
             return response()->json(['status'=>true, 'data' => $user], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
