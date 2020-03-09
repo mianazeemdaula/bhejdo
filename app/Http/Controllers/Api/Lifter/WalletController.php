@@ -21,6 +21,18 @@ class WalletController extends Controller
 
     }
 
+    public function store(Requst $request)
+    {
+        try{
+            $user = \App\User::where('reffer_id', $request->account_id)->first();
+            $userWallet = Wallet::deduct($request->user()->id,"Transfer to {$user->name}","transer",$request->amount);
+            $wallet = Wallet::add($request->user()->id,"Received from {$userWallet->user->name}","transer",$request->amount);
+            return response()->json(['status'=>true, 'data' => $userWallet], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
     public function fetchaccount(Request $request)
     {
         try{
