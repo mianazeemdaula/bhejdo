@@ -202,14 +202,20 @@ class SeedController extends Controller
         //return $user->services()->wherePivot("service_id",2)->get();
 
         // Profile Resorce
-        $exits = \PRedis::command('EXISTS',['profile:'.$user->id]);
-        if($exits){
-            return response()->json(['status'=>true, 'data2' => json_encode(\PRedis::get('profile:'.$user->id))], 200);
-        }
-        $profile = new \App\Http\Resources\Profile\LifterProfile($user);
-        \PRedis::set('profile:'.$user->id, $profile);
-        return response()->json(['status'=>true, 'data' => $profile], 200);
-        return $profile;
+        // $exits = \PRedis::command('EXISTS',['profile:'.$user->id]);
+        // if($exits){
+        //     return response()->json(['status'=>true, 'data2' => json_encode(\PRedis::get('profile:'.$user->id))], 200);
+        // }
+        // $profile = new \App\Http\Resources\Profile\LifterProfile($user);
+        // \PRedis::set('profile:'.$user->id, $profile);
+        // return response()->json(['status'=>true, 'data' => $profile], 200);
+        // return $profile;
+
+        \App\Wallet::add(2,'Topup', 'topup', 5000);
+        \App\Wallet::deduct(2,'Transfer to #asfsfsd', 'transfer', 5000);
+        \App\Wallet::add(2,'Topup', 'topup', 50);
+        \App\Wallet::deduct(2,'Transfer to service charges', 'transfer', 1200);
+        \App\Wallet::add(2,'Topup', 'topup', 250);
     }
 
 }
