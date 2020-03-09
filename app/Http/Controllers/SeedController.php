@@ -202,7 +202,7 @@ class SeedController extends Controller
         //return $user->services()->wherePivot("service_id",2)->get();
 
         // Profile Resorce
-        $exits = \PRedis::command('EXISTS','profile:'.$user->id);
+        $exits = \PRedis::command('EXISTS',['profile:'.$user->id]);
         if($exits){
             return response()->json(['status'=>true, 'data2' => \PRedis::get('profile:'.$user->id)], 200);
         }
