@@ -196,8 +196,13 @@ class SeedController extends Controller
         //     $user->services()->attach($u, ['status' => 1, 'level_id' => $level->id]);
         // }
         // print_r($updated);
-        return $user->services;
+        // return $user->services;
         //return $user->services()->wherePivot("service_id",2)->get();
+
+        // Profile Resorce
+        $profile = new \App\Http\Resources\Profile\LifterProfile($user);
+        Redis::set('profile:'.$user->id, $profile);
+        return $profile;
     }
 
 }

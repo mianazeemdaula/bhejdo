@@ -86,8 +86,8 @@ class AuthController extends Controller
 
             $user->assignRole($user->account_type);
             $user->services()->attach([1 => ['level_id' => 1, 'status' => 1]]);
-            // $user->services()->attach([2 => ['level_id' => 5]]);
-            // $user->services()->attach([3 => ['level_id' => 9]]);
+            $user->services()->attach([2 => ['level_id' => 5, 'status' => 1]]);
+            $user->services()->attach([3 => ['level_id' => 9, 'status' => 1]]);
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
             DB::commit();
@@ -182,6 +182,18 @@ class AuthController extends Controller
             $user->status = 'inprocess';
             $user->save();
             return response()->json(['status'=>true, 'data' => ['user' => $request->user()]], 200);
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'error' => "$e" ], 405);
+        }
+    }
+
+    public function profile(Request $request)
+    {
+        try{
+            $user = $request->user();
+            $profile = new \App\Http\Resources\Profile\LifterProfile($user);
+            Redis::set('profile:'.$user->id, $profile);
+            return response()->json(['status'=>true, 'data' => $profile], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
         }
