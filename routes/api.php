@@ -87,6 +87,7 @@ Route::prefix('lifter')->group(function () {
         Route::prefix('wallet')->group(function () {
             Route::resource('/', 'Api\Lifter\WalletController');
             Route::get('/balance', 'Api\Lifter\WalletController@balance');
+            Route::get('/fetchaccount', 'Api\Lifter\WalletController@fetchaccount');
         });
 
         Route::prefix('servicecharge')->group(function () {

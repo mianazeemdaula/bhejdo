@@ -21,7 +21,7 @@ class WalletController extends Controller
 
     }
 
-    public function show(Request $request, $id)
+    public function fetchaccount(Request $request)
     {
         try{
             $user = User::where('mobile', $id)->orWhere('reffer_id', $id)->first();
