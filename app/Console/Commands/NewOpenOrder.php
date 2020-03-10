@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\OpenOrder;
+use App\Order;
 use Carbon\Carbon;
 use App\Helpers\OrderProcess;
 
@@ -42,6 +42,7 @@ class NewOpenOrder extends Command
     public function handle()
     {
         $orders = Order::where('created_at', '<', Carbon::now()->subSeconds(60)->toDateTimeString())->where('lifter_id',2)->get();
+        //$orders = Order::where('lifter_id',2)->get();
         foreach($orders as $order){
             $response = OrderProcess::orderCreated($order);
         }
