@@ -136,7 +136,7 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'avatar' => $user->avatar,
                 'account_type' => $user->getRoleNames()[0],
-                'services' => $user->services()->wherePivot('status',1)->pluck('id'),
+                'services' => $user->services()->wherePivot('status',1)->pluck('id')->toArray(),
                 'services_details' => [], 
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id
