@@ -198,7 +198,7 @@ class SeedController extends Controller
         //     $user->services()->attach($u, ['status' => 1, 'level_id' => $level->id]);
         // }
         // print_r($updated);
-        return $user->services;
+      //  return $user->services;
         return $user->services()->wherePivot('status',1)->pluck('id');
         //return $user->services()->wherePivot("service_id",2)->get();
 
