@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // Illuminate
 use DB;
+use Validator;
 
 // Models
 use App\Order;
