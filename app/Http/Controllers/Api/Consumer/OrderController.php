@@ -14,6 +14,7 @@ use App\ScheduleOrder;
 use App\Wallet;
 use App\ServiceCharge;
 use App\Bonus;
+use App\Service;
 
 use App\Http\Resources\Milk\Order as OrderResource;
 use App\Helpers\AndroidNotifications;
