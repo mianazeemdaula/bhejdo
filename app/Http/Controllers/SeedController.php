@@ -199,7 +199,7 @@ class SeedController extends Controller
         // }
         // print_r($updated);
       //  return $user->services;
-        return $user->services()->wherePivot('status',1)->pluck('id');
+        return $user->services()->wherePivot('status',1)->pluck('id')->toArray();
         //return $user->services()->wherePivot("service_id",2)->get();
 
         // Profile Resorce
