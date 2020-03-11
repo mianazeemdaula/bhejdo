@@ -20,6 +20,7 @@ use App\Review;
 // Helpers
 use App\Helpers\BonusProcess;
 use App\Helpers\UserHelper;
+use App\Helpers\AndroidNotifications;
 
 class AuthController extends Controller
 {
