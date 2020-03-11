@@ -22,6 +22,8 @@ class LifterProfile extends JsonResource
             'refferid' => $this->reffer_id,
             'address' => $this->address,
             'status' => $this->status,
+            'cnic' => $this->profile->cnic,
+            'dob' => $this->profile->dob,
             'services' => ProfileService::collection($this->services)
         ];
     }
