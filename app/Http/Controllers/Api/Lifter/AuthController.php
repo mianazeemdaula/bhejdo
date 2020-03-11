@@ -205,9 +205,17 @@ class AuthController extends Controller
             $type = strtolower($request->type);
             if($type == "avatar"){
                 if($reffer->hasFile('avatar')){
-
+                    $request->validate([
+                        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    ]);
+                    $imageName = "profile_".$request->user()->id.".".$request->avatar->getClientOriginalExtension();
+                    $request->avatar->move(public_path('avatars'), $imageName);
+                    $user = $request->user();
+                    $user->avatar = $imageName;
+                    $user->save();
+                    return response()->json(['status'=>true, 'data' => "$imageName"], 200);
                 }
-                return response()->json(['status'=>true, 'data' => $profile], 200);
+                return response()->json(['status'=>true, 'data' => "file not found"], 200);
             }
             return response()->json(['status'=>false, 'error' => "Update Type Error" ], 405);
         }catch(Exception $e){
