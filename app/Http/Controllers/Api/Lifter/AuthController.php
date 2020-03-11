@@ -224,7 +224,7 @@ class AuthController extends Controller
                 $user = $request->user();
                 $user->avatar = $avatarImageName;
                 $user->save();
-                return response()->json(['status'=>true, 'data' => ['user' => $request->user()]], 200);
+                return response()->json(['status'=>true, 'data' => ['user' => $avatarImageName]], 200);
             }
             return response()->json(['status'=>false, 'error' => "Update Type Error" ], 401);
         }catch(Exception $e){
