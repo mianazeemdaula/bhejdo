@@ -198,4 +198,20 @@ class AuthController extends Controller
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
         }
     }
+
+    public function update(Request $request)
+    {
+        try{
+            $type = strtolower($request->type);
+            if($type == "avatar"){
+                if($reffer->hasFile('avatar')){
+
+                }
+                return response()->json(['status'=>true, 'data' => $profile], 200);
+            }
+            return response()->json(['status'=>false, 'error' => "Update Type Error" ], 405);
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'error' => "$e" ], 405);
+        }
+    }
 }

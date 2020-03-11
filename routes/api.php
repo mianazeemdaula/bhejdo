@@ -65,6 +65,7 @@ Route::prefix('lifter')->group(function () {
         // User Info (Profile)
         Route::prefix('profile')->group(function () {
             Route::get('/', 'Api\Lifter\AuthController@profile');
+            Route::get('/update', 'Api\Lifter\AuthController@update');
         });
 
         Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
