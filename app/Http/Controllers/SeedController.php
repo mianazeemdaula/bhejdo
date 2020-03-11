@@ -78,7 +78,7 @@ class SeedController extends Controller
         $service->max_qty = 25;
         $service->min_qty_charges = 50;
         $service->s_charges = 10;
-        $service->s_price = 100;
+        $service->s_price = 90;
         $service->icon = 'milk_service';
         $service->s_status = 'active';
         $service->save();
@@ -107,11 +107,11 @@ class SeedController extends Controller
 
         $service = new Service();
         $service->s_name = 'Cow Milk';
-        $service->min_qty = 2;
-        $service->max_qty = 10;
-        $service->s_price = 250;
+        $service->min_qty = 5;
+        $service->max_qty = 25;
+        $service->s_price = 100;
         $service->min_qty_charges = 50;
-        $service->s_charges = 25;
+        $service->s_charges = 10;
         $service->icon = 'milk_service';
         $service->s_status = 'active';
         $service->save();
@@ -143,7 +143,7 @@ class SeedController extends Controller
         $user->password = bcrypt('8m8a2r4w');
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->account_type = 'lifter';
-        $user->reffer_id = "azeemlifte";
+        $user->reffer_id = "OHYESSTORE0";
         $user->status = "active";
         $user->save();
         $user->assignRole('lifter');

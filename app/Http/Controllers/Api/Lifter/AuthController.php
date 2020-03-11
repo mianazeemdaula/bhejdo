@@ -77,12 +77,12 @@ class AuthController extends Controller
                 'latitude' => $request->latitude
             ]);
 
-            if($request->referred != null){
-                $reffer = User::where('reffer_id', $request->referred)->first();
-                if($reffer != null && $reffer->hasRole('store')){
-                    $reffer->storLifter()->sync([$user->id]);
-                }
-            }
+            // if($request->referred != null){
+            //     $reffer = User::where('reffer_id', $request->referred)->first();
+            //     if($reffer != null && $reffer->hasRole('store')){
+            //         $reffer->storLifter()->sync([$user->id]);
+            //     }
+            // }
 
             $user->assignRole($user->account_type);
             $user->services()->attach([1 => ['level_id' => 1, 'status'=> 1]]);

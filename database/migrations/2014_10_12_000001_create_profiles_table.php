@@ -18,6 +18,7 @@ class CreateProfilesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('dob')->nullable();
             $table->string('cnic')->nullable();
+            $table->string('vehicle')->nullable();
             $table->string('cnic_front')->nullable();
             $table->string('cnic_back')->nullable();
             $table->date('cnic_expiry')->nullable();

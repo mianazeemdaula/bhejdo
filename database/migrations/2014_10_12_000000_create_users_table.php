@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('city')->nullable()->default('Lahore');
             $table->string('address')->default('Lahore');
             $table->string('reffer_id',10);
+            $table->integer('pin');
             $table->rememberToken();
             $table->timestamps();
         });
