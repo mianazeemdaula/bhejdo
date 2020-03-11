@@ -220,7 +220,7 @@ class AuthController extends Controller
             }
             return response()->json(['status'=>false, 'error' => "Update Type Error" ], 405);
         }catch(Exception $e){
-            return response()->json(['status'=>false, 'error' => "$e" ], 405);
+            return response()->json(['status'=>false, 'error' => "Internal Server Erro sdfsdfsd" ], 405);
         }
     }
 }
