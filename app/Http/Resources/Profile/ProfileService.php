@@ -20,7 +20,9 @@ class ProfileService extends JsonResource
             'id' => $this->id,
             'name' => $this->s_name,
             'stars' => $rate == null ? 0 : $rate,
-            'orders' => count($ids)
+            'orders' => count($ids),
+            'total' => $this->orders()->count(),
+            'deliver' => $this->orders()->where('status','delivered')->count(),
         ];
     }
 }
