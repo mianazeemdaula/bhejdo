@@ -75,6 +75,8 @@ class UserController extends Controller
         }else if($user->hasRole('lifter')){
             ServiceCharge::add($user->id, "Signup Bonus", "bonus", 1000);
         }
+        $data = ['type' => 'profile'];
+        AndroidNotifications::toLifter("Congratulations!","Your account is approved", $user->pushToken, $data);
         return redirect()->back()->with('status', 'Account Approved Successfully!');
     }
 
