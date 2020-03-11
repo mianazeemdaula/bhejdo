@@ -143,7 +143,7 @@ class SeedController extends Controller
         $user->password = bcrypt('8m8a2r4w');
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->account_type = 'lifter';
-        $user->reffer_id = "OHYESSTORE0";
+        $user->reffer_id = "OHYESSTORE";
         $user->status = "active";
         $user->save();
         $user->assignRole('lifter');
