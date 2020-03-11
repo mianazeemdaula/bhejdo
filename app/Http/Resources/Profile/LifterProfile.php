@@ -17,7 +17,7 @@ class LifterProfile extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'avatar' => asset("storage/".$this->avatar),
+            'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
             'mobile' => $this->mobile,
             'refferid' => $this->reffer_id,
             'address' => $this->address,
