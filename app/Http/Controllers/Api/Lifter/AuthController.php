@@ -219,7 +219,7 @@ class AuthController extends Controller
                 // return response()->json(['status'=>true, 'data' => "file not found"], 401);
                 $avatar = $request->avatar;
                 $avatarImageName = $request->user()->id.'_avatar.'.'png';
-                \Storage::disk('public')->put($avatarImageName, base64_decode($nicFront));
+                \Storage::disk('public')->put($avatarImageName, base64_decode($avatar));
 
                 $user = $request->user();
                 $user->avatar = $avatarImageName;
