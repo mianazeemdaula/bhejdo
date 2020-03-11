@@ -17,7 +17,7 @@ class Consumer extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'avatar' => $this->avatar,
+            'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
         ];
     }
 }
