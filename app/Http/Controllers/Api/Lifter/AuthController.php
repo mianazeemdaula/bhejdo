@@ -205,20 +205,28 @@ class AuthController extends Controller
         try{
             $type = strtolower($request->type);
             if($type == "avatar"){
-                if($reffer->hasFile('avatar')){
-                    $request->validate([
-                        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                    ]);
-                    $imageName = "profile_".$request->user()->id.".".$request->avatar->getClientOriginalExtension();
-                    $request->avatar->move(public_path('avatars'), $imageName);
-                    $user = $request->user();
-                    $user->avatar = $imageName;
-                    $user->save();
-                    return response()->json(['status'=>true, 'data' => "$imageName"], 200);
-                }
-                return response()->json(['status'=>true, 'data' => "file not found"], 200);
+                // if($reffer->hasFile('avatar')){
+                //     $request->validate([
+                //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                //     ]);
+                //     $imageName = "profile_".$request->user()->id.".".$request->avatar->getClientOriginalExtension();
+                //     $request->avatar->move(public_path('avatars'), $imageName);
+                //     $user = $request->user();
+                //     $user->avatar = $imageName;
+                //     $user->save();
+                //     return response()->json(['status'=>true, 'data' => "$imageName"], 200);
+                // }
+                // return response()->json(['status'=>true, 'data' => "file not found"], 401);
+                $avatar = $request->avatar;
+                $avatarImageName = $request->user()->id.'_avatar.'.'png';
+                \Storage::disk('public')->put($avatarImageName, base64_decode($nicFront));
+
+                $user = $request->user();
+                $user->avatar = $avatarImageName;
+                $user->save();
+                return response()->json(['status'=>true, 'data' => ['user' => $request->user()]], 200);
             }
-            return response()->json(['status'=>false, 'error' => "Update Type Error" ], 405);
+            return response()->json(['status'=>false, 'error' => "Update Type Error" ], 401);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Erro sdfsdfsd" ], 405);
         }
