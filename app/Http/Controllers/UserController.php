@@ -8,6 +8,8 @@ use App\User;
 use App\ServiceCharge;
 use Carbon\Carbon;
 
+use App\Helpers\AndroidNotifications;
+
 class UserController extends Controller
 {
     public function index()
@@ -76,7 +78,7 @@ class UserController extends Controller
             ServiceCharge::add($user->id, "Signup Bonus", "bonus", 1000);
         }
         $data = ['type' => 'profile'];
-        AndroidNotifications::toLifter("Congratulations!","Your account is approved", $user->pushToken, $data);
+        AndroidNotifications::toLifter("Congratulations!","Your account has been approved", $user->pushToken, $data);
         return redirect()->back()->with('status', 'Account Approved Successfully!');
     }
 
