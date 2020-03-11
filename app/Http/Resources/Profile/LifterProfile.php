@@ -17,7 +17,7 @@ class LifterProfile extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'avatar' => $this->avatar,
+            'avatar' => \Storage::url($this->avatar),
             'mobile' => $this->mobile,
             'refferid' => $this->reffer_id,
             'address' => $this->address,
