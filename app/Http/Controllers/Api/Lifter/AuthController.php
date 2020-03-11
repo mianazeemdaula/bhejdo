@@ -77,17 +77,18 @@ class AuthController extends Controller
                 'latitude' => $request->latitude
             ]);
 
-            // if($request->referred != null){
-            //     $reffer = User::where('referred_by', $request->referred)->first();
-            //     if($reffer != null && $reffer->account_type == 'store'){
-            //         $reffer->storLifter()->sync([$user->id]);
-            //     }
-            // }
+            if($request->referred != null){
+                $reffer = User::where('reffer_id', $request->referred)->first();
+                if($reffer != null && $reffer->hasRole('store')){
+                    $reffer->storLifter()->sync([$user->id]);
+                }
+            }
 
             $user->assignRole($user->account_type);
-            $user->services()->attach([1 => ['level_id' => 1, 'status' => 1]]);
-            $user->services()->attach([2 => ['level_id' => 5, 'status' => 1]]);
-            $user->services()->attach([3 => ['level_id' => 9, 'status' => 1]]);
+            $user->services()->attach([1 => ['level_id' => 1, 'status'=> 1]]);
+            $user->services()->attach([2 => ['level_id' => 5, 'status'=> 1]]);
+            $user->services()->attach([3 => ['level_id' => 9, 'status'=> 1]]);
+            $user->services()->attach([4 => ['level_id' => 13, 'status'=> 1]]);
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
             DB::commit();

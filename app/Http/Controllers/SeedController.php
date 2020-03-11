@@ -33,7 +33,7 @@ class SeedController extends Controller
         $user->password = bcrypt('8m8a2r4w');
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->account_type = 'super-admin';
-        $user->reffer_id = "azeem00001";
+        $user->reffer_id = "AZEEMREHAN";
         $user->save();
         $user->assignRole('super-admin');
 
@@ -89,7 +89,7 @@ class SeedController extends Controller
         $service->max_qty = 25;
         $service->s_price = 110;
         $service->min_qty_charges = 50;
-        $service->s_charges = 11;
+        $service->s_charges = 10;
         $service->icon = 'milk_service';
         $service->s_status = 'active';
         $service->save();
@@ -100,20 +100,20 @@ class SeedController extends Controller
         $service->max_qty = 25;
         $service->s_price = 130;
         $service->min_qty_charges = 50;
-        $service->s_charges = 13;
+        $service->s_charges = 10;
         $service->icon = 'milk_service';
         $service->s_status = 'active';
         $service->save();
 
         $service = new Service();
-        $service->s_name = 'Chiken';
+        $service->s_name = 'Cow Milk';
         $service->min_qty = 2;
         $service->max_qty = 10;
         $service->s_price = 250;
         $service->min_qty_charges = 50;
         $service->s_charges = 25;
         $service->icon = 'milk_service';
-        $service->s_status = 'inactive';
+        $service->s_status = 'active';
         $service->save();
 
         $level = Level::firstOrCreate(['service_id' => 1,'l_name' => 'Part Time', 'order_qty' => 25]);
@@ -132,6 +132,9 @@ class SeedController extends Controller
         $level = Level::firstOrCreate(['service_id' => 3,'l_name' => 'Dual Time', 'order_qty' => 100]);
 
         $level = Level::firstOrCreate(['service_id' => 4,'l_name' => 'Part Time', 'order_qty' => 25]);
+        $level = Level::firstOrCreate(['service_id' => 4,'l_name' => 'Full Time', 'order_qty' => 50]);
+        $level = Level::firstOrCreate(['service_id' => 4,'l_name' => 'Over Time', 'order_qty' => 75]);
+        $level = Level::firstOrCreate(['service_id' => 4,'l_name' => 'Dual Time', 'order_qty' => 100]);
 
         $user = new User();
         $user->name = 'OhYes Store';
@@ -145,18 +148,19 @@ class SeedController extends Controller
         $user->save();
         $user->assignRole('lifter');
         //$user->services()->sync([1,['level_id' => 1]],[2, ['level_id' => 5]], [3, ['level_id' => 9]]);
-        $user->services()->attach([3 => ['level_id' => 9, 'status'=> 1]]);
         $user->services()->attach([1 => ['level_id' => 1, 'status'=> 1]]);
         $user->services()->attach([2 => ['level_id' => 5, 'status'=> 1]]);
+        $user->services()->attach([3 => ['level_id' => 9, 'status'=> 1]]);
+        $user->services()->attach([4 => ['level_id' => 13, 'status'=> 1]]);
 
         $user = new User();
         $user->name = 'Mian AR Rehman';
-        $user->mobile = '03014103160';
-        $user->email = 'arrehman@gmail.com';
-        $user->password = bcrypt('123456');
+        $user->mobile = '03014262629';
+        $user->email = 'mianarrehman@gmail.com';
+        $user->password = bcrypt('8m8a2r4w');
         $user->address = 'Rasheed u din colony, Depalpur';
         $user->account_type = 'consumer';
-        $user->reffer_id = "rehan00001";
+        $user->reffer_id = "ARREHMAN01";
         $user->status = "active";
         $user->save();
 
@@ -165,10 +169,9 @@ class SeedController extends Controller
         return "Data Added Successfully";
     }
 
-    public function pusher($message)
+    public function pusher()
     {
-        event(new NewLocation($message));
-        return "Pushed";
+        return event(new NewLocation(1,25.322,32.656556));
     }
 
     public function test()

@@ -62,7 +62,7 @@ Route::prefix('lifter')->group(function () {
     
     Route::group(['middleware' => ['auth:api']], function(){
         
-        // User Infor (Profile)
+        // User Info (Profile)
         Route::prefix('profile')->group(function () {
             Route::get('/', 'Api\Lifter\AuthController@profile');
         });
@@ -76,7 +76,10 @@ Route::prefix('lifter')->group(function () {
             Route::get('open', 'Api\Consumer\OrderController@open'); 
             Route::get('all', 'Api\Consumer\OrderController@all'); 
             Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
-            Route::post('update', 'Api\Consumer\OrderController@update'); 
+            Route::post('update', 'Api\Consumer\OrderController@update');
+            // New Orders
+            Route::get('get/{id}', 'Api\Lifter\OrderController@show');
+            Route::post('accept', 'Api\Lifter\OrderController@acceptOrder');
         });
 
         Route::prefix('bonus')->group(function () {
