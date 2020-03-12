@@ -188,7 +188,7 @@ class SeedController extends Controller
             return User::find(2);
         });
 
-        return $$value;
+        return $value;
         // $user->services->save();
         // $updated = [2,3,4];
         // $index = 0;
