@@ -11,6 +11,7 @@ use App\Events\NewLocation;
 use App\Service;
 use App\Level;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Support\Facades\Redis;
 
@@ -182,8 +183,12 @@ class SeedController extends Controller
         // //return $balance;
         // return $user = User::find(2)->services->pluk('id');
         
-        $user = User::find(2);
-        
+        //$user = User::find(2);
+        $value = Cache::get("user:1", function(){
+            return User::find(2);
+        });
+
+        return $$value;
         // $user->services->save();
         // $updated = [2,3,4];
         // $index = 0;
@@ -202,7 +207,7 @@ class SeedController extends Controller
         // }
         // print_r($updated);
       //  return $user->services;
-        return $user->services()->wherePivot('status',1)->pluck('id')->toArray();
+       // return $user->services()->wherePivot('status',1)->pluck('id')->toArray();
         //return $user->services()->wherePivot("service_id",2)->get();
 
         // Profile Resorce
