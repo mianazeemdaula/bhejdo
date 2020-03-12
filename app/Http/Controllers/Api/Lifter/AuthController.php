@@ -16,11 +16,13 @@ use DB;
 use App\User;
 use App\LifterLocation;
 use App\Review;
+use App\ServiceCharge;
 
 // Helpers
 use App\Helpers\BonusProcess;
 use App\Helpers\UserHelper;
 use App\Helpers\AndroidNotifications;
+
 
 class AuthController extends Controller
 {
@@ -90,6 +92,12 @@ class AuthController extends Controller
             $user->services()->attach([2 => ['level_id' => 5, 'status'=> 1]]);
             $user->services()->attach([3 => ['level_id' => 9, 'status'=> 1]]);
             $user->services()->attach([4 => ['level_id' => 13, 'status'=> 1]]);
+
+            if($user->hasRole('store')){
+                ServiceCharge::add($user->id, "Signup bonus for services", "bonus", 5000);
+            }else if($user->hasRole('lifter')){
+                ServiceCharge::add($user->id, "Signup bonus for services", "bonus", 1000);
+            }
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
             DB::commit();

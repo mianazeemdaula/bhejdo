@@ -72,11 +72,11 @@ class UserController extends Controller
         ]);
         $user->status = 'active';
         $user->save();
-        if($user->hasRole('store')){
-            ServiceCharge::add($user->id, "Signup Bonus", "bonus", 5000);
-        }else if($user->hasRole('lifter')){
-            ServiceCharge::add($user->id, "Signup Bonus", "bonus", 1000);
-        }
+        // if($user->hasRole('store')){
+        //     ServiceCharge::add($user->id, "Signup Bonus", "bonus", 5000);
+        // }else if($user->hasRole('lifter')){
+        //     ServiceCharge::add($user->id, "Signup Bonus", "bonus", 1000);
+        // }
         $data = ['type' => 'profile'];
         AndroidNotifications::toLifter("Congratulations!","Your account has been approved", $user->pushToken, $data);
         return redirect()->back()->with('status', 'Account Approved Successfully!');
