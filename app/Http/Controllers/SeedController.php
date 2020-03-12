@@ -184,6 +184,9 @@ class SeedController extends Controller
         // return $user = User::find(2)->services->pluk('id');
         
         //$user = User::find(2);
+        if (Cache::has('user:1')) {
+            return "Has Data";
+        }
         $value = Cache::get("user:1", function(){
             return User::find(2);
         });
