@@ -12,7 +12,7 @@ Route::get('/indexer/doc/{lat}/{lon}/{dis}', 'Api\Lifter\EventController@getLoca
 Route::get('/indexer/status', 'Api\Lifter\EventController@getStatus');
 
 Route::prefix('consumer')->group(function () {
-    Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
+    Route::post('phone-register', 'Api\ApiAuthController@phoneRegisterConsumer');
     Route::post('login', 'Api\Consumer\AuthController@login');
     Route::post('register', 'Api\Consumer\AuthController@register');
     Route::post('forgetpassword', 'Api\Consumer\AuthController@updateForgetPassword');

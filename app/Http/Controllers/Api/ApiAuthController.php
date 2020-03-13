@@ -47,4 +47,20 @@ class ApiAuthController extends Controller
             return response()->json(['success'=>$e], 405);
         }
     }
+
+    public function phoneRegisterConsumer(Request $request)
+    {
+        try{
+            $user = User::where('mobile',$request->mobile)->first();
+            if($user != null){
+                if($user->hasRole('consumer')){
+                    return response()->json(['status'=>true, 'isregister' => true], 200);
+                }
+                return response()->json(['status'=>true, 'isregister' => true, 'role' => false], 200);
+            }
+            return response()->json(['status'=>false, 'isregister' => false ], 200);
+        }catch(Exception $e){
+            return response()->json(['success'=>$e], 405);
+        }
+    }
 }
