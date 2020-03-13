@@ -15,10 +15,17 @@ Route::prefix('consumer')->group(function () {
     Route::post('phone-register', 'Api\ApiAuthController@phoneRegister');
     Route::post('login', 'Api\Consumer\AuthController@login');
     Route::post('register', 'Api\Consumer\AuthController@register');
+    Route::post('forgetpassword', 'Api\Consumer\AuthController@updateForgetPassword');
 
     Route::group(['middleware' => ['auth:api']], function(){
+
+        
         // User Info (Profile)
         Route::post('/updatePushToken', 'Api\Consumer\AuthController@pushToken');
+        Route::prefix('profile')->group(function () {
+            Route::get('/', 'Api\Consumer\AuthController@profile');
+            Route::post('/update', 'Api\Consumer\AuthController@update');
+        });
 
         // Lifters
         Route::post('/lifters-near', 'Api\Consumer\LifterController@getNearMe');

@@ -101,4 +101,63 @@ class AuthController extends Controller
             return response()->json(['success'=>$e], 405);
         }
     }
+
+    public function updateForgetPassword(Request $request){
+        DB::beginTransaction();
+        try{
+            
+            $validator = Validator::make( $request->all(), [
+                'mobile' => 'required|min:11|max:11',
+                'password' => 'required|min:6',
+                'confirm_password' => 'required|same:password',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json(['error'=>$validator->errors()], 401);
+            }
+
+            $user = User::where('mobile', $request->mobile)->first();
+            if($user == null){
+                return response()->json(['status'=> false, 'data' => $request->all()], 405);
+            }
+            $user->password = bcrypt($request->password);
+            $user->save();
+            DB::commit();
+            return response()->json(['status'=> true, 'data' => 'updated'], 200);
+        }catch(Exception $e){
+            DB::rollBack();
+            return response()->json(['success'=>$e], 405);
+        }
+    }
+
+    public function profile(Request $request)
+    {
+        try{
+            $user = $request->user();
+            $profile = new \App\Http\Resources\Profile\LifterProfile($user);
+            return response()->json(['status'=>true, 'data' => $profile], 200);
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'error' => "$e" ], 405);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        try{
+            $type = strtolower($request->type);
+            if($type == "avatar"){
+                $avatar = $request->avatar;
+                $avatarImageName = $request->user()->id.'_avatar.'.'png';
+                \Storage::disk('public')->put($avatarImageName, base64_decode($avatar));
+
+                $user = $request->user();
+                $user->avatar = $avatarImageName;
+                $user->save();
+                return response()->json(['status'=>true, 'data' => $avatarImageName], 200);
+            }
+            return response()->json(['status'=>false, 'error' => "Update Type Error" ], 401);
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'error' => "Internal Server Erro sdfsdfsd" ], 405);
+        }
+    }
 }
