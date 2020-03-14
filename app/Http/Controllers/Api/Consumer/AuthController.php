@@ -28,7 +28,7 @@ class AuthController extends Controller
         {
             $user = Auth::user();
             if($user->hasRole('consumer')){
-                $success['user'] = $user; 
+                $success['user'] = new \App\Http\Resources\Profile\ConsumerProfile($user); 
                 $success['token'] = $user->createToken($user->account_type)->accessToken; 
                 return response()->json(['status'=>true, 'data' => $success], 200);
             }
@@ -65,7 +65,6 @@ class AuthController extends Controller
             $user->account_type = 'consumer';
             $user->referred_by = $request->referred;
             $user->status = 'varified';
-            $user->reffer_id = UserHelper::gerateId($request->name);
             $user->save();
 
             $profile = $user->profile()->create([
@@ -76,7 +75,8 @@ class AuthController extends Controller
             $user->assignRole('consumer');
             Bonus::add($user->id,'Signup bonus','signup', 500);
             $success['token'] = $user->createToken($user->account_type)->accessToken;
-            $success['user'] = $user;
+            $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
+            $success['user'] = $profile;
             DB::commit();
             return response()->json(['status'=>true, 'data' => $success], 200);
         }catch(Expection $ex){
@@ -128,7 +128,7 @@ class AuthController extends Controller
     {
         try{
             $user = $request->user();
-            $profile = new \App\Http\Resources\Profile\LifterProfile($user);
+            $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
             return response()->json(['status'=>true, 'data' => $profile], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
@@ -154,4 +154,6 @@ class AuthController extends Controller
             return response()->json(['status'=>false, 'error' => "Internal Server Erro sdfsdfsd" ], 405);
         }
     }
+
+    
 }
