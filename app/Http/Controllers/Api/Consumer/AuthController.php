@@ -47,7 +47,7 @@ class AuthController extends Controller
                 'name' => 'required',
                 'mobile' => 'required|min:11|max:11|unique:users',
                 'email' => 'unique:users|email|nullable',
-                'referred' => 'exists:users,reffer_id|nullable',
+                'referred' => 'exists:users,mobile|nullable',
                 'password' => 'required',
                 'confirm_password' => 'required|same:password',
             ]);

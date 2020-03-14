@@ -55,7 +55,7 @@ class AuthController extends Controller
                 'mobile' => 'required|min:11|max:11|unique:users',
                 'email' => 'unique:users|email|nullable',
                 'password' => 'required',
-                'referred' => 'exists:users,reffer_id|nullable',
+                'referred' => 'exists:users,mobile|nullable',
                 'confirm_password' => 'required|same:password',
                 'type' => ['required', Rule::in(['lifter', 'store'])]
             ]);
