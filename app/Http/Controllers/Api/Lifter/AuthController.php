@@ -73,7 +73,6 @@ class AuthController extends Controller
             $user->account_type = $request->type;
             $user->referred_by = $request->referred;
             $user->status = 'unvarified';
-            $user->reffer_id = UserHelper::gerateId($request->name);
             $user->save();
             $profile = $user->profile()->create([
                 'longitude' => $request->longitude,
