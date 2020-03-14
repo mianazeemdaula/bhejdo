@@ -151,9 +151,10 @@ class OrderController extends Controller
                 // Logic for bonus d#eduction
                 $bonus = Bonus::balance($request->user()->id);
                 if($bonus != null){
-                    if($bonus->balance >= 25){
-                        $bonusDeducted = 25;
-                        Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",25);
+                    $deductable = $order->qty * 10;  
+                    if($bonus->balance >= $deductable){
+                        $bonusDeducted = $deductable;
+                        Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
                     }else{
                         $bonusDeducted = $bonus->balance;
                         Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
@@ -161,15 +162,20 @@ class OrderController extends Controller
                 }
                 $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
                 ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
+                $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
             }
-            $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
             $order->save();
             //
             DB::commit();
             $message = "Order for {$order->service->s_name} of {$order->qty} is {$status}.";
-            $data = ['order_id' => $order->id, 'type' => 'order', "amount" => $order->payable_amount];
-            AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
-            return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "amount" => $order->payable_amount ]], 200);
+            if($status == 'canceled'){
+                return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", ]], 200);
+            }else{
+                $data = ['order_id' => $order->id, 'type' => 'confirmed_order', "amount" => $order->payable_amount];
+                AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
+                return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "amount" => $order->payable_amount ]], 200);
+            }
+            
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
