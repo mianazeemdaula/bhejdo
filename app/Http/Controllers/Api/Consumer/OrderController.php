@@ -51,8 +51,7 @@ class OrderController extends Controller
             $order->service_id = $request->service_id;
             $order->qty = $request->qty;
             $order->price = $service->s_price;
-            $order->note = $service->note;
-            $order->note = $service->note;
+            $order->note = $request->note;
             $order->delivery_time = $request->delivery_time;
             $order->address = $request->address;
             $order->longitude = $request->longitude;
