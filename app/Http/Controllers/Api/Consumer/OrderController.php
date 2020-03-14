@@ -148,15 +148,15 @@ class OrderController extends Controller
                 $order->payment_id = $request->paymentType;
                 $order->confirmed_time = $dateTime;
 
-                // Logic for bonus deduction
+                // Logic for bonus d#eduction
                 $bonus = Bonus::balance($request->user()->id);
                 if($bonus != null){
                     if($bonus->balance >= 25){
                         $bonusDeducted = 25;
-                        Bonus::deduct($request->user()->id, "Deduction of order ${$order->id}","order",25);
+                        Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",25);
                     }else{
                         $bonusDeducted = $bonus->balance;
-                        Bonus::deduct($request->user()->id, "Deduction of order ${$order->id}","order",$bonus->balance);
+                        Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
                     }
                 }
                 $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
