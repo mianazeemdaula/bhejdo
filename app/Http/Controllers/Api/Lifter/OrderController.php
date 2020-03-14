@@ -28,10 +28,10 @@ class OrderController extends Controller
             }
             $order->lifter_id = $request->user()->id;
             $order->accepted_time = Carbon::now()->toDateTimeString();
-            $order->status = 'accepted';
+            $order->status = 'assigned';
             $order->save();
             DB::commit();
-            // Notifications
+            // Notifications to consumer
             $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";
             $data = ['order_id' => $order->id, 'type' => 'order'];
             AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
