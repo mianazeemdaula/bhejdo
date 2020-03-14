@@ -116,7 +116,7 @@ class OrderController extends Controller
             DB::commit();
             $message = "Your order of {$order->service->s_name} is {$status}.";
             $data = ['order_id' => $order->id, 'type' => 'order'];
-            AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
+            AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
             return response()->json(['status'=>true, 'data' => "Order Accepted"], 200);
         }catch(Exception $ex){
             DB::rollBack();
