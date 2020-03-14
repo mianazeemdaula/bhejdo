@@ -94,9 +94,9 @@ class AuthController extends Controller
             $user->services()->attach([4 => ['level_id' => 13, 'status'=> 1]]);
 
             if($user->hasRole('store')){
-                ServiceCharge::add($user->id, "Signup bonus for services", "bonus", 5000);
+                ServiceCharge::add($user->id, "Signup bonus for fee", "bonus", 5000);
             }else if($user->hasRole('lifter')){
-                ServiceCharge::add($user->id, "Signup bonus for services", "bonus", 1000);
+                ServiceCharge::add($user->id, "Signup bonus for fee", "bonus", 1000);
             }
             $response['token'] = $user->createToken($user->account_type)->accessToken;
             $response['user'] = $user;
