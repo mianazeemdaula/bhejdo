@@ -81,10 +81,11 @@ class OrderController extends Controller
     public function show($orderid)
     {
         try{
-            $order = Order::with(['consumer','service'])->where('id',$orderid)->first();
+            $order = Order::find($orderid);
             if($order == null){
                 return response()->json(['status'=>false, 'data' => ['Order not found']], 200);
             }
+            $order =  new OrderResource($order);
             return response()->json(['status'=>true, 'data' => $order], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
