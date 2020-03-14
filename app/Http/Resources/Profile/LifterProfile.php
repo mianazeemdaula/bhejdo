@@ -24,7 +24,9 @@ class LifterProfile extends JsonResource
             'status' => $this->status,
             'cnic' => $this->profile->cnic,
             'dob' => $this->profile->dob,
-            'services' => ProfileService::collection($this->services)
+            'services' => ProfileService::collection($this->services),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
