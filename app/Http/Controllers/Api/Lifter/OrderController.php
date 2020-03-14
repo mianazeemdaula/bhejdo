@@ -33,7 +33,7 @@ class OrderController extends Controller
             DB::commit();
             // Notifications to consumer
             $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";
-            $data = ['order_id' => $order->id, 'type' => 'order'];
+            $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id];
             AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
             return response()->json(['status'=>true, 'data' => "Order Accepted"], 200);
         }catch(Exception $ex){
@@ -116,7 +116,7 @@ class OrderController extends Controller
             $order->save();
             DB::commit();
             $message = "Your order of {$order->service->s_name} is {$status}.";
-            $data = ['order_id' => $order->id, 'type' => 'order'];
+            $data = ['order_id' => $order->id, 'type' => 'order',  'lifter_id' => $order->lifter_id];
             AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
             return response()->json(['status'=>true, 'data' => "Order Accepted"], 200);
         }catch(Exception $ex){

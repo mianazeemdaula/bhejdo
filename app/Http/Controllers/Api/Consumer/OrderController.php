@@ -167,8 +167,8 @@ class OrderController extends Controller
             //
             DB::commit();
             $message = "Order for {$order->service->s_name} of {$order->qty} is {$status}.";
-            $data = ['order_id' => $order->id, 'type' => 'order'];
-            AndroidNotifications::toLifter("Order $status from {$order->consumer->name}", $message, $order->lifter->pushToken, $data);
+            $data = ['order_id' => $order->id, 'type' => 'order', "amount" => $order->payable_amount];
+            AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
             return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "amount" => $order->payable_amount ]], 200);
         }catch(Exception $ex){
             DB::rollBack();
