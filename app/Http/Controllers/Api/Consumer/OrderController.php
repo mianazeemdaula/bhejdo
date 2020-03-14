@@ -52,6 +52,7 @@ class OrderController extends Controller
             $order->qty = $request->qty;
             $order->price = $service->s_price;
             $order->note = $service->note;
+            $order->note = $service->note;
             $order->delivery_time = $request->delivery_time;
             $order->address = $request->address;
             $order->longitude = $request->longitude;
@@ -59,7 +60,7 @@ class OrderController extends Controller
             if($request->has('sample')){
                 $order->type = 3;
             }
-            if($service->min_qty < $request->qty){
+            if($request->qty < $service->min_qty){
                 $order->charges = $service->min_qty_charges;
             }else{
                 $order->charges = 0;

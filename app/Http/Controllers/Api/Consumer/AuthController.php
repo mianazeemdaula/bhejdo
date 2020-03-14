@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 // Models
 use DB;
 use App\User;
+use App\Bonus;
 
 // Helpers
 use App\Helpers\BonusProcess;
@@ -73,14 +74,7 @@ class AuthController extends Controller
             ]);
             
             $user->assignRole('consumer');
-
-            $user->bonus()->create([
-                'description' => 'Signup bonus',
-                'type' => 'signup',
-                'amount' => 500,
-                'balance' => 500
-            ]);
-
+            Bonus::add($user->id,'Signup bonus','signup', 500);
             $success['token'] = $user->createToken($user->account_type)->accessToken;
             $success['user'] = $user;
             DB::commit();
