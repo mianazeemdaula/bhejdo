@@ -5,7 +5,7 @@ namespace App\Helpers;
 class AndroidNotifications {
     static public function toConsumer($title, $messag, $token,Array $data)
     {
-        $pushKey = 'AIzaSyDt9hhxcjoDSd6Tf5KHz7CkMTh8hTsECVo';
+        $pushKey = 'AIzaSyCTO-6wlZ0iVLzGgrnGUCecizBoEYjgJ68';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
@@ -71,7 +71,7 @@ class AndroidNotifications {
 
     static public function MultipleConsumer($tokenList, $messag, $token, Array $data)
     {
-        $pushKey = 'AIzaSyDt9hhxcjoDSd6Tf5KHz7CkMTh8hTsECVo';
+        $pushKey = 'AIzaSyCTO-6wlZ0iVLzGgrnGUCecizBoEYjgJ68';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
