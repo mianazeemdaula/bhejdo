@@ -17,6 +17,7 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
             $table->double('starts');
+            $table->enum('type',['lifter','consumer'])->default('lifter');
             $table->string('comment');
             $table->timestamps();
         });
