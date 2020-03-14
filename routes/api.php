@@ -116,8 +116,6 @@ Route::prefix('lifter')->group(function () {
         // Get Order and Open Order
         Route::get('/get-open-order/{id}', 'Api\Lifter\OrderController@show');
         
-        // Update Order
-        Route::post('/update-order', 'Api\Lifter\OrderController@update');
         
 
         // Events

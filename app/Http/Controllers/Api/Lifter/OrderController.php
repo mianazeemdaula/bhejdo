@@ -28,6 +28,7 @@ class OrderController extends Controller
             }
             $order->lifter_id = $request->user()->id;
             $order->accepted_time = Carbon::now()->toDateTimeString();
+            $order->status = 'accepted';
             $order->save();
             DB::commit();
             // Notifications
