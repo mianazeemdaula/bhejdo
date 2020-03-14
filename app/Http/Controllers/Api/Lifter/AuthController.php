@@ -32,7 +32,7 @@ class AuthController extends Controller
         { 
             $user = Auth::user();
             if($user->hasRole('lifter|store')){
-                $response['user'] = $user; 
+                $response['user'] = new \App\Http\Resources\Profile\LifterProfile($user); 
                 $response['token'] = $user->createToken($user->account_type)->accessToken; 
                 return response()->json(['status'=>true, 'data' => $response], 200);
             }
@@ -98,7 +98,7 @@ class AuthController extends Controller
                 ServiceCharge::add($user->id, "Signup bonus for fee", "bonus", 1000);
             }
             $response['token'] = $user->createToken($user->account_type)->accessToken;
-            $response['user'] = $user;
+            $response['user'] = new \App\Http\Resources\Profile\LifterProfile($user);
             DB::commit();
             return response()->json(['status'=>true, 'data' => $response], 200);
         }catch(Expection $ex){
