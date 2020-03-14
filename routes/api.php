@@ -81,10 +81,10 @@ Route::prefix('lifter')->group(function () {
 
         Route::prefix('order')->group(function () {
             Route::get('inprocess', 'Api\Lifter\OrderController@inprocess');
-            Route::get('open', 'Api\Consumer\OrderController@open'); 
-            Route::get('all', 'Api\Consumer\OrderController@all'); 
-            Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
-            Route::post('update', 'Api\Consumer\OrderController@update');
+            Route::get('open', 'Api\Lifter\OrderController@open'); 
+            Route::get('all', 'Api\Lifter\OrderController@all'); 
+            Route::get('schedule', 'Api\Lifter\OrderController@schedule'); 
+            Route::post('update', 'Api\Lifter\OrderController@update');
             // New Orders
             Route::get('get/{id}', 'Api\Lifter\OrderController@show');
             Route::post('accept', 'Api\Lifter\OrderController@acceptOrder');

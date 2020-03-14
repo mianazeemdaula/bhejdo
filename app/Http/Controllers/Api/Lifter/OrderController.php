@@ -135,4 +135,15 @@ class OrderController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
+
+    public function all(Request $request)
+    {
+        try{
+            $orders = Order::where('lifter_id', $request->user()->id)->get();
+            $orders = OrderResource::collection($orders);
+            return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
 }
