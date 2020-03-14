@@ -24,6 +24,7 @@ class Order extends JsonResource
             'service' => new Service($this->service),
             'qty' => $this->qty,
             'price' => $this->price,
+            'charges' => $this->charges,
             'address' => $this->address,
             'delivery_time' => $this->delivery_time,
             'address' => $this->address,
