@@ -19,6 +19,7 @@ class ConsumerProfile extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
+            'rating' => $rating == null ? 0.0 : $rating,
             'mobile' => $this->mobile,
             'refferid' => $this->reffer_id,
             'address' => $this->address,
@@ -27,7 +28,6 @@ class ConsumerProfile extends JsonResource
             'dob' => $this->profile->dob,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'rating' => $rating == null ? 0.0 : $rating
         ];
     }
 }

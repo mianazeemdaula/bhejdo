@@ -20,6 +20,7 @@ class LifterProfile extends JsonResource
             'name' => $this->name,
             'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
             'mobile' => $this->mobile,
+            'rating' => $rating == null ? 0.0 : $rating,
             'refferid' => $this->reffer_id,
             'address' => $this->address,
             'status' => $this->status,
@@ -28,7 +29,6 @@ class LifterProfile extends JsonResource
             'services' => ProfileService::collection($this->services),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'rating' => $rating == null ? 0.0 : $rating
         ];
     }
 }
