@@ -58,8 +58,9 @@ class OrderController extends Controller
             $order->latitude = $request->latitude;
             if($request->has('sample')){
                 $order->type = 3;
+                $order->charges = 0;
             }
-            if($request->qty < $service->min_qty){
+            else if($request->qty < $service->min_qty){
                 $order->charges = $service->min_qty_charges;
             }else{
                 $order->charges = 0;
