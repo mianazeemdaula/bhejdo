@@ -113,7 +113,7 @@ class OrderController extends Controller
     public function all(Request $request)
     {
         try{
-            $orders = Order::where('consumer_id', $request->user()->id)->get();
+            $orders = Order::where('consumer_id', $request->user()->id)->latest()->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){

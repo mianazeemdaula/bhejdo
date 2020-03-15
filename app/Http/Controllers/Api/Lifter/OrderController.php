@@ -129,7 +129,7 @@ class OrderController extends Controller
     {
         try{
             $orders = Order::where('lifter_id', $request->user()->id)
-            ->where('status', '!=' ,'confirmed')->get();
+            ->where('status', '!=' ,'confirmed')->latest()->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
@@ -140,7 +140,7 @@ class OrderController extends Controller
     public function all(Request $request)
     {
         try{
-            $orders = Order::where('lifter_id', $request->user()->id)->get();
+            $orders = Order::where('lifter_id', $request->user()->id)->latest()->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
