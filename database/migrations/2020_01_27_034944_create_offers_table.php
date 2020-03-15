@@ -15,7 +15,7 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('');
+            $table->unsignedBigInteger('service_id');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
