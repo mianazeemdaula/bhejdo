@@ -114,6 +114,10 @@ Route::prefix('lifter')->group(function () {
             Route::resource('/', 'Api\Lifter\ServicesController');
         });
 
+        Route::prefix('review')->group(function () {
+            Route::resource('/', 'Api\Lifter\ReviewController');
+        });
+
         // Accept Open Order
         Route::post('/open-order-accept', 'Api\Lifter\OrderController@acceptOrder');
         Route::post('/schedule-order-accept', 'Api\Lifter\OrderController@scheduleOrderCreate');
