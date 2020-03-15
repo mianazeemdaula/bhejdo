@@ -74,6 +74,13 @@ class AuthController extends Controller
             
             $user->assignRole('consumer');
             Bonus::add($user->id,'Signup bonus','signup', 500);
+            if($request->referred != null){
+                $referrBy = User::where('mobile', $request->referred)->first();
+                if($referrBy != null){
+                    Bonus::add($referrBy->id,"Referr bonus of {$user->name}",'referr', 100);
+                }
+            }
+            
             $success['token'] = $user->createToken($user->account_type)->accessToken;
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
             $success['user'] = $profile;
