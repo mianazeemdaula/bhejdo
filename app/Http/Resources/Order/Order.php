@@ -32,6 +32,8 @@ class Order extends JsonResource
             'address' => $this->address,
             'delivery_time' => $this->delivery_time,
             'address' => $this->address,
+            'type' => $this->type,
+            'note' => $this->note,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'status' => $this->status,
@@ -41,6 +43,7 @@ class Order extends JsonResource
             'accepted_time' => $this->accepted_time,
             'shipped_time' => $this->shipped_time,
             'delivered_time' => $this->delivered_time,
+            'confirmed_time' => $this->confirmed_time,
             'review' => Auth::user()->hasRole('consumer') ? new Review($this->consumerReview) : new Review($this->lifterReview),
         ];
     }
