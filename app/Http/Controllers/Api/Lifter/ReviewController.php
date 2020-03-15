@@ -39,11 +39,15 @@ class ReviewController extends Controller
     {
         DB::beginTransaction();
         try{
+            $reviewRow = \App::Review()->where('order_id', $request->order)->where('type','consumer')->first();
+            if($reviewRow != null){
+                return response()->json(['status'=>false, 'data' => 'Review already submitted'], 200);
+            }
             $review = new \App\Review();
             $review->order_id = $request->order;
             $review->comment = $request->comment;
             $review->starts = $request->starts;
-            $review->type = 'lifter';
+            $review->type = 'consumer';
             $review->save();
             DB::commit();
             $data = ['msg' => 'Review successfully'];
