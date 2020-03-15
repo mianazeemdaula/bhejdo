@@ -14,7 +14,7 @@ class Lifter extends JsonResource
      */
     public function toArray($request)
     {
-        $rating = \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.consumer_id',$this->id)->where('reviews.type','lifter')->avg('reviews.starts');
+        $rating = \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.lifter_id',$this->id)->where('reviews.type','lifter')->avg('reviews.starts');
         return [
             'id' => $this->id,
             'name' => $this->name,
