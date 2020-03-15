@@ -146,7 +146,7 @@ class OrderController extends Controller
                 $order->canceled_time = $dateTime;
             }else if($status == 'confirmed'){
                 if($order->confirmed_time != null){
-                    return response()->json(['status'=>true, 'data' => [ "msg" => "Already Confirmed", ]], 200);
+                    return response()->json(['status'=>false, 'data' => [ "msg" => "Already Confirmed", ]], 200);
                 }
                 $order->status = 'confirmed';
                 $order->payment_id = $request->paymentType;
