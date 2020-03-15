@@ -41,7 +41,7 @@ class ReviewController extends Controller
         try{
             $review = new \App\Review();
             $review->order_id = $request->order;
-            $request->comment = $request->comment;
+            $review->comment = $request->comment;
             $review->starts = $request->starts;
             $review->type = 'lifter';
             $review->save();
