@@ -52,6 +52,10 @@ Route::prefix('consumer')->group(function () {
             Route::resource('/', 'Api\Consumer\WalletController');
             Route::get('/balance', 'Api\Consumer\WalletController@balance');
         });
+
+        Route::prefix('review')->group(function () {
+            Route::resource('/', 'Api\Consumer\ReviewController');
+        });
         
         
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
