@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Resources\Milk;
+namespace App\Http\Resources\Order;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\User\Consumer;
 use App\Http\Resources\User\Lifter;
 use App\Http\Resources\Service;
+use App\Http\Resources\Order\Review;
+use Illuminate\Support\Facades\Auth;
 
 class Order extends JsonResource
 {
@@ -37,6 +39,7 @@ class Order extends JsonResource
             'accepted_time' => $this->accepted_time,
             'shipped_time' => $this->shipped_time,
             'delivered_time' => $this->delivered_time,
+            'review' => Auth::user()->hasRole('consumer') ? new Review($this->consumerReview) : new Review($this->lifterReview),
         ];
     }
 }

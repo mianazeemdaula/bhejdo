@@ -16,7 +16,7 @@ use App\ServiceCharge;
 use App\Bonus;
 use App\Service;
 
-use App\Http\Resources\Milk\Order as OrderResource;
+use App\Http\Resources\Order\Order as OrderResource;
 use App\Helpers\AndroidNotifications;
 use App\Helpers\OrderProcess;
 

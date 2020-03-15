@@ -26,8 +26,18 @@ class Order extends Model
         return $this->belongsTo(Service::class);
     }
 
-    public function review()
+    private function review()
     {
         return $this->hasOne('App\Review');
+    }
+
+    public function consumerReview()
+    {
+        return $this->review()->where('type','consumer');
+    }
+
+    public function lifterReview()
+    {
+        return $this->review()->where('type','lifter');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Milk;
+namespace App\Http\Resources\Order;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\User\Lifter;
 
-class OrderDetail extends JsonResource
+class Review extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +17,11 @@ class OrderDetail extends JsonResource
     {
         return [
             'id' => $this->id,
-            'status' => $this->status,
+            'comment' => $this->comment,
+            'rating' => $this->starts,
+            'type' => $this->type,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'lifter' => new Lifter($this->lifter),
         ];
     }
 }

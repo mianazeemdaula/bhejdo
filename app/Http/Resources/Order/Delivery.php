@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Milk;
+namespace App\Http\Resources\Order;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\User\Lifter;

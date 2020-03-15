@@ -11,7 +11,7 @@ use App\OpenOrder;
 use Carbon\Carbon;
 use Validator;
 
-use App\Http\Resources\Milk\Order as OrderResource;
+use App\Http\Resources\Order\Order as OrderResource;
 use App\Helpers\AndroidNotifications;
 
 class OrderController extends Controller
