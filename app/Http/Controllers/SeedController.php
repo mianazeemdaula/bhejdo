@@ -184,16 +184,18 @@ class SeedController extends Controller
         // return $user = User::find(2)->services->pluk('id');
         
         //$user = User::find(2);
-        return \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.lifter_id',2)->where('reviews.type','lifter')->avg('reviews.starts');
-        if (Cache::has('user')) {
-            return "Has Data";
-        }
-        $value = Cache::remember('user', 60*60*60, function () {
-            return User::find(2);
-        });
 
-        return $value;
-        // $user->services->save();
+        return \App\Order::find(2)->lifterReview;
+        // return \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.lifter_id',2)->where('reviews.type','lifter')->avg('reviews.starts');
+        // if (Cache::has('user')) {
+        //     return "Has Data";
+        // }
+        // $value = Cache::remember('user', 60*60*60, function () {
+        //     return User::find(2);
+        // });
+
+        // return $value;
+        // // $user->services->save();
         // $updated = [2,3,4];
         // $index = 0;
         // foreach($user->services as $service){
