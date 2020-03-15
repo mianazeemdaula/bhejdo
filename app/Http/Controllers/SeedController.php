@@ -185,7 +185,7 @@ class SeedController extends Controller
         
         //$user = User::find(2);
 
-        return \App\Order::find(2)->lifterReview;
+        return \App\Order::find(2)->consumerReview;
         // return \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.lifter_id',2)->where('reviews.type','lifter')->avg('reviews.starts');
         // if (Cache::has('user')) {
         //     return "Has Data";
