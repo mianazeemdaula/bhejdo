@@ -149,21 +149,25 @@ class OrderController extends Controller
                 $order->payment_id = $request->paymentType;
                 $order->confirmed_time = $dateTime;
 
-                // Logic for bonus d#eduction
-                $bonus = Bonus::balance($request->user()->id);
-                if($bonus != null){
-                    $deductable = $order->qty * 10;  
-                    if($bonus->balance >= $deductable){
-                        $bonusDeducted = $deductable;
-                        Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
-                    }else{
-                        $bonusDeducted = $bonus->balance;
-                        Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
+                if($order->type == 3){ // Sample order
+                    ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order", $order->qty * $order->price);
+                }else{
+                    // Logic for bonus d#eduction
+                    $bonus = Bonus::balance($request->user()->id);
+                    if($bonus != null){
+                        $deductable = $order->qty * 10;  
+                        if($bonus->balance >= $deductable){
+                            $bonusDeducted = $deductable;
+                            Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
+                        }else{
+                            $bonusDeducted = $bonus->balance;
+                            Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
+                        }
                     }
+                    $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
+                    ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
+                    $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
                 }
-                $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
-                ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
-                $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
             }
             $order->save();
             //
