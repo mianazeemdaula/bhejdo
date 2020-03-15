@@ -25,7 +25,7 @@ class LifterController extends Controller
         ])->where('last_update', '>', Carbon::now()->subSeconds(21)->timestamp)
         ->where('services','all',[intval($request->service)])->get();
         $service = Service::find($request->service);
-        $smaple = \App\Order::where('type',3)->where('service_id', $service->id)->where('consumer_id', $request->user()->id)->count();
+        $smaple = \App\Order::where('type',3)->where('consumer_id', $request->user()->id)->count();
         return ['status' => true, 'data' => ['lifters' => $lifters, 'service' => $service, 'sample' => $smaple]];
         //return $stats;
     }
