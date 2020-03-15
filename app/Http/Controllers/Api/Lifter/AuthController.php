@@ -191,7 +191,7 @@ class AuthController extends Controller
             ]);
             $user->status = 'inprocess';
             $user->save();
-            return response()->json(['status'=>true, 'data' => ['user' => $request->user()]], 200);
+            return response()->json(['status'=>true, 'data' => ['user' => new \App\Http\Resources\Profile\LifterProfile($user)]], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
         }
