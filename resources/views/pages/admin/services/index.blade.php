@@ -32,8 +32,6 @@
                                 <th>Charges</th>
                                 <th>Sample Qty</th>
                                 <th>Status</th>
-                                <th>Created</th>
-                                <th>Last Update</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,8 +47,6 @@
                                     <td> {{ $item->s_charges }} </td>
                                     <td> {{ $item->s_sample_qty }} </td>
                                     <td> {{ $item->s_status }} </td>
-                                    <td> {{ $item->created_at}} </td>
-                                    <td> {{ $item->updated_at}} </td>
                                     <td> 
                                       <div class="btn-group">
                                         <a href="{{ route('service.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
