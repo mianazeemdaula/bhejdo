@@ -13,7 +13,8 @@ class ApiAuthController extends Controller
     
     public function accountStatus(Request $request) {
         try{
-            return response()->json(['status'=>true, 'data' => ['user' => $request->user()]], 200);
+            $user = new \App\Http\Resources\Profile\LifterProfile($request->user());
+            return response()->json(['status'=>true, 'data' => ['user' => $user]], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }
