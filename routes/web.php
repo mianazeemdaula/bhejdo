@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/user', 'UserController');
     Route::get('/user/approved/{id}', 'UserController@approved');
     Route::resource('bonus', 'BonusController');
-    Route::resource('services', 'ServiceController');
+    Route::resource('service', 'ServiceController');
     Route::resource('wallet', 'WalletController');
     Route::resource('charges', 'ServiceChargeController');
 });
