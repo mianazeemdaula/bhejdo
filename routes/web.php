@@ -46,12 +46,11 @@ Auth::routes(['register' => false]);
 
 
 Route::group(['middleware' => ['auth']], function () {
-    
     Route::get('/home', 'HomeController@index')->name('home');
-
     Route::resource('/user', 'UserController');
     Route::get('/user/approved/{id}', 'UserController@approved');
     Route::resource('/bonus', 'BonusController');
+    Route::resource('services', 'ServiceController');
 });
 
 
@@ -59,14 +58,7 @@ Route::get('/seed', 'SeedController@Seed');
 Route::get('/pusher/{message}', 'SeedController@pusher');
 
 Route::get('/service', 'ServiceController@setservice');
+
 Route::get('/pages/terms', function(){
     return view('posts/terms_and_policies');
-});
-
-use Illuminate\Support\Str;
-Route::get('id/{id}', function($username){
-    $refferid = Str::limit($username,5,"");
-    $random = Str::random(5);
-    $newid = strtoupper("$refferid$random");
-    return $refferid."-".$newid;
 });

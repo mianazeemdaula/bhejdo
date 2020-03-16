@@ -9,6 +9,12 @@ use App\Service;
 
 class ServiceController extends Controller
 {
+    public function index()
+    {
+        $services = Service::all();
+        return view('pages.admin.services.index', compact('services'));
+    }
+
     public function setservice()
     {
         $user = User::find(1);
