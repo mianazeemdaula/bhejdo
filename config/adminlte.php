@@ -194,7 +194,6 @@ return [
             'text'        => 'Services',
             'route'         => 'service.index',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
             'label_color' => 'success',
         ],
         [
