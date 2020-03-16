@@ -40,6 +40,7 @@ class ServiceController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
         $service->s_price = $request->s_price;
+        $service->s_status = $request->s_status;
         $service->save();
         return redirect()->back()->with('status', 'Service Updated!');
     }

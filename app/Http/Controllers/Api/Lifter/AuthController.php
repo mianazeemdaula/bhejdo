@@ -89,9 +89,9 @@ class AuthController extends Controller
 
             $user->assignRole($user->account_type);
             $user->services()->attach([1 => ['level_id' => 1, 'status'=> 1]]);
-            $user->services()->attach([2 => ['level_id' => 5, 'status'=> 1]]);
-            $user->services()->attach([3 => ['level_id' => 9, 'status'=> 1]]);
-            $user->services()->attach([4 => ['level_id' => 13, 'status'=> 1]]);
+            // $user->services()->attach([2 => ['level_id' => 5, 'status'=> 1]]);
+            // $user->services()->attach([3 => ['level_id' => 9, 'status'=> 1]]);
+            // $user->services()->attach([4 => ['level_id' => 13, 'status'=> 1]]);
 
             if($user->hasRole('store')){
                 ServiceCharge::add($user->id, "Signup bonus for fee", "bonus", 5000);
