@@ -7,12 +7,41 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Service;
 
+// Forms
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use App\Forms\Admin\ServiceCreateForm;
+
 class ServiceController extends Controller
 {
+    use FormBuilderTrait;
     public function index()
     {
         $services = Service::all();
         return view('pages.admin.services.index', compact('services'));
+    }
+
+    public function edit($id)
+    {
+        $service = Service::findOrFail($id);
+        $form = $this->form(ServiceCreateForm::class, [
+            'method' => 'PUT',
+            'class' => 'form-horizontal',
+            'url' => route('service.update'),
+            'model' => $service
+        ]);
+        return view('pages.admin.services.edit', compact('form'));
+    }
+
+    public function update(Request $request, Service $service)
+    {
+        $form = $this->form(ServiceCreateForm::class);
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+        $service->price = $request->price;
+        $service->save();
+        return redirect()->back()->with('status', 'Service Updated!');
     }
 
     public function setservice()
