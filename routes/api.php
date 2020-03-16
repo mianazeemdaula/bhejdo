@@ -79,7 +79,7 @@ Route::prefix('lifter')->group(function () {
             Route::post('/update', 'Api\Lifter\AuthController@update');
         });
 
-        Route::get('/account-status', 'Api\ApiAuthController@accountStatus');
+        Route::get('/account-status', 'Api\Lifter\AuthController@accountStatus');
         Route::post('/updatePushToken', 'Api\Lifter\AuthController@pushToken');
         Route::post('/nic-verification', 'Api\Lifter\AuthController@nicVerificaiton');
 

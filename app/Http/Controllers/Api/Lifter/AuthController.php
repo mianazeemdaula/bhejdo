@@ -108,6 +108,15 @@ class AuthController extends Controller
         }
     }
 
+    public function accountStatus(Request $request) {
+        try{
+            $user = new \App\Http\Resources\Profile\LifterProfile($request->user());
+            return response()->json(['status'=>true, 'data' => ['user' => $user]], 200);
+        }catch(Exception $e){
+            return response()->json(['success'=>$e], 405);
+        }
+    }
+
     public function updateForgetPassword(Request $request){
         DB::beginTransaction();
         try{
