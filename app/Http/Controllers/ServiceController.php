@@ -39,7 +39,7 @@ class ServiceController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        $service->price = $request->price;
+        $service->s_price = $request->s_price;
         $service->save();
         return redirect()->back()->with('status', 'Service Updated!');
     }
