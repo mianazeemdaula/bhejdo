@@ -26,7 +26,7 @@ class ServiceController extends Controller
         $form = $this->form(ServiceCreateForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('service.update'),
+            'url' => route('service.update', $id),
             'model' => $service
         ]);
         return view('pages.admin.services.edit', compact('form'));
