@@ -28,7 +28,6 @@
                                 <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Rols</th>
-                                <th>RefferID</th>
                                 <th>Status</th>
                                 <th>Created</th>
                                 <th>Last Update</th>
@@ -43,7 +42,6 @@
                                     <td> {{ $item->mobile}} </td>
                                     <td> {{ $item->email}} </td>
                                     <td> {{ $item->getRoleNames() }} </td>
-                                    <td> {{ $item->reffer_id }} </td>
                                     <td> {{ $item->status }} </td>
                                     <td> {{ $item->created_at}} </td>
                                     <td> {{ $item->updated_at}} </td>
