@@ -10,7 +10,7 @@ class ServiceCreateForm extends Form
     {
         $this
         ->add('s_name', 'text',  [
-            'rules' => 'required|min:2|unique:services',
+            'rules' => 'required|min:2',
             'label' => 'Service Name'
         ])
         ->add('s_price', 'text',  [
