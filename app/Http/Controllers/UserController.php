@@ -57,7 +57,7 @@ class UserController extends Controller
         $form = $this->form(UserEditForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('user.update', $id),
+            'url' => route('user.update', $user->id),
             'model' => $user
         ]);
         return view('pages.super-admin.user.show', compact('user'));
