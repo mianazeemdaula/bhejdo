@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('service', 'ServiceController');
     Route::resource('wallet', 'WalletController');
     Route::resource('charges', 'ServiceChargeController');
+    Route::resource('order', 'OrderController');
 });
 
 
