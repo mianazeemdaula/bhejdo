@@ -242,6 +242,11 @@ class AuthController extends Controller
                 $user->avatar = $avatarImageName;
                 $user->save();
                 return response()->json(['status'=>true, 'data' => $avatarImageName], 200);
+            }else if($type == "bikenumber"){
+                $profile = $request->user()->profile;
+                $profile->vehicle = $request->vehicle;
+                $profile->save();
+                return response()->json(['status'=>true, 'data' => 'Vehicle number Updated'], 200);
             }
             return response()->json(['status'=>false, 'error' => "Update Type Error" ], 401);
         }catch(Exception $e){

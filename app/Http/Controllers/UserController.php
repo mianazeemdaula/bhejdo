@@ -10,8 +10,15 @@ use Carbon\Carbon;
 
 use App\Helpers\AndroidNotifications;
 
+// Forms
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use App\Forms\Admin\UserEditForm;
+
+
 class UserController extends Controller
 {
+    use FormBuilderTrait;
+
     public function index()
     {
         $users = User::all();
@@ -47,6 +54,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $form = $this->form(UserEditForm::class, [
+            'method' => 'PUT',
+            'class' => 'form-horizontal',
+            'url' => route('user.update', $id),
+            'model' => $user
+        ]);
         return view('pages.super-admin.user.show', compact('user'));
     }
 
@@ -56,9 +69,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $form = $this->form(ServiceCreateForm::class, [
+            'method' => 'PUT',
+            'class' => 'form-horizontal',
+            'url' => route('service.update', $id),
+            'model' => $user
+        ]);
+        return view('pages.admin.services.edit', compact('form'));
     }
 
     public function approved($id)
