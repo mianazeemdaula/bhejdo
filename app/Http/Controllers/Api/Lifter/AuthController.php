@@ -65,6 +65,18 @@ class AuthController extends Controller
                 return response()->json(['error'=>$validator->errors()], 401);
             }
 
+            if($request->referred != null){
+                if($request->type == 'store'){
+                    return response()->json(['error'=>['referred' => ["Store account can't be referred."]]], 401);
+                }
+                $referrBy = User::where('mobile', $request->referred)->first();
+                if($referrBy->hasRole('store') && $request->type == 'lifter'){
+
+                }else{
+                    return response()->json(['error'=>['referred' => ["Referral id is not a store."]]], 401);
+                }
+            }
+            
             $user = new User();
             $user->name = $request->name;
             $user->mobile = $request->mobile;
