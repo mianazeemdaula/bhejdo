@@ -38,7 +38,7 @@
                                     <td> {{ $item->id}} </td>
                                     <td> {{ $item->consumer->name}} </td>
                                     <td> {{ $item->lifter->name}} </td>
-                                    <td> {{ $item->service->name}} </td>
+                                    <td> {{ $item->service->s_name}} </td>
                                     <td> {{ $item->qty }} </td>
                                     <td> {{ $item->price }} </td>
                                     <td> {{ $item->charges }} </td>
