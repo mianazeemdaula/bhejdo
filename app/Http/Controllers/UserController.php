@@ -74,10 +74,10 @@ class UserController extends Controller
         $form = $this->form(ServiceCreateForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('service.update', $id),
-            'model' => $user
+            'url' => route('user.update', $id),
+            'model' => $user->profile
         ]);
-        return view('pages.admin.services.edit', compact('form'));
+        return view('pages.admin.super-admin.eprofile_edit.blade', compact('form'));
     }
 
     public function approved($id)
