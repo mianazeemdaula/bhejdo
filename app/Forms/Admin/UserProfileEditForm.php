@@ -22,7 +22,10 @@ class UserProfileEditForm extends Form
         ])->add('cnic_expiry', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'CNIC'
-        ])->add('vehicle', 'text',  [
+        ])->add('driving_licene_expiry', 'text',  [
+            'rules' => 'required|min:2',
+            'label' => 'CNIC'
+        ])->add('driving_licene_expiry', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'CNIC'
         ]);
