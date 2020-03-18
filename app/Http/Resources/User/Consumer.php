@@ -18,6 +18,7 @@ class Consumer extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'mobile' => $this->mobile,
             'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
             'rating' => $rating == null ? 0.0 : $rating,
         ];
