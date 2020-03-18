@@ -19,6 +19,9 @@ class UserEditForm extends Form
         ])->add('email', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Email'
+        ])->add('profile.cnic', 'text',  [
+            'rules' => 'required|min:2',
+            'label' => 'CNIC'
         ]);
     }
 }
