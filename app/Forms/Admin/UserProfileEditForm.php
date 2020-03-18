@@ -11,20 +11,20 @@ class UserProfileEditForm extends Form
         $this
         ->add('cnic', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'cnic'
+            'label' => 'CNIC'
         ])
         ->add('dob', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Mobile'
-        ])->add('vehicle', 'text',  [
+        ])->add('vehicle', 'DOB',  [
             'rules' => 'required|min:2',
             'label' => 'vehicle'
         ])->add('cnic_expiry', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'CNIC'
+            'label' => 'CNIC EXPIRY'
         ])->add('driving_licene_expiry', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'CNIC'
+            'label' => 'DRIVING LICENCE EXIRY'
         ]);
     }
 }
