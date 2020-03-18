@@ -60,7 +60,7 @@ class UserController extends Controller
             'url' => route('user.update', $user->id),
             'model' => $user
         ]);
-        return view('pages.super-admin.user.show', compact('user'));
+        return view('pages.super-admin.user.show', compact('user', 'form'));
     }
 
     /**
