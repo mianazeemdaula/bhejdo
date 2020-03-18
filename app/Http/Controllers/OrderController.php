@@ -11,6 +11,6 @@ class OrderController extends Controller
     public function index()
     {
         $collection = Order::latest()->limit(200)->get();
-        return view('admin.order.index', compact('collection'));
+        return view('pages.admin.order.index', compact('collection'));
     }
 }
