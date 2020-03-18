@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $collection = Order::latest()->limit(200)->get();
+        $collection = Order::latest('id')->limit(200)->get();
         return view('pages.admin.order.index', compact('collection'));
     }
 }
