@@ -39,7 +39,7 @@ Route::get('/', function () {
 //    return App\LifterLocation::truncate();
 // });
 
-// Route::get('/dbtest', 'SeedController@test');
+Route::get('/dbtest', 'SeedController@test');
 
 
 Auth::routes(['register' => false]);
