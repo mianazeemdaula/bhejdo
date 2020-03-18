@@ -21,13 +21,13 @@
                         <thead>
                             <tr>
                                 <th>Sr #</th>
-                                <th>Name</th>
-                                <th>Min Qty</th>
-                                <th>Max Qty</th>
-                                <th>Min Qty Charges</th>
+                                <th>Consumer</th>
+                                <th>Lifter</th>
+                                <th>Service</th>
+                                <th>Qty</th>
                                 <th>Price</th>
                                 <th>Charges</th>
-                                <th>Sample Qty</th>
+                                <th>Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -36,14 +36,14 @@
                             @foreach ($collection as $item)
                                 <tr>
                                     <td> {{ $item->id}} </td>
-                                    <td> {{ $item->s_name}} </td>
-                                    <td> {{ $item->min_qty}} </td>
-                                    <td> {{ $item->max_qty}} </td>
-                                    <td> {{ $item->min_qty_charges }} </td>
-                                    <td> {{ $item->s_price }} </td>
-                                    <td> {{ $item->s_charges }} </td>
-                                    <td> {{ $item->s_sample_qty }} </td>
-                                    <td> {{ $item->s_status }} </td>
+                                    <td> {{ $item->consumer->name}} </td>
+                                    <td> {{ $item->lifter->name}} </td>
+                                    <td> {{ $item->service->name}} </td>
+                                    <td> {{ $item->qty }} </td>
+                                    <td> {{ $item->price }} </td>
+                                    <td> {{ $item->charges }} </td>
+                                    <td> {{ $item->type }} </td>
+                                    <td> {{ $item->status }} </td>
                                     <td> 
                                       <div class="btn-group">
                                         <a href="{{ route('order.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
