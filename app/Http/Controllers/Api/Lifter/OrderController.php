@@ -14,6 +14,8 @@ use Validator;
 use App\Http\Resources\Order\Order as OrderResource;
 use App\Helpers\AndroidNotifications;
 
+use App\Events\UpdateLifterEvent;
+
 class OrderController extends Controller
 {
     
@@ -118,7 +120,7 @@ class OrderController extends Controller
             $message = "Your order of {$order->service->s_name} is {$status}.";
             $data = ['order_id' => $order->id, 'type' => 'order',  'lifter_id' => $order->lifter_id];
             AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
-            event(new \App\Event\UpdateLifterEvent($order->lifter_id, $order));
+            event(new UpdateLifterEvent($order->lifter_id, $order));
             return response()->json(['status'=>true, 'data' => "Order Accepted"], 200);
         }catch(Exception $ex){
             DB::rollBack();

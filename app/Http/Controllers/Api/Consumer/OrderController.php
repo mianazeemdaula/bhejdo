@@ -20,6 +20,7 @@ use App\Http\Resources\Order\Order as OrderResource;
 use App\Helpers\AndroidNotifications;
 use App\Helpers\OrderProcess;
 
+use App\Events\UpdateLifterEvent;
 use Carbon\Carbon;
 
 class OrderController extends Controller
@@ -176,7 +177,7 @@ class OrderController extends Controller
             //
             DB::commit();
             $message = "Order for {$order->service->s_name} of {$order->qty} is {$status}.";
-            event(new \App\Event\UpdateLifterEvent($order->lifter_id, $order));
+            event(new UpdateLifterEvent($order->lifter_id, $order));
             if($status == 'canceled'){
                 return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", ]], 200);
             }else{
