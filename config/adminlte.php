@@ -191,6 +191,11 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text'        => 'Orders',
+            'route'         => 'order.index',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
             'text'        => 'Services',
             'route'         => 'service.index',
             'icon'        => 'far fa-fw fa-file',
