@@ -183,7 +183,10 @@ class SeedController extends Controller
         // //return $balance;
         // return $user = User::find(2)->services->pluk('id');
         
-        //$user = User::find(2);
+        $user = User::find(2);
+        $user->removeRole('lifter');
+        $user->assignRole('store');
+        return $user;
         $order = \App\Order::find(2);
         return  new \App\Http\Resources\Order\Order($order);
         // return \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.lifter_id',2)->where('reviews.type','lifter')->avg('reviews.starts');
