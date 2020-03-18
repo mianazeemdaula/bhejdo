@@ -9,17 +9,20 @@ class UserProfileEditForm extends Form
     public function buildForm()
     {
         $this
-        ->add('name', 'text',  [
+        ->add('cnic', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'Name'
+            'label' => 'cnic'
         ])
-        ->add('mobile', 'text',  [
+        ->add('dob', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Mobile'
-        ])->add('email', 'text',  [
+        ])->add('vehicle', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'Email'
-        ])->add('profile.cnic', 'text',  [
+            'label' => 'vehicle'
+        ])->add('cnic_expiry', 'text',  [
+            'rules' => 'required|min:2',
+            'label' => 'CNIC'
+        ])->add('vehicle', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'CNIC'
         ]);

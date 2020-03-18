@@ -13,6 +13,7 @@ use App\Helpers\AndroidNotifications;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\UserEditForm;
+use App\Forms\Admin\UserProfileEditForm;
 
 
 class UserController extends Controller
@@ -54,13 +55,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $form = $this->form(UserProfileEditForm::class, [
+        $profileForm = $this->form(UserProfileEditForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
             'url' => route('user.update', $user->id),
             'model' => $user->profile
         ]);
-        return view('pages.super-admin.user.show', compact('user', 'form'));
+        return view('pages.super-admin.user.show', compact('user', 'profileForm'));
     }
 
     /**

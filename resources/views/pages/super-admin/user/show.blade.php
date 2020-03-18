@@ -297,15 +297,15 @@
                 <!-- /.tab-pane -->
 
                 <div class="tab-pane active" id="settings">
-                  {!! form_start($form) !!}
+                  {!! form_start($profileForm) !!}
                   <div class="card-body">
-                      {!! form_rest($form) !!}
+                      {!! form_rest($profileForm) !!}
                   </div>
                   <div class="card-footer">
-                      <button type="submit" class="btn btn-info">Update</button>
+                      <button type="submit" class="btn btn-info">Update Profile</button>
                       <button type="submit" class="btn btn-default float-right">Cancel</button>
                   </div>
-                  {!! form_end($form) !!}
+                  {!! form_end($profileForm) !!}
                 </div>
                 <!-- /.tab-pane -->
               </div>
