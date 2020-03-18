@@ -29,6 +29,7 @@
                                 <th>Charges</th>
                                 <th>Type</th>
                                 <th>Status</th>
+                                <th>Dated</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -44,6 +45,7 @@
                                     <td> {{ $item->charges }} </td>
                                     <td> {{ $item->type }} </td>
                                     <td> {{ $item->status }} </td>
+                                    <td> {{ $item->updated_at }} </td>
                                     <td> 
                                       <div class="btn-group">
                                         <a href="{{ route('order.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
