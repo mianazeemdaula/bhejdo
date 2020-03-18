@@ -176,6 +176,7 @@ class OrderController extends Controller
             //
             DB::commit();
             $message = "Order for {$order->service->s_name} of {$order->qty} is {$status}.";
+            event(new \App\Event\UpdateLifterEvent($order->lifter_id, $order));
             if($status == 'canceled'){
                 return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", ]], 200);
             }else{
@@ -183,7 +184,6 @@ class OrderController extends Controller
                 AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
                 return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "amount" => $order->payable_amount ]], 200);
             }
-            
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
