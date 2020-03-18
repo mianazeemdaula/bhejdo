@@ -54,11 +54,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $form = $this->form(UserEditForm::class, [
+        $form = $this->form(UserProfileEditForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
             'url' => route('user.update', $user->id),
-            'model' => $user
+            'model' => $user->profile
         ]);
         return view('pages.super-admin.user.show', compact('user', 'form'));
     }
@@ -110,7 +110,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request->all();
     }
 
     /**
