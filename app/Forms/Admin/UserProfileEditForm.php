@@ -15,11 +15,11 @@ class UserProfileEditForm extends Form
         ])
         ->add('dob', 'date',  [
             'rules' => 'required|min:2',
-            'label' => 'Mobile'
+            'label' => 'Date of birth'
         ])->add('vehicle', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'vehicle'
-        ])->add('cnic_expiry', 'text',  [
+            'label' => 'Vehicle'
+        ])->add('cnic_expiry', 'date',  [
             'rules' => 'required|min:2',
             'label' => 'CNIC EXPIRY'
         ])->add('driving_licene_expiry', 'date',  [
