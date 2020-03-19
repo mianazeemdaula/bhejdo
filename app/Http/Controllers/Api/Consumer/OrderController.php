@@ -145,6 +145,8 @@ class OrderController extends Controller
                 $order->status = 'canceled';
                 $order->cancel_desc = $request->cancelDescription;
                 $order->canceled_time = $dateTime;
+                $order->cancel_desc = "";
+                Bonus::deduct($request->user()->id, "Cancel order panality #{$order->id}","order", $order->qty * $order->price );
             }else if($status == 'confirmed'){
                 if($order->confirmed_time != null){
                     return response()->json(['status'=>false, 'data' => [ "msg" => "Already Confirmed", ]], 200);
@@ -179,6 +181,8 @@ class OrderController extends Controller
             $message = "Order for {$order->service->s_name} of {$order->qty} is {$status}.";
             event(new UpdateLifterEvent($order->lifter_id, $order));
             if($status == 'canceled'){
+                $data = ['order_id' => $order->id, 'type' => 'order'];
+                AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
                 return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", ]], 200);
             }else{
                 $data = ['order_id' => $order->id, 'type' => 'confirmed_order', "amount" => $order->payable_amount];
