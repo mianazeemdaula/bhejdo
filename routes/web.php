@@ -56,8 +56,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('order', 'OrderController');
 
     Route::resource('user', 'UserController');
-    Route::get('user/consumer', 'UserController@consumer');
-    Route::get('user/lifter', 'UserController@lifter');
+    Route::get('user/type/consumer', 'UserController@consumer');
+    Route::get('user/type/lifter', 'UserController@lifter');
 });
 
 
