@@ -196,8 +196,12 @@ return [
                     'url'  => 'user/type/consumer',
                 ],
                 [
-                    'text' => 'Lifte & Store',
+                    'text' => 'Lifters',
                     'url'  => 'user/type/lifter',
+                ],
+                [
+                    'text' => 'Stores',
+                    'url'  => 'user/type/store',
                 ],
             ],
             
