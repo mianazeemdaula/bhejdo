@@ -146,7 +146,9 @@ class OrderController extends Controller
                 $order->cancel_desc = $request->cancelDescription;
                 $order->canceled_time = $dateTime;
                 $order->cancel_desc = "";
-                Bonus::deduct($request->user()->id, "Cancel order panality #{$order->id}","order", $order->qty * 10 );
+                $balance = Bonus::balance($request->user()->id);
+                if($balance->balance > 10)
+                    Bonus::deduct($request->user()->id, "Cancel order panality #{$order->id}","order", 10);
             }else if($status == 'confirmed'){
                 if($order->confirmed_time != null){
                     return response()->json(['status'=>false, 'data' => [ "msg" => "Already Confirmed", ]], 200);
