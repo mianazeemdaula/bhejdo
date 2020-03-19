@@ -26,6 +26,18 @@ class UserController extends Controller
         return view('pages.super-admin.user.index', compact('users'));
     }
 
+    public function consumer()
+    {
+        $users = User::role('consumer')->get();
+        return view('pages.super-admin.user.index', compact('users'));
+    }
+
+    public function lifter()
+    {
+        $users = User::role('lifter|store')->get();
+        return view('pages.super-admin.user.index', compact('users'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -41,7 +41,7 @@
                                     <td> {{ $item->name}} </td>
                                     <td> {{ $item->mobile}} </td>
                                     <td> {{ $item->email}} </td>
-                                    <td> {{ $item->getRoleNames()[0] }} </td>
+                                    <td> {{ $item->getRoleNames() }} </td>
                                     <td> {{ $item->status }} </td>
                                     <td> {{ $item->created_at}} </td>
                                     <td> {{ $item->updated_at}} </td>

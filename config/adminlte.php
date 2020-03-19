@@ -185,10 +185,22 @@ return [
         ],
         [
             'text'        => 'Users',
-            'route'         => 'user.index',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Admin',
+                    'route' => 'user.index',
+                ],
+                [
+                    'text' => 'Consumer',
+                    'url'  => 'user/consumer',
+                ],
+                [
+                    'text' => 'Lifte & Store',
+                    'url'  => 'user/lifter',
+                ],
+            ],
+            
         ],
         [
             'text'        => 'Orders',
