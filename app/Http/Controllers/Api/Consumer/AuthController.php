@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 use App\User;
 use App\Bonus;
+use App\ServiceCharge;
 
 // Helpers
 use App\Helpers\BonusProcess;
@@ -77,7 +78,11 @@ class AuthController extends Controller
             if($request->referred != null){
                 $referrBy = User::where('mobile', $request->referred)->first();
                 if($referrBy != null){
-                    Bonus::add($referrBy->id,"Referr bonus of {$user->name}",'referr', 100);
+                    if($referrBy->hasRole('store|lifter')){
+                        ServiceCharge::add($referrBy->id, "Referr bonus of {$user->name}", "referr", 100);
+                    }else{
+                        Bonus::add($referrBy->id,"Referr bonus of {$user->name}",'referr', 100);
+                    }
                 }
             }
             
