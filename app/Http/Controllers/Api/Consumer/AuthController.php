@@ -74,7 +74,7 @@ class AuthController extends Controller
             ]);
             
             $user->assignRole('consumer');
-            Bonus::add($user->id,'Signup bonus','signup', 500);
+            Bonus::add($user->id,'Signup bonus','signup', 200);
             if($request->referred != null){
                 $referrBy = User::where('mobile', $request->referred)->first();
                 if($referrBy != null){
