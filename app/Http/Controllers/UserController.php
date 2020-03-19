@@ -38,7 +38,7 @@ class UserController extends Controller
         return view('pages.super-admin.user.index', compact('users'));
     }
 
-    public function store()
+    public function stores()
     {
         $users = User::role('store')->get();
         return view('pages.super-admin.user.index', compact('users'));
