@@ -34,7 +34,7 @@ class UserController extends Controller
 
     public function lifter()
     {
-        $users = User::HasRoles('lifter|store')->get();
+        $users = User::hasRole('lifter|store')->get();
         return view('pages.super-admin.user.index', compact('users'));
     }
 
