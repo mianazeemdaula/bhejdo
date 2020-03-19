@@ -55,11 +55,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('charges', 'ServiceChargeController');
     Route::resource('order', 'OrderController');
 
-    Route::prefix('user')->group(function () {
-        Route::resource('/', 'UserController');
-        Route::get('/consumer', 'UserController@consumer');
-        Route::get('/lifter', 'UserController@lifter');
-    });
+    Route::resource('user', 'UserController');
+    Route::get('user/consumer', 'UserController@consumer');
+    Route::get('user/lifter', 'UserController@lifter');
 });
 
 
