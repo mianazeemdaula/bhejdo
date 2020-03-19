@@ -189,7 +189,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Admin',
-                    'route' => 'user.index',
+                    'url' => 'user',
                 ],
                 [
                     'text' => 'Consumer',
