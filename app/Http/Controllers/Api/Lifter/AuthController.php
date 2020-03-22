@@ -241,7 +241,7 @@ class AuthController extends Controller
             if($lifter == null){
                 $lifter = LifterLocation::create($data);
             }else{
-                $lifter = $lifter->update(['onwork' =>  $request->onwork]);
+                $lifter = $lifter->update(['onwork' =>  $request->onwork], ['upsert' => true]);
             }
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
         }catch(Exception $e){
