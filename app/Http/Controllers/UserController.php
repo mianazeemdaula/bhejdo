@@ -79,7 +79,10 @@ class UserController extends Controller
             'url' => route('user.update', $user->id),
             'model' => $user->profile
         ]);
-        return view('pages.super-admin.user.show', compact('user', 'profileForm'));
+        if($user->hasRole('consumer'))
+            return view('pages.super-admin.user.show', compact('user', 'profileForm'));
+        else
+            return view('pages.super-admin.user.profile', compact('user', 'profileForm'));
     }
 
     /**
