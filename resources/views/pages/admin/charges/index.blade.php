@@ -13,42 +13,45 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Users(s)
+                        Ledger
                     </h3>
                 </div>
                 <div class="card-body">
-                    <div class="py-2">
-                        <a href="{{ route('user.create') }}" class="btn btn-primary" > Create User</a>
-                    </div>
                     <table class="table table-bordered table-striped dataTable" id="example1">
                         <thead>
                             <tr>
                                 <th>Sr #</th>
-                                <th>Name</th>
-                                <th>Mobile</th>
-                                <th>Email</th>
-                                <th>Rols</th>
+                                <th>Consumer</th>
+                                <th>Lifter</th>
+                                <th>Service</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Charges</th>
+                                <th>Type</th>
                                 <th>Status</th>
-                                <th>Created</th>
-                                <th>Last Update</th>
+                                <th>Location</th>
+                                <th>Dated</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $item)
+                            @foreach ($collection as $item)
                                 <tr>
                                     <td> {{ $item->id}} </td>
-                                    <td> {{ $item->name}} </td>
-                                    <td> {{ $item->mobile}} </td>
-                                    <td> {{ $item->email}} </td>
-                                    <td> {{ $item->getRoleNames() }} </td>
+                                    <td> {{ $item->consumer->mobile}} </td>
+                                    <td> {{ $item->lifter->mobile}} </td>
+                                    <td> {{ $item->service->s_name}} </td>
+                                    <td> {{ $item->qty }} </td>
+                                    <td> {{ $item->price }} </td>
+                                    <td> {{ $item->charges }} </td>
+                                    <td> {{ $item->type }} </td>
                                     <td> {{ $item->status }} </td>
-                                    <td> {{ $item->created_at}} </td>
-                                    <td> {{ $item->updated_at}} </td>
+                                    <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->latitude }},{{ $item->longitude }}">Map</a></td>
+                                    <td> {{ $item->updated_at }} </td>
                                     <td> 
                                       <div class="btn-group">
-                                        <a href="{{ route('user.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('user.edit',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('order.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('order.edit',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-edit"></i></a>
                                         <button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button>
                                       </div>
                                     </td>

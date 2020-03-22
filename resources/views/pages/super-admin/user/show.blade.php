@@ -24,7 +24,7 @@
                     <b>Rating</b> <a class="float-right">3.5</a>
                   </li>
                 <li class="list-group-item">
-                  <b>Bonus</b> <a class="float-right">2522</a>
+                <b><a href="{{ route('user.charges', [$user->id]) }}">Charges</a></b> <a class="float-right">{{ $user->serviceCharges()->latest()->first()->balance }}</a>
                 </li>
                 <li class="list-group-item">
                   <b>Cash</b> <a class="float-right">13,287</a>
