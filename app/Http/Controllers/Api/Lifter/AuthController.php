@@ -234,7 +234,7 @@ class AuthController extends Controller
         try {
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             $data = [
-                'onwork' => $request->onwork, 
+                'onwork' => (bool) $request->onwork, 
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id
             ];
@@ -243,7 +243,7 @@ class AuthController extends Controller
             }else{
                 $lifter->update($data);
             }
-            return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
+            return response()->json(['status'=>true, 'onwork' => (bool) $request->onwork, 'data' => $lifter ], 401);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
         }
