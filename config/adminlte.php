@@ -226,11 +226,11 @@ return [
             'route'         => 'wallet.index',
             'icon'        => 'far fa-fw fa-file',
         ],
-        [
-            'text'        => 'Fee',
-            'route'         => 'charges.index',
-            'icon'        => 'far fa-fw fa-file',
-        ],
+        // [
+        //     'text'        => 'Fee',
+        //     'route'         => 'charges.index',
+        //     'icon'        => 'far fa-fw fa-file',
+        // ],
     //     ['header' => 'account_settings'],
     //     [
     //         'text' => 'profile',
