@@ -80,9 +80,9 @@ class UserController extends Controller
             'model' => $user->profile
         ]);
         if($user->hasRole('consumer'))
-            return view('pages.super-admin.user.show', compact('user', 'profileForm'));
-        else
             return view('pages.super-admin.user.profile', compact('user', 'profileForm'));
+        else
+            return view('pages.super-admin.user.show', compact('user', 'profileForm'));
     }
 
     /**
