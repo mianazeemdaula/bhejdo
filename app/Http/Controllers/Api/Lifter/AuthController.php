@@ -241,9 +241,9 @@ class AuthController extends Controller
             if($lifter == null){
                 $lifter = LifterLocation::create($data);
             }else{
-                $lifter->update($data);
+                $lifter = $lifter->update($data);
             }
-            return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
+            return response()->json(['status'=>true, 'onwork' => $request->all(), 'data' => $lifter ], 401);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
         }
