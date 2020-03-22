@@ -233,13 +233,8 @@ class AuthController extends Controller
     {
         try {
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
-            $data = [
-                'onwork' =>  $request->onwork, 
-                'last_update' => Carbon::now()->timestamp,
-                'lifter_id' => $request->user()->id
-            ];
             if($lifter != null){
-                $lifter = $lifter->update(['onwork' =>  $request->onwork]);
+                $lifter = $lifter->update(['onwork' =>  $request->onwork], ['upsert' => true]);
             }
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
