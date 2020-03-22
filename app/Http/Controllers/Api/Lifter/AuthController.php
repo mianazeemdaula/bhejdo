@@ -158,11 +158,12 @@ class AuthController extends Controller
     } 
 
     public function pushToken(Request $request) {
+        DB::beginTransaction();
         try{
             $user = User::findOrFail($request->user()->id);
             $user->pushToken = $request->pushToken;
             $user->save();
-            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
+            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->delete();
             $data = [
                 'name' => $user->name,
                 'avatar' => $user->avatar,
@@ -173,11 +174,7 @@ class AuthController extends Controller
                 'lifter_id' => $request->user()->id,
                 'onwork' => "0",
             ];
-            if($lifter == null){
-                $lifter = LifterLocation::create($data);
-            }else{
-                $lifter->update($data);
-            }
+            $lifter = LifterLocation::create($data);
             $lifter->unset('services_details');
             $scoreData = [];
             foreach($user->services as $service){
@@ -189,8 +186,10 @@ class AuthController extends Controller
                 $scoreData[$service->id] = $data;
             }
             $lifter->push('services_details', $scoreData, true);
+            DB::commit();
             return response()->json(['status'=> true, 'data' => $lifter], 200);
         }catch(Exception $e){
+            DB::rollBack();
             return response()->json(['success'=>$e], 405);
         }
     }
