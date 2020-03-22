@@ -49,7 +49,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     
     Route::get('/user/approved/{id}', 'UserController@approved');
-    Route::resource('bonus', 'BonusController');
     Route::resource('service', 'ServiceController');
     Route::resource('wallet', 'WalletController');
     Route::resource('order', 'OrderController');
@@ -59,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user/type/lifter', 'UserController@lifter');
     Route::get('user/type/store', 'UserController@stores');
     Route::resource('user.charges', 'ServiceChargeController');
+    Route::resource('user.bonus', 'BonusController');
 });
 
 
