@@ -170,7 +170,8 @@ class AuthController extends Controller
                 'services' => $user->services()->wherePivot('status',1)->pluck('id')->toArray(),
                 'services_details' => [], 
                 'last_update' => Carbon::now()->timestamp,
-                'lifter_id' => $request->user()->id
+                'lifter_id' => $request->user()->id,
+                'onwork' => "0",
             ];
             if($lifter == null){
                 $lifter = LifterLocation::create($data);
@@ -238,10 +239,8 @@ class AuthController extends Controller
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id
             ];
-            if($lifter == null){
-                $lifter = LifterLocation::create($data);
-            }else{
-                $lifter = $lifter->push('onwork', $request->onwork,true);
+            if($lifter != null){
+                $lifter = $lifter->update(['onwork' =>  $request->onwork]);
             }
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
