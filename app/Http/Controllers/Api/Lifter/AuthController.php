@@ -243,6 +243,7 @@ class AuthController extends Controller
             }else{
                 $lifter = $lifter->update(['onwork' =>  $request->onwork], ['upsert' => true]);
             }
+            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
