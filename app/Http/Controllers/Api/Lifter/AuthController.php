@@ -232,10 +232,7 @@ class AuthController extends Controller
     public function onwork(Request $request)
     {
         try {
-            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
-            if($lifter != null){
-                $lifter = $lifter->update(['onwork' =>  $request->onwork], ['upsert' => true]);
-            }
+            LifterLocation::where('lifter_id',$request->user()->id)->update(['onwork'=> $request->onwork]);
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
         }catch(Exception $e){
