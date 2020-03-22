@@ -77,6 +77,7 @@ Route::prefix('lifter')->group(function () {
         Route::prefix('profile')->group(function () {
             Route::get('/', 'Api\Lifter\AuthController@profile');
             Route::post('/update', 'Api\Lifter\AuthController@update');
+            Route::post('/onwork', 'Api\Lifter\AuthController@onwork');
         });
 
         Route::get('/account-status', 'Api\Lifter\AuthController@accountStatus');

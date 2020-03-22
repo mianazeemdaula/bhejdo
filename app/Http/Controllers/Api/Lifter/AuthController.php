@@ -229,6 +229,26 @@ class AuthController extends Controller
         }
     }
 
+    public function onwork(Request $request)
+    {
+        try {
+            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
+            $data = [
+                'onwork' => $request->onwork, 
+                'last_update' => Carbon::now()->timestamp,
+                'lifter_id' => $request->user()->id
+            ];
+            if($lifter == null){
+                $lifter = LifterLocation::create($data);
+            }else{
+                $lifter->update($data);
+            }
+            return response()->json(['status'=>true, 'onwork' => $request->onwork ], 401);
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
+        }
+    }
+    
     public function update(Request $request)
     {
         try{
