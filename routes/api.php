@@ -126,7 +126,6 @@ Route::prefix('lifter')->group(function () {
         Route::get('/get-open-order/{id}', 'Api\Lifter\OrderController@show');
         
         
-
         // Events
         Route::post('/pushLocation', 'Api\Lifter\EventController@lifterLocation');
     });

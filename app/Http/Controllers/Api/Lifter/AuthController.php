@@ -243,7 +243,7 @@ class AuthController extends Controller
             }else{
                 $lifter->update($data);
             }
-            return response()->json(['status'=>true, 'onwork' => $request->onwork ], 401);
+            return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 401);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
         }
