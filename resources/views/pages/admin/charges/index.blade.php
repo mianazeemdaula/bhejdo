@@ -21,16 +21,12 @@
                         <thead>
                             <tr>
                                 <th>Sr #</th>
-                                <th>Consumer</th>
-                                <th>Lifter</th>
-                                <th>Service</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Charges</th>
+                                <th>Description</th>
                                 <th>Type</th>
-                                <th>Status</th>
-                                <th>Location</th>
-                                <th>Dated</th>
+                                <th>Amount</th>
+                                <th>Balance</th>
+                                <th>created</th>
+                                <th>updated</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,15 +34,11 @@
                             @foreach ($collection as $item)
                                 <tr>
                                     <td> {{ $item->id}} </td>
-                                    <td> {{ $item->consumer->mobile}} </td>
-                                    <td> {{ $item->lifter->mobile}} </td>
-                                    <td> {{ $item->service->s_name}} </td>
-                                    <td> {{ $item->qty }} </td>
-                                    <td> {{ $item->price }} </td>
-                                    <td> {{ $item->charges }} </td>
-                                    <td> {{ $item->type }} </td>
-                                    <td> {{ $item->status }} </td>
-                                    <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->latitude }},{{ $item->longitude }}">Map</a></td>
+                                    <td> {{ $item->description}} </td>
+                                    <td> {{ $item->type}} </td>
+                                    <td> {{ $item->amount}} </td>
+                                    <td> {{ $item->balance }} </td>
+                                    <td> {{ $item->created_at }} </td>
                                     <td> {{ $item->updated_at }} </td>
                                     <td> 
                                       <div class="btn-group">
