@@ -32,9 +32,9 @@ Route::get('/', function () {
 //     return phpinfo();
 // });
 
-// Route::get('/mongo', function(){
-//    return App\LifterLocation::all(); 
-// });
+Route::get('/mongo', function(){
+   return App\LifterLocation::all(); 
+});
 // Route::get('/mongot', function(){
 //    return App\LifterLocation::truncate();
 // });
