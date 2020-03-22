@@ -29,6 +29,7 @@
                                 <th>Charges</th>
                                 <th>Type</th>
                                 <th>Status</th>
+                                <th>Location</th>
                                 <th>Dated</th>
                                 <th>Action</th>
                             </tr>
@@ -45,6 +46,7 @@
                                     <td> {{ $item->charges }} </td>
                                     <td> {{ $item->type }} </td>
                                     <td> {{ $item->status }} </td>
+                                    <td><a href="http://https://www.google.com/maps/?q={{ $item->latitude }},{{ $item->longitude }}"></a> Map </td>
                                     <td> {{ $item->updated_at }} </td>
                                     <td> 
                                       <div class="btn-group">
