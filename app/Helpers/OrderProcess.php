@@ -20,7 +20,7 @@ class OrderProcess {
             foreach ($lifters as $lifter) {
                 $lifterid = $lifter['lifter_id'];
                 $_lifter = User::findOrFail($lifterid); 
-                $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earlist.";
+                $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
                 // Send Notification to Lifter
                 $args =  ["type" => 'new_order', 'order_id' => $order->id ];
                 $notification = AndroidNotifications::toLifter("New Order", $message, $_lifter->pushToken,$args);

@@ -13,7 +13,7 @@ class LifterController extends Controller
 {
     public function getNearMe(Request $request)
     {
-        $lifters = LifterLocation::where('location', 'nearSphere', [
+        $lifters = LifterLocation::where('location', 'near', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
