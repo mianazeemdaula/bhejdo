@@ -60,7 +60,7 @@ class OrderProcess {
 
     static public function getNearMe($lat, $lon, $distance, $service)
     {
-        $lifters = lifterLocation::where('location', 'near', [
+        $lifters = LifterLocation::where('location', 'near', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [

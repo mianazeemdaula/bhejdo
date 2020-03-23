@@ -84,7 +84,7 @@ Route::get('/pages/terms', function(){
 // });
 
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
-    $lifters = \App\lifterLocation::where('location', 'near', [
+    $lifters = \App\LifterLocation::where('location', 'near', [
         '$geometry' => [
             'type' => 'Point',
             'coordinates' => [
