@@ -82,3 +82,18 @@ Route::get('/pages/terms', function(){
 //     $user->save();
 //     $user->assignRole('admin');
 // });
+
+Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
+    $lifters = \App\lifterLocation::where('location', 'near', [
+        '$geometry' => [
+            'type' => 'Point',
+            'coordinates' => [
+                floatval($lat), // longitude
+                floatval($lon), // latitude
+            ],
+        ],
+        '$maxDistance' => intval(5 * 1000)
+    ])
+    ->where('services','all',[1])->get();
+    return $lifters;
+});
