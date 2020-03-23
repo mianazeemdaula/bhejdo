@@ -25,6 +25,7 @@ Route::prefix('consumer')->group(function () {
         Route::prefix('profile')->group(function () {
             Route::get('/', 'Api\Consumer\AuthController@profile');
             Route::post('/update', 'Api\Consumer\AuthController@update');
+            Route::post('logout', 'Api\Lifter\AuthController@logout');
         });
 
         // Lifters
@@ -69,12 +70,14 @@ Route::prefix('lifter')->group(function () {
     Route::post('phone-register', 'Api\ApiAuthController@phoneRegisterLifter');
     Route::post('login', 'Api\Lifter\AuthController@login');
     Route::post('register', 'Api\Lifter\AuthController@register');
+    
     Route::post('forgetpassword', 'Api\Lifter\AuthController@updateForgetPassword'); 
     
     Route::group(['middleware' => ['auth:api']], function(){
         
         // User Info (Profile)
         Route::prefix('profile')->group(function () {
+            Route::post('logout', 'Api\Lifter\AuthController@logout');
             Route::get('/', 'Api\Lifter\AuthController@profile');
             Route::post('/update', 'Api\Lifter\AuthController@update');
             Route::post('/onwork', 'Api\Lifter\AuthController@onwork');

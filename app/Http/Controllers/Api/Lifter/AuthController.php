@@ -120,6 +120,18 @@ class AuthController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        try {
+            $user = User::find($request->user()-id);
+            $user->pushToken = null;
+            $user->save();
+            return response()->json(['status'=>true ], 200);
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
+        }
+    }
+
     public function accountStatus(Request $request) {
         try{
             $user = new \App\Http\Resources\Profile\LifterProfile($request->user());
@@ -239,6 +251,8 @@ class AuthController extends Controller
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
         }
     }
+
+    
     
     public function update(Request $request)
     {

@@ -97,6 +97,18 @@ class AuthController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        try {
+            $user = User::find($request->user()-id);
+            $user->pushToken = null;
+            $user->save();
+            return response()->json(['status'=>true ], 200);
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
+        }
+    }
+
     public function pushToken(Request $request) {
         try{
             $user = User::findOrFail($request->user()->id);
