@@ -23,7 +23,7 @@ class OrderProcess {
                 $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earlist.";
                 // Send Notification to Lifter
                 $args =  ["type" => 'new_order', 'order_id' => $order->id ];
-                $notification = AndroidNotifications::toLifter("New Milk Order", $message, $_lifter->pushToken,$args);
+                $notification = AndroidNotifications::toLifter("New Order", $message, $_lifter->pushToken,$args);
                 $noti[] = $notification;
             }
             return ['count' => $lCount, 'noti' => $noti, 'lat' => $order->latitude, 'lon' => $order->longitude];
@@ -60,7 +60,7 @@ class OrderProcess {
 
     static public function getNearMe($lat, $lon, $distance, $service)
     {
-        $lifters = lifterLocation::where('location', 'nearSphere', [
+        $lifters = lifterLocation::where('location', 'near', [
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
