@@ -23,8 +23,8 @@ class LifterController extends Controller
             ],
             '$maxDistance' => intval($request->distance * 1000),
         ])
-        ->where('last_update', '>', Carbon::now()->subSeconds(60)->timestamp)
         ->where('services','all',[intval($request->service)])->get();
+        //->where('last_update', '>', Carbon::now()->subSeconds(60)->timestamp)
         $service = Service::find($request->service);
         $smaple = \App\Order::where('type',3)->where('consumer_id', $request->user()->id)->count();
         return ['status' => true, 'data' => ['lifters' => $lifters, 'service' => $service, 'sample' => $smaple]];
