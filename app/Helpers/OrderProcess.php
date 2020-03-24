@@ -22,7 +22,7 @@ class OrderProcess {
                 $_lifter = User::findOrFail($lifterid); 
                 $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
                 // Send Notification to Lifter
-                $args =  ["type" => 'new_order', 'order_id' => $order->id ];
+                $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => $order];
                 $notification = AndroidNotifications::toLifter("New Order", $message, $_lifter->pushToken,$args);
                 $noti[] = $notification;
             }
