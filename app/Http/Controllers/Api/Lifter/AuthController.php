@@ -175,7 +175,7 @@ class AuthController extends Controller
             $user = User::findOrFail($request->user()->id);
             $user->pushToken = $request->pushToken;
             $user->save();
-            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->delete();
+            $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             $data = [
                 'name' => $user->name,
                 'avatar' => $user->avatar,
@@ -186,7 +186,11 @@ class AuthController extends Controller
                 'lifter_id' => $request->user()->id,
                 'onwork' => "0",
             ];
-            $lifter = LifterLocation::create($data);
+            if($lifter == null){
+                $lifter = LifterLocation::create($data);
+            }else{
+                $lifter = $lifter->update($data);
+            }
             $lifter->unset('services_details');
             $scoreData = [];
             foreach($user->services as $service){
