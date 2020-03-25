@@ -14,7 +14,7 @@ class OrderProcess {
     static public function orderCreated(Order $order)
     {
         try{
-            $lifters = self::getNearMe($order->latitude, $order->longitude, 5, $order->service_id);
+            $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
             $lCount = count($lifters);
             $noti = Array();
             $users = Array();
