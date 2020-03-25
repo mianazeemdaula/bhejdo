@@ -22,7 +22,7 @@ class OrderProcess {
                 $lifterid = $lifter['lifter_id'];
                 $_lifter = User::find($lifterid);
                 
-                if($_lifter != null && $_lifter->pushToken != null){
+                if($_lifter != null && $_lifter->pushToken != null && $_lifter->type != 'consumer'){
                     $users[] = $_lifter->id;
                     $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
                     // Send Notification to Lifter
