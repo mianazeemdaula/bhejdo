@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Order;
 use App\OpenOrder;
+use App\ServiceCharge;
 use Carbon\Carbon;
 use Validator;
 
@@ -116,6 +117,14 @@ class OrderController extends Controller
                 $order->confirmed_time = $dateTime;
             }else if($status == 'collected'){
                 $order->status = 'collected';
+                if($order->type == 3){ // Sample order
+                    ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order", $order->qty * $order->price);
+                }else{
+                    $debit = ($order->service->s_charges * $order->qty);
+                    ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
+                    $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
+                }
+                
             }
             $order->save();
             DB::commit();
@@ -135,7 +144,7 @@ class OrderController extends Controller
     {
         try{
             $orders = Order::where('lifter_id', $request->user()->id)
-            ->where('status', '!=' ,'confirmed')->latest()->get();
+            ->where('status', '!=' ,'confirmed')->where('status', '!=' ,'collected')->latest()->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
