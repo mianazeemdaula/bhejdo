@@ -7,6 +7,7 @@ use App\Order;
 use App\OpenOrder;
 use App\Helpers\AndroidNotifications;
 use App\User;
+use App\Http\Resources\Order\Order as OrderResource;
 use App\LifterLocation;
 
 class OrderProcess {
@@ -26,7 +27,7 @@ class OrderProcess {
                     $users[] = $_lifter->id;
                     $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
                     // Send Notification to Lifter
-                    $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => $order];
+                    $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
                     $notification = AndroidNotifications::toLifter("New Order", $message, $_lifter->pushToken,$args);
                     $noti[] = $notification;
                 }
