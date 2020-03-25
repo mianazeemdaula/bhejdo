@@ -42,7 +42,7 @@ class NewOpenOrder extends Command
     public function handle()
     {
         $orders = Order::where('created_at', '<', Carbon::now()->subSeconds(60)->toDateTimeString())
-        ->where('lifter_id',2)->where('status','!=','canceled')->get();
+        ->where('lifter_id',2)->where('status','created')->get();
         //$orders = Order::where('lifter_id',2)->get();
         foreach($orders as $order){
             $response = OrderProcess::orderCreated($order);
