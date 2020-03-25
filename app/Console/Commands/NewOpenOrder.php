@@ -44,9 +44,10 @@ class NewOpenOrder extends Command
         $orders = Order::where('created_at', '<', Carbon::now()->subSeconds(60)->toDateTimeString())
         ->where('lifter_id',2)->where('status','created')->get();
         //$orders = Order::where('lifter_id',2)->get();
+        $response = Array();
         foreach($orders as $order){
-            $response = OrderProcess::orderCreated($order);
+            $response[] = OrderProcess::orderCreated($order);
         }
-        $this->info('Notifications send to every lifter');
+        $this->info('Notifications'.json_encode($response));
     }
 }
