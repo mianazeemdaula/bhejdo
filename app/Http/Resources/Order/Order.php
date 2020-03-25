@@ -44,7 +44,7 @@ class Order extends JsonResource
             'shipped_time' => $this->shipped_time,
             'delivered_time' => $this->delivered_time,
             'confirmed_time' => $this->confirmed_time,
-            'review' => Auth::user()->hasRole('consumer') ? new Review($this->lifterReview) : new Review($this->consumerReview),
+            'review' => Auth::check() && Auth::user()->hasRole('consumer') ? new Review($this->lifterReview) : new Review($this->consumerReview),
         ];
     }
 }
