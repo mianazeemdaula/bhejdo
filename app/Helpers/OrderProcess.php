@@ -17,9 +17,11 @@ class OrderProcess {
             $lifters = self::getNearMe($order->latitude, $order->longitude, 5, $order->service_id);
             $lCount = count($lifters);
             $noti = Array();
+            $users = Array();
             foreach ($lifters as $lifter) {
                 $lifterid = $lifter['lifter_id'];
-                $_lifter = User::find($lifterid); 
+                $_lifter = User::find($lifterid);
+                $$users[] = $lifter['lifter_id'];
                 if($lifter != null && $lifter->pushToken != null){
                     $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
                     // Send Notification to Lifter
@@ -28,7 +30,7 @@ class OrderProcess {
                     $noti[] = $notification;
                 }
             }
-            return ['count' => $lCount, 'noti' => $noti, 'lat' => $order->latitude, 'lon' => $order->longitude];
+            return ['count' => $lCount, 'noti' => $noti, 'lat' => $order->latitude, 'lon' => $order->longitude, 'users' => $users];
         }catch(Exception $ex){
             return $ex;
         }
