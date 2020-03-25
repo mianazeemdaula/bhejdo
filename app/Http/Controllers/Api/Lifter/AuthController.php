@@ -189,7 +189,7 @@ class AuthController extends Controller
             if($lifter == null){
                 $lifter = LifterLocation::create($data);
             }else{
-                $lifter = $lifter->update($data);
+                $lifter->update($data);
             }
             $lifter->unset('services_details');
             $scoreData = [];
