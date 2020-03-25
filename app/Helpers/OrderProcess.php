@@ -16,7 +16,7 @@ class OrderProcess {
         try{
             $lifters = self::getNearMe($order->latitude, $order->longitude, 5, $order->service_id);
             $lCount = count($lifters);
-            $noti = [];
+            $noti = Array();
             foreach ($lifters as $lifter) {
                 $lifterid = $lifter['lifter_id'];
                 $_lifter = User::find($lifterid); 
