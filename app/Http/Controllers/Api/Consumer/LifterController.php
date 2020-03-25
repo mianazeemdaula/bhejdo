@@ -21,7 +21,7 @@ class LifterController extends Controller
                     floatval($request->lon), // latitude
                 ],
             ],
-            '$maxDistance' => intval($request->distance * 1000),
+            '$maxDistance' => intval(3 * 1000),
         ])
         ->where('services','all',[intval($request->service)])->get();
         //->where('last_update', '>', Carbon::now()->subSeconds(60)->timestamp)
