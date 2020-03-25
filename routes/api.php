@@ -124,6 +124,7 @@ Route::prefix('lifter')->group(function () {
 
         // Accept Open Order
         Route::post('/open-order-accept', 'Api\Lifter\OrderController@acceptOrder');
+        Route::post('/open-order-accept2', 'Api\Lifter\OrderController@acceptOrder2');
         Route::post('/schedule-order-accept', 'Api\Lifter\OrderController@scheduleOrderCreate');
         // Get Order and Open Order
         Route::get('/get-open-order/{id}', 'Api\Lifter\OrderController@show');

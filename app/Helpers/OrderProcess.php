@@ -75,6 +75,7 @@ class OrderProcess {
             ],
             '$maxDistance' => intval(3 * 1000)
         ])
+        ->where("onwork","1")
         ->where('services','all',[$service])->get();
         //->where('last_update', '>', Carbon::now()->subSeconds(120)->timestamp)
         return $lifters;

@@ -46,6 +46,31 @@ class OrderController extends Controller
         }
     }
 
+    public function acceptOrder2(Request $request)
+    {
+        DB::beginTransaction();
+        try{
+            $order = Order::find($request->orderid);
+            if($order == null){
+                return response()->json(['status'=>false, 'data' => false ], 200);
+            }
+            // $order->lifter_id = $request->user()->id;
+            // $order->accepted_time = Carbon::now()->toDateTimeString();
+            // $order->status = 'assigned';
+            // $order->save();
+            DB::commit();
+            // Notifications to consumer
+            $orderResource = new OrderResource($order);
+            $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";
+            $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
+            AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
+            return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource ], 200);
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
 
     public function scheduleOrderCreate(Request $request)
     {
