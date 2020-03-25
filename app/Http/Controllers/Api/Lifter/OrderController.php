@@ -114,14 +114,17 @@ class OrderController extends Controller
             }else if($status == 'confirmed'){
                 $order->status = 'confirmed';
                 $order->confirmed_time = $dateTime;
+            }else if($status == 'collected'){
+                $order->status = 'collected';
             }
             $order->save();
             DB::commit();
+            $orderResource = new OrderResource($order);
             $message = "Your order of {$order->service->s_name} is {$status}.";
-            $data = ['order_id' => $order->id, 'type' => 'order',  'lifter_id' => $order->lifter_id];
+            $data = ['order_id' => $order->id, 'type' => 'order',  'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
             event(new UpdateLifterEvent($order->lifter_id, $order));
-            return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => new OrderResource($order) ], 200);
+            return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource ], 200);
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
