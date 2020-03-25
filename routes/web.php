@@ -97,3 +97,9 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
     ->where('services','all',[1])->get();
     return $lifters;
 });
+
+Route::get('created_order', function(){
+    $orders = \App\Order::where('created_at', '<', \Carbon\Carbon::now()->subSeconds(60)->toDateTimeString())
+        ->where('lifter_id',2)->where('status','created')->get();
+        return $orders;
+});
