@@ -103,3 +103,13 @@ Route::get('created_order', function(){
         ->where('lifter_id',2)->where('status','created')->get();
         return $orders;
 });
+
+Route::get('notifiorders', function(){
+    $orders = \App\Order::where('created_at', '<', \Carbon\Carbon::now()->subSeconds(60)->toDateTimeString())
+    ->where('lifter_id',2)->where('status','created')->get();
+    //$orders = Order::where('lifter_id',2)->get();
+    foreach($orders as $order){
+        $response = \App\Helpers\OrderProcess::orderCreated($order);
+        print_r($response);
+    }
+});
