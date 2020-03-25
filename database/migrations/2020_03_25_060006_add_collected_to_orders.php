@@ -14,7 +14,7 @@ class AddCollectedToOrders extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->integer('collect_amount')->default(0);
+            $table->integer('collected_amount')->default(0);
         });
     }
 
@@ -26,7 +26,7 @@ class AddCollectedToOrders extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn(['collect_amount']);
+            $table->dropColumn(['collected_amount']);
         });
     }
 }
