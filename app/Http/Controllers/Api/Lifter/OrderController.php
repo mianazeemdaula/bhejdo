@@ -35,10 +35,11 @@ class OrderController extends Controller
             $order->save();
             DB::commit();
             // Notifications to consumer
+            $orderResource = new OrderResource($order);
             $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";
-            $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id];
+            $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
-            return response()->json(['status'=>true, 'data' => "Order Accepted"], 200);
+            return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource ], 200);
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
