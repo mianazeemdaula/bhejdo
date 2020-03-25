@@ -5,7 +5,7 @@ namespace App\Helpers;
 class AndroidNotifications {
     static public function toConsumer($title, $messag, $token,Array $data)
     {
-        $pushKey = 'AIzaSyCTO-6wlZ0iVLzGgrnGUCecizBoEYjgJ68';
+        $pushKey = 'AAAAP1dnNFQ:APA91bHezgB1suVurRuRWDoMWbiFZ9oAhIxUtC2kd8Ot0HZ2t0lGAlEpPZHswsV7pnGWuK0eTKfZ6y7ZjIyD5Wt4nP4Fhqm1Q3uvlZVyqaA446ckC2J2QJ94rvA1bFPC_d3AgBkICCIr';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
@@ -38,7 +38,7 @@ class AndroidNotifications {
 
     static public function toLifter($title, $messag, $token,Array $data)
     {
-        $pushKey = 'AIzaSyCTO-6wlZ0iVLzGgrnGUCecizBoEYjgJ68';
+        $pushKey = 'AAAAP1dnNFQ:APA91bHezgB1suVurRuRWDoMWbiFZ9oAhIxUtC2kd8Ot0HZ2t0lGAlEpPZHswsV7pnGWuK0eTKfZ6y7ZjIyD5Wt4nP4Fhqm1Q3uvlZVyqaA446ckC2J2QJ94rvA1bFPC_d3AgBkICCIr';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
@@ -71,7 +71,7 @@ class AndroidNotifications {
 
     static public function MultipleConsumer($tokenList, $messag, $token, Array $data)
     {
-        $pushKey = 'AIzaSyCTO-6wlZ0iVLzGgrnGUCecizBoEYjgJ68';
+        $pushKey = 'AAAAP1dnNFQ:APA91bHezgB1suVurRuRWDoMWbiFZ9oAhIxUtC2kd8Ot0HZ2t0lGAlEpPZHswsV7pnGWuK0eTKfZ6y7ZjIyD5Wt4nP4Fhqm1Q3uvlZVyqaA446ckC2J2QJ94rvA1bFPC_d3AgBkICCIr';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
@@ -106,7 +106,7 @@ class AndroidNotifications {
 
     static public function MultipleLifter($tokenList, $messag, $token, Array $data)
     {
-        $pushKey = 'AIzaSyCTO-6wlZ0iVLzGgrnGUCecizBoEYjgJ68';
+        $pushKey = 'AAAAP1dnNFQ:APA91bHezgB1suVurRuRWDoMWbiFZ9oAhIxUtC2kd8Ot0HZ2t0lGAlEpPZHswsV7pnGWuK0eTKfZ6y7ZjIyD5Wt4nP4Fhqm1Q3uvlZVyqaA446ckC2J2QJ94rvA1bFPC_d3AgBkICCIr';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
