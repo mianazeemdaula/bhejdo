@@ -73,7 +73,7 @@ class OrderProcess {
                     floatval($lon), // latitude
                 ],
             ],
-            '$maxDistance' => intval(5 * 1000)
+            '$maxDistance' => intval(3 * 1000)
         ])
         ->where('services','all',[$service])->get();
         //->where('last_update', '>', Carbon::now()->subSeconds(120)->timestamp)
