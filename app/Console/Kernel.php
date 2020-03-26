@@ -29,7 +29,6 @@ class Kernel extends ConsoleKernel
         //$schedule->command('openorder:notifications')->cron("*/3 * * * *");
         $schedule->command('openorder:notifications')->everyFiveMinutes();
         
-        
         // Backup 
         $schedule->command('backup:clean')->dailyAt('23:00');
         $schedule->command('backup:run')->dailyAt('23:20');

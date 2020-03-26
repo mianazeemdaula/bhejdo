@@ -104,6 +104,15 @@ Route::get('created_order', function(){
         return $orders;
 });
 
+
+Route::get('send_order', function(){
+    $orders = \App\Order::find(61);
+    $lifter = \App\User::find(6);
+    $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
+    $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new \App\Http\Resources\Order\Order($order)];
+    $notification = \App\Helpers\AndroidNotifications::toOnlineLifter("New Order", $message, $lifter->pushToken,$args);
+    return $notification;
+});
 Route::get('notifiorders', function(){
     $orders = \App\Order::where('created_at', '<', \Carbon\Carbon::now()->subSeconds(60)->toDateTimeString())
     ->where('lifter_id',2)->where('status','created')->get();
