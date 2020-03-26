@@ -106,7 +106,7 @@ Route::get('created_order', function(){
 
 
 Route::get('send_order', function(){
-    $orders = \App\Order::find(61);
+    $order = \App\Order::find(61);
     $lifter = \App\User::find(6);
     $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
     $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new \App\Http\Resources\Order\Order($order)];
