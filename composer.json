@@ -13,6 +13,7 @@
         "cviebrock/laravel-elasticsearch": "^4.1",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
+        "grimzy/laravel-mysql-spatial": "^2.2",
         "intervention/image": "^2.5",
         "jenssegers/mongodb": "^3.6",
         "jeroennoten/laravel-adminlte": "^3.0",
