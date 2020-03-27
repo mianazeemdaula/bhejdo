@@ -19,8 +19,9 @@ class OrderController extends Controller
         return view('pages.admin.order.index', compact('collection'));
     }
 
-    public function getTransfer(Order $order)
+    public function getTransfer($id)
     {
+        $order = Order::find($id);
         $form = $this->form(OrderTransferForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
