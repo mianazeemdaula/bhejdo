@@ -35,7 +35,7 @@ class OrderController extends Controller
                     floatval($order->latitude), // latitude
                 ],
             ],
-            '$maxDistance' => intval(3 * 1000),
+            '$maxDistance' => intval(10 * 1000),
         ])
         ->where('services','all',[intval($order->service_id)])->pluck('name','lifter_id');
         return $lifters;
