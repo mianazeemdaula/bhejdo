@@ -38,6 +38,7 @@ class OrderController extends Controller
             '$maxDistance' => intval(3 * 1000),
         ])
         ->where('services','all',[intval($order->service_id)])->lists('name','lifter_id');
+        return $lifters;
         $form->addAfter('consumer_id', 'lifter', 'select', [
             'choices' => $lifters
         ]);
