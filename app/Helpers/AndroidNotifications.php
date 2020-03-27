@@ -104,7 +104,7 @@ class AndroidNotifications {
         return $result;
     }
 
-    static public function MultipleLifter($tokenList, $messag, $token, Array $data)
+    static public function MultipleLifter(Array $tokenList, $messag, $token, Array $data)
     {
         $pushKey = 'AAAAP1dnNFQ:APA91bHezgB1suVurRuRWDoMWbiFZ9oAhIxUtC2kd8Ot0HZ2t0lGAlEpPZHswsV7pnGWuK0eTKfZ6y7ZjIyD5Wt4nP4Fhqm1Q3uvlZVyqaA446ckC2J2QJ94rvA1bFPC_d3AgBkICCIr';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
