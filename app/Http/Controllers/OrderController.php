@@ -31,8 +31,8 @@ class OrderController extends Controller
             '$geometry' => [
                 'type' => 'Point',
                 'coordinates' => [
-                    floatval($order->longitude), // longitude
                     floatval($order->latitude), // latitude
+                    floatval($order->longitude), // longitude
                 ],
             ],
             '$maxDistance' => intval(10 * 1000),
