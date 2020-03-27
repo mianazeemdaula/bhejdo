@@ -21,7 +21,7 @@ class OrderController extends Controller
 
     public function getTransfer($id)
     {
-        $order = Order::find($id);
+        $order = Order::find($id);  
         $form = $this->form(OrderTransferForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',

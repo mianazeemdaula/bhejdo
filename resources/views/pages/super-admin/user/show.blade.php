@@ -30,7 +30,7 @@
                   <b>Cash</b> <a class="float-right">13,287</a>
                 </li>
               </ul>
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              <a href="https://www.google.com/maps/search/?api=1&query={{ $user->profile->latitude }},{{ $user->profile->longitude }}" class="btn btn-primary btn-block"><b>Shop Location</b></a>
             </div>
             <!-- /.card-body -->
           </div>
