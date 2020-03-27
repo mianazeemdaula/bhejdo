@@ -38,8 +38,8 @@
                             @foreach ($collection as $item)
                                 <tr>
                                     <td> {{ $item->id}} </td>
-                                    <td> {{ $item->consumer->mobile}} </td>
-                                    <td> {{ $item->lifter->mobile}} </td>
+                                    <td> {{ $item->consumer->mobile}} <br/> {{ $item->consumer->name}} </td>
+                                    <td> {{ $item->lifter->mobile}} <br/> {{ $item->lifter->name}} </td>
                                     <td> {{ $item->service->s_name}} </td>
                                     <td> {{ $item->qty }} </td>
                                     <td> {{ $item->price }} </td>

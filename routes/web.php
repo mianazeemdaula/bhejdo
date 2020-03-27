@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('service', 'ServiceController');
     Route::resource('wallet', 'WalletController');
     Route::resource('order', 'OrderController');
+
+    Route::get('order/transfer','OrderController@getTransfer');
+    Route::post('order/transfer','OrderController@postTransfer');
     
     Route::resource('user', 'UserController');
     Route::get('user/type/consumer', 'UserController@consumer');
