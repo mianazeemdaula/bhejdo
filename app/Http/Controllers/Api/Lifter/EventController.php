@@ -33,11 +33,11 @@ class EventController extends Controller
         // ];
         // $return = \Elasticsearch::update($data);
         try{
-            $location =  [
-                'type' => 'Point',
-                'coordinates' => [floatval($request->lat), floatval($request->lon)]
-            ];
-            LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location,'last_update' => Carbon::now()->timestamp ]);
+            // $location =  [
+            //     'type' => 'Point',
+            //     'coordinates' => [floatval($request->lat), floatval($request->lon)]
+            // ];
+            //LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location,'last_update' => Carbon::now()->timestamp ]);
             event(new NewLocation($request->user()->id, $request->lat, $request->lon));
             return response()->json(['status'=> true], 200);
         }catch(Exception $e){

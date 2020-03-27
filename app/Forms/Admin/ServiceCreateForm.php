@@ -19,6 +19,9 @@ class ServiceCreateForm extends Form
         ])->add('s_status', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Service status'
+        ])->add('min_qty_charges', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Delivery Fee'
         ]);
     }
 }

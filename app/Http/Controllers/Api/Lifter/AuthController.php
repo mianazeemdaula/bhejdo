@@ -176,6 +176,10 @@ class AuthController extends Controller
             $user->pushToken = $request->pushToken;
             $user->save();
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
+            $location =  [
+                'type' => 'Point',
+                'coordinates' => [floatval($user->profile->latitude), floatval($request->profile->longitude)]
+            ];
             $data = [
                 'name' => $user->name,
                 'avatar' => $user->avatar,
@@ -185,6 +189,7 @@ class AuthController extends Controller
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id,
                 'onwork' => "0",
+                'location' => $location
             ];
             if($lifter == null){
                 $lifter = LifterLocation::create($data);
