@@ -24,7 +24,7 @@ class OrderController extends Controller
         $form = $this->form(OrderTransferForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => route("order/transfer/{$order->id}"),
+            'url' => url("order/transfer/{$order->id}"),
             'model' => $order
         ]);
         $lifters = \App\LifterLocation::where('location', 'near', [
