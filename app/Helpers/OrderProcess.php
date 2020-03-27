@@ -31,7 +31,7 @@ class OrderProcess {
             // Send Notification to Lifter
             $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
             $notification = AndroidNotifications::MultipleLifter("New Order", $message, $tokens, $args);
-            return ['count' => $lCount, 'noti' => $noti, 'lat' => $order->latitude, 'lon' => $order->longitude, 'users' => $users];
+            return ['count' => $lCount, 'notification' => $notification, 'lat' => $order->latitude, 'lon' => $order->longitude, 'users' => $users];
         }catch(Exception $ex){
             return $ex;
         }
