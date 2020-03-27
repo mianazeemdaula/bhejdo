@@ -28,7 +28,6 @@ class OrderController extends Controller
             'url' => url("order/transfer/{$order->id}"),
             'model' => $order
         ]);
-        return $order;
         $lifters = \App\LifterLocation::where('location', 'near', [
             '$geometry' => [
                 'type' => 'Point',
