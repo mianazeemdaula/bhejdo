@@ -38,6 +38,16 @@ class EventController extends Controller
             //     'coordinates' => [floatval($request->lat), floatval($request->lon)]
             // ];
             //LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location,'last_update' => Carbon::now()->timestamp ]);
+            if($profile = $request->user()->profile->latitude == 0){
+                $profile->latitude = $request->lat;
+                $profile->latitude = $request->lon;
+                $profile->save();
+                $location =  [
+                    'type' => 'Point',
+                    'coordinates' => [floatval($request->lat), floatval($request->lon)]
+                ];
+                LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location,'last_update' => Carbon::now()->timestamp ]);
+            }
             event(new NewLocation($request->user()->id, $request->lat, $request->lon));
             return response()->json(['status'=> true], 200);
         }catch(Exception $e){

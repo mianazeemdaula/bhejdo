@@ -176,10 +176,18 @@ class AuthController extends Controller
             $user->pushToken = $request->pushToken;
             $user->save();
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
-            $location =  [
-                'type' => 'Point',
-                'coordinates' => [floatval($user->profile->latitude), floatval($request->profile->longitude)]
-            ];
+            $location = Array();
+            if($user->profile->latitude == 0){
+                $location =  [
+                    'type' => 'Point',
+                    'coordinates' => [0,0]
+                ];
+            }else{
+                $location =  [
+                    'type' => 'Point',
+                    'coordinates' => [floatval($user->profile->latitude), floatval($request->profile->longitude)]
+                ];
+            }
             $data = [
                 'name' => $user->name,
                 'avatar' => $user->avatar,
