@@ -23,6 +23,7 @@ class LifterController extends Controller
             ],
             '$maxDistance' => intval(3 * 1000),
         ])
+        ->where("onwork","1")
         ->where('services','all',[intval($request->service)])->get();
         //->where('last_update', '>', Carbon::now()->subSeconds(60)->timestamp)
         $service = Service::find($request->service);
