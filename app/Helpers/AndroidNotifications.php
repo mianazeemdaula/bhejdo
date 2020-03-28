@@ -84,7 +84,7 @@ class AndroidNotifications {
         $fcmNotification = [
             'registration_ids' => $tokenList, //multple token array
             'notification' => $notification,
-            'data' => $data
+            'data' => array_merge([ 'click_action' => 'FLUTTER_NOTIFICATION_CLICK'], $data)
         ];
 
         $headers = [
@@ -119,7 +119,7 @@ class AndroidNotifications {
         $fcmNotification = [
             'registration_ids' => $tokenList, //multple token array
             'notification' => $notification,
-            'data' => $data
+            'data' => array_merge([ 'click_action' => 'FLUTTER_NOTIFICATION_CLICK'], $data)
         ];
 
         $headers = [
@@ -154,7 +154,7 @@ class AndroidNotifications {
         $fcmNotification = [
             'registration_ids' => $tokenList, //multple token array
             'notification' => $notification,
-            'data' => $data
+            'data' => array_merge([ 'click_action' => 'FLUTTER_NOTIFICATION_CLICK'], $data)
         ];
 
         $headers = [
