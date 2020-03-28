@@ -276,7 +276,7 @@ class AuthController extends Controller
     {
         try {
             $profile = $request->user()->profile;
-            if($profile->latitude == 0){
+            if($profile->latitude == 0.0 && $profile->longitude == 0.0){
                 return response()->json(['status'=>false, 'onwork' => $request->onwork, 'data' => "Update your working location in profile" ], 200);
             }
             LifterLocation::where('lifter_id',$request->user()->id)->update(['onwork'=> $request->onwork]);
