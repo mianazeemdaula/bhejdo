@@ -266,7 +266,7 @@ class AuthController extends Controller
                 'latitude' => 0,
                 'longitude' => 0,
             ]);
-            return response()->json(['status'=>true, 'data' => "Updated Successfully", 'latlng' => $profile], 200);
+            return response()->json(['status'=>true, 'data' => "Updated Successfully", 'latlng' => $profile->user_id], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
         }
