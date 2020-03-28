@@ -275,6 +275,10 @@ class AuthController extends Controller
     public function onwork(Request $request)
     {
         try {
+            $profile = $request->user()->profile;
+            if($profile->latitude == 0){
+                return response()->json(['status'=>false, 'onwork' => $request->onwork, 'data' => "Update your working location in profile" ], 200);
+            }
             LifterLocation::where('lifter_id',$request->user()->id)->update(['onwork'=> $request->onwork]);
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 200);
