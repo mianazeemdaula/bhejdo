@@ -8,7 +8,7 @@ use App\Helpers\AndroidNotifications;
 use App\User;
 use App\Http\Resources\Order\Order as OrderResource;
 use App\LifterLocation;
-
+use Illuminate\Support\Facades\Cache;
 
 class OrderProcess {
 
@@ -21,10 +21,15 @@ class OrderProcess {
             $users = Array();
             foreach ($lifters as $lifter) {
                 $lifterid = $lifter['lifter_id'];
-                $_lifter = User::find($lifterid);
-                if($_lifter != null && $_lifter->pushToken != null && $_lifter->type != 'consumer'){
-                    $users[] = $_lifter->id;
-                    $tokens[] = $_lifter->pushToken;
+                if(Cache::has('neworder_time_'.$lifterid)){
+                    continue;
+                }else{
+                    Cache::put('neworder_time_'.$lifterid, true, 100);
+                    $_lifter = User::find($lifterid);
+                    if($_lifter != null && $_lifter->pushToken != null && $_lifter->type != 'consumer'){
+                        $users[] = $_lifter->id;
+                        $tokens[] = $_lifter->pushToken;
+                    }
                 }
             }
             $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
