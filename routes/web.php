@@ -133,5 +133,5 @@ Route::get('cache', function(){
     $value = Cache::remember('neworder_time_'.$lifterid, 100, function () use($lifterid) {
         return Cache::put('neworder_time_'.$lifterid, true);
     });
-    return $value;
+    return "$value";
 });
