@@ -4,11 +4,11 @@ namespace App\Helpers;
 
 use Carbon\Carbon;
 use App\Order;
-use App\OpenOrder;
 use App\Helpers\AndroidNotifications;
 use App\User;
 use App\Http\Resources\Order\Order as OrderResource;
 use App\LifterLocation;
+
 
 class OrderProcess {
 

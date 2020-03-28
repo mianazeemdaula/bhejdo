@@ -125,3 +125,12 @@ Route::get('notifiorders', function(){
         print_r($response);
     }
 });
+
+use Illuminate\Support\Facades\Cache;
+
+Route::get('cache', function(){
+    $value = Cache::remember('neworder_time_'.$lifterid, 100, function () {
+        return Cache::put('neworder_time_'.$lifterid, true);
+    });
+    return $value;
+});
