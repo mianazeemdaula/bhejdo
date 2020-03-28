@@ -262,10 +262,10 @@ class AuthController extends Controller
     public function updateWorkingLocation(Request $request)
     {
         try {
-            $profile = $request->user()->profile();
-            $profile->latitude = $request->lat;
-            $profile->longitude = $request->lon;
-            $profile->save();
+            $profile = $request->user()->profile()->update([
+                'latitude' => $request->lat,
+                'longitude' => $request->lon,
+            ]);
             return response()->json(['status'=>true, 'data' => "Updated Successfully", 'latlng' => $profile], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
