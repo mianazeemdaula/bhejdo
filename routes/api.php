@@ -80,6 +80,7 @@ Route::prefix('lifter')->group(function () {
             Route::post('logout', 'Api\Lifter\AuthController@logout');
             Route::get('/', 'Api\Lifter\AuthController@profile');
             Route::post('/update', 'Api\Lifter\AuthController@update');
+            Route::post('/workinglocation', 'Api\Lifter\AuthController@updateWorkingLocation');
             Route::post('/onwork', 'Api\Lifter\AuthController@onwork');
         });
 
