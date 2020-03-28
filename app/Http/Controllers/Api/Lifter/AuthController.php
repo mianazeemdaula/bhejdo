@@ -262,7 +262,7 @@ class AuthController extends Controller
     public function updateWorkingLocation(Request $request)
     {
         try {
-            $profile = $request->user()->profile;
+            $profile = $request->user()->profile();
             $profile->latitude = $request->lat;
             $profile->longitude = $request->lon;
             $profile->save();
