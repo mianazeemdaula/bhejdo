@@ -21,9 +21,7 @@ class OrderProcess {
             $users = Array();
             foreach ($lifters as $lifter) {
                 $lifterid = $lifter['lifter_id'];
-                if(Cache::has('neworder_time_'.$lifterid)){
-                    continue;
-                }else{
+                if(!Cache::has('neworder_time_'.$lifterid)){
                     Cache::put('neworder_time_'.$lifterid, true, 100);
                     $_lifter = User::find($lifterid);
                     if($_lifter != null && $_lifter->pushToken != null && $_lifter->type != 'consumer'){
