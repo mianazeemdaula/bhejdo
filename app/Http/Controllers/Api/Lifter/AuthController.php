@@ -177,7 +177,7 @@ class AuthController extends Controller
             $user->save();
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
             $location = Array();
-            if($user->profile->latitude == 0){
+            if($user->profile->latitude == 0 && $user->profile->longitude == 0){
                 $location =  [
                     'type' => 'Point',
                     'coordinates' => [0,0]
@@ -185,7 +185,7 @@ class AuthController extends Controller
             }else{
                 $location =  [
                     'type' => 'Point',
-                    'coordinates' => [floatval($user->profile->latitude), floatval($request->profile->longitude)]
+                    'coordinates' => [floatval($user->profile->latitude), floatval($user->profile->longitude)]
                 ];
             }
             $data = [
