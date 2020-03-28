@@ -139,3 +139,7 @@ Route::get('cache', function(){
     }
     return "$value";
 });
+
+Route::get('profile/{id}', function($id){
+    return \App\User::find($id)->profile;
+});
