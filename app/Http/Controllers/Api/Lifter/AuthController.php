@@ -263,8 +263,8 @@ class AuthController extends Controller
     {
         try {
             $profile = $request->user()->profile()->update([
-                'latitude' => $request->lat,
-                'longitude' => $request->lon,
+                'latitude' => 0,
+                'longitude' => 0,
             ]);
             return response()->json(['status'=>true, 'data' => "Updated Successfully", 'latlng' => $profile], 200);
         }catch(Exception $e){
