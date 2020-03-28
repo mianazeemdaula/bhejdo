@@ -130,7 +130,7 @@ use Illuminate\Support\Facades\Cache;
 
 Route::get('cache', function(){
     $lifterid = 2;
-    $value = Cache::remember('neworder_time_'.$lifterid, 100, function () {
+    $value = Cache::remember('neworder_time_'.$lifterid, 100, function () use($lifterid) {
         return Cache::put('neworder_time_'.$lifterid, true);
     });
     return $value;
