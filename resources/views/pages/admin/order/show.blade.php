@@ -106,19 +106,6 @@
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
-  
-                <!-- this row will not appear when printing -->
-                <div class="row no-print">
-                  <div class="col-12">
-                    <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                      Payment
-                    </button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                      <i class="fas fa-download"></i> Generate PDF
-                    </button>
-                  </div>
-                </div>
               </div>
         </div>
     </div>
