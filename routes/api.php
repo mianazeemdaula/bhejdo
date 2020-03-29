@@ -30,6 +30,7 @@ Route::prefix('consumer')->group(function () {
 
         // Lifters
         Route::post('/lifters-near', 'Api\Consumer\LifterController@getNearMe');
+        Route::post('/liftersforrepeatorder', 'Api\Consumer\LifterController@getNearLifterForRepeat');
 
         
         

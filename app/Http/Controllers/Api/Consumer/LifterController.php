@@ -31,4 +31,23 @@ class LifterController extends Controller
         return ['status' => true, 'data' => ['lifters' => $lifters, 'service' => $service, 'sample' => 1]];
         //return $stats;
     }
+    
+    public function getNearLifterForRepeat(Request $request)
+    {
+        $lifters = LifterLocation::where('location', 'near', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    floatval($request->lat), // longitude
+                    floatval($request->lon), // latitude
+                ],
+            ],
+            '$maxDistance' => intval(3 * 1000),
+        ])
+        ->where("onwork","1")
+        ->where('services','all',[intval($request->service)])->get();
+        //->where('last_update', '>', Carbon::now()->subSeconds(60)->timestamp)
+        //$smaple = \App\Order::where('type',3)->where('consumer_id', $request->user()->id)->count();
+        return ['status' => true, 'data' => ['lifters' => $lifters,]];
+    }
 }
