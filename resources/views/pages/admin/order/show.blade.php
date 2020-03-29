@@ -10,8 +10,8 @@
                 <div class="row">
                   <div class="col-12">
                     <h4>
-                      <i class="fas fa-globe"></i> AdminLTE, Inc.
-                      <small class="float-right">Date: 2/10/2014</small>
+                      <i class="fas fa-globe"></i> ORDER INVOICE.
+                      <small class="float-right">Date: {{ $order->created_at }}</small>
                     </h4>
                   </div>
                   <!-- /.col -->
@@ -37,8 +37,6 @@
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-4 invoice-col">
-                    <b>Invoice #007612</b><br>
-                    <br>
                     <b>Order ID:</b> {{ $order->id }}<br>
                     <b>Payment:</b> {{ $order->payable_amount }}<br>
                   </div>
