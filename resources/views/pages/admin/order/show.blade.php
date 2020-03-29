@@ -109,7 +109,7 @@
                           </tr>
                         <tr>
                           <th>Total:</th>
-                          <td>$265.24</td>
+                          <td>{{ $order->payable_amount }}</td>
                         </tr>
                       </tbody></table>
                     </div>
