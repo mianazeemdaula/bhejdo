@@ -104,6 +104,10 @@
                           <td>{{ $order->qty * $order->service->s_charges  }}</td>
                         </tr>
                         <tr>
+                            <th>Consumer Bonus</th>
+                            <td>{{ $order->bonus }}</td>
+                          </tr>
+                        <tr>
                           <th>Total:</th>
                           <td>$265.24</td>
                         </tr>
