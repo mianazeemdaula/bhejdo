@@ -45,4 +45,10 @@ class OrderController extends Controller
         ]);
         return view('pages.admin.order.transfer', compact('form'));
     }
+
+    public function show($id)
+    {
+        $order = Order::find($id);
+        return view('pages.admin.order.show', compact('order'));
+    }
 }
