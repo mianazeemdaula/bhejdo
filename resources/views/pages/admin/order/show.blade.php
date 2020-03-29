@@ -19,7 +19,7 @@
                 <!-- info row -->
                 <div class="row invoice-info">
                   <div class="col-sm-4 invoice-col">
-                    From
+                    CONSUMER
                     <address>
                       <strong>{{ $order->consumer->name }}</strong><br>
                       Phone: {{ $order->consumer->mobile }}<br>
@@ -28,7 +28,7 @@
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-4 invoice-col">
-                    To
+                    LIFTER
                     <address>
                         <strong>{{ $order->lifter->name }}</strong><br>
                         Phone: {{ $order->lifter->mobile }}<br>
@@ -105,7 +105,7 @@
                         </tr>
                         <tr>
                             <th>Consumer Bonus</th>
-                            <td>{{ $order->bonus }}</td>
+                            <td>-{{ $order->qty * 10 }}</td>
                           </tr>
                         <tr>
                           <th>Total:</th>
