@@ -72,8 +72,12 @@
   
                 <div class="row">
                   <!-- accepted payments column -->
+                  <div class="col-6">
+                    <p class="lead">Payment Details:</p>
+                  </div>
                   <!-- /.col -->
                   <div class="col-6">
+  
                     <div class="table-responsive">
                       <table class="table">
                         <tbody><tr>
