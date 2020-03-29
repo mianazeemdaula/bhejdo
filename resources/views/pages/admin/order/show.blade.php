@@ -59,7 +59,7 @@
                       <tbody>
                       <tr>
                         <td>{{ $order->service->s_name }}</td>
-                        <td>{{ $roder->qty }}</td>
+                        <td>{{ $order->qty }}</td>
                         <td>{{ $order->price }}</td>
                         <td>{{ $order->price * $order->qty }}</td>
                       </tr>
@@ -93,15 +93,15 @@
                       <table class="table">
                         <tbody><tr>
                           <th style="width:50%">Subtotal:</th>
-                          <td>$250.30</td>
+                          <td>{{ $order->qty * $order->price }}</td>
                         </tr>
                         <tr>
-                          <th>Tax (9.3%)</th>
-                          <td>$10.34</td>
+                          <th>Delivery Charges</th>
+                          <td>{{ $order->charges }}</td>
                         </tr>
                         <tr>
-                          <th>Shipping:</th>
-                          <td>$5.80</td>
+                          <th>Service Charges</th>
+                          <td>{{ $order->qty * $order->service->s_charges  }}</td>
                         </tr>
                         <tr>
                           <th>Total:</th>
