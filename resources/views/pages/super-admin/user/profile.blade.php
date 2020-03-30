@@ -18,7 +18,7 @@
 
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                  <b>Orders</b> <a class="float-right">1,322</a>
+                  <b>Orders</b> <a class="float-right">{{ $user->orders->count() }}</a>
                 </li>
                 <li class="list-group-item">
                     <b>Rating</b> <a class="float-right">3.5</a>
