@@ -152,6 +152,9 @@ class OrderController extends Controller
                 }else{
                     $debit = ($order->service->s_charges * $order->qty);
                     ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
+                    if($order->charges > 0){
+                        ServiceCharge::deduct($order->lifter_id,"Delivery charges of order #{$order->id}", "order", $$order->charges / 2);
+                    }
                     $order->collected_amount = (($order->qty * $order->price) + $order->charges);
                 }
                 
