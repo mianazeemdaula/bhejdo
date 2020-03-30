@@ -58,6 +58,15 @@ Route::prefix('consumer')->group(function () {
         Route::prefix('review')->group(function () {
             Route::resource('/', 'Api\Consumer\ReviewController');
         });
+
+        Route::prefix('review')->group(function () {
+            Route::resource('/', 'Api\Consumer\ReviewController');
+        });
+
+        Route::prefix('services')->group(function () {
+            Route::resource('/', 'Api\Consumer\ServiceController');
+            Route::get('/active', 'Api\Consumer\ServiceController@getActive');
+        });
         
         
         Route::post('/milk-lifters', 'Api\MilkLifterController@getMilkLifters');
