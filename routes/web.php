@@ -143,3 +143,13 @@ Route::get('cache', function(){
 Route::get('profile/{id}', function($id){
     return \App\User::find($id)->profile;
 });
+
+Route::get('changeRole', function(){
+    $user = User::find(25);
+    $user->removeRole('store');
+    $user->assignRole('lifter');
+
+    $user = User::find(23);
+    $user->removeRole('consumer');
+    $user->assignRole('lifter');
+});
