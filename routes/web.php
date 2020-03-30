@@ -145,11 +145,11 @@ Route::get('profile/{id}', function($id){
 });
 
 Route::get('changeRole', function(){
-    $user = User::find(25);
+    $user = \App\User::find(25);
     $user->removeRole('store');
     $user->assignRole('lifter');
 
-    $user = User::find(23);
+    $user = \App\User::find(23);
     $user->removeRole('consumer');
     $user->assignRole('lifter');
 });
