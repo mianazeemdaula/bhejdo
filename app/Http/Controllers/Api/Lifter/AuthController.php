@@ -261,7 +261,7 @@ class AuthController extends Controller
             ]);
             $location =  [
                 'type' => 'Point',
-                'coordinates' => [$request->lat,$request->lon]
+                'coordinates' => [(double)$request->lat,(double)$request->lon]
             ];
             LifterLocation::where('lifter_id',$request->user()->id)->update(['location'=> $location,'last_update' => Carbon::now()->timestamp ]);
             return response()->json(['status'=>true, 'data' => "Updated Successfully", 'latlng' => $profile], 200);
