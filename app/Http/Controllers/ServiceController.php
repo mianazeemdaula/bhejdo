@@ -44,10 +44,10 @@ class ServiceController extends Controller
         $service->s_status = $request->s_status;
         $service->urdu_name = $request->urdu_name;
         $service->cross_price = $request->cross_price;
-        $service->cross_price = $request->cross_price;
         $service->lifter_price = $request->lifter_price;
         $service->description = $request->description;
         $service->scale = $request->scale;
+        $service->max_qty = $request->max_qty;
         $service->min_qty = $request->min_qty;
         if($request->has('image')){
             $cover = $request->file('image');
@@ -83,10 +83,10 @@ class ServiceController extends Controller
         $service->s_status = $request->s_status;
         $service->urdu_name = $request->urdu_name;
         $service->cross_price = $request->cross_price;
-        $service->cross_price = $request->cross_price;
         $service->lifter_price = $request->lifter_price;
         $service->description = $request->description;
         $service->scale = $request->scale;
+        $service->max_qty = $request->max_qty;
         $service->min_qty = $request->min_qty;
         if($request->has('image')){
             $cover = $request->file('image');
