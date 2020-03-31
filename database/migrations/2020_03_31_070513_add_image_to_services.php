@@ -15,7 +15,6 @@ class AddImageToServices extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
             $table->string('urdu_name',25)->nullable();
-            $table->mediumText('description')->nullable();
             $table->integer('cross_price')->default(0);
             $table->integer('lifter_price')->default(0);
             $table->string('img_url')->nullable();
@@ -31,7 +30,7 @@ class AddImageToServices extends Migration
     public function down()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->dropColumn(['urdu_name','img_url', 'scale', 'cross_price', 'description']);
+            $table->dropColumn(['urdu_name','img_url', 'scale', 'cross_price', 'lifter_price']);
         });
     }
 }
