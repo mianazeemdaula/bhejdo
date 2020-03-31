@@ -46,7 +46,7 @@ class ServiceController extends Controller
         if($request->has('image')){
             $cover = $request->file('image');
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $request->image->move(public_path('services'), $imageName);
             //\Storage::disk('public')->put($imageName, $cover);
             $service->img_url = $imageName;
         }
