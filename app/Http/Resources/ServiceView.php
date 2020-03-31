@@ -18,6 +18,7 @@ class ServiceView extends JsonResource
             'id' => $this->id,
             'name' => $this->s_name,
             'icon' => $this->img_url == null ? null : asset("services/".$this->img_url),
+            'price' => $this->s_price,
         ];
     }
 }
