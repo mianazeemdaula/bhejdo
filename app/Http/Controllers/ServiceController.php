@@ -60,6 +60,45 @@ class ServiceController extends Controller
         return redirect()->back()->with('status', 'Service Updated!');
     }
 
+    public function create()
+    {
+        $form = $this->form(ServiceCreateForm::class, [
+            'method' => 'POST',
+            'class' => 'form-horizontal',
+            'url' => route('service.store'),
+        ]);
+        return view('pages.admin.services.edit', compact('form'));
+    }
+
+    public function store(Request $request)
+    {
+        $form = $this->form(ServiceCreateForm::class);
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+        $service = new Service();
+        $service->s_name = $request->s_name;
+        $service->s_price = $request->s_price;
+        $service->s_status = $request->s_status;
+        $service->urdu_name = $request->urdu_name;
+        $service->cross_price = $request->cross_price;
+        $service->cross_price = $request->cross_price;
+        $service->lifter_price = $request->lifter_price;
+        $service->description = $request->description;
+        $service->scale = $request->scale;
+        $service->min_qty = $request->min_qty;
+        if($request->has('image')){
+            $cover = $request->file('image');
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('services'), $imageName);
+            //\Storage::disk('public')->put($imageName, $cover);
+            $service->img_url = $imageName;
+        }
+        $service->save();
+        return redirect()->back()->with('status', 'Service Created!');
+    }
+
     public function setservice()
     {
         $user = User::find(1);

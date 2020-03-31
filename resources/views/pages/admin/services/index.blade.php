@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Users(s)
+                        Service(s)
                     </h3>
                 </div>
                 <div class="card-body">
