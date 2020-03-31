@@ -34,7 +34,7 @@
                                     <td> {{ $item->lifter_id}} </td>
                                     <td> {{ $item->name}} </td>
                                     <td> {{ $item->account_type}} </td>
-                                    <td> {{ $item->last_update}} </td>
+                                    <td> {{ Carbon::createFromTimestamp($item->last_update)->toDateTimeString() }} </td>
                                     <td> @isset($item->location['coordinates'][0])
                                         {!! $item->location['coordinates'][0] !!}
                                         @endisset  </td>
