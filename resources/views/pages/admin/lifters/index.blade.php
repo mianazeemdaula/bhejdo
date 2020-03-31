@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($services as $item)
+                            @foreach ($lifters as $item)
                                 <tr>
                                     <td> {{ $item->lifter_id}} </td>
                                     <td> {{ $item->name}} </td>
