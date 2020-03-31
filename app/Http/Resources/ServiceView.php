@@ -22,6 +22,7 @@ class ServiceView extends JsonResource
             'price' => $this->s_price,
             'crossPrice' => $this->cross_price,
             'scale' => $this->scale,
+            'description' => $this->description
         ];
     }
 }
