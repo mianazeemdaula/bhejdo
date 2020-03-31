@@ -196,7 +196,7 @@ class AuthController extends Controller
                 'services_details' => [], 
                 'last_update' => Carbon::now()->timestamp,
                 'lifter_id' => $request->user()->id,
-                'onwork' => "0",
+                // 'onwork' => "0",
                 'location' => $location
             ];
             if($lifter == null){
