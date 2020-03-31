@@ -47,6 +47,7 @@ class ServiceController extends Controller
         $service->lifter_price = $request->lifter_price;
         $service->description = $request->description;
         $service->scale = $request->scale;
+        $service->min_qty_charges = $request->min_qty_charges;
         $service->max_qty = $request->max_qty;
         $service->min_qty = $request->min_qty;
         if($request->has('image')){
@@ -86,6 +87,7 @@ class ServiceController extends Controller
         $service->lifter_price = $request->lifter_price;
         $service->description = $request->description;
         $service->scale = $request->scale;
+        $service->min_qty_charges = $request->min_qty_charges;
         $service->max_qty = $request->max_qty;
         $service->min_qty = $request->min_qty;
         if($request->has('image')){
