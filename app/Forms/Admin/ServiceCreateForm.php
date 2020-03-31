@@ -20,10 +20,13 @@ class ServiceCreateForm extends Form
             'label' => 'Service price'
         ])->add('s_status', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'Service status'
+            'label' => 'Service status' 
         ])->add('min_qty_charges', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Delivery Fee'
+        ])->add('min_qty', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Minimum Qty'
         ])->add('cross_price', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Cross Price'
