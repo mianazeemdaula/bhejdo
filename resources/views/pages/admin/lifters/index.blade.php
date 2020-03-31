@@ -35,7 +35,7 @@
                                     <td> {{ $item->name}} </td>
                                     <td> {{ $item->account_type}} </td>
                                     <td> {{ $item->last_update}} </td>
-                                    <td> {!! $item->location !!} </td>
+                                    <td> {!! $item->location['coordinates'][0] !!} </td>
                                 </tr>
                             @endforeach
                         </tbody>
