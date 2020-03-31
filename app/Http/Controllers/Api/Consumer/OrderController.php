@@ -164,7 +164,7 @@ class OrderController extends Controller
                 $order->confirmed_time = $dateTime;
 
                 if($order->type == 3){ // Sample order
-                    $amount = $order->qty * $order->price;
+                    $amount = $order->qty * $order->service->lifter_price;
                     ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order",$amount );
                 }else{
                     // Logic for bonus d#eduction
