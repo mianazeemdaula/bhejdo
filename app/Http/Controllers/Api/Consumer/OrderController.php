@@ -53,7 +53,7 @@ class OrderController extends Controller
             $order->qty = $request->qty;
             $order->price = $service->s_price;
             $order->note = $request->note;
-            $order->delivery_time = $request->delivery_time;
+            
             $order->address = $request->address;
             $order->longitude = $request->longitude;
             $order->latitude = $request->latitude;
@@ -65,6 +65,12 @@ class OrderController extends Controller
                 $order->charges = $service->min_qty_charges;
             }else{
                 $order->charges = 0;
+            }
+
+            if($request->has('shift')){
+                //$order->shift = $service->shift;
+            }else{
+                $order->delivery_time = $request->delivery_time;
             }
             $order->save();
             $response = OrderProcess::orderCreated($order);
