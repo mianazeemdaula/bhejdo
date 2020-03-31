@@ -62,6 +62,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user/type/store', 'UserController@stores');
     Route::resource('user.charges', 'ServiceChargeController');
     Route::resource('user.bonus', 'BonusController');
+
+    Route::get('online', function(){
+        $lifters = \App\LifterLocation::where("onwork","1")->get();
+        return view('pages.admin.lifters.index', compact('lifters'));
+    });
 });
 
 
