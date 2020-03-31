@@ -31,6 +31,7 @@
                                 <th>Price</th>
                                 <th>Charges</th>
                                 <th>Sample Qty</th>
+                                <th>Icon</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -46,6 +47,7 @@
                                     <td> {{ $item->s_price }} </td>
                                     <td> {{ $item->s_charges }} </td>
                                     <td> {{ $item->s_sample_qty }} </td>
+                                    <td> <a href="{{ asset($item->img_url) }}"></a>Icon</td>
                                     <td> {{ $item->s_status }} </td>
                                     <td> 
                                       <div class="btn-group">

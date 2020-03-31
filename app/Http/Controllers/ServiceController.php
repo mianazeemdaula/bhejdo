@@ -43,6 +43,12 @@ class ServiceController extends Controller
         $service->s_price = $request->s_price;
         $service->s_status = $request->s_status;
         $service->min_qty_charges = $request->min_qty_charges;
+        if($service->has('image_url')){
+            $cover = $request->file('image_url');
+            $imageName = time().'.'.$request->image_url->extension();
+            \Storage::disk('public')->put($imageName, $request->image_url);
+            $service->img_url = $imageName;
+        }
         $service->save();
         return redirect()->back()->with('status', 'Service Updated!');
     }
