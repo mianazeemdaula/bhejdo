@@ -47,7 +47,7 @@
                                     <td> {{ $item->s_price }} </td>
                                     <td> {{ $item->s_charges }} </td>
                                     <td> {{ $item->s_sample_qty }} </td>
-                                    <td> <a href='{{ asset("storage/$item->img_url") }}'>Icon</a></td>
+                                    <td> <a href='{{ asset("services/$item->img_url") }}'>Icon</a></td>
                                     <td> {{ $item->s_status }} </td>
                                     <td> 
                                       <div class="btn-group">
