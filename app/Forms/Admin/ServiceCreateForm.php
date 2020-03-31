@@ -22,7 +22,7 @@ class ServiceCreateForm extends Form
         ])->add('min_qty_charges', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Delivery Fee'
-        ])->add('icon', 'image',  [
+        ])->add('img_url', 'image',  [
             'label' => 'Service Icon'
         ]);
     }
