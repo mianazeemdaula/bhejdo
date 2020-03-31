@@ -12,9 +12,11 @@ class ServiceCreateForm extends Form
         ->add('s_name', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Service Name'
-        ])
-        ->add('s_price', 'text',  [
-            'rules' => 'required|min:2',
+        ])->add('urdu_name', 'text',  [
+            'rules' => 'required|min:1',
+            'label' => 'Urdu Name'
+        ])->add('s_price', 'number',  [
+            'rules' => 'required|min:1',
             'label' => 'Service price'
         ])->add('s_status', 'text',  [
             'rules' => 'required|min:2',
@@ -22,6 +24,15 @@ class ServiceCreateForm extends Form
         ])->add('min_qty_charges', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Delivery Fee'
+        ])->add('cross_price', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Cross Price'
+        ])->add('lifter_price', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Partner Price'
+        ])->add('scale', 'text',  [
+            'rules' => 'required|min:1',
+            'label' => 'Scale'
         ])->add('image','file',[
             'attr' =>[
                 'accept'=>"image/jpeg, image/png, image/jpg",

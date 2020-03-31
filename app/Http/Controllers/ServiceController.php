@@ -42,7 +42,10 @@ class ServiceController extends Controller
         $service->s_name = $request->s_name;
         $service->s_price = $request->s_price;
         $service->s_status = $request->s_status;
-        $service->min_qty_charges = $request->min_qty_charges;
+        $service->urdu_name = $request->urdu_name;
+        $service->cross_price = $request->cross_price;
+        $service->lifter_price = $request->lifter_price;
+        $service->scale = $request->scale;
         if($request->has('image')){
             $cover = $request->file('image');
             $imageName = time().'.'.$request->image->extension();
