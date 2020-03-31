@@ -30,9 +30,6 @@ class ServiceCreateForm extends Form
         ])->add('max_qty', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Maximum Qty'
-        ])->add('min_qty_charges', 'number',  [
-            'rules' => 'required|min:1',
-            'label' => 'Minimum Qty Charges'
         ])->add('cross_price', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Cross Price'
