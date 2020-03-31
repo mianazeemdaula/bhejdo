@@ -46,6 +46,7 @@ class ServiceController extends Controller
         $service->cross_price = $request->cross_price;
         $service->cross_price = $request->cross_price;
         $service->lifter_price = $request->lifter_price;
+        $service->description = $request->description;
         $service->scale = $request->scale;
         $service->min_qty = $request->min_qty;
         if($request->has('image')){

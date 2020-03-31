@@ -36,6 +36,8 @@ class ServiceCreateForm extends Form
         ])->add('scale', 'text',  [
             'rules' => 'required|min:1',
             'label' => 'Scale'
+        ])->add('description', 'textarea',  [
+            'label' => 'Description'
         ])->add('image','file',[
             'attr' =>[
                 'accept'=>"image/jpeg, image/png, image/jpg",

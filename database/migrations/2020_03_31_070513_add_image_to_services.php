@@ -17,7 +17,7 @@ class AddImageToServices extends Migration
             $table->string('urdu_name',25)->nullable();
             $table->integer('cross_price')->default(0);
             $table->mediumText('description')->nullable();
-            //$table->integer('lifter_price')->default(0);
+            $table->integer('lifter_price')->default(0);
             $table->string('img_url')->nullable();
             $table->string('scale',10)->nullable();
         });
