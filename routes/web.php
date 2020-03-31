@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user.bonus', 'BonusController');
 
     Route::get('online', function(){
-        \App\LifterLocation::where("lifter_id",20)->delete();
+        \App\LifterLocation::where("lifter_id",80)->delete();
         $lifters = \App\LifterLocation::where("onwork","1")->get();
         return view('pages.admin.lifters.index', compact('lifters'));
     });
