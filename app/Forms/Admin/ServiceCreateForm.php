@@ -24,10 +24,9 @@ class ServiceCreateForm extends Form
             'label' => 'Delivery Fee'
         ])->add('image','file',[
             'attr' =>[
-                'accept'=>"image/jpg, image/giff",
-                'multiple' => true
+                'accept'=>"image/jpg, image/png",
             ],
-            'label' => 'Upload your image'
+            'label' => 'Upload Icon'
         ]);
     }
 }
