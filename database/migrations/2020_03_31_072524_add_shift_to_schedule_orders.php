@@ -30,7 +30,7 @@ class AddShiftToScheduleOrders extends Migration
     public function down()
     {
         Schema::table('schedule_orders', function (Blueprint $table) {
-            $table->dropColumn(['shift','note','schedule_type','days'. 'status']);
+            $table->dropColumn(['shift','note','schedule_type','days','status']);
         });
     }
 }
