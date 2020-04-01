@@ -212,6 +212,11 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         [
+            'text'        => 'Schedule Order',
+            'route'         => 'scheduleOrder.index',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
             'text'        => 'Services',
             'route'         => 'service.index',
             'icon'        => 'far fa-fw fa-file',

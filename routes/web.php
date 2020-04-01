@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('service', 'ServiceController');
     Route::resource('wallet', 'WalletController');
     Route::resource('order', 'OrderController');
+    Route::resource('scheduleOrder', 'ScheduleOrderController');
 
     Route::get('order/transfer/{id}','OrderController@getTransfer');
     Route::post('order/transfer/{id}','OrderController@postTransfer');
@@ -113,22 +114,19 @@ Route::get('created_order', function(){
 });
 
 Route::get('created_order', function(){
-    $order = \App\Order::find(52);
-    $sOrder = new \App\ScheduleOrder();
-    $sOrder->consumer_id = $order->consumer_id;
-    $sOrder->lifter_id = $order->consumer_id;
-    $sOrder->service_id = $order->consumer_id;
-    $sOrder->qty = 2;
-    $sOrder->price = $order->service->s_price;
-    $sOrder->charges = $order->service->min_qty_charges;
-    $sOrder->delivery_time = $order->delivery_time;
-    $sOrder->address = $order->address;
-    $sOrder->longitude = $order->longitude;
-    $sOrder->latitude = $order->latitude;
-    $sOrder->shift = 0;
-    $sOrder->note = 0;
-    $sOrder->schedule_type = 1;
-    $sOrder->status = 1;
-    $sOrder->save();
-    return $sOrder;
+
+    $sOrder = \App\ScheduleOrder::find(1);
+    $order = new \App\Order();
+    $order->consumer_id = $sOrder->consumer_id;
+    $order->lifter_id = $sOrder->lifter_id;
+    $order->service_id = $sOrder->service_id;
+    $order->qty = $sOrder->qty;
+    $order->price = $sOrder->price;
+    $order->note = "";
+    $order->address = $sOrder->address;
+    $order->longitude = $sOrder->longitude;
+    $order->latitude = $sOrder->latitude;
+    $order->charges = $sOrder->charges;
+    $order->delivery_time = $sOrder->delivery_time;
+    $order->save();
 });
