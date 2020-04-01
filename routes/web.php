@@ -115,13 +115,13 @@ Route::get('created_order', function(){
 
 Route::get('changeRole', function(){
     $user = \App\User::find(22);
-    $user->type = 'lifter';
+    $user->account_type = 'lifter';
     $user->removeRole('store');
     $user->assignRole('store');
     $user->save();
 
     $user = \App\User::find(24);
-    $user->type = 'lifter';
+    $user->account_type = 'lifter';
     $user->removeRole('store');
     $user->assignRole('store');
     $user->save();
