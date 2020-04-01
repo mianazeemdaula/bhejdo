@@ -40,7 +40,7 @@
                                     <td> {{ $item->id}} </td>
                                     <td> {{ $item->consumer->mobile}} <br/> {{ $item->consumer->name}} </td>
                                     <td> {{ $item->lifter->mobile}} <br/> {{ $item->lifter->name}} </td>
-                                    <td>  </td>
+                                    <td> {{ $item->service->s_name}} </td>
                                     <td> {{ $item->qty }} </td>
                                     <td> {{ $item->price }} </td>
                                     <td> {{ $item->charges }} </td>
