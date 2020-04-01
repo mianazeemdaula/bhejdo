@@ -159,9 +159,6 @@ class OrderController extends Controller
                 if($order->confirmed_time != null){
                     return response()->json(['status'=>false, 'data' => [ "msg" => "Already Confirmed", ]], 200);
                 }
-                $order->status = 'confirmed';
-                $order->payment_id = $request->paymentType;
-                $order->confirmed_time = $dateTime;
 
                 if($order->type == 3){ // Sample order
                     $amount = $order->qty * $order->service->lifter_price;
@@ -175,16 +172,25 @@ class OrderController extends Controller
                             $bonusDeducted = $deductable;
                             $order->bonus_paid = $bonusDeducted;
                             Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
-                        }else{
+                        }else if($bonus->balance >= 0){
                             $bonusDeducted = $bonus->balance;
                             $order->bonus_paid = $bonusDeducted;
                             Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
                         }
                     }
-                    $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
-                    ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
+                    if($order->status == 'collected'){
+                        $debit = $bonusDeducted;
+                        ServiceCharge::add($order->lifter_id,"Bonus addition of order #{$order->id}", "order", $debit);
+                    }else{
+                        $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
+                        ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
+                    }
                     $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
                 }
+                // Confirmed Order
+                $order->status = 'confirmed';
+                $order->payment_id = $request->paymentType;
+                $order->confirmed_time = $dateTime;
             }
             $order->save();
             //
