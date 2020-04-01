@@ -39,7 +39,9 @@ class ServicesController extends Controller
             }
             foreach($updated as $u){
                 $level = Level::where('service_id',$u)->first();
-                $user->services()->attach($u, ['status' => 1, 'level_id' => $level->id]);
+                if($level != null){
+                    $user->services()->attach($u, ['status' => 1, 'level_id' => $level->id]);
+                }
             }
             return response()->json(['status'=>true, 'data' => 'updated' ], 200);
         }catch(Exception $ex){
