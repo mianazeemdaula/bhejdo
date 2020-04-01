@@ -112,49 +112,23 @@ Route::get('created_order', function(){
         return $orders;
 });
 
-
-Route::get('send_order', function(){
-    $order = \App\Order::find(61);
-    $lifter = \App\User::find(6);
-    $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
-    $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new \App\Http\Resources\Order\Order($order)];
-    $notification = \App\Helpers\AndroidNotifications::toOnlineLifter("New Order", $message, $lifter->pushToken,$args);
-    return $notification;
-});
-Route::get('notifiorders', function(){
-    $orders = \App\Order::where('created_at', '<', \Carbon\Carbon::now()->subSeconds(60)->toDateTimeString())
-    ->where('lifter_id',2)->where('status','created')->get();
-    //$orders = Order::where('lifter_id',2)->get();
-    foreach($orders as $order){
-        $response = \App\Helpers\OrderProcess::orderCreated($order);
-        print_r($response);
-    }
-});
-
-use Illuminate\Support\Facades\Cache;
-
-Route::get('cache', function(){
-    $lifterid = 2;
-    $value = false;
-    if(Cache::has('neworder_time_'.$lifterid)){
-        $value = true;
-    }else{
-        Cache::put('neworder_time_'.$lifterid, true, 100);
-        $value = false;
-    }
-    return "$value";
-});
-
-Route::get('profile/{id}', function($id){
-    return \App\User::find($id)->profile;
-});
-
-Route::get('changeRole', function(){
-    $user = \App\User::find(25);
-    $user->removeRole('store');
-    $user->assignRole('lifter');
-
-    $user = \App\User::find(23);
-    $user->removeRole('consumer');
-    $user->assignRole('lifter');
+Route::get('created_order', function(){
+    $order = \App\Order::find(52);
+    $sOrder = new \App\ScheduleOrder();
+    $sOrder->consumer_id = $order->consumer_id;
+    $sOrder->lifter_id = $order->consumer_id;
+    $sOrder->service_id = $order->consumer_id;
+    $sOrder->qty = 2;
+    $sOrder->price = $order->service->s_price;
+    $sOrder->charges = $order->service->min_qty_charges;
+    $sOrder->delivery_time = $order->delivery_time;
+    $sOrder->address = $order->address;
+    $sOrder->longitude = $order->longitude;
+    $sOrder->latitude = $order->latitude;
+    $sOrder->shift = 0;
+    $sOrder->note = $order->note;
+    $sOrder->schedule_type = 1;
+    $sOrder->status = 1;
+    $sOrder->save();
+    return $sOrder;
 });
