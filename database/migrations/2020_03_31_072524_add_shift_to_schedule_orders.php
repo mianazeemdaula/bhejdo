@@ -14,14 +14,13 @@ class AddShiftToScheduleOrders extends Migration
     public function up()
     {
         Schema::table('schedule_orders', function (Blueprint $table) {
-            $table->integer('shift')->default(0);
-            $table->integer('note')->default(0);
+            $table->integer('shift')->default(1);
+            $table->string('note')->nullable();
             $table->integer('schedule_type')->default(0); // 0 - Daily, 2- Week Days , 3-monthly
             $table->json('days')->nullable();
             $table->boolean('status')->default(1);
         });
     }
-
     /**
      * Reverse the migrations.
      *

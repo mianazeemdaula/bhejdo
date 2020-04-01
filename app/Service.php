@@ -22,6 +22,11 @@ class Service extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function scheduleorder()
+    {
+        return $this->hasMany(ScheduleOrder::class);
+    }
+
     public function levels()
     {
         return $this->hasMany(Level::class);
