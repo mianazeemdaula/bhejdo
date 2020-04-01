@@ -36,7 +36,7 @@ class Order extends JsonResource
             'note' => $this->note,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'status' => $this->status,
+            'status' => $this->status == 'collected' && Auth::check() && Auth::user()->hasRole('consumer') ? "delivered"  : $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_time' => $this->created_time,
