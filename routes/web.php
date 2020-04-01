@@ -113,6 +113,19 @@ Route::get('created_order', function(){
         return $orders;
 });
 
+Route::get('changeRole', function(){
+    $user = \App\User::find(22);
+    $user->type = 'lifter';
+    $user->removeRole('store');
+    $user->assignRole('store');
+    $user->save();
+
+    $user = \App\User::find(24);
+    $user->type = 'lifter';
+    $user->removeRole('store');
+    $user->assignRole('store');
+    $user->save();
+
 Route::get('created_order', function(){
 
     $sOrder = \App\ScheduleOrder::find(1);
