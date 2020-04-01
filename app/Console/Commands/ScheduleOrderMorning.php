@@ -54,6 +54,7 @@ class ScheduleOrderMorning extends Command
             $order->deliver_time = $sOrder->delivery_time;
             $order->delivery_time = \Carbon\Carbon::now();
             $order->type = 2;
+            $order->status = 'assigned';
             $order->save();
             $data = ['order_id' => $order->id, 'type' => 'order'];
             AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
