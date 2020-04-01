@@ -20,7 +20,7 @@ class LifterProfile extends JsonResource
             'name' => $this->name,
             'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
             'mobile' => $this->mobile,
-            'rating' => $rating == null ? 0.0 : number_format((float)$rating, 1, '.', ''),
+            'rating' => $rating == null ? 0.0 : $rating,
             'refferid' => $this->reffer_id,
             'address' => $this->address,
             'status' => $this->status,
