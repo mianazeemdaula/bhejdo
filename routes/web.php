@@ -125,7 +125,7 @@ Route::get('changeRole', function(){
     $user->removeRole('store');
     $user->assignRole('store');
     $user->save();
-
+});
 Route::get('created_order', function(){
 
     $sOrder = \App\ScheduleOrder::find(1);
