@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Helpers\AndroidNotifications;
 
 class ScheduleOrderMorning extends Command
 {
@@ -54,6 +55,8 @@ class ScheduleOrderMorning extends Command
             $order->delivery_time = \Carbon\Carbon::now();
             $order->type = 2;
             $order->save();
+            $data = ['order_id' => $order->id, 'type' => 'order'];
+            AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
         }
         $this->info('Orders Created');
     }
