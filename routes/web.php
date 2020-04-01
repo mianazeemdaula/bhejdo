@@ -113,19 +113,19 @@ Route::get('created_order', function(){
         return $orders;
 });
 
-// Route::get('changeRole', function(){
-//     $user = \App\User::find(22);
-//     $user->account_type = 'lifter';
-//     $user->removeRole('store');
-//     $user->assignRole('store');
-//     $user->save();
+Route::get('changeRole', function(){
+    $user = \App\User::find(22);
+    $user->account_type = 'lifter';
+    $user->removeRole('store');
+    $user->assignRole('lifter');
+    $user->save();
 
-//     $user = \App\User::find(24);
-//     $user->account_type = 'lifter';
-//     $user->removeRole('store');
-//     $user->assignRole('store');
-//     $user->save();
-// });
+    $user = \App\User::find(24);
+    $user->account_type = 'lifter';
+    $user->removeRole('store');
+    $user->assignRole('lifter');
+    $user->save();
+});
 
 Route::get('created_order', function(){
 
