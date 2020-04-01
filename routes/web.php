@@ -126,7 +126,7 @@ Route::get('created_order', function(){
     $sOrder->longitude = $order->longitude;
     $sOrder->latitude = $order->latitude;
     $sOrder->shift = 0;
-    $sOrder->note = $order->note;
+    $sOrder->note = $order->note == null ? " " : $order->note;
     $sOrder->schedule_type = 1;
     $sOrder->status = 1;
     $sOrder->save();
