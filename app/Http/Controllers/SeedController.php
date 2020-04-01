@@ -177,18 +177,27 @@ class SeedController extends Controller
 
     public function test()
     {
+        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Part Time', 'order_qty' => 25]);
+        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Full Time', 'order_qty' => 50]);
+        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Over Time', 'order_qty' => 75]);
+        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Dual Time', 'order_qty' => 100]);
+
+        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Part Time', 'order_qty' => 25]);
+        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Full Time', 'order_qty' => 50]);
+        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Over Time', 'order_qty' => 75]);
+        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Dual Time', 'order_qty' => 100]);
         // $ue = "";
         // $balance = \App\Bonus::deduct(2, "Test Fee", "reffer", 20);
 
         // //return $balance;
         // return $user = User::find(2)->services->pluk('id');
         
-        $user = User::find(2);
-        $user->removeRole('lifter');
-        $user->assignRole('store');
-        return $user;
-        $order = \App\Order::find(2);
-        return  new \App\Http\Resources\Order\Order($order);
+        // $user = User::find(2);
+        // $user->removeRole('lifter');
+        // $user->assignRole('store');
+        // return $user;
+        // $order = \App\Order::find(2);
+        // return  new \App\Http\Resources\Order\Order($order);
         // return \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.lifter_id',2)->where('reviews.type','lifter')->avg('reviews.starts');
         // if (Cache::has('user')) {
         //     return "Has Data";
