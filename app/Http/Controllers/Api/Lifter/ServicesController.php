@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Service;
+use App\Level;
 use DB;
 
 class ServicesController extends Controller
