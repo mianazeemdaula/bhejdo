@@ -129,4 +129,5 @@ Route::get('created_order', function(){
     $order->charges = $sOrder->charges;
     $order->delivery_time = $sOrder->delivery_time;
     $order->save();
+    return $order;
 });
