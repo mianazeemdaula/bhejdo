@@ -157,7 +157,6 @@ class OrderController extends Controller
                     }
                     $order->collected_amount = (($order->qty * $order->price) + $order->charges);
                 }
-                
             }
             $order->save();
             DB::commit();

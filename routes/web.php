@@ -79,6 +79,11 @@ Route::get('/pages/terms', function(){
 });
 
 
+Route::get('deduct', function(){
+    $user = \App\User::find(19);
+    return \App\ServiceCharge::deduct($user->lid,"Adjustment of order #88,96,99,101 & 111", "order", 370);
+});
+
 // Route::get('usercreate', function(){
 //     $user = new \App\User();
 //     $user->name = 'Zaheer Watto';
