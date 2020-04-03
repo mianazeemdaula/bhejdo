@@ -20,7 +20,7 @@ class Consumer extends JsonResource
             'name' => $this->name,
             'mobile' => $this->mobile,
             'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
-            'rating' => $rating == null ? 0.0 : number_format((float)$rating, 1, '.', ''),
+            'rating' => $rating == null ? 0.0 : $rating,
         ];
     }
 }
