@@ -146,6 +146,7 @@ Route::get('created_order', function(){
     $order->longitude = $sOrder->longitude;
     $order->latitude = $sOrder->latitude;
     $order->charges = 10;
+    $order->status = 'assigned';
     $order->delivery_time = $sOrder->delivery_time;
     $order->save();
     return $order;
