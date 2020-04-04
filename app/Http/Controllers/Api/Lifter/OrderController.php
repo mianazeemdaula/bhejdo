@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Lifter;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use DB;
 use App\Order;
@@ -129,6 +130,12 @@ class OrderController extends Controller
     {
         DB::beginTransaction();
         try{
+            if($request->has('notification')){
+                $orderid = $request->orderid;
+                Cache::put('order_notificaton_'.$request->user()->id."_".$orderid, true, 90000); // 25 hours
+                return response()->json(['status'=>true, 'data' => "Notification disable for this order" ], 200);
+            }
+
             $order = Order::findOrFail($request->orderid);
             $dateTime = Carbon::now()->toDateTimeString();
             $status = strtolower($request->status);

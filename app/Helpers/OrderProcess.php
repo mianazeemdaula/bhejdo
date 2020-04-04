@@ -21,12 +21,14 @@ class OrderProcess {
             $users = Array();
             foreach ($lifters as $lifter) {
                 $lifterid = $lifter['lifter_id'];
-                if(!Cache::has('neworder_time_'.$lifterid)){
-                    Cache::put('neworder_time_'.$lifterid, true, 100);
-                    $_lifter = User::find($lifterid);
-                    if($_lifter != null && $_lifter->pushToken != null && $_lifter->type != 'consumer'){
-                        $users[] = $_lifter->id;
-                        $tokens[] = $_lifter->pushToken;
+                if(!Cache::has('order_notificaton_'.$lifterid."_".$order->id)){
+                    if(!Cache::has('neworder_time_'.$lifterid)){
+                        Cache::put('neworder_time_'.$lifterid, true, 100);
+                        $_lifter = User::find($lifterid);
+                        if($_lifter != null && $_lifter->pushToken != null && $_lifter->type != 'consumer'){
+                            $users[] = $_lifter->id;
+                            $tokens[] = $_lifter->pushToken;
+                        }
                     }
                 }
             }
