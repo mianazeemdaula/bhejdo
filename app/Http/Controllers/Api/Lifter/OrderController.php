@@ -30,8 +30,10 @@ class OrderController extends Controller
             if($order == null){
                 return response()->json(['status'=>false, 'data' => false ], 200);
             }
-            if($order->status == 'assigned'){
-                return response()->json(['status'=>false, 'data'=>"Order already assigned"], 200);
+            else if($order->status == 'assigned'){
+                return response()->json(['status'=>false, 'data'=>"Order already assigned."], 200);
+            }else if($order->status == 'canceled'){
+                return response()->json(['status'=>false, 'data'=>"Order canceled by consumer."], 200);
             }
             $order->lifter_id = $request->user()->id;
             $order->accepted_time = Carbon::now()->toDateTimeString();
