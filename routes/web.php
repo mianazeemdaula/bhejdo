@@ -132,21 +132,40 @@ Route::get('/pages/terms', function(){
 //     $user->save();
 // });
 
-// Route::get('created_order', function(){
+Route::get('created_order', function(){
 
-//     $sOrder = \App\ScheduleOrder::find(1);
-//     $order = new \App\Order();
-//     $order->consumer_id = $sOrder->consumer_id;
-//     $order->lifter_id = $sOrder->lifter_id;
-//     $order->service_id = $sOrder->service_id;
-//     $order->qty = $sOrder->qty;
-//     $order->price = $sOrder->price;
-//     $order->note = "";
-//     $order->address = $sOrder->address;
-//     $order->longitude = $sOrder->longitude;
-//     $order->latitude = $sOrder->latitude;
-//     $order->charges = $sOrder->charges;
-//     $order->delivery_time = $sOrder->delivery_time;
-//     $order->save();
-//     return $order;
-// });
+    $sOrder = \App\Order::find(121);
+    $order = new \App\Order();
+    $order->consumer_id = $sOrder->consumer_id;
+    $order->lifter_id = $sOrder->lifter_id;
+    $order->service_id = $sOrder->service_id;
+    $order->qty = 1;
+    $order->price = $sOrder->price;
+    $order->note = "";
+    $order->address = $sOrder->address;
+    $order->longitude = $sOrder->longitude;
+    $order->latitude = $sOrder->latitude;
+    $order->charges = 10;
+    $order->delivery_time = $sOrder->delivery_time;
+    $order->save();
+    return $order;
+});
+
+Route::get('created_schedule_order', function(){
+
+    $sOrder = \App\ScheduleOrder::find(1);
+    $order = new \App\Order();
+    $order->consumer_id = $sOrder->consumer_id;
+    $order->lifter_id = $sOrder->lifter_id;
+    $order->service_id = $sOrder->service_id;
+    $order->qty = $sOrder->qty;
+    $order->price = $sOrder->price;
+    $order->note = "";
+    $order->address = $sOrder->address;
+    $order->longitude = $sOrder->longitude;
+    $order->latitude = $sOrder->latitude;
+    $order->charges = $sOrder->charges;
+    $order->delivery_time = $sOrder->delivery_time;
+    $order->save();
+    return $order;
+});
