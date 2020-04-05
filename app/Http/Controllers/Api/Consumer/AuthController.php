@@ -65,7 +65,7 @@ class AuthController extends Controller
             $user->address = $request->address;
             $user->account_type = 'consumer';
             $user->referred_by = $request->referred;
-            $user->status = 'varified';
+            $user->status = 'verified';
             $user->save();
 
             $profile = $user->profile()->create([
