@@ -134,13 +134,14 @@ Route::get('/pages/terms', function(){
 
 Route::get('created_order', function(){
 
-    $sOrder = \App\Order::find(121);
+    $sOrder = \App\Order::find(124);
     $order = new \App\Order();
+    $service = \App\Service::find(6);
     $order->consumer_id = $sOrder->consumer_id;
     $order->lifter_id = $sOrder->lifter_id;
-    $order->service_id = $sOrder->service_id;
+    $order->service_id = 6;
     $order->qty = 1;
-    $order->price = $sOrder->price;
+    $order->price = $service->s_price;
     $order->note = "";
     $order->address = $sOrder->address;
     $order->longitude = $sOrder->longitude;
