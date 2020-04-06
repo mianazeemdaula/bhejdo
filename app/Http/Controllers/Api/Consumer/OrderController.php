@@ -44,6 +44,10 @@ class OrderController extends Controller
                 return response()->json(['error'=>$validator->errors()], 401);
             }
 
+            if($request->has('test')){
+                return response()->json(['status'=>true, 'data' => $request->all()], 200);
+            }
+
             $service = Service::findOrFail($request->service_id);
             
             $order = new Order();
