@@ -114,7 +114,8 @@ class AuthController extends Controller
             $user = User::findOrFail($request->user()->id);
             $user->pushToken = $request->pushToken;
             $user->save();
-            return response()->json(['status'=>'success'], 200);
+            $bonus = Bonus::balance($request->user()->id);
+            return response()->json(['status'=>'success', 'bonus' => $bonus], 200);
         }catch(Exception $e){
             return response()->json(['success'=>$e], 405);
         }
