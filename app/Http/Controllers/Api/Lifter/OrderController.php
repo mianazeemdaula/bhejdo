@@ -196,7 +196,7 @@ class OrderController extends Controller
     public function all(Request $request)
     {
         try{
-            $orders = Order::where('lifter_id', $request->user()->id)->latest()->get();
+            $orders = Order::where('lifter_id', $request->user()->id)->orderByRaw("FIELD(status , 'created', 'assigned', 'shipped') ASC")->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
