@@ -36,7 +36,6 @@ class OrderController extends Controller
                 'address' => 'required',
                 'latitude' => 'required',
                 'longitude' => 'required',
-                'delivery_time' => 'required',
                 'service_id' => 'required'
             ]);
     
