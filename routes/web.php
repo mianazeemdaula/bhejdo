@@ -184,3 +184,8 @@ Route::get('/getorder/{id}', function($id){
     return $order;
 });
 
+
+Route::get('/addbonus/{id}', function($id){
+    return \App\Bonus::add($id, "Addition of bonus","order", 200);
+});
+

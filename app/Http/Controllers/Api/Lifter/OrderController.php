@@ -46,9 +46,11 @@ class OrderController extends Controller
                 if($bonus->balance >= $deductable){
                     $bonusDeducted = $deductable;
                     $order->bonus_paid = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
                 }else if($bonus->balance >= 0){
                     $bonusDeducted = $bonus->balance;
                     $order->bonus_paid = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
                 }
             }
             $order->status = 'assigned';
