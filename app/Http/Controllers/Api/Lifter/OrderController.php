@@ -163,17 +163,12 @@ class OrderController extends Controller
             }else if($status == 'delivered'){
                 $order->status = 'delivered';
                 $order->delivered_time = $dateTime;
-            }else if($status == 'delivered'){
-                $order->status = 'delivered';
-                $order->delivered_time = $dateTime;
             }else if($status == 'confirmed'){
                 $order->status = 'confirmed';
                 $order->confirmed_time = $dateTime;
             }else if($status == 'collected'){
                 $order->status = 'collected';
                 if($order->type == 3){ 
-                    // Sample order
-                    //ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order", $order->qty * $order->price);
                     $order->collected_amount = 0;
                 }else{
                     $debit = ($order->service->s_charges * $order->qty);
@@ -190,7 +185,7 @@ class OrderController extends Controller
             $message = "Your order of {$order->service->s_name} is {$status}.";
             $data = ['order_id' => $order->id, 'type' => 'order',  'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
-            event(new UpdateLifterEvent($order->lifter_id, $order));
+            //event(new UpdateLifterEvent($order->lifter_id, $order));
             return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource ], 200);
         }catch(Exception $ex){
             DB::rollBack();
