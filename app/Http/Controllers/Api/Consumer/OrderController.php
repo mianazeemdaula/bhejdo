@@ -160,7 +160,7 @@ class OrderController extends Controller
                     Bonus::deduct($request->user()->id, "Cancel order panality #{$order->id}","order", 10);
             }else if($status == 'confirmed'){
                 if($order->confirmed_time != null){
-                    return response()->json(['status'=>false, 'data' => [ "msg" => "Already Confirmed", ]], 200);
+                    return response()->json(['status'=>false, 'data' => [ "data" => "Already Confirmed", ]], 200);
                 }
 
                 if($order->type == 3){ // Sample order

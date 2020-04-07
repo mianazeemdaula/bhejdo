@@ -174,6 +174,7 @@ class OrderController extends Controller
                 if($order->type == 3){ 
                     // Sample order
                     //ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order", $order->qty * $order->price);
+                    $order->collected_amount = 0;
                 }else{
                     $debit = ($order->service->s_charges * $order->qty);
                     ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
