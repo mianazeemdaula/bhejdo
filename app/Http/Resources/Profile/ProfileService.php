@@ -4,7 +4,7 @@ namespace App\Http\Resources\Profile;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
-
+use App\Order;
 class ProfileService extends JsonResource
 {
     /**
@@ -15,15 +15,15 @@ class ProfileService extends JsonResource
      */
     public function toArray($request)
     {
-        $ids = $this->orders()->where('service_id',$this->id)->where('lifter_id',Auth::id())->where('status','confirmed')->orWhere('status','collected')->pluck('id')->toArray();
+        $ids = Order::where('service_id',$this->id)->where('lifter_id',$this->pivot->user_id)->where('status','confirmed')->orWhere('status','collected')->pluck('id')->toArray();
         $rating = \App\Review::whereIn('order_id', $ids)->where('type', 'lifter')->avg('starts');
         return [
             'id' => $this->id,
             'name' => $this->s_name,
             'stars' => $rating == null ? 0 : (double) number_format($rating, 1),
             'orders' =>  count($ids),
-            'total' => $this->orders()->where('service_id',$this->id)->where('lifter_id',Auth::id())->count(),
-            'deliver' => $this->orders()->where('service_id',$this->id)->where('lifter_id',Auth::id())->where('status','delivered')->count(),
+            'total' => Order::where('service_id',$this->id)->where('lifter_id',$this->pivot->user_id)->count(),
+            'deliver' => Order::where('service_id',$this->id)->where('lifter_id',$this->pivot->user_id)->where('status','delivered')->count(),
         ];
     }
 }
