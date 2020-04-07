@@ -171,3 +171,9 @@ Route::get('created_schedule_order', function(){
     $order->save();
     return $order;
 });
+
+
+Route::get('/profile/{id}', function($id){
+    $user = \App\User::find($id);
+    $profile = new \App\Http\Resources\Profile\LifterProfile($user);
+});
