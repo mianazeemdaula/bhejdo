@@ -45,16 +45,15 @@ class OrderController extends Controller
                 $deductable = $order->qty * 10;  
                 if($bonus->balance >= $deductable){
                     $bonusDeducted = $deductable;
-                    $order->bonus_paid = $bonusDeducted;
+                    $order->bonus = $bonusDeducted;
                     Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
                 }else if($bonus->balance >= 0){
                     $bonusDeducted = $bonus->balance;
-                    $order->bonus_paid = $bonusDeducted;
+                    $order->bonus = $bonusDeducted;
                     Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
                 }
             }
             $order->status = 'assigned';
-            $order->bonus_paid = $bonusDeducted;
             $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
             $order->save();
             DB::commit();

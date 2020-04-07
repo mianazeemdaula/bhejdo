@@ -174,11 +174,11 @@ class OrderController extends Controller
                             $deductable = $order->qty * 10;  
                             if($bonus->balance >= $deductable){
                                 $bonusDeducted = $deductable;
-                                $order->bonus_paid = $bonusDeducted;
+                                $order->bonus = $bonusDeducted;
                                 Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
                             }else if($bonus->balance >= 0){
                                 $bonusDeducted = $bonus->balance;
-                                $order->bonus_paid = $bonusDeducted;
+                                $order->bonus = $bonusDeducted;
                                 Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
                             }
                         }
