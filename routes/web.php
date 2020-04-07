@@ -178,7 +178,7 @@ Route::get('/profile/{id}', function($id){
     $profile = new \App\Http\Resources\Profile\LifterProfile($user);
 });
 
-Route::get('/order/{id}', function($id){
+Route::get('/getorder/{id}', function($id){
     $order = \App\Order::find($id);
     $order = new App\Http\Resources\Order\Order($order);
     return $order;
