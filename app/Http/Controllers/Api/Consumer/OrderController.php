@@ -160,7 +160,7 @@ class OrderController extends Controller
                 $balance = Bonus::balance($request->user()->id);
                 if($balance->balance > 10)
                     Bonus::deduct($request->user()->id, "Cancel order panality #{$order->id}","order", 10);
-            }else if($status == 'paid'){
+            }else if($status == 'paid' || $status == 'confirmed'){
                 if($order->confirmed_time != null){
                     $order->status = 'confirmed';
                     $order->save();
