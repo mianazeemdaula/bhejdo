@@ -12,4 +12,8 @@ class ScheduleOrder extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    protected $casts = [
+        'days' => 'array',
+    ];
 }
