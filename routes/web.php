@@ -191,3 +191,8 @@ Route::get('/addbonus/{id}', function($id){
     return \App\Bonus::add($id, "Addition of bonus","order", 200);
 });
 
+
+Route::get('time', function(){
+    $deliveryTime = "05:45AM";
+    return \App\Helpers\TimeHelper::parseTime($deliveryTime);  
+});

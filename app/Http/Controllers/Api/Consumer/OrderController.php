@@ -43,9 +43,9 @@ class OrderController extends Controller
                 return response()->json(['error'=>$validator->errors()], 401);
             }
 
-            if($request->has('test')){
-                return response()->json(['status'=>true, 'data' => $request->all()], 200);
-            }
+            // if($request->has('test')){
+            //     return response()->json(['status'=>true, 'data' => $request->all()], 200);
+            // }
 
             $service = Service::findOrFail($request->service_id);
             
@@ -71,7 +71,8 @@ class OrderController extends Controller
             }
 
             if($request->has('shift')){
-                //$order->shift = $service->shift;
+                $order->shift = $service->shift;
+                $order->deliver_time = \App\Helpers\TimeHelper::parseTime($request->preffer_time);
             }else{
                 $order->delivery_time = $request->delivery_time;
             }
