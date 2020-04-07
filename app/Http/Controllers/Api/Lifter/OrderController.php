@@ -180,7 +180,7 @@ class OrderController extends Controller
                     if($order->charges > 0){
                         ServiceCharge::deduct($order->lifter_id,"Delivery charges of order #{$order->id}", "order", $order->charges / 2);
                     }
-                    $order->collected_amount = (($order->qty * $order->price) + $order->charges);
+                    $order->collected_amount = (($order->qty * $order->price) + $order->charges) - $order->bonus;
                 }
             }
             $order->save();

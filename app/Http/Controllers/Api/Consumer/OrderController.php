@@ -207,9 +207,9 @@ class OrderController extends Controller
                 AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
                 return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", ]], 200);
             }else{
-                $data = ['order_id' => $order->id, 'type' => 'confirmed_order', "amount" => $order->payable_amount];
+                $data = ['order_id' => $order->id, 'type' => 'confirmed_order', "amount" => $order->collected_amount];
                 AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
-                return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "amount" => $order->payable_amount ]], 200);
+                return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "amount" => $order->collected_amount ]], 200);
             }
         }catch(Exception $ex){
             DB::rollBack();
