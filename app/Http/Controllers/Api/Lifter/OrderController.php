@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use DB;
 use App\Order;
 use App\OpenOrder;
+use App\Bonus;
 use App\ServiceCharge;
 use Carbon\Carbon;
 use Validator;
