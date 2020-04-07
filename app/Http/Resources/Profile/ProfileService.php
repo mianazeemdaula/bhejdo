@@ -23,7 +23,7 @@ class ProfileService extends JsonResource
             'stars' => $rating == null ? 0 : (double) number_format($rating, 1),
             'orders' =>  count($ids),
             'total' => $this->orders()->where('service_id',$this->id)->where('lifter_id',Auth::id())->count(),
-            'deliver' => $this->orders()->where('service_id',$this->id)->where('lifter_id',Auth::id())->where('status','confirmed')->count(),
+            'deliver' => $this->orders()->where('service_id',$this->id)->where('lifter_id',Auth::id())->where('status','delivered')->count(),
         ];
     }
 }
