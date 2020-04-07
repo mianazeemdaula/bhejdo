@@ -38,7 +38,7 @@ class AndroidNotifications {
 
     static public function toLifter($title, $messag, $token,Array $data)
     {
-        $pushKey = 'AAAAP1dnNFQ:APA91bHezgB1suVurRuRWDoMWbiFZ9oAhIxUtC2kd8Ot0HZ2t0lGAlEpPZHswsV7pnGWuK0eTKfZ6y7ZjIyD5Wt4nP4Fhqm1Q3uvlZVyqaA446ckC2J2QJ94rvA1bFPC_d3AgBkICCIr';
+        $pushKey = 'AAAAOXAdKDY:APA91bEbYof1-s4W1lrcu0TTFalGI8H9dcPHftK3zxaxZnbM7G4o9RiPFea8PjKZLkSlQdx0HzMAxK-bcH720cKJz1-u1Glph1dmO3m-qTeeZ_p1NACNmbbdLnxw51mOLCzNp3jBospR';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
@@ -106,7 +106,7 @@ class AndroidNotifications {
 
     static public function MultipleLifter($title, $messag, Array $tokenList, Array $data)
     {
-        $pushKey = 'AAAAP1dnNFQ:APA91bHezgB1suVurRuRWDoMWbiFZ9oAhIxUtC2kd8Ot0HZ2t0lGAlEpPZHswsV7pnGWuK0eTKfZ6y7ZjIyD5Wt4nP4Fhqm1Q3uvlZVyqaA446ckC2J2QJ94rvA1bFPC_d3AgBkICCIr';
+        $pushKey = 'AAAAOXAdKDY:APA91bEbYof1-s4W1lrcu0TTFalGI8H9dcPHftK3zxaxZnbM7G4o9RiPFea8PjKZLkSlQdx0HzMAxK-bcH720cKJz1-u1Glph1dmO3m-qTeeZ_p1NACNmbbdLnxw51mOLCzNp3jBospR';
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification = [
