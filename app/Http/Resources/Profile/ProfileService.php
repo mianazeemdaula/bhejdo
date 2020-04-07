@@ -15,7 +15,7 @@ class ProfileService extends JsonResource
      */
     public function toArray($request)
     {
-        $ids = Order::where('service_id',$this->id)->where('lifter_id',$this->pivot->user_id)->where('status','confirmed')->orWhere('status','collected')->pluck('id')->toArray();
+        $ids = Order::where('service_id',$this->id)->where('lifter_id',$this->pivot->user_id)->where('status','confirmed')->pluck('id')->toArray();
         $rating = \App\Review::whereIn('order_id', $ids)->where('type', 'lifter')->avg('starts');
         return [
             'id' => $this->id,
