@@ -19,7 +19,7 @@ class ConsumerProfile extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
-            'rating' => $rating == null ? 0.0 : $rating,
+            'rating' => $rating == null ? 0.0 : (double) number_format($rating, 1),
             'mobile' => $this->mobile,
             'refferid' => $this->reffer_id,
             'address' => $this->address,
