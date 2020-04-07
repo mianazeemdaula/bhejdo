@@ -162,6 +162,7 @@ class OrderController extends Controller
                 if($order->confirmed_time != null){
                     $order->status = 'confirmed';
                     $order->save();
+                    DB::commit();
                     return response()->json(['status'=>false, 'msg' => "Already Confirmed"], 200);
                 }
 
