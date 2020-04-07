@@ -176,7 +176,8 @@ Route::get('created_schedule_order', function(){
 Route::get('/profile/{id}', function($id){
     $user = \App\User::find($id);
     $profile = new \App\Http\Resources\Profile\LifterProfile($user);
-    return $user->services->first();
+    return \App\Order::where('service_id',1)->where('lifter_id',$user->id)->where('status','confirmed')->orWhere('status','collected')->pluck('id')->toArray();
+    return $profile;
 });
 
 Route::get('/getorder/{id}', function($id){
