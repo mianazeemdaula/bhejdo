@@ -27,7 +27,7 @@ class Order extends JsonResource
             'qty' => $this->qty,
             'price' => $this->price,
             'charges' => $this->charges,
-            'bonus' => $this->bonus_paid,
+            'bonus' => $this->bonus,
             'payable' => $this->payable_amount,
             'address' => $this->address,
             'delivery_time' => $this->delivery_time,
