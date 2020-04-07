@@ -73,6 +73,7 @@ class OrderController extends Controller
             if($request->has('shift')){
                 $order->shift = $request->shift;
                 $order->deliver_time = \App\Helpers\TimeHelper::parseTime($request->preffer_time);
+                $order->delivery_time = Carbon::now();
             }else{
                 $order->delivery_time = $request->delivery_time;
             }
