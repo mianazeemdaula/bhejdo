@@ -41,7 +41,7 @@ class OrderController extends Controller
             // Bonus Deduction
             $bonus = Bonus::balance($order->consumer_id);
             $bonusDeducted = 0;
-            if($bonus != null){
+            if($bonus != null && $order->type != 3){
                 $deductable = $order->qty * 10;  
                 if($bonus->balance >= $deductable){
                     $bonusDeducted = $deductable;
