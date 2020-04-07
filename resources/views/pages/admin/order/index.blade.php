@@ -30,6 +30,7 @@
                                 <th>Type</th>
                                 <th>Status</th>
                                 <th>Location</th>
+                                <th>Created</th>
                                 <th>Dated</th>
                                 <th>Action</th>
                             </tr>
@@ -47,6 +48,7 @@
                                     <td> {{ $item->type }} </td>
                                     <td> {{ $item->status }} </td>
                                     <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->latitude }},{{ $item->longitude }}">Map</a></td>
+                                    <td> {{ $item->created_at }} </td>
                                     <td> {{ $item->updated_at }} </td>
                                     <td> 
                                       <div class="btn-group">
