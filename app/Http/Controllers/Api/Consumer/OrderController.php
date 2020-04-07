@@ -183,7 +183,7 @@ class OrderController extends Controller
                     }
                     if($order->status == 'collected'){
                         $debit = $bonusDeducted;
-                        ServiceCharge::add($order->lifter_id,"Bonus addition of order #{$order->id}", "order", $debit);
+                        //ServiceCharge::add($order->lifter_id,"Bonus addition of order #{$order->id}", "order", $debit);
                     }else{
                         $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
                         ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
