@@ -14,14 +14,14 @@ class ProfileService extends JsonResource
      */
     public function toArray($request)
     {
-        $ids = $this->orders()->where('status','confirmed')->pluck('id')->toArray();
-        $rate = \App\Review::whereIn('order_id', $ids)->avg('starts');
+        $ids = $this->orders()->where('status','confirmed')->orWhere('status','collected')->pluck('id')->toArray();
+        $rate = \App\Review::whereIn('order_id', $ids)->where('type', 'lifter')->avg('starts');
         return [
             'id' => $this->id,
             'name' => $this->s_name,
-            'stars' => 0, //$rate == null ? 0 : $rate,
-            'orders' =>  0, //count($ids),
-            'total' => 0, //$this->orders()->count(),
+            'stars' => $rate == null ? 0 : (double) number_format($rating, 1),
+            'orders' =>  count($ids),
+            'total' => $this->orders()->count(),
             'deliver' => $this->orders()->where('status','delivered')->count(),
         ];
     }
