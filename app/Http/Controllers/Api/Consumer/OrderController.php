@@ -162,7 +162,7 @@ class OrderController extends Controller
                 if($order->confirmed_time != null){
                     $order->status = 'confirmed';
                     $order->save();
-                    return response()->json(['status'=>false, 'data' => [ "data" => "Already Confirmed", ]], 200);
+                    return response()->json(['status'=>false, 'msg' => "Already Confirmed"], 200);
                 }
 
                 if($order->type == 3){ // Sample order
