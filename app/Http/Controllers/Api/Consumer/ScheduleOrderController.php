@@ -19,7 +19,7 @@ class ScheduleOrderController extends Controller
             $order->service_id = $request->service;
             $order->qty = $request->qty;
             $order->shift = $request->shift;
-            $order->delivery_time = $request->prefer_time;
+            $order->delivery_time = \App\Helpers\TimeHelper::parseTime($request->prefer_time);
             $order->address = $request->address;
             $order->latitude = $request->latitude;
             $order->longitude = $request->longitude;
@@ -34,7 +34,7 @@ class ScheduleOrderController extends Controller
             $order->status = 1;
             $order->save();
             DB::commit();
-            return response()->json(['status'=>true, 'data' => $request->all() ], 200);
+            return response()->json(['status'=>true, 'data' => 'Order susbscribe successfullly' ], 200);
         }catch(Exception $e){
             DB::rollBack();
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
