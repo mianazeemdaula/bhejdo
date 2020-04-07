@@ -107,8 +107,7 @@ Route::prefix('lifter')->group(function () {
             Route::get('open', 'Api\Lifter\OrderController@open'); 
             Route::get('all', 'Api\Lifter\OrderController@all'); 
             Route::get('schedule', 'Api\Lifter\OrderController@schedule'); 
-            Route::post('update', 'Api\Lifter\OrderController@update2');
-            Route::post('process', 'Api\Lifter\OrderController@update');
+            Route::post('update', 'Api\Lifter\OrderController@update');
             // New Orders
             Route::get('get/{id}', 'Api\Lifter\OrderController@show');
             Route::post('accept', 'Api\Lifter\OrderController@acceptOrder');
