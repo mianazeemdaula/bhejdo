@@ -71,7 +71,7 @@ class OrderController extends Controller
             }
 
             if($request->has('shift')){
-                $order->shift = $service->shift;
+                $order->shift = $request->shift;
                 $order->deliver_time = \App\Helpers\TimeHelper::parseTime($request->preffer_time);
             }else{
                 $order->delivery_time = $request->delivery_time;
