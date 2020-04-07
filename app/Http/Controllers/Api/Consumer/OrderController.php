@@ -168,17 +168,19 @@ class OrderController extends Controller
                     ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order",$amount );
                 }else{
                     // Logic for bonus d#eduction
-                    $bonus = Bonus::balance($request->user()->id);
-                    if($bonus != null){
-                        $deductable = $order->qty * 10;  
-                        if($bonus->balance >= $deductable){
-                            $bonusDeducted = $deductable;
-                            $order->bonus_paid = $bonusDeducted;
-                            Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
-                        }else if($bonus->balance >= 0){
-                            $bonusDeducted = $bonus->balance;
-                            $order->bonus_paid = $bonusDeducted;
-                            Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
+                    if($order->payable_amount == 0){
+                        $bonus = Bonus::balance($request->user()->id);
+                        if($bonus != null){
+                            $deductable = $order->qty * 10;  
+                            if($bonus->balance >= $deductable){
+                                $bonusDeducted = $deductable;
+                                $order->bonus_paid = $bonusDeducted;
+                                Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
+                            }else if($bonus->balance >= 0){
+                                $bonusDeducted = $bonus->balance;
+                                $order->bonus_paid = $bonusDeducted;
+                                Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
+                            }
                         }
                     }
                     if($order->status == 'collected'){

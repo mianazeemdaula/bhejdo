@@ -38,7 +38,22 @@ class OrderController extends Controller
             }
             $order->lifter_id = $request->user()->id;
             $order->accepted_time = Carbon::now()->toDateTimeString();
+            // Bonus Deduction
+            $bonus = Bonus::balance($order->consumer_id);
+            $bonusDeducted = 0;
+            if($bonus != null){
+                $deductable = $order->qty * 10;  
+                if($bonus->balance >= $deductable){
+                    $bonusDeducted = $deductable;
+                    $order->bonus_paid = $bonusDeducted;
+                }else if($bonus->balance >= 0){
+                    $bonusDeducted = $bonus->balance;
+                    $order->bonus_paid = $bonusDeducted;
+                }
+            }
             $order->status = 'assigned';
+            $order->bonus_paid = $bonusDeducted;
+            $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
             $order->save();
             DB::commit();
             // Notifications to consumer
@@ -77,7 +92,6 @@ class OrderController extends Controller
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
     }
-
 
     public function scheduleOrderCreate(Request $request)
     {
@@ -160,24 +174,12 @@ class OrderController extends Controller
                     // Sample order
                     //ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order", $order->qty * $order->price);
                 }else{
-                    $bonus = Bonus::balance($order->consumer_id);
-                    $bonusDeducted = 0;
-                    if($bonus != null){
-                        $deductable = $order->qty * 10;  
-                        if($bonus->balance >= $deductable){
-                            $bonusDeducted = $deductable;
-                            $order->bonus_paid = $bonusDeducted;
-                        }else if($bonus->balance >= 0){
-                            $bonusDeducted = $bonus->balance;
-                            $order->bonus_paid = $bonusDeducted;
-                        }
-                    }
                     $debit = ($order->service->s_charges * $order->qty);
                     ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
                     if($order->charges > 0){
                         ServiceCharge::deduct($order->lifter_id,"Delivery charges of order #{$order->id}", "order", $order->charges / 2);
                     }
-                    $order->collected_amount = (($order->qty * $order->price) + $order->charges) - $bonusDeducted;
+                    $order->collected_amount = (($order->qty * $order->price) + $order->charges);
                 }
             }
             $order->save();
