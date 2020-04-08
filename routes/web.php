@@ -112,7 +112,7 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
         'distanceField' => 'distance'
     ])->get();
     // ->where('services','all',[1])->get();
-    return $lifters;
+    return \App\LifterLocation::all();
 });
 
 // Route::get('created_order', function(){
