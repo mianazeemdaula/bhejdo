@@ -197,7 +197,9 @@ Route::get('/locations', function(){
     $user = \App\User::where('account_type','lifter')->with('profile')->get();
     $_users = [];
     foreach($user as $u){
-        $_users[$u->id] = ['lat' => $u->profile->latitude, 'lon' => $u->profile->longitude];
+        if($u->profile != null){
+            $_users[$u->id] = ['lat' => $u->profile->latitude, 'lon' => $u->profile->longitude];
+        }
     }
     return $_users;
 });
