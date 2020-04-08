@@ -25,7 +25,7 @@ class OrderController extends Controller
         $form = $this->form(OrderTransferForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => url("order/transfer/{$order->id}"),
+            'url' => url("order/transfer/{$id}"),
             'model' => $order
         ]);
         $lifters = \App\LifterLocation::where('location', 'near', [
@@ -36,14 +36,23 @@ class OrderController extends Controller
                     floatval($order->longitude), // longitude
                 ],
             ],
-            '$maxDistance' => intval(10 * 1000),
+            '$maxDistance' => intval(3 * 1000),
         ])
         ->where('services','all',[intval($order->service_id)])->pluck('name','lifter_id');
-        return $lifters;
         $form->addAfter('consumer_id', 'lifter', 'select', [
             'choices' => $lifters
         ]);
         return view('pages.admin.order.transfer', compact('form'));
+    }
+
+    public function postTransfer(Request $request)
+    {
+        $form = $this->form(ServiceCreateForm::class);
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+        return redirect()->back()->with('status', 'Order updated!');
     }
 
     public function show($id)
