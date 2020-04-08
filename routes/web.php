@@ -101,15 +101,30 @@ Route::get('/pages/terms', function(){
 // // });
 
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
-    $lifters = \App\LifterLocation::raw(['location', '$geoNear', [
-        'near' => array(
-            'type' => "Point",
-            'coordinates' => array(doubleval($lng), doubleval($lat))
-        ),
-        'maxDistance' => intval($dist * 1000),
-        'distanceField' => 'distance'
-    ]]);
-    dd($lifters);
+    // $lifters = \App\LifterLocation::raw(['location', '$geoNear', [
+    //     'near' => array(
+    //         'type' => "Point",
+    //         'coordinates' => array(doubleval($lng), doubleval($lat))
+    //     ),
+    //     'maxDistance' => intval($dist * 1000),
+    //     'distanceField' => 'distance'
+    // ]]);
+    // dd($lifters);
+    $lifters = \App\LifterLocation::raw(function($collection) use($lat, $lng, $dist) {
+        return $collection->find([
+            'location' => [
+                '$geoNear' => [
+                    'near' => array(
+                        'type' => "Point",
+                        'coordinates' => array(doubleval($lng), doubleval($lat))
+                    ),
+                    'maxDistance' => intval($dist * 1000),
+                    'distanceField' => 'distance'
+                ]
+            ]
+        ]);
+    });
+    return $lifters;
     // $mongodb = \DB::connection('mongodb')->getMongoDB();
     // $r = $mongodb->command(
     //     array( 'geoNear' => "lifter_locations",
