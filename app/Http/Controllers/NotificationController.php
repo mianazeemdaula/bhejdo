@@ -18,6 +18,6 @@ class NotificationController extends Controller
             'class' => 'form-horizontal',
             'url' => route("notification.store"),
         ]);
-        return view('pages.admin.order.create', compact('form'));
+        return view('pages.admin.notificatons.create', compact('form'));
     }
 }
