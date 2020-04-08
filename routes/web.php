@@ -194,6 +194,5 @@ Route::get('/addbonus/{id}', function($id){
 });
 
 Route::get('/locations', function(){
-    $user = \App\User::where('account_type','lifter')->get();
-    return $user->profile()->pluck('latitude','longitude')->toArray();
+    $user = \App\User::where('account_type','lifter')->with('profile')->get();
 });
