@@ -221,11 +221,11 @@ return [
             'route'         => 'service.index',
             'icon'        => 'far fa-fw fa-file',
         ],
-        // [
-        //     'text'        => 'Bonus',
-        //     'route'         => 'bonus.index',
-        //     'icon'        => 'far fa-fw fa-file',
-        // ],
+        [
+            'text'        => 'Notifications',
+            'route'         => 'notification.index',
+            'icon'        => 'far fa-fw fa-file',
+        ],
         [
             'text'        => 'Wallet',
             'route'         => 'wallet.index',
