@@ -100,20 +100,19 @@ Route::get('/pages/terms', function(){
 // //     $user->assignRole('admin');
 // // });
 
-// Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
-//     $lifters = \App\LifterLocation::where('location', 'near', [
-//         '$geometry' => [
-//             'type' => 'Point',
-//             'coordinates' => [
-//                 floatval($lat), // longitude
-//                 floatval($lng), // latitude
-//             ],
-//         ],
-//         '$maxDistance' => intval($dist * 1000)
-//     ])
-//     ->where('services','all',[1])->get();
-//     return $lifters;
-// });
+Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
+    $lifters = \App\LifterLocation::where('location', '$geoNear', [
+        'near' => [
+            floatval($lat), // longitude
+            floatval($lng), // latitude
+        ],
+        'spherical' => true,
+        'maxDistance' => 1000,
+        'distanceField' => "distance"
+    ])->get();
+    // ->where('services','all',[1])->get();
+    return $lifters;
+});
 
 // Route::get('created_order', function(){
 //     $orders = \App\Order::where('created_at', '<', \Carbon\Carbon::now()->subSeconds(60)->toDateTimeString())
