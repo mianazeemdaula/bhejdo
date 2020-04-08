@@ -43,7 +43,7 @@ class OrderController extends Controller
         
         foreach($lifters as $key => $value){
             $id = (int) $key;
-            $_lifters[$id] = $value;
+            $_lifters[$id] = "$value ($key)";
         }
 
         $form->addAfter('id', 'lifter_id', 'select', [
