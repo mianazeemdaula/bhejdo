@@ -111,7 +111,7 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
         ],
         '$maxDistance' => intval($dist * 1000)
     ])->get();
-    $mongodb = \DB::getMongoDB();
+    $mongodb = \DB::connection('mongodb')->getMongoClient();
     $r = $mongodb->command(
         array( 'geoNear' => "lifter_locations",
             'near' => array(
