@@ -40,12 +40,12 @@ class OrderController extends Controller
         ])
         ->where('services','all',[intval($order->service_id)])->pluck('name','lifter_id');
         $_lifters = [];
-        return $lifters;
-        foreach($lifters as $lifter){
-            $id = (int) $lifter['lifter_id'];
-            $_lifters[$id] = $lifter['name'];
+        
+        foreach($lifters as $key => $value){
+            $id = (int) $key;
+            $_lifters[$id] = $value;
         }
-        return $_lifters;
+        
         $form->addAfter('consumer_id', 'lifter_id', 'select', [
             'choices' => $lifters
         ]);
