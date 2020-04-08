@@ -15,7 +15,8 @@ class ServiceController extends Controller
         try{
             $services = Service::where('s_status', 'active')->get();
             $services = ServiceView::collection($services);
-            return response()->json(['status'=>true, 'data' => $services], 200);
+            $smaple = \App\Order::where('type',3)->where('consumer_id', $request->user()->id)->count();
+            return response()->json(['status'=>true, 'data' => $services, 'sample' => $smaple], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
