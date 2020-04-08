@@ -193,8 +193,7 @@ Route::get('/addbonus/{id}', function($id){
     return \App\Bonus::add($id, "Addition of bonus","order", 200);
 });
 
-
-Route::get('time', function(){
-    $deliveryTime = "05:45AM";
-    return \App\Helpers\TimeHelper::parseTime($deliveryTime);  
+Route::get('/locations', function(){
+    $user = \App\User::where('account_type','lifter')->get();
+    return $user->profile()->pluck('latitude','longitude')->toArray();
 });
