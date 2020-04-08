@@ -111,8 +111,19 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
         ],
         '$maxDistance' => intval($dist * 1000)
     ])->get();
+    $mongodb = \DB::getMongoDB();
+    $r = $mongodb->command(
+        array( 'geoNear' => "lifter_locations",
+            'near' => array(
+                'type' => "Point",
+                'coordinates' => array(doubleval($lng), doubleval($lat))
+            ),
+            'spherical' => true,
+            'maxDistance' => (int) ($dist * 100),
+            )
+        );
     // ->where('services','all',[1])->get();
-    return $lifters;
+    return $r;
 });
 
 // Route::get('created_order', function(){
