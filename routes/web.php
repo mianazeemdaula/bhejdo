@@ -108,7 +108,7 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
         ),
         'maxDistance' => intval($dist * 1000),
         'distanceField' => 'distance'
-    ]])->get();
+    ]]);
     return $lifters;
     // $mongodb = \DB::connection('mongodb')->getMongoDB();
     // $r = $mongodb->command(
