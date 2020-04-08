@@ -39,8 +39,9 @@ class OrderController extends Controller
             '$maxDistance' => intval(3 * 1000),
         ])
         ->where('services','all',[intval($order->service_id)])->pluck('name','lifter_id');
-        $form->addAfter('consumer_id', 'lifter', 'select', [
-            'choices' => json_decode($lifters)
+        return json_decode($lifters);
+        $form->addAfter('consumer_id', 'lifter_id', 'select', [
+            'choices' => $lifters
         ]);
         return view('pages.admin.order.transfer', compact('form'));
     }
