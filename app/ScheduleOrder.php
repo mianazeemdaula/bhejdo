@@ -16,4 +16,14 @@ class ScheduleOrder extends Model
     protected $casts = [
         'days' => 'array',
     ];
+
+    public function consumer()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function lifter()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
