@@ -101,13 +101,12 @@ Route::get('/pages/terms', function(){
 // // });
 
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
-    $lifters = \App\LifterLocation::where('location', '$geoNear', [
+    $lifters = \App\LifterLocation::where('location', '$geoNear66', [
         'near' => [
-            'type' => 'Point',
-            'coordinates' => [
+            [
                 floatval($lat), // longitude
                 floatval($lng), // latitude
-            ],
+            ]
         ],
         'maxDistance' => intval($dist * 1000),
         'distanceField' => 'distance'
