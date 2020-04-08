@@ -68,7 +68,7 @@ class OrderController extends Controller
         DB::beginTransaction();
         try{
 
-            $order = Order::find($request->orderid);
+            $order = Order::find( $id);
             if($order == null){
                 return response()->json(['status'=>false, 'data' => false ], 200);
             }
