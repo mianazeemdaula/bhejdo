@@ -59,7 +59,7 @@ class OrderController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        $order = Order::findOrFail($id);
+        $order = Order::find($id);
         $order->lifter_id = $request->lifter_id;
         $order->status = $request->status;
         $order->save();
