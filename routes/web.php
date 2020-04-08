@@ -101,18 +101,18 @@ Route::get('/pages/terms', function(){
 // // });
 
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
-    $lifters = \App\LifterLocation::where('location', '$geoNear66', [
-        'near' => [
-            [
+    $lifters = LifterLocation::where('location', 'near', [
+        '$geometry' => [
+            'type' => 'Point',
+            'coordinates' => [
                 floatval($lat), // longitude
-                floatval($lng), // latitude
-            ]
+                floatval($lon), // latitude
+            ],
         ],
-        'maxDistance' => intval($dist * 1000),
-        'distanceField' => 'distance'
+        '$maxDistance' => intval($dist * 1000)
     ])->get();
     // ->where('services','all',[1])->get();
-    return \App\LifterLocation::all();
+    return $lifters;
 });
 
 // Route::get('created_order', function(){
