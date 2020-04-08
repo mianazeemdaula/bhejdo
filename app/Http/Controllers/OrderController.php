@@ -40,6 +40,7 @@ class OrderController extends Controller
         ])
         ->where('services','all',[intval($order->service_id)])->pluck('name','lifter_id');
         $_lifters = [];
+        return $lifters;
         foreach($lifters as $lifter){
             $id = (int) $lifter['lifter_id'];
             $_lifters[$id] = $lifter['name'];
