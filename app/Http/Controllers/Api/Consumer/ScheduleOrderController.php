@@ -9,6 +9,17 @@ use App\ScheduleOrder;
 use DB;
 class ScheduleOrderController extends Controller
 {
+    public function index(Type $var = null)
+    {
+        try{
+            $orders = ScheduleOrder::where('consumer_id', $request->user()->id)->latest()->get();
+            //$orders = OrderResource::collection($orders);
+            return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
+
     public function store(Request $request)
     {
         try {

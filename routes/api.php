@@ -45,7 +45,7 @@ Route::prefix('consumer')->group(function () {
             Route::post('update', 'Api\Consumer\OrderController@update'); 
         });
 
-        Route::prefix('schedule_order')->group(function () {
+        Route::prefix('subscriptions')->group(function () {
             Route::resource('/', 'Api\Consumer\ScheduleOrderController');
         });
 
