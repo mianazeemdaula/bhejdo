@@ -109,7 +109,7 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
         'maxDistance' => intval($dist * 1000),
         'distanceField' => 'distance'
     ]]);
-    return $lifters;
+    return $lifters->toJson();
     // $mongodb = \DB::connection('mongodb')->getMongoDB();
     // $r = $mongodb->command(
     //     array( 'geoNear' => "lifter_locations",
