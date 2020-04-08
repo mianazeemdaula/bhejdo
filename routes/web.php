@@ -114,11 +114,11 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
         return $collection->find([
             'location' => [
                 '$geoNear' => [
-                    'near' => array(
+                    '$near' => array(
                         'type' => "Point",
                         'coordinates' => array(doubleval($lng), doubleval($lat))
                     ),
-                    'maxDistance' => intval($dist * 1000),
+                    '$maxDistance' => intval($dist * 1000),
                     'distanceField' => 'distance'
                 ]
             ]
