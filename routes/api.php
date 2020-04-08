@@ -49,6 +49,12 @@ Route::prefix('consumer')->group(function () {
             Route::resource('/', 'Api\Consumer\ScheduleOrderController');
         });
 
+        Route::prefix('schedule_order')->group(function () {
+            Route::resource('/', 'Api\Consumer\ScheduleOrderController');
+        });
+
+        
+
         Route::prefix('bonus')->group(function () {
             Route::resource('/', 'Api\Consumer\BonusController');
             Route::get('/balance', 'Api\Consumer\BonusController@balance');
