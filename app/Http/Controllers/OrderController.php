@@ -54,7 +54,7 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        $form = $this->form(ServiceCreateForm::class);
+        $form = $this->form(OrderTransferForm::class);
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
