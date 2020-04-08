@@ -45,9 +45,9 @@ class OrderController extends Controller
             $id = (int) $key;
             $_lifters[$id] = $value;
         }
-        
+
         $form->addAfter('consumer_id', 'lifter_id', 'select', [
-            'choices' => $lifters
+            'choices' => $_lifters
         ]);
         return view('pages.admin.order.transfer', compact('form'));
     }
