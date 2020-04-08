@@ -120,7 +120,7 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
             )
         );
     // ->where('services','all',[1])->get();
-    return $r;
+    dd($r);
 });
 
 // Route::get('created_order', function(){
