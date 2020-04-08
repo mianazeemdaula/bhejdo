@@ -77,6 +77,7 @@ class OrderController extends Controller
             // }else if($order->status == 'canceled'){
             //     return response()->json(['status'=>false, 'data'=>"Order canceled by consumer."], 200);
             // }
+            //
             $order->lifter_id = $request->lifter_id;
             $order->accepted_time = Carbon::now()->toDateTimeString();
             // Bonus Deduction
