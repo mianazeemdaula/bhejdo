@@ -9,7 +9,8 @@ use App\ScheduleOrder;
 use DB;
 class ScheduleOrderController extends Controller
 {
-    public function index(Type $var = null)
+
+    public function index(Request $request)
     {
         try{
             $orders = ScheduleOrder::where('consumer_id', $request->user()->id)->latest()->get();
