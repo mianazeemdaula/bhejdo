@@ -9,6 +9,12 @@ use App\Order;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\OrderTransferForm;
+use App\Helpers\AndroidNotifications;
+
+use Carbon\Carbon;
+use Validator;
+use App\Http\Resources\Order\Order as OrderResource;
+use DB;
 
 class OrderController extends Controller
 {
@@ -59,11 +65,50 @@ class OrderController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        $order = Order::find($id);
-        $order->lifter_id = $request->lifter_id;
-        $order->status = $request->status;
-        $order->save();
-        return redirect()->back()->with('status', 'Order updated!');
+        DB::beginTransaction();
+        try{
+
+            $order = Order::find($request->orderid);
+            if($order == null){
+                return response()->json(['status'=>false, 'data' => false ], 200);
+            }
+            // else if($order->status == 'assigned'){
+            //     return response()->json(['status'=>false, 'data'=>"Order already assigned."], 200);
+            // }else if($order->status == 'canceled'){
+            //     return response()->json(['status'=>false, 'data'=>"Order canceled by consumer."], 200);
+            // }
+            $order->lifter_id = $request->lifter_id;
+            $order->accepted_time = Carbon::now()->toDateTimeString();
+            // Bonus Deduction
+            $bonus = Bonus::balance($order->consumer_id);
+            $bonusDeducted = 0;
+            if($bonus != null && $order->type != 3){
+                $deductable = $order->qty * 10;  
+                if($bonus->balance >= $deductable){
+                    $bonusDeducted = $deductable;
+                    $order->bonus = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
+                }else if($bonus->balance >= 0){
+                    $bonusDeducted = $bonus->balance;
+                    $order->bonus = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
+                }
+            }
+            $order->status = 'assigned';
+            $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
+            $order->save();
+            DB::commit();
+            // Notifications to consumer
+            $orderResource = new OrderResource($order);
+            $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";
+            $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
+            AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
+            AndroidNotifications::toLifter("Order Assigned", $message, $order->lifter->pushToken, $data);
+            return redirect()->back()->with('status', 'Order updated!');
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
     }
 
     public function show($id)
