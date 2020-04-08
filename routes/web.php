@@ -198,7 +198,7 @@ Route::get('/locations', function(){
     $_users = [];
     foreach($user as $u){
         if($u->profile != null){
-            $_users[$u->id] = ['lat' => $u->profile->latitude, 'lon' => $u->profile->longitude];
+            $_users[$u->id] = ['lat' => $u->profile->latitude, 'lon' => $u->profile->longitude, 'name'=> $u->name, 'token' => $u->puskToken];
         }
     }
     return $_users;
