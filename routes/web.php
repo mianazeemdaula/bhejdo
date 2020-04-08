@@ -103,8 +103,8 @@ Route::get('/pages/terms', function(){
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
     $lifters = \App\LifterLocation::where('location', '$geoNear', [
         'near' => [
-            floatval($lat), // longitude
             floatval($lng), // latitude
+            floatval($lat), // longitude
         ],
         'spherical' => true,
         'maxDistance' => $dist * 1000,
