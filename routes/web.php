@@ -117,11 +117,12 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
                     '$geometry' => [
                         'type' => 'Point',
                         'coordinates' => [
-                            floatval($lng), // latitude
                             floatval($lat), // longitude
+                            floatval($lng), // latitude
                         ],
                     ],
                     '$maxDistance' => intval($dist * 1000),
+                    '$distanceField' => 'distance'
                 ]
             ]
         ]);
