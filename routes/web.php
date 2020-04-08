@@ -135,20 +135,21 @@ Route::get('/pages/terms', function(){
 
 Route::get('created_order', function(){
 
-    $sOrder = \App\Order::find(124);
+    $sOrder = \App\Order::find(153);
     $order = new \App\Order();
-    $service = \App\Service::find(6);
+    $service = \App\Service::find(1);
     $order->consumer_id = $sOrder->consumer_id;
-    $order->lifter_id = $sOrder->lifter_id;
-    $order->service_id = 6;
+    $order->lifter_id = 2;
+    $order->service_id = 1;
+    $order->type = 3;
     $order->qty = 1;
     $order->price = $service->s_price;
     $order->note = "";
     $order->address = $sOrder->address;
     $order->longitude = $sOrder->longitude;
     $order->latitude = $sOrder->latitude;
-    $order->charges = 10;
-    $order->status = 'assigned';
+    $order->charges = 0;
+    $order->status = 'created';
     $order->delivery_time = $sOrder->delivery_time;
     $order->save();
     return $order;
