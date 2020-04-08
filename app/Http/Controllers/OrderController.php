@@ -19,13 +19,13 @@ class OrderController extends Controller
         return view('pages.admin.order.index', compact('collection'));
     }
 
-    public function getTransfer($id)
+    public function edit($id)
     {
         $order = Order::find($id);  
         $form = $this->form(OrderTransferForm::class, [
-            'method' => 'POST',
+            'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => url("order/transfer/{$id}"),
+            'url' => route("order.update", $id),
             'model' => $order
         ]);
         $lifters = \App\LifterLocation::where('location', 'near', [
@@ -52,7 +52,7 @@ class OrderController extends Controller
         return view('pages.admin.order.transfer', compact('form'));
     }
 
-    public function postTransfer(Request $request)
+    public function upate(Request $request)
     {
         $form = $this->form(ServiceCreateForm::class);
 
