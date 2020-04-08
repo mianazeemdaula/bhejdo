@@ -17,7 +17,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped dataTable" id="example1">
+                    <table class="table table-sm dataTable" id="example1">
                         <thead>
                             <tr>
                                 <th>Sr #</th>
@@ -52,9 +52,9 @@
                                     <td> {{ $item->updated_at }} </td>
                                     <td> 
                                       <div class="btn-group">
-                                        <a href="{{ route('order.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('order.edit',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-edit"></i></a>
-                                        <button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button>
+                                        <a href="{{ route('order.show',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('order.edit',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-edit"></i></a>
+                                        <button type="button" class="btn-sm btn-default"><i class="fas fa-trash"></i></button>
                                       </div>
                                     </td>
                                 </tr>
