@@ -39,7 +39,12 @@ class OrderController extends Controller
             '$maxDistance' => intval(3 * 1000),
         ])
         ->where('services','all',[intval($order->service_id)])->pluck('name','lifter_id');
-        return json_decode(json_encode($lifters));
+        $_lifters = [];
+        foreach($lifters as $lifter){
+            $id = (int) $lifter['lifter_id'];
+            $_lifters[$id] = $lifter['name'];
+        }
+        return $_lifters;
         $form->addAfter('consumer_id', 'lifter_id', 'select', [
             'choices' => $lifters
         ]);
