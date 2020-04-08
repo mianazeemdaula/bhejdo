@@ -36,7 +36,7 @@
                                     <td> {{ $item->account_type}} </td>
                                     <td> {{ \Carbon\Carbon::createFromTimestamp($item->last_update)->toDateTimeString() }} </td>
                                     <td> @isset($item->location['coordinates'][0])
-                                        {!! $item->location['coordinates'][0] !!}
+                                        <a href="https://www.google.com/maps/search/?api=1&query={{ $item->location['coordinates'][0] }},{{ $item->location['coordinates'][1] }}">Map</a>
                                         @endisset  </td>
                                 </tr>
                             @endforeach
