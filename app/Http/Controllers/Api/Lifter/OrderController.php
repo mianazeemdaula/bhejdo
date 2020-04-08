@@ -170,6 +170,7 @@ class OrderController extends Controller
                 $order->status = 'collected';
                 if($order->type == 3){ 
                     $order->collected_amount = 0;
+                    $order->payable_amount = 0;
                 }else{
                     $debit = ($order->service->s_charges * $order->qty);
                     if($debit > $order->bonus){
@@ -182,6 +183,7 @@ class OrderController extends Controller
                         ServiceCharge::deduct($order->lifter_id,"Delivery charges of order #{$order->id}", "order", $order->charges / 2);
                     }
                     $order->collected_amount = (($order->qty * $order->price) + $order->charges) - $order->bonus;
+                    $order->payable_amount = (($order->qty * $order->price) + $order->charges) - $order->bonus;
                 }
             }
             $order->save();
