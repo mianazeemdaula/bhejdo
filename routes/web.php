@@ -122,7 +122,6 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
                         ],
                     ],
                     '$maxDistance' => intval($dist * 1000),
-                    '$distanceField' => 'distance'
                 ]
             ]
         ]);
