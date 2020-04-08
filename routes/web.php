@@ -107,7 +107,7 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
             floatval($lng), // latitude
         ],
         'spherical' => true,
-        'maxDistance' => 1000,
+        'maxDistance' => $dist * 1000,
         'distanceField' => "distance"
     ])->get();
     // ->where('services','all',[1])->get();
