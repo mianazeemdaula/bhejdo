@@ -40,7 +40,7 @@ class OrderController extends Controller
         ])
         ->where('services','all',[intval($order->service_id)])->pluck('name','lifter_id');
         $form->addAfter('consumer_id', 'lifter', 'select', [
-            'choices' => $lifters
+            'choices' => json_decode($lifters)
         ]);
         return view('pages.admin.order.transfer', compact('form'));
     }
