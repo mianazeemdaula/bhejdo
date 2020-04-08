@@ -14,11 +14,11 @@
 use Illuminate\Support\Facades\Redis;
 
 Route::get('/redis', function () {
-    $app = PRedis::connection();
+    //$app = PRedis::connection();
     //$app->set('user', App\User::with('services')->get()->toJson());
     // $redis = PRedis::command('GEOADD',['locations' , 30.675738, 73.668141, 'lifter-1']);
     // $redis = PRedis::command('GEOADD',['locations' , 30.692198, 73.639817, 'lifter-2']);
-    // $redis = PRedis::command('GEOADD', ['locations' , 30.679687, 73.654408, 'lifter-3']);
+    // $redis = PRedis::command('GEOADD',['locations' , 30.679687, 73.654408, 'lifter-3']);
     // //return $app->get('user');
     $lifters= PRedis::command('GEORADIUS',['locations' ,30.685629,73.660845, 5, 'km', ['WITHDIST','WITHCOORD', 10, 'ASC']]);
     return $lifters;
