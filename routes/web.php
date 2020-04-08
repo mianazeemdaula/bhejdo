@@ -102,14 +102,11 @@ Route::get('/pages/terms', function(){
 
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
     $lifters = \App\LifterLocation::whereRaw('location', '$geoNear', [
-        '$geometry' => [
-            'type' => 'Point',
-            'coordinates' => [
-                floatval($lat), // longitude
-                floatval($lng), // latitude
-            ],
-        ],
-        '$maxDistance' => intval($dist * 1000)
+        'near' => array(
+            'type' => "Point",
+            'coordinates' => array(doubleval($lng), doubleval($lat))
+        ),
+        '$maxDistance' => intval($dist * 1000),
     ])->get();
     // $mongodb = \DB::connection('mongodb')->getMongoClient();
     // $r = $mongodb->command(
