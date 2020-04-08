@@ -101,7 +101,7 @@ Route::get('/pages/terms', function(){
 // // });
 
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
-    $lifters = \App\LifterLocation::whereRaw(['location', '$geoNear', [
+    $lifters = \App\LifterLocation::raw(['location', '$geoNear', [
         'near' => array(
             'type' => "Point",
             'coordinates' => array(doubleval($lng), doubleval($lat))
