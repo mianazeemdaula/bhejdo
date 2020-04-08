@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\ScheduleOrder;
 use DB;
+use App\Http\Resources\Subscription\Order as SubscriptionResource;
 class ScheduleOrderController extends Controller
 {
 
@@ -14,7 +15,7 @@ class ScheduleOrderController extends Controller
     {
         try{
             $orders = ScheduleOrder::where('consumer_id', $request->user()->id)->latest()->get();
-            //$orders = OrderResource::collection($orders);
+            $orders = SubscriptionResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
