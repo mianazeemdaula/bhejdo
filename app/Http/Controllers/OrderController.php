@@ -46,19 +46,23 @@ class OrderController extends Controller
             $_lifters[$id] = $value;
         }
 
-        $form->addAfter('consumer_id', 'lifter_id', 'select', [
+        $form->addAfter('id', 'lifter_id', 'select', [
             'choices' => $_lifters
         ]);
         return view('pages.admin.order.transfer', compact('form'));
     }
 
-    public function upate(Request $request)
+    public function update(Request $request, $id)
     {
         $form = $this->form(ServiceCreateForm::class);
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
+        $order = Order::find($id);
+        $order->lifter_id = $request->lifter_id;
+        $order->status = $request->status;
+        $order->save();
         return redirect()->back()->with('status', 'Order updated!');
     }
 

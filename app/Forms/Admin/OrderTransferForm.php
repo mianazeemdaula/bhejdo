@@ -13,10 +13,7 @@ class OrderTransferForm extends Form
             'rules' => 'required|min:1',
             'label' => 'Order ID'
         ])
-        ->add('qty', 'text',  [
-            'rules' => 'required|min:2',
-            'label' => 'Service price'
-        ])->add('status', 'select',  [
+        ->add('status', 'select',  [
             'choices' => ['assigned' => 'assigned'],
             'rules' => 'required|min:2',
             'label' => 'Status'
