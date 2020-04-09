@@ -173,20 +173,20 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
 
 Route::get('created_order', function(){
 
-    $sOrder = \App\Order::find(153);
+    $sOrder = \App\Order::find(167);
     $order = new \App\Order();
     $service = \App\Service::find(1);
     $order->consumer_id = $sOrder->consumer_id;
     $order->lifter_id = 2;
     $order->service_id = 1;
     $order->type = 1;
-    $order->qty = 2;
+    $order->qty = 3;
     $order->price = $service->s_price;
     $order->note = "";
     $order->address = $sOrder->address;
     $order->longitude = $sOrder->longitude;
     $order->latitude = $sOrder->latitude;
-    $order->charges = 10;
+    $order->charges = 0;
     $order->status = 'created';
     $order->delivery_time = $sOrder->delivery_time;
     $order->save();
