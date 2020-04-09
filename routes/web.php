@@ -42,6 +42,7 @@ Route::get('/mongo', function(){
 Route::get('/dbtest', 'SeedController@test');
 Route::get('/seedLocations', 'SeedController@seedLocations');
 Route::get('/getLocation', 'SeedController@getLocation');
+Route::get('/sendSMS', 'SeedController@sendSMS');
 
 
 Auth::routes(['register' => false]);

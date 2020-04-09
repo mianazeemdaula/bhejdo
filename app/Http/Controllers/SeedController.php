@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Redis;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use App\PartnerLocation;
 
+use Twilio\Rest\Client;
+
 class SeedController extends Controller
 {
     public function Seed()
@@ -268,6 +270,17 @@ class SeedController extends Controller
         $lat = "30.673375";
         $lon = "73.656468";
         return PartnerLocation::MBRContains('location', new Point($lat, $lon), 5)->pluck('name','partner_id');
+    }
+
+    public function sendSMS()
+    {
+        $account_sid = "AC7915496d6ecda502bcb800757aa33e32";
+        $auth_token = "878b8adaff0b2422cb3f6dac6126af51";
+        $twilio_number = "+12102390721";
+        $client = new Client($account_sid, $auth_token);
+        $message  = "Hello Dear";
+        $recipients = '+923004103160';
+        return $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
     }
 
 }
