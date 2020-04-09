@@ -38,7 +38,7 @@ class OrderProcess {
                 $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
                 $notification = AndroidNotifications::MultipleLifter("New Order", $message, $tokens, $args);
                 $notification2 = AndroidNotifications::MultiplePartner("New Order", $message, $tokens, $args);
-                return ['count' => $lCount, 'notification' => $notification, 'order' => $order->id,'users' => $users];
+                return ['count' => $lCount, 'notification' => $notification, 'partners' => $notification2 ,'order' => $order->id,'users' => $users];
             }
         }catch(Exception $ex){
             return $ex;
