@@ -278,7 +278,7 @@ class AuthController extends Controller
             }
             LifterLocation::where('lifter_id',$request->user()->id)->update(['onwork'=> $request->onwork]);
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
-            if($request->onwork == "1"){
+            if($request->onwork == 1){
                 \PRedis::command('GEOADD',['partner_locations' , $profile->latitude, $profile->longitude, "{$request->user()->id}"]);
             }else{
                 \PRedis::command('ZREM',['partner_locations' ,"{$request->user()->id}"]);
