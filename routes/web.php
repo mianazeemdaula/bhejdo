@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user/type/consumer', 'UserController@consumer');
     Route::get('user/type/lifter', 'UserController@lifter');
     Route::get('user/type/store', 'UserController@stores');
+    Route::get('user/notification/{id}','UserController@notification');
     Route::resource('user.charges', 'ServiceChargeController');
     Route::resource('user.bonus', 'BonusController');
     Route::resource('notification', 'NotificationController');

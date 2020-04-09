@@ -123,6 +123,14 @@ class UserController extends Controller
         return redirect()->back()->with('status', 'Account Approved Successfully!');
     }
 
+    public function notification($id)
+    {
+        $user = User::find($id);
+        $data = ['url' => 'https://play.google.com/store/apps/details?id=ltd.ohyes.partner'];
+        $data = AndroidNotifications::toLifter("OhYes Partner!","Notification test", $user->pushToken, $data);
+        return $data;
+    }
+
     /**
      * Update the specified resource in storage.
      *
