@@ -21,7 +21,7 @@ class LifterController extends Controller
                     floatval($request->lon), // latitude
                 ],
             ],
-            '$maxDistance' => intval(3 * 1000),
+            '$maxDistance' => intval(2 * 1000),
         ])
         ->where("onwork","1")
         ->where('services','all',[intval($request->service)])->get();
