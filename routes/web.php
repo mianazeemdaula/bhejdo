@@ -26,7 +26,7 @@ Route::get('/redis', function () {
     PRedis::command('LPUSH',['notification-order-5', "7-Numan Dhodhi"]);
     PRedis::command('LPUSH',['notification-order-5', "6-Azeem Dhodhi"]);
     PRedis::command('LPUSH',['notification-order-5', "8-Hamzam Dhodhi"]);
-    return PRedis::get('notification-order-5');
+    return PRedis::lrange('notification-order-5', 0, -1);
 });
 
 Route::get('/', function () {
