@@ -22,7 +22,7 @@ Route::get('/redis', function () {
     // //return $app->get('user');
     // $lifters= PRedis::command('GEORADIUS',['partner_locations' ,30.69529,73.660845, 5, 'km', ['WITHDIST','WITHCOORD', 1, 'ASC']]);
     // return $lifters;
-    PRedis::command('DEL',['notification-order-5']);
+    //PRedis::command('DEL',['notification-order-5']);
     PRedis::command('RPUSH',['notification-order-5', "6-Azeem Dhodhi"]);
     PRedis::command('RPUSH',['notification-order-5', "7-Numan Dhodhi"]);
     PRedis::command('RPUSH',['notification-order-5', "6-Azeem Dhodhi"]);
