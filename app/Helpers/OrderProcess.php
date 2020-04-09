@@ -57,6 +57,7 @@ class OrderProcess {
                 $ids = $lifters->pluck('id','pushToken');
                 $data = [$ids];
             }
+            Cache::forget($key);
             return $data;
             // $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
             // $lCount = count($lifters);
