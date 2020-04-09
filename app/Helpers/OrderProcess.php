@@ -58,7 +58,43 @@ class OrderProcess {
                 $data = [$ids];
             }
             Cache::forget($key);
-            return $data;
+            //return $data;
+            $myArray = [[
+                'id' => 25,
+                'distance' => 0.900,
+                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
+                'notification' => true,
+                'cancel' => true,
+                'time' => "2656565565653232",
+            ], [
+                'id' => 24,
+                'distance' => 0.5826,
+                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
+                'notification' => true,
+                'cancel' => true,
+                'time' => "2656565565653232",
+            ],
+            [
+                'id' => 365,
+                'distance' => 0.200,
+                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
+                'notification' => true,
+                'cancel' => true,
+                'time' => "2656565565653232",
+            ],
+            [
+                'id' => 145,
+                'distance' => 0.999958,
+                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
+                'notification' => true,
+                'cancel' => true,
+                'time' => "2656565565653232",
+            ]];
+
+            usort($myArray, function($a, $b) {
+                return $a['distance'] <=> $b['distance'];
+            });
+            return $myArray;
             // $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
             // $lCount = count($lifters);
             // $tokens = Array();
