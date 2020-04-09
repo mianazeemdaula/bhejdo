@@ -153,7 +153,7 @@ class OrderController extends Controller
             if($request->has('notification')){
                 $orderid = $request->orderid;
                 Cache::put('order_notificaton_'.$request->user()->id."_".$orderid, true, 90000); // 25 hours
-                return response()->json(['status'=>true, 'data' => "Notification disable for this order" ], 200);
+                return response()->json(['status'=>true, 'data' => "Notification is disabled for this order." ], 200);
             }
 
             $order = Order::findOrFail($request->orderid);
