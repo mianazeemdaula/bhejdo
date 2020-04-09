@@ -140,7 +140,7 @@ class OrderController extends Controller
         $data = [];
         foreach($lifters as $lifter){
             $cancle = Cache::has('order_notificaton_'.$lifter->lifter_id."_".$order->id);
-            $data[] = ['name' => $lifter->name, 'notificaton' => $cancle];
+            $data[] = ['name' => $lifter->name, 'id' => $lifter->lifter_id, 'notificaton' => $cancle];
         }
         $lifters= \PRedis::command('GEORADIUS',['partner_locations' ,$order->latitude,$order->longitude, 3, 'km', ['WITHDIST','WITHCOORD', 1, 'ASC']]);
         return response()->json(['lifters'=> $data, 'neighbours'=> $lifters], 200);
