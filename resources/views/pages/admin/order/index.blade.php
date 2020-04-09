@@ -54,7 +54,7 @@
                                       <div class="btn-group">
                                         <a href="{{ route('order.show',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('order.edit',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="btn-sm btn-default"><i class="fas fa-trash"></i></a>
+                                        <a href="{{ url('order/livepartners/'.$item->id) }}" class="btn-sm btn-default"><i class="fas fa-trash"></i></a>
                                       </div>
                                     </td>
                                 </tr>

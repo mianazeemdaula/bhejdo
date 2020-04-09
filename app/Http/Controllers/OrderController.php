@@ -118,4 +118,23 @@ class OrderController extends Controller
         $order = Order::find($id);
         return view('pages.admin.order.show', compact('order'));
     }
+
+    public function livePartners($id)
+    {
+        $order = Order::find($id);
+        $lifters = \App\LifterLocation::where('location', 'near', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    floatval($order->latitude), // longitude
+                    floatval($order->longitude), // latitude
+                ],
+            ],
+            '$maxDistance' => intval(3 * 1000)
+        ])
+        ->where("onwork","1")
+        ->where('services','all',[$service])->get();
+        //->where('last_update', '>', Carbon::now()->subSeconds(120)->timestamp)
+        return response()->json(['lifters'=> $lifters], 200);
+    }
 }
