@@ -20,8 +20,9 @@ Route::get('/redis', function () {
     // $redis = PRedis::command('GEOADD',['locations' , 30.692198, 73.639817, 'lifter-2']);
     // $redis = PRedis::command('GEOADD',['locations' , 30.679687, 73.654408, 'lifter-3']);
     // //return $app->get('user');
+    $redis = PRedis::command('ZREM',['partner_locations' ,'6']);
     $lifters= PRedis::command('GEORADIUS',['partner_locations' ,30.69529,73.660845, 5, 'km', ['WITHDIST','WITHCOORD', 1, 'ASC']]);
-    return $lifters;
+    return $redis;
 });
 
 Route::get('/', function () {
