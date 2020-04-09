@@ -133,7 +133,7 @@ class OrderController extends Controller
             '$maxDistance' => intval(3 * 1000)
         ])
         ->where("onwork","1")
-        ->where('services','all',[$service])->get();
+        ->where('services','all',[$order->service_id])->get();
         //->where('last_update', '>', Carbon::now()->subSeconds(120)->timestamp)
         return response()->json(['lifters'=> $lifters], 200);
     }
