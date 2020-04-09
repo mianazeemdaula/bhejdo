@@ -142,6 +142,7 @@ class OrderController extends Controller
             $cancle = Cache::has('order_notificaton_'.$lifter->lifter_id."_".$order->id);
             $data[] = ['name' => $lifter->name, 'notificaton' => $cancle];
         }
-        return response()->json(['lifters'=> $data], 200);
+        $lifters= \PRedis::command('GEORADIUS',['partner_locations' ,$order->latitude,$order->longitude, 3, 'km', ['WITHDIST','WITHCOORD', 1, 'ASC']]);
+        return response()->json(['lifters'=> $data, 'neighbours'=> $lifters], 200);
     }
 }
