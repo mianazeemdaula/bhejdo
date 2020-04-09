@@ -49,17 +49,15 @@ class OrderProcess {
     {
         try{
             $key = 'partner_notificaton_'.$order->id;
-            $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id)->pluck('lifter_id');
+            $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id)->pluck('lifter_id','location');
             $redis = \PRedis::command('GEORADIUS',['partner_locations' ,$order->latitude, $order->longitude, 3, 'km', ['WITHDIST','WITHCOORD', 20, 'ASC']]);
             if(Cache::has($key)){
                 $data = Cache::get($key);
             }else{
-                $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
-                $ids = $lifters->pluck('lifter_id','location');
+                $data = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
                 $data = $ids;
             }
-            Cache::forget($key);
-            return [ 'mongo' => $data, 'redis' => $redis];
+            return [ 'mongo' => $lifters, 'redis' => $redis];
             $myArray = [[
                 'id' => 25,
                 'distance' => 0.900,
