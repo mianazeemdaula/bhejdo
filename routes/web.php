@@ -236,7 +236,8 @@ Route::get('/locations', function(){
     $_users = [];
     foreach($user as $u){
         if($u->profile != null){
-            $_users[$u->id] = ['lat' => $u->profile->latitude, 'lon' => $u->profile->longitude, 'name'=> $u->name, 'token' => $u->pushToken, 'onwork'=>1, 'services'=> [1,2,3]];
+            \PRedis::command('GEOADD',['partner_locations' , $u->profile->latitude, $u->profile->longitude, "{$u->id}"]);
+            //$_users[$u->id] = ['lat' => $u->profile->latitude, 'lon' => $u->profile->longitude, 'name'=> $u->name, 'token' => $u->pushToken, 'onwork'=>1, 'services'=> [1,2,3]];
         }
     }
     return $_users;
