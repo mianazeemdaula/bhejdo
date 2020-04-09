@@ -63,11 +63,11 @@ class ScheduleOrderMorning extends Command
                 if($bonus->balance >= $deductable){
                     $bonusDeducted = $deductable;
                     $order->bonus = $bonusDeducted;
-                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
+                    Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
                 }else if($bonus->balance >= 0){
                     $bonusDeducted = $bonus->balance;
                     $order->bonus = $bonusDeducted;
-                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
+                    Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
                 }
             }
             $order->status = 'assigned';
@@ -75,7 +75,7 @@ class ScheduleOrderMorning extends Command
             $order->save();
             
             $data = ['order_id' => $order->id, 'type' => 'order'];
-            //AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
+            AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
         }
         $this->info('Orders Created');
     }
