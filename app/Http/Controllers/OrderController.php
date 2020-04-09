@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Validator;
 use App\Http\Resources\Order\Order as OrderResource;
 use DB;
+use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
 {
@@ -135,6 +136,12 @@ class OrderController extends Controller
         ->where("onwork","1")
         ->where('services','all',[$order->service_id])->get();
         //->where('last_update', '>', Carbon::now()->subSeconds(120)->timestamp)
-        return response()->json(['lifters'=> $lifters], 200);
+
+        $data = [];
+        foreach($lifters as $lifter){
+            $cancle = Cache::has('order_notificaton_'.$lifter->lifter_id."_".$order->id);
+            $data[] = ['name' => $lifter->name, 'notificaton' => $cancle];
+        }
+        return response()->json(['lifters'=> $data], 200);
     }
 }
