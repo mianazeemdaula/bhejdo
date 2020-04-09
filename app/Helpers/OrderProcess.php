@@ -53,7 +53,7 @@ class OrderProcess {
             $data = [];
             foreach($lifters as $lifter){
                 $latlong = $lifter->location['coordinates'];
-                $data[] = ['id' => $lifter->lifter_id, 'distance' => self::distance($latlong[0], $latlong[1],$order->latitude, $order->longitude,"K") ];
+                $data[] = ['id' => $lifter->lifter_id, 'distance' => self::distance($latlong[0], $latlong[1],$order->latitude, $order->longitude,"K"), 'location' => $latlong ];
             }
             $redis = \PRedis::command('GEORADIUS',['partner_locations' ,$order->latitude, $order->longitude, 3, 'km', ['WITHDIST','WITHCOORD', 20, 'ASC']]);
             if(Cache::has($key)){
