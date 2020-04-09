@@ -50,6 +50,7 @@ class OrderProcess {
     {
         try{
             $key = 'partner_notificaton_'.$order->id;
+            $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id)->pluck('lifter_id');
             if(Cache::has($key)){
                 $data = Cache::get($key);
             }else{
