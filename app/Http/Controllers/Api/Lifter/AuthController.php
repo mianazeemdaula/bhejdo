@@ -23,7 +23,6 @@ use App\ServiceCharge;
 use App\Helpers\BonusProcess;
 use App\Helpers\UserHelper;
 use App\Helpers\AndroidNotifications;
-use Illuminate\Support\Facades\Redis;
 
 class AuthController extends Controller
 {
