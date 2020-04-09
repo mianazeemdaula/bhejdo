@@ -54,7 +54,7 @@ class OrderProcess {
                 $data = Cache::get($key);
             }else{
                 $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
-                $ids = $lifters->pluck('id','pushToken');
+                $ids = $lifters->pluck('lifter_id');
                 $data = [$ids];
             }
             Cache::forget($key);
