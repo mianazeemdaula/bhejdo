@@ -52,7 +52,8 @@ class OrderProcess {
             $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
             $data = [];
             foreach($lifters as $lifter){
-                $data[] = ['id' => $lifter->lifter_id, 'location' => $lifter->location];
+                $latlong = $lifter->location->coordinates;
+                $data[] = ['id' => $lifter->lifter_id, 'location' => $latlong ];
             }
             $redis = \PRedis::command('GEORADIUS',['partner_locations' ,$order->latitude, $order->longitude, 3, 'km', ['WITHDIST','WITHCOORD', 20, 'ASC']]);
             if(Cache::has($key)){
