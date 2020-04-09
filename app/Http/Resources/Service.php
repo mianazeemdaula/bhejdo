@@ -18,6 +18,7 @@ class Service extends JsonResource
             'id' => $this->id,
             'name' => $this->s_name,
             'icon' => $this->img_url == null ? null : asset("services/".$this->img_url),
+            'scale' => $this->scale,
         ];
     }
 }
