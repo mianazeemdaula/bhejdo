@@ -55,47 +55,13 @@ class OrderProcess {
                 $latlong = $lifter->location['coordinates'];
                 $data[] = ['id' => $lifter->lifter_id, 'distance' => self::distance($latlong[0], $latlong[1],$order->latitude, $order->longitude,"K"), 'location' => $latlong ];
             }
-            $redis = \PRedis::command('GEORADIUS',['partner_locations' ,$order->latitude, $order->longitude, 3, 'km', ['WITHDIST','WITHCOORD', 20, 'ASC']]);
             if(Cache::has($key)){
                 $data = Cache::get($key);
             }
-            return [ 'mongo' => $data, 'redis' => $redis];
-            $myArray = [[
-                'id' => 25,
-                'distance' => 0.900,
-                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
-                'notification' => true,
-                'cancel' => true,
-                'time' => "2656565565653232",
-            ], [
-                'id' => 24,
-                'distance' => 0.5826,
-                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
-                'notification' => true,
-                'cancel' => true,
-                'time' => "2656565565653232",
-            ],
-            [
-                'id' => 365,
-                'distance' => 0.200,
-                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
-                'notification' => true,
-                'cancel' => true,
-                'time' => "2656565565653232",
-            ],
-            [
-                'id' => 145,
-                'distance' => 0.999958,
-                'pushToken' => "lasdjlfsjfljslfjslfjlaskjfs;kldjf",
-                'notification' => true,
-                'cancel' => true,
-                'time' => "2656565565653232",
-            ]];
-
-            usort($myArray, function($a, $b) {
+            usort($data, function($a, $b) {
                 return $a['distance'] <=> $b['distance'];
             });
-            return $myArray;
+            return $data;
             // $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
             // $lCount = count($lifters);
             // $tokens = Array();
