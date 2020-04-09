@@ -20,8 +20,13 @@ Route::get('/redis', function () {
     // $redis = PRedis::command('GEOADD',['locations' , 30.692198, 73.639817, 'lifter-2']);
     // $redis = PRedis::command('GEOADD',['locations' , 30.679687, 73.654408, 'lifter-3']);
     // //return $app->get('user');
-    $lifters= PRedis::command('GEORADIUS',['partner_locations' ,30.69529,73.660845, 5, 'km', ['WITHDIST','WITHCOORD', 1, 'ASC']]);
-    return $lifters;
+    // $lifters= PRedis::command('GEORADIUS',['partner_locations' ,30.69529,73.660845, 5, 'km', ['WITHDIST','WITHCOORD', 1, 'ASC']]);
+    // return $lifters;
+    PRedis::command('LPUSH',['notification-order-5', "6-Azeem Dhodhi"]);
+    PRedis::command('LPUSH',['notification-order-5', "7-Numan Dhodhi"]);
+    PRedis::command('LPUSH',['notification-order-5', "6-Azeem Dhodhi"]);
+    PRedis::command('LPUSH',['notification-order-5', "8-Hamzam Dhodhi"]);
+    return PRedis::get('notification-order-5');
 });
 
 Route::get('/', function () {
