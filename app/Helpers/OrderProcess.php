@@ -57,9 +57,6 @@ class OrderProcess {
             $redis = \PRedis::command('GEORADIUS',['partner_locations' ,$order->latitude, $order->longitude, 3, 'km', ['WITHDIST','WITHCOORD', 20, 'ASC']]);
             if(Cache::has($key)){
                 $data = Cache::get($key);
-            }else{
-                $data = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
-                $data = $ids;
             }
             return [ 'mongo' => $data, 'redis' => $redis];
             $myArray = [[
