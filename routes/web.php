@@ -242,3 +242,10 @@ Route::get('/locations', function(){
     }
     return $_users;
 });
+
+
+Route::get('queue', function(){
+    $order = \App\Order::find(75);
+    $data = \App\Helpers\OrderProcess::orderAssign($order);
+    return $data;
+});
