@@ -75,7 +75,7 @@ class ScheduleOrderMorning extends Command
             $order->save();
             
             $data = ['order_id' => $order->id, 'type' => 'order'];
-            AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
+            //AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
         }
         $this->info('Orders Created');
     }
