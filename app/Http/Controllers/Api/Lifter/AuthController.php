@@ -279,7 +279,7 @@ class AuthController extends Controller
             }
             LifterLocation::where('lifter_id',$request->user()->id)->update(['onwork'=> $request->onwork]);
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
-            PRedis::command('GEOADD',['partner_locations' , $profile->latitude, $profile->longitude, "{$request->user()->id}"]);
+            \PRedis::command('GEOADD',['partner_locations' , $profile->latitude, $profile->longitude, "{$request->user()->id}"]);
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
