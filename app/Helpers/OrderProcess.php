@@ -64,32 +64,31 @@ class OrderProcess {
                 $queue = Cache::get($key);
             }
 
-            foreach($livePartners as $partner){
-                $lifterid = $partner['id'];
-                if(!in_array($lifterid, $queue)){
-                    // Do processing for notificaton
-                    // if partner not cancel the acceptance
-                    if(!Cache::has('order_notificaton_'.$lifterid."_".$order->id)){
-                        // if another notifation in last 100 seconds
-                        if(!Cache::has('neworder_time_'.$lifterid)){
-                            Cache::put('neworder_time_'.$lifterid, true, 100);
-                            $user = User::find($lifterid);
-                            $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
-                            // Send Notification to Lifter
-                            $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
-                            $notification = AndroidNotifications::toLifter("New Order", $message, $user->pushToken, $args);
-                            $respone = json_decode($notification);
-                            dd($notification);
-                            if($respone->success){
-                                $queue[] = $lifterid;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            Cache::put($key, $queue, 90000); // 25 hours
-            return $queue;
+            // foreach($livePartners as $partner){
+            //     $lifterid = $partner['id'];
+            //     if(!in_array($lifterid, $queue)){
+            //         // Do processing for notificaton
+            //         // if partner not cancel the acceptance
+            //         if(!Cache::has('order_notificaton_'.$lifterid."_".$order->id)){
+            //             // if another notifation in last 100 seconds
+            //             if(!Cache::has('neworder_time_'.$lifterid)){
+            //                 Cache::put('neworder_time_'.$lifterid, true, 100);
+            //                 $user = User::find($lifterid);
+            //                 $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
+            //                 // Send Notification to Lifter
+            //                 $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
+            //                 $notification = AndroidNotifications::toLifter("New Order", $message, $user->pushToken, $args);
+            //                 $respone = json_decode($notification);
+            //                 if($respone->success){
+            //                     $queue[] = $lifterid;
+            //                     break;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            // Cache::put($key, $queue, 90000); // 25 hours
+            return $livePartners;
         }catch(Exception $ex){
             return $ex;
         }
