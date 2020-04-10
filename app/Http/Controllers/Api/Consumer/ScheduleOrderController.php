@@ -53,4 +53,9 @@ class ScheduleOrderController extends Controller
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
         }
     }
+
+    public function updateorder(Request $request)
+    {
+        return response()->json(['status'=>true, 'data' => $request->all() ], 200);
+    }
 }
