@@ -61,9 +61,9 @@ class OrderProcess {
             // Caculated distance and lifters
             $queue = [];
             $queueFail = [];
-            if(Cache::has($key)){
-                $queue = Cache::get($key);
-                $queueFail = Cache::get($key."_fail");
+            if(\PRedis::exists($key)){
+                $queue = json_decode(\PRedis::get($key));
+                $queueFail = json_encode(\PRedis::get($key."_fail"));
             }
 
             foreach($livePartners as $partner){
@@ -91,8 +91,8 @@ class OrderProcess {
                     }
                 }
             }
-            Cache::put($key, $queue, 90000); // 25 hours
-            Cache::put($key."_fail", $queueFail, 90000); // 25 hours
+            \PRedis::set($key, json_encode($queue), 90000); // 25 hours
+            \PRedis::set($key."_fail", json_encode($queueFail), 90000); // 25 hours
             return ['sucess'=> $queue, 'fail' => $queueFail, 'order' => $order->id];
         }catch(Exception $ex){
             return $ex;
