@@ -93,8 +93,10 @@ class OrderProcess {
                     }
                 }
             }
-            \PRedis::set($key, json_encode($queue), 90000); // 25 hours
-            \PRedis::set($key."_fail", json_encode($queueFail), 90000); // 25 hours
+            \PRedis::set($key, json_encode($queue)); // 25 hours
+            \PRedis::set($key."_fail", json_encode($queueFail));
+            \PRedis::expire($key, 25 * 60 * 60); // 25 hours
+            \PRedis::expire($key."_fail", 25 * 60 * 60); // 25 hours
             return ['sucess'=> $queue, 'fail' => $queueFail, 'order' => $order->id];
         }catch(Exception $ex){
             return $ex;
