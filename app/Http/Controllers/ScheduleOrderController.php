@@ -15,8 +15,8 @@ class OrderController extends Controller
     use FormBuilderTrait;
     public function index()
     {
-        $collection = ScheduleOrder::latest('id')->limit(200)->get();
-        return view('pages.admin.order.index', compact('collection'));
+        $collection = ScheduleOrder::latest('id')->get();
+        return view('pages.admin.subscription.index', compact('collection'));
     }
 
     public function getTransfer($id)
