@@ -203,6 +203,7 @@ return [
                 [
                     'text' => 'Stores',
                     'url'  => 'user/type/store',
+                    'permission' => 'super-admin|admin'
                 ],
             ],
             
