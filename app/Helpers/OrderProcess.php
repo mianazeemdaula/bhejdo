@@ -63,7 +63,7 @@ class OrderProcess {
             $queueFail = [];
             if(\PRedis::exists($key)){
                 $queue = json_decode(\PRedis::get($key));
-                $queueFail = json_encode(\PRedis::get($key."_fail"));
+                $queueFail = json_decode(\PRedis::get($key."_fail"));
             }
 
             foreach($livePartners as $partner){
@@ -78,6 +78,7 @@ class OrderProcess {
                             $user = User::find($lifterid);
                             $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
                             // Send Notification to Lifter
+                 
                             $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
                             $notification = AndroidNotifications::toLifter("New Order", $message, $user->pushToken, $args);
                             $respone = json_decode($notification);
