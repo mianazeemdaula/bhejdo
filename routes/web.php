@@ -248,7 +248,7 @@ Route::get('queue', function(){
     $user = \App\User::find(6);
     $notification = \App\Helpers\AndroidNotifications::toLifter("New Order","Just Test", $user->pushToken, []);
     $respone = json_decode($notification);
-    return $respone['success'];
+    return $respone->success;
     $data = \App\Helpers\OrderProcess::orderAssign($order);
     return $data;
 });
