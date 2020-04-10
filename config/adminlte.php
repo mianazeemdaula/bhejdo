@@ -215,7 +215,7 @@ return [
         ],
         [
             'text'        => 'Subscriptions',
-            'route'         => 'scheduleOrder.index',
+            'route'         => 'subscription.index',
             'icon'        => 'far fa-fw fa-file',
         ],
         [

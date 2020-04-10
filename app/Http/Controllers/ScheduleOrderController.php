@@ -10,7 +10,7 @@ use App\ScheduleOrder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\OrderTransferForm;
 
-class OrderController extends Controller
+class ScheduleOrderController extends Controller
 {
     use FormBuilderTrait;
     public function index()
