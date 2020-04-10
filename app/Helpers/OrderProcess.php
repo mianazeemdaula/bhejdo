@@ -68,6 +68,7 @@ class OrderProcess {
                 if(!in_array($partner['id'], $queue)){
                     // Do processing for notificaton
                     $queue[] = $partner['id'];
+                    break;
                 }
             }
             Cache::put($key, $queue, 90000); // 25 hours
