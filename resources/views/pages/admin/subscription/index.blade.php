@@ -46,8 +46,8 @@
                                     <td> {{ $item->qty }} </td>
                                     <td> {{ $item->shift }} </td>
                                     <td> {{ $item->delivery_time }} </td>
-                                    <td>  </td>
-                                    <td> {!! $item->days !!} </td>
+                                    <td> {{ $item->subscribe_type }} </td>
+                                    <td> {!! $item->days->toJson() !!} </td>
                                     <td> {{ $item->status }} </td>
                                     <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->latitude }},{{ $item->longitude }}">Map</a></td>
                                     <td> {{ $item->created_at }} </td>
