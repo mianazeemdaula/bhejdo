@@ -46,7 +46,7 @@ class NewOpenOrder extends Command
         //$orders = Order::where('lifter_id',2)->get();
         $response = Array();
         foreach($orders as $order){
-            $response[] = OrderProcess::orderCreated($order);
+            $response[] = OrderProcess::orderAssign($order);
         }
         $this->info('Notifications'.json_encode($response));
     }

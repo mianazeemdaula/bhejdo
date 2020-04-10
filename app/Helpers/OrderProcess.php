@@ -93,7 +93,7 @@ class OrderProcess {
             }
             Cache::put($key, $queue, 90000); // 25 hours
             Cache::put($key."_fail", $queueFail, 90000); // 25 hours
-            return ['sucess'=> $queue, 'fail' => $queueFail];
+            return ['sucess'=> $queue, 'fail' => $queueFail, 'order' => $order->id];
         }catch(Exception $ex){
             return $ex;
         }
