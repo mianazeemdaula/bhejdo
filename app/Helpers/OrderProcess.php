@@ -78,8 +78,11 @@ class OrderProcess {
                             // Send Notification to Lifter
                             $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
                             $notification = AndroidNotifications::toLifter("New Order", $message, $user->pushToken, $args);
-                            $queue[] = $lifterid;
-                            break;
+                            $respone = json_decode($notification);
+                            if($respone->success){
+                                $queue[] = $lifterid;
+                                break;
+                            }
                         }
                     }
                 }
@@ -89,7 +92,6 @@ class OrderProcess {
         }catch(Exception $ex){
             return $ex;
         }
-        return true;
     }
 
     static public function distance($lat1, $lon1, $lat2, $lon2, $unit) {

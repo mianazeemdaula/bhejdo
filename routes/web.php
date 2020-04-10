@@ -244,11 +244,7 @@ Route::get('/locations', function(){
 
 
 Route::get('queue', function(){
-    $order = \App\Order::find(75);
-    $user = \App\User::find(6);
-    $notification = \App\Helpers\AndroidNotifications::toLifter("New Order","Just Test", $user->pushToken, []);
-    $respone = json_decode($notification);
-    return $respone->success;
+    $order = \App\Order::find(197);
     $data = \App\Helpers\OrderProcess::orderAssign($order);
     return $data;
 });
