@@ -25,9 +25,10 @@
                                 <th>Lifter</th>
                                 <th>Service</th>
                                 <th>Qty</th>
-                                <th>Price</th>
-                                <th>Charges</th>
+                                <th>Shift</th>
+                                <th>Delivery Time</th>
                                 <th>Type</th>
+                                <th>Days</th>
                                 <th>Status</th>
                                 <th>Location</th>
                                 <th>Created</th>
@@ -43,9 +44,10 @@
                                     <td> {{ $item->lifter->mobile}} <br/> {{ $item->lifter->name}} </td>
                                     <td> {{ $item->service->s_name}} </td>
                                     <td> {{ $item->qty }} </td>
-                                    <td> {{ $item->price }} </td>
-                                    <td> {{ $item->charges }} </td>
-                                    <td> {{ $item->type }} </td>
+                                    <td> {{ $item->shift }} </td>
+                                    <td> {{ $item->delivery_time }} </td>
+                                    <td> {{ $item->subscribe_type }} </td>
+                                    <td> {{ $item->days }} </td>
                                     <td> {{ $item->status }} </td>
                                     <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->latitude }},{{ $item->longitude }}">Map</a></td>
                                     <td> {{ $item->created_at }} </td>
