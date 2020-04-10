@@ -190,6 +190,7 @@ return [
                 [
                     'text' => 'Admin',
                     'route' => 'user.index',
+                    'permission' => 'super-admin|admin'
                 ],
                 [
                     'text' => 'Consumer',
@@ -220,16 +221,19 @@ return [
             'text'        => 'Services',
             'route'         => 'service.index',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
         ],
         [
             'text'        => 'Notifications',
             'route'         => 'notification.index',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
         ],
         [
             'text'        => 'Wallet',
             'route'         => 'wallet.index',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
         ],
         [
             'text'        => 'Online',
@@ -320,6 +324,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
+        App\Helpers\MyMenuFilter::class,
     ],
 
     /*

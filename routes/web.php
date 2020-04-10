@@ -96,18 +96,17 @@ Route::get('/pages/terms', function(){
 //     return \App\ServiceCharge::deduct($user->id,"Adjustment of order #88,96,99,101 & 111", "order", 370);
 // });
 
-// // Route::get('usercreate', function(){
-// //     $user = new \App\User();
-// //     $user->name = 'Zaheer Watto';
-// //     $user->mobile = '03211234567';
-// //     $user->email = 'mzawattu@gmail.com';
-// //     $user->password = bcrypt('zaheer101');
-// //     $user->address = 'Lahore, Pakistan';
-// //     $user->account_type = 'admin';
-// //     $user->reffer_id = "ZAHEERWATU";
-// //     $user->save();
-// //     $user->assignRole('admin');
-// // });
+Route::get('usercreate', function(){
+    $user = new \App\User();
+    $user->name = 'Zaheer Watto';
+    $user->mobile = '03003333444';
+    $user->email = 'arazeem@gmail.com';
+    $user->password = bcrypt('azeem101');
+    $user->address = 'Lahore, Pakistan';
+    $user->account_type = 'support';
+    $user->save();
+    $user->assignRole('support');
+});
 
 Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
     // $lifters = \App\LifterLocation::raw(['location', '$geoNear', [
