@@ -56,6 +56,16 @@ class ScheduleOrderController extends Controller
 
     public function updateorder(Request $request)
     {
-        return response()->json(['status'=>true, 'data' => $request->all() ], 200);
+        try {
+            DB::beginTransaction();
+            $order = ScheduleOrder::find($request->id);
+            $order->status = $request->status;
+            $order->save();
+            DB::commit();
+            return response()->json(['status'=>true, 'data' => 'order updated successfullly' ], 200);
+        }catch(Exception $e){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
+        }
     }
 }
