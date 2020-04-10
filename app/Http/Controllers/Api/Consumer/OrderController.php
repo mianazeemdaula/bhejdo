@@ -114,7 +114,7 @@ class OrderController extends Controller
     {
         try{
             $orders = Order::where('consumer_id', $request->user()->id)
-            ->where('status', '!=' ,'confirmed')->get();
+            ->where('status', '!=' ,'confirmed')->where('status', '!=' ,'collected')->latest()->get();
             $orders = OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
