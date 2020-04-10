@@ -62,8 +62,6 @@ class OrderProcess {
             $queue = [];
             $queueFail = [];
             
-            \PRedis::del($key);
-            \PRedis::del($key."_fail");
             if(\PRedis::exists($key)){
                 $queue = json_decode(\PRedis::get($key));
                 $queueFail = json_decode(\PRedis::get($key."_fail"));
