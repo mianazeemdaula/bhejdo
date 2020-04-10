@@ -48,20 +48,30 @@ class OrderProcess {
     static public function orderAssign(Order $order)
     {
         try{
-            $key = 'partner_notificaton_'.$order->id;
-            $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
-            $data = [];
-            foreach($lifters as $lifter){
-                $latlong = $lifter->location['coordinates'];
-                $data[] = ['id' => $lifter->lifter_id, 'distance' => self::distance($latlong[0], $latlong[1],$order->latitude, $order->longitude,"K"), 'location' => $latlong ];
+            $key = 'order_queue_notificaton_'.$order->id;
+            $partners = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
+            $livePartners = [];
+            foreach($partners as $partner){
+                $latlong = $partner->location['coordinates'];
+                $livePartners[] = ['id' => $partner->lifter_id, 'distance' => self::distance($latlong[0], $latlong[1],$order->latitude, $order->longitude,"K"), 'location' => $latlong ];
             }
-            if(Cache::has($key)){
-                $data = Cache::get($key);
-            }
-            usort($data, function($a, $b) {
+            usort($livePartners, function($a, $b) {
                 return $a['distance'] <=> $b['distance'];
             });
-            return $data;
+            // Caculated distance and lifters
+            $queue = [];
+            if(Cache::has($key)){
+                $queue = Cache::get($key);
+            }
+
+            foreach($livePartners as $partner){
+                if(!in_array($partner['id'], $queue)){
+                    // Do processing for notificaton
+                    $queue[] = $partner['id'];
+                }
+            }
+            Cache::put($key, $queue, 90000); // 25 hours
+            return $queue;
             // $lifters = self::getNearMe($order->latitude, $order->longitude, 3, $order->service_id);
             // $lCount = count($lifters);
             // $tokens = Array();
