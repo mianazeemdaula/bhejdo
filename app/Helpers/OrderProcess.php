@@ -79,6 +79,7 @@ class OrderProcess {
                             $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
                             $notification = AndroidNotifications::toLifter("New Order", $message, $user->pushToken, $args);
                             $respone = json_decode($notification);
+                            dd($notification);
                             if($respone->success){
                                 $queue[] = $lifterid;
                                 break;
