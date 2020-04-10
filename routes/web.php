@@ -244,7 +244,7 @@ Route::get('/locations', function(){
 
 
 Route::get('queue', function(){
-    $order = \App\Order::find(197);
+    $order = \App\Order::find(198);
     $data = \App\Helpers\OrderProcess::orderAssign($order);
     return $data;
 });
