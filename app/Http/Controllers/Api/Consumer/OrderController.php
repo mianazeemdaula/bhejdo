@@ -78,9 +78,9 @@ class OrderController extends Controller
                 $order->delivery_time = $request->delivery_time;
             }
             $order->save();
-            $response = OrderProcess::orderCreated($order);
+            $response = OrderProcess::orderAssign($order);
             DB::commit();
-            $data = ['msg' => 'Order Placed Successfully', 'response' => $response];
+            $data = ['msg' => 'Order has placed successfully', 'response' => $response];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
             DB::rollBack();
