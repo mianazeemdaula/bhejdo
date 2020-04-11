@@ -85,8 +85,8 @@ class OrderProcess {
                             $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
                             $notification = AndroidNotifications::toLifter("New Order", $message, $user->pushToken, $args);
                             $respone = json_decode($notification);
-                            $msg = "OhYes have new order please click the link below to accept the order. ";
-                            $msg += "https://bhejdo.org/api/lifter/order/smsacceptance/".$order->id."/".$user->id;
+                            //$msg = "OhYes have new order please click the link below to accept the order. ";
+                            $msg = "OhYes have new order please click the link below to accept the order.  https://bhejdo.org/api/lifter/order/smsacceptance/".$order->id."/".$user->id;
                             $msgresponse = \App\Helpers\SmsHelper::send($user->mobile, $msg);
                             if(substr($msgresponse,0,2) == "OK"){
                                 $smsqueue[] = $lifterid;
