@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Validator;
 use App\Http\Resources\Order\Order as OrderResource;
 use DB;
+use App\User;
 use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
