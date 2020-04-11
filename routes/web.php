@@ -82,6 +82,9 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
+// Order Prcess url
+
+Route::get('assing/{order}/{user}', "");
 
 Route::get('/seed', 'SeedController@Seed');
 Route::get('/pusher/{message}', 'SeedController@pusher');

@@ -92,6 +92,7 @@ Route::prefix('lifter')->group(function () {
     Route::post('register', 'Api\Lifter\AuthController@register');
     
     Route::post('forgetpassword', 'Api\Lifter\AuthController@updateForgetPassword'); 
+    Route::get('order/smsacceptance/{order}/{user}', 'Api\Lifter\OrderController@acceptOrderBySms'); 
     
     Route::group(['middleware' => ['auth:api']], function(){
         
