@@ -21,6 +21,56 @@ use App\Events\UpdateLifterEvent;
 
 class OrderController extends Controller
 {
+    public function acceptOrderBySms($order, $user)
+    {
+        DB::beginTransaction();
+        try{
+            $order = Order::find($order);
+            $user = User::find($user);
+            if($order == null){
+                $message = "Order not found";
+                return view('pages.api.order.accept',compact('message'));
+            }
+            else if($order->status == 'assigned'){
+                $message = "Order already assigned";
+                return view('pages.api.order.accept',compact('message'));
+            }else if($order->status == 'canceled'){
+                $message = "Order was canceled by consumer.";
+                return view('pages.api.order.accept',compact('message'));
+            }
+            $order->lifter_id = $user->id;
+            $order->accepted_time = Carbon::now()->toDateTimeString();
+            // Bonus Deduction
+            $bonus = Bonus::balance($order->consumer_id);
+            $bonusDeducted = 0;
+            if($bonus != null && $order->type != 3){
+                $deductable = $order->qty * 10;  
+                if($bonus->balance >= $deductable){
+                    $bonusDeducted = $deductable;
+                    $order->bonus = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
+                }else if($bonus->balance >= 0){
+                    $bonusDeducted = $bonus->balance;
+                    $order->bonus = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order", $bonusDeducted);
+                }
+            }
+            $order->status = 'assigned';
+            $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
+            $order->save();
+            DB::commit();
+            // Notifications to consumer
+            $orderResource = new OrderResource($order);
+            $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";
+            $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
+            AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
+            $message = "Congratulations! order assigned to you.";
+            return view('pages.api.order.accept',compact('message'));
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
     
     public function acceptOrder(Request $request)
     {
