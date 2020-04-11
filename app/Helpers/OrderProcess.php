@@ -60,10 +60,12 @@ class OrderProcess {
             });
             // Caculated distance and lifters
             $queue = [];
+            $smsqueue = [];
             $queueFail = [];
             
             if(\PRedis::exists($key)){
                 $queue = json_decode(\PRedis::get($key));
+                $smsqueue = json_decode(\PRedis::get($key."_sms"));
                 $queueFail = json_decode(\PRedis::get($key."_fail"));
             }
 
@@ -75,7 +77,7 @@ class OrderProcess {
                     if(!Cache::has('order_notificaton_'.$lifterid."_".$order->id)){
                         // if another notifation in last 100 seconds
                         if(!Cache::has('neworder_time_'.$lifterid)){
-                            Cache::put('neworder_time_'.$lifterid, true, 100);
+                            Cache::put('neworder_time_'.$lifterid, true, 50);
                             $user = User::find($lifterid);
                             $message = "Place order of $order->qty liter of ".$order->service->s_name.". Please deliver as earliest.";
                             // Send Notification to Lifter
@@ -83,6 +85,11 @@ class OrderProcess {
                             $args =  ["type" => 'new_order', 'order_id' => $order->id , 'order' => new OrderResource($order)];
                             $notification = AndroidNotifications::toLifter("New Order", $message, $user->pushToken, $args);
                             $respone = json_decode($notification);
+                            $msg = "https://bhejdo.org/api/lifter/order/smsacceptance/{$order->id}/{$user->id}";
+                            $msgresponse = \App\Helpers\SmsHelper::send($user->mobile, $msg);
+                            if(substr($msgresponse,0,2) == "OK"){
+                                $smsqueue[] = $lifterid;
+                            }
                             if($respone->success){
                                 $queue[] = $lifterid;
                                 break;
@@ -95,9 +102,11 @@ class OrderProcess {
             }
             \PRedis::set($key, json_encode($queue)); // 25 hours
             \PRedis::set($key."_fail", json_encode($queueFail));
+            \PRedis::set($key."_sms", json_encode($smsqueue));
             \PRedis::expire($key, 25 * 60 * 60); // 25 hours
             \PRedis::expire($key."_fail", 25 * 60 * 60); // 25 hours
-            return ['sucess'=> $queue, 'fail' => $queueFail, 'order' => $order->id];
+            \PRedis::expire($key."_sms", 25 * 60 * 60); // 25 hours
+            return ['sucess'=> $queue, 'fail' => $queueFail, 'sms' => $smsqueue, 'order' => $order->id];
         }catch(Exception $ex){
             return $ex;
         }

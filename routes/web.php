@@ -250,5 +250,5 @@ Route::get('queue', function(){
 });
 
 Route::get('sendsms', function(){
-    return \App\Helpers\SmsHelper::send("923334103160","An order of Green Milk is assigned to you https://www.google.com");
+    return (string)URLShortener::shorten("https://bhejdo.org/api/lifter/order/smsacceptance/30/12");
 });
