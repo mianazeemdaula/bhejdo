@@ -248,3 +248,7 @@ Route::get('queue', function(){
     $data = \App\Helpers\OrderProcess::orderAssign($order);
     return $data;
 });
+
+Route::get('sendsms', function(){
+    return \App\Helpers\SmsHelper::send("923334103160","An order of Green Milk is assigned to you https://www.google.com");
+});
