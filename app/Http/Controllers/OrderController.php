@@ -140,6 +140,7 @@ class OrderController extends Controller
         $data = [];
         foreach($lifters as $lifter){
             $cancle = Cache::has('order_notificaton_'.$lifter->lifter_id."_".$order->id);
+            $latlong = $lifter->location['coordinates'];
             $data[] = ['name' => $lifter->name, 'id' => $lifter->lifter_id, 'notificaton' => $cancle, 'distance' => \App\Helpers\OrderProcess::distance($latlong[0], $latlong[1],$order->latitude, $order->longitude,"K")];
         }
 
