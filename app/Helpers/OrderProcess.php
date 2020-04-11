@@ -71,7 +71,7 @@ class OrderProcess {
 
             foreach($livePartners as $partner){
                 $lifterid = $partner['id'];
-                if(!in_array($lifterid, $queue)){
+                if(!in_array($lifterid, $queue) && !in_array($lifterid, $queueFail)){
                     // Do processing for notificaton
                     // if partner not cancel the acceptance
                     if(!Cache::has('order_notificaton_'.$lifterid."_".$order->id)){
