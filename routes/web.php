@@ -214,4 +214,5 @@ Route::get('created_schedule_order', function(){
 Route::get('old_orders', function(){
     $orders = \App\Order::where('created_at', '<', \Carbon\Carbon::now()->subHours(24)->toDateTimeString())
         ->where('lifter_id',2)->where('status','created')->get();
+        return $orders;
 });
