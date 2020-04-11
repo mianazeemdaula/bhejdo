@@ -65,7 +65,7 @@ class OrderProcess {
             
             if(\PRedis::exists($key)){
                 $queue = json_decode(\PRedis::get($key));
-                $smsqueue = \PRedis::get($key."_sms") == null ? [] : json_decode(\PRedis::get($key."_sms"));
+                $smsqueue = json_decode(\PRedis::get($key."_sms")); 
                 $queueFail = json_decode(\PRedis::get($key."_fail"));
             }
 
