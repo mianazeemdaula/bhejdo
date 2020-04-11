@@ -276,13 +276,12 @@ class AuthController extends Controller
             if($profile->latitude == 0.0 || $profile->longitude == 0.0){
                 return response()->json(['status'=>false, 'onwork' => $request->onwork, 'data' => "Update your working location in profile" ], 200);
             }
-            LifterLocation::where('lifter_id',$request->user()->id)->update(['onwork'=> $request->onwork]);
+            $location =  [
+                'type' => 'Point',
+                'coordinates' => [(double)$profile->latitude,(double)$profile->longitude]
+            ];
+            LifterLocation::where('lifter_id',$request->user()->id)->update(['onwork'=> $request->onwork, 'location' => $location]);
             $lifter = LifterLocation::where('lifter_id',$request->user()->id)->first();
-            if($request->onwork == 1){
-                \PRedis::command('GEOADD',['partner_locations' , $profile->latitude, $profile->longitude, "{$request->user()->id}"]);
-            }else{
-                \PRedis::command('ZREM',['partner_locations' ,"{$request->user()->id}"]);
-            }
             return response()->json(['status'=>true, 'onwork' => $request->onwork, 'data' => $lifter ], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
