@@ -82,7 +82,10 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-// Order Prcess url
+// Order Proccess url
+Route::get('order/smsacceptance/{order}/{user}', 'OrderController@acceptOrderBySms'); 
+
+
 Route::get('/seed', 'SeedController@Seed');
 Route::get('/pusher/{message}', 'SeedController@pusher');
 
