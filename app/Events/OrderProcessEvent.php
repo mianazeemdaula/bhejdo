@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Order;
 
 class OrderProcessEvent
 {
@@ -21,9 +20,11 @@ class OrderProcessEvent
      * @return void
      */
 
+    public $id;
     public $order;
-    public function __construct(Order $order)
+    public function __construct($id, $order)
     {
+        $this->id = $id;
         $this->order = $order;
     }
 
@@ -34,6 +35,6 @@ class OrderProcessEvent
      */
     public function broadcastOn()
     {
-        return new Channel('order-'.$this->order->id);
+        return new Channel('order-'.$this->id);
     }
 }

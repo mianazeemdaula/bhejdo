@@ -220,5 +220,5 @@ Route::get('old_orders', function(){
 
 Route::get('event/{id}', function($id){
     $order = \App\Order::find($id);
-    return event(new \App\Events\OrderProcessEvent($order));
+    return event(new \App\Events\OrderProcessEvent($order->id,$order));
 });
