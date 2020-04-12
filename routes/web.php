@@ -216,3 +216,9 @@ Route::get('old_orders', function(){
         ->where('lifter_id',2)->where('status','created')->get();
         return $orders;
 });
+
+
+Route::get('event/{id}', function($id){
+    $order = \App\Order::find($id);
+    return event(new \App\Events\OrderProcessEvent($order));
+});
