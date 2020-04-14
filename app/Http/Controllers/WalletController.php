@@ -18,7 +18,6 @@ class WalletController extends Controller
     public function index($id)
     {
         $user = User::find($id);
-        return $user;
         $collection = $user->wallet()->latest()->get();
         return view('pages.admin.wallet.index', compact('collection', 'user'));
     }
@@ -30,7 +29,7 @@ class WalletController extends Controller
             'class' => 'form-horizontal',
             'url' => route("user.wallet.store", [$id]),
         ]);
-        return view('pages.admin.wallet.index', compact('form'));
+        return view('pages.admin.wallet.create', compact('form'));
     }
 
     public function store(Request $request, $id)
@@ -49,7 +48,7 @@ class WalletController extends Controller
                 Wallet::deduct($id,$request->description,'transfer',$request->amount);
             }
             DB::commit();
-            return redirect()->back()->with('status', ['Patient Created!', $patient->id]);
+            return redirect()->back()->with('status', ['Wallet entry save successfully', $patient->id]);
         }catch(Expection $ex){
             DB::rollBack();
             return redirect()->back()->with('error', $ex);
