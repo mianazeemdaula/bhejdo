@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Order;
 use App\Bonus;
-
+use App\ServiceCharge;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\OrderTransferForm;
@@ -162,6 +162,7 @@ class OrderController extends Controller
                 $amount = $order->qty * $order->service->lifter_price;
                 ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order",$amount );
                 $order->save();
+                DB::commit();
                 return redirect()->back()->with('status', 'Order confirmed!');
             }else{
                 return redirect()->back()->with('status', 'Order already confirmed!');
