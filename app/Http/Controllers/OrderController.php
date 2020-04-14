@@ -149,4 +149,26 @@ class OrderController extends Controller
         });
         return response()->json(['lifters'=> $data], 200);
     }
+
+    public function manualSampleConfirm($id)
+    {
+        DB::beginTransaction();
+        try{
+            $order = Order::find( $id);
+            if($order->type == 3 && $order->delivered_time != null){
+                $order->status = 'confirmed';
+                $amount = $order->qty * $order->service->s_price;
+                Bonus::deduct($order->consumer_id, "Deduction of sampel order","order", $amount);
+                $amount = $order->qty * $order->service->lifter_price;
+                ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order",$amount );
+                $order->save();
+                return redirect()->back()->with('status', 'Order confirmed!');
+            }else{
+                return redirect()->back()->with('status', 'Order already confirmed!');
+            }
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
 }

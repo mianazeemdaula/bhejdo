@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('order/transfer/{id}','OrderController@getTransfer');
     Route::post('order/transfer/{id}','OrderController@postTransfer');
     Route::get('order/livepartners/{id}','OrderController@livePartners');
+    Route::get('order/manualSampleConfirm/{id}','OrderController@manualSampleConfirm');
     
     Route::resource('user', 'UserController');
     Route::get('user/type/consumer', 'UserController@consumer');

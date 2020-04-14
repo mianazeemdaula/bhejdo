@@ -170,7 +170,7 @@ class OrderController extends Controller
 
                 if($order->type == 3){ // Sample order
                     $amount = $order->qty * $service->s_price;
-                    Bonus::deduct($request->user()->id, "Bonus deductino of sample order","order", $amount);
+                    Bonus::deduct($request->user()->id, "Bonus deduction of sample order","order", $amount);
                     $amount = $order->qty * $order->service->lifter_price;
                     ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order",$amount );
                     $order->payable_amount = 0;
