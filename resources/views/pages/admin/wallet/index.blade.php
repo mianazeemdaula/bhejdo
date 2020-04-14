@@ -19,7 +19,7 @@
                 <div class="card-body">
                     @role('super-admin|admin')
                     <div class="py-2">
-                        <a href="{{ route('user.wallet.create',[$user->id]) }}" class="btn btn-primary" > Create User</a>
+                        <a href="{{ route('user.wallet.create',[$user->id]) }}" class="btn btn-primary" >Create Entry</a>
                     </div>
                     @endrole
                     <table class="table table-bordered table-striped dataTable" id="example1">
