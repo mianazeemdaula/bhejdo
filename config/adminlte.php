@@ -230,12 +230,12 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'permission' => 'super-admin|admin'
         ],
-        [
-            'text'        => 'Wallet',
-            'route'         => 'wallet.index',
-            'icon'        => 'far fa-fw fa-file',
-            'permission' => 'super-admin|admin'
-        ],
+        // [
+        //     'text'        => 'Wallet',
+        //     'route'         => 'wallet.index',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'permission' => 'super-admin|admin'
+        // ],
         [
             'text'        => 'Online',
             'url'         => '/online',
