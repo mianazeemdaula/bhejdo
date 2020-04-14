@@ -49,7 +49,7 @@ class WalletController extends Controller
                 Wallet::deduct($id,$request->description,'transfer',$request->amount);
             }
             DB::commit();
-            return redirect()->back()->with('status', ['Wallet entry save successfully', $patient->id]);
+            return redirect()->back()->with('status','Wallet entry save successfully');
         }catch(Expection $ex){
             DB::rollBack();
             return redirect()->back()->with('error', $ex);
