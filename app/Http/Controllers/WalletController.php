@@ -15,9 +15,9 @@ use App\Forms\Wallet\WalletForm;
 class WalletController extends Controller
 {
     use FormBuilderTrait;
-    public function index(User $user)
+    public function index($id)
     {
-        $user = $user;
+        $user = User::find($id);
         $collection = $user->wallet()->latest()->get();
         return view('pages.admin.wallet.index', compact('collection', 'user'));
     }
