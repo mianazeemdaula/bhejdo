@@ -24,10 +24,10 @@
                     <b>Rating</b> <a class="float-right">3.5</a>
                   </li>
                 <li class="list-group-item">
-                <b><a href="{{ route('user.bonus.index', [$user->id]) }}">Bonus</a></b> <a class="float-right">{{ $user->bonus()->latest()->first()->balance }}</a>
+                  <b><a href="{{ route('user.bonus.index', [$user->id]) }}">Bonus</a></b> <a class="float-right">{{ $user->bonus()->latest()->first()->balance }}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Cash</b> <a class="float-right">13,287</a>
+                  <b><a href="{{ route('user.wallet.index', [$user->id]) }}">Walelt</a></b> <a class="float-right">{{ $user->wallet()->latest()->first()->balance }}</a>
                 </li>
               </ul>
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
