@@ -175,7 +175,7 @@ Route::get('geo/{lat}/{lng}/{dist}', function($lat, $lng, $dist){
 Route::get('created_order', function(){
 
     \DB::beginTransaction();
-    $sorder = \App\Order::find(228);
+    $sorder = \App\Order::find(245);
     $order = new \App\ScheduleOrder();
     $order->consumer_id = $sorder->consumer_id;
     $order->lifter_id = $sorder->lifter_id;
