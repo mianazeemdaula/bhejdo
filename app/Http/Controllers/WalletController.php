@@ -18,6 +18,7 @@ class WalletController extends Controller
     public function index($id)
     {
         $user = User::find($id);
+        return $user;
         $collection = $user->wallet()->latest()->get();
         return view('pages.admin.wallet.index', compact('collection', 'user'));
     }
