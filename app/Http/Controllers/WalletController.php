@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Bonus;
 use App\Wallet;
 use App\User;
+use DB;
 
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Wallet\WalletForm;
