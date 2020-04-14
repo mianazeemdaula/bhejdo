@@ -169,6 +169,8 @@ class OrderController extends Controller
                 }
 
                 if($order->type == 3){ // Sample order
+                    $amount = $order->qty * $service->s_price;
+                    Bonus::deduct($request->user()->id, "Bonus deductino of sample order","order", $amount);
                     $amount = $order->qty * $order->service->lifter_price;
                     ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order",$amount );
                     $order->payable_amount = 0;
@@ -194,84 +196,6 @@ class OrderController extends Controller
                 AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
                 $order = new OrderResource($order);
                 return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "order" => $order ]], 200);
-            }
-        }catch(Exception $ex){
-            DB::rollBack();
-            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
-        }
-    }
-
-    public function update2(Request $request)
-    {
-        DB::beginTransaction();
-        try{
-            $order = Order::findOrFail($request->orderid);
-            $dateTime = Carbon::now()->toDateTimeString();
-            $status = strtolower($request->status);
-            $bonusDeducted = 0;
-            if($status == 'canceled'){
-                $order->status = 'canceled';
-                $order->cancel_desc = $request->cancelDescription;
-                $order->canceled_time = $dateTime;
-                $order->cancel_desc = "";
-                $balance = Bonus::balance($request->user()->id);
-                if($balance->balance > 10)
-                    Bonus::deduct($request->user()->id, "Cancel order panality #{$order->id}","order", 10);
-            }else if($status == 'confirmed'){
-                if($order->confirmed_time != null){
-                    $order->status = 'confirmed';
-                    $order->save();
-                    DB::commit();
-                    return response()->json(['status'=>false, 'msg' => "Already Confirmed"], 200);
-                }
-
-                if($order->type == 3){ // Sample order
-                    $amount = $order->qty * $order->service->lifter_price;
-                    ServiceCharge::add($order->lifter_id,"Sample order #{$order->id}", "order",$amount );
-                }else{
-                    // Logic for bonus d#eduction
-                    if($order->payable_amount == 0){
-                        $bonus = Bonus::balance($request->user()->id);
-                        if($bonus != null){
-                            $deductable = $order->qty * 10;  
-                            if($bonus->balance >= $deductable){
-                                $bonusDeducted = $deductable;
-                                $order->bonus = $bonusDeducted;
-                                Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order", $deductable);
-                            }else if($bonus->balance >= 0){
-                                $bonusDeducted = $bonus->balance;
-                                $order->bonus = $bonusDeducted;
-                                Bonus::deduct($request->user()->id, "Deduction of order #{$order->id}","order",$bonus->balance);
-                            }
-                        }
-                    }
-                    if($order->status == 'collected'){
-                        $debit = $bonusDeducted;
-                        //ServiceCharge::add($order->lifter_id,"Bonus addition of order #{$order->id}", "order", $debit);
-                    }else{
-                        $debit = ($order->service->s_charges * $order->qty) - $bonusDeducted;
-                        ServiceCharge::deduct($order->lifter_id,"Service charges of order #{$order->id}", "order", $debit);
-                    }
-                    $order->payable_amount = (($order->qty * $order->price) + $order->charges ) - $bonusDeducted;
-                }
-                // Confirmed Order
-                $order->status = 'confirmed';
-                $order->payment_id = $request->paymentType;
-                $order->confirmed_time = $dateTime;
-            }
-            $order->save();
-            //
-            DB::commit();
-            $message = "Order for {$order->service->s_name} of {$order->qty} is {$status}.";
-            event(new UpdateLifterEvent($order->lifter_id, $order));
-            if($status == 'canceled'){
-                $data = ['order_id' => $order->id, 'type' => 'order'];
-                AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
-                return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", ]], 200);
-            }else{
-                $data = ['order_id' => $order->id, 'type' => 'confirmed_order', "amount" => $order->collected_amount];
-                AndroidNotifications::toLifter("Order $status", $message, $order->lifter->pushToken, $data);
-                return response()->json(['status'=>true, 'data' => [ "msg" => "Order $status", "amount" => $order->collected_amount ]], 200);
             }
         }catch(Exception $ex){
             DB::rollBack();
