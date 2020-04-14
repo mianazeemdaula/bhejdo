@@ -27,7 +27,9 @@
                 <b><a href="{{ route('user.charges.index', [$user->id]) }}">Charges</a></b> <a class="float-right">{{ $user->serviceCharges()->latest()->first()->balance }}</a>
                 </li>
                 <li class="list-group-item">
-                  <b><a href="{{ route('user.wallet.index', [$user->id]) }}">Walelt</a></b> <a class="float-right">{{ $user->wallet()->latest()->first()->balance }}</a>
+                  <b><a href="{{ route('user.wallet.index', [$user->id]) }}">Walelt</a></b> <a class="float-right">@isset($user->wallet()->latest()->first()->balance)
+                    {{ $user->wallet()->latest()->first()->balance }}
+                  @endisset  0 </a>
                 </li>
               </ul>
               <a href="https://www.google.com/maps/search/?api=1&query={{ $user->profile->latitude }},{{ $user->profile->longitude }}" class="btn btn-primary btn-block"><b>Shop Location</b></a>
