@@ -10,6 +10,7 @@ use DB;
 use App\Order;
 use App\User;
 use App\Bonus;
+use App\Wallet;
 use App\ServiceCharge;
 use Carbon\Carbon;
 use Validator;
