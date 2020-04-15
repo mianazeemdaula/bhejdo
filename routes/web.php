@@ -216,18 +216,9 @@ Route::get('created_schedule_order', function(){
 
 Route::get('whereTime', function(){
     date_default_timezone_set('Asia/Karachi');
-    $time = new DateTime(date('Y-m-d H:i:s'));
-    $time2 = new DateTime(date('Y-m-d H:i:s'));
-    $minutes1 = $time->format('i');
-    if ($minutes1 > 0) {
-        $time->modify("+1 hour");
-        $time->modify('-'.$minutes1.' minutes');
-    }
-
-    $minutes2 = $time2->format('i');
-    if ($minutes1 > 0) {
-        $time2->modify("+2 hour");
-        $time2->modify('-'.$minutes2.' minutes');
-    }
-    return \App\ScheduleOrder::where('delivery_time','>=', $time->format('H:i:s'))->where('delivery_time','<', $time2->format('H:i:s'))->get();
+    $hour = \Carbon\Carbon::now()->hour;
+    $nextHour = $hour+1;
+    $t1 = "$nextHour:00:00";
+    $t2 = "$nextHour:59:00";
+    return \App\ScheduleOrder::where('delivery_time','>=', $t1)->where('delivery_time','<=', $t2)->get();
 });
