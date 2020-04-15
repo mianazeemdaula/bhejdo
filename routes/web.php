@@ -220,5 +220,5 @@ Route::get('whereTime', function(){
     $nextHour = $hour+1;
     $t1 = "$nextHour:00:00";
     $t2 = "$nextHour:59:00";
-    return \App\ScheduleOrder::where('delivery_time','>=', $t1)->where('delivery_time','<=', $t2)->get();
+    return \App\ScheduleOrder::whereBetween('delivery_time', [$t1, $t2])->get();
 });
