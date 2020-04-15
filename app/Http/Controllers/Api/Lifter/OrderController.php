@@ -208,6 +208,7 @@ class OrderController extends Controller
             $order = Order::findOrFail($request->orderid);
             $dateTime = Carbon::now()->toDateTimeString();
             $status = strtolower($request->status);
+            $Walletdeduction = 0;
             if($status == 'shipped'){
                 $order->status = 'shipped';
                 $order->shipped_time = $dateTime;
@@ -219,6 +220,29 @@ class OrderController extends Controller
                 $order->confirmed_time = $dateTime;
             }else if($status == 'collected'){
                 $order->status = 'collected';
+                if($request->has('paymentType') && $request->paymentType == 2 && $order->type != 3){
+                    $cash = $request->cash;
+                    // If collect more cash than bill
+                    if($cash > $order->payable_amount){
+                        $Walletdeduction = $cash - $order->payable_amount;
+                        $wallet = Wallet::balance($order->lifter_id);
+                        if($wallet == null || $wallet->balance < $Walletdeduction){
+                            return response()->json(['status'=>false, 'data' => "Not enough balance in your account"], 200);
+                        }else{
+                            Wallet::deduct($order->lifter_id,"Payment of order # {$order->id}",'order',$Walletdeduction);
+                            Wallet::add($order->consumer_id,"Cash collection of order # {$order->id}",'order',$Walletdeduction);
+                        }
+                    }else{
+                        $Walletdeduction = $order->payable_amount - $cash;
+                        $wallet = Wallet::balance($order->consumer_id);
+                        if($wallet == null || $wallet->balance < $Walletdeduction){
+                            return response()->json(['status'=>false, 'data' => "Not enough balance in consumer account"], 200);
+                        }else{
+                            Wallet::deduct($order->consumer_id,"Payment of order # {$order->id}",'order',$Walletdeduction);
+                            Wallet::add($order->lifter_account,"Cash collection of order # {$order->id}",'order',$Walletdeduction);
+                        }
+                    }
+                }
                 if($order->type == 3){ 
                     $order->collected_amount = 0;
                     $order->payable_amount = 0;
@@ -241,10 +265,10 @@ class OrderController extends Controller
             DB::commit();
             $orderResource = new OrderResource($order);
             $message = "Your order of {$order->service->s_name} is {$status}.";
-            $data = ['order_id' => $order->id, 'type' => 'order',  'lifter_id' => $order->lifter_id, 'order' => $orderResource];
+            $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
             //event(new UpdateLifterEvent($order->lifter_id, $order));
-            return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource ], 200);
+            return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource, 'wallet' => $Walletdeduction], 200);
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
