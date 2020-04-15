@@ -7,7 +7,7 @@ use App\Helpers\AndroidNotifications;
 
 use App\Bonus;
 use App\ScheduleOrder;
-
+use DB;
 class ScheduleOrderMorning extends Command
 {
     /**
