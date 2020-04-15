@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use App\Helpers\AndroidNotifications;
 
 use App\Bonus;
+use App\ScheduleOrder;
+
 class ScheduleOrderMorning extends Command
 {
     /**
@@ -45,46 +47,59 @@ class ScheduleOrderMorning extends Command
         $t1 = "$nextHour:00:00";
         $t2 = "$nextHour:59:00";
 
-        $scheduleOder = \App\ScheduleOrder::where('status',1)->whereBetween('delivery_time', [$t1, $t2])->get();
-        foreach($scheduleOder as $sOrder){
-            if($scheduleOder->type == 'daily'){
-                $order = new \App\Order();
-                $order->consumer_id = $sOrder->consumer_id;
-                $order->lifter_id = $sOrder->lifter_id;
-                $order->service_id = $sOrder->service_id;
-                $order->qty = $sOrder->qty;
-                $order->price = $sOrder->service->s_price;
-                $order->note = "";
-                $order->address = $sOrder->address;
-                $order->longitude = $sOrder->longitude;
-                $order->latitude = $sOrder->latitude;
-                $charges = $sOrder->qty <= $sOrder->service->min_qty ? $sOrder->service->min_qty_charges : 0;
-                $order->charges = $charges;
-                $order->deliver_time = $sOrder->delivery_time;
-                $order->delivery_time = \Carbon\Carbon::now();
-                $order->type = 2;
-                $bonus = Bonus::balance($sOrder->consumer_id);
-                $bonusDeducted = 0;
-                if($bonus != null){
-                    $deductable = $sOrder->qty * 10;  
-                    if($bonus->balance >= $deductable){
-                        $bonusDeducted = $deductable;
-                        $order->bonus = $bonusDeducted;
-                        Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
-                    }else if($bonus->balance >= 0){
-                        $bonusDeducted = $bonus->balance;
-                        $order->bonus = $bonusDeducted;
-                        Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
-                    }
-                }
-                $order->status = 'assigned';
-                $order->payable_amount = (($sOrder->qty * $sOrder->service->s_price) + $charges ) - $bonusDeducted;
-                $order->save();
-                
-                $data = ['order_id' => $order->id, 'type' => 'order'];
-                AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
-            }
+        $daily = \App\ScheduleOrder::where('status',1)->where('type','daily')->whereBetween('delivery_time', [$t1, $t2])->get();
+        foreach($daily as $sOrder){
+            $this->createOrder($sOrder);
         }
+
+        $weekdays = \App\ScheduleOrder::where('status',1)->where('type','weekdays')->whereJsonContains('days',$date->dayOfWeek)->whereBetween('delivery_time', [$t1, $t2])->get();
+        foreach($weekdays as $sOrder){
+            $this->createOrder($sOrder);
+        }
+
+        $monthly = \App\ScheduleOrder::where('status',1)->where('type','monthly')->whereJsonContains('days',$date->day)->whereBetween('delivery_time', [$t1, $t2])->get();
+        foreach($monthly as $sOrder){
+            $this->createOrder($sOrder);
+        }
+
         $this->info('Orders Created');
+    }
+
+    public function createOrder(ScheduleOrder $sOrder){
+        $order = new \App\Order();
+        $order->consumer_id = $sOrder->consumer_id;
+        $order->lifter_id = $sOrder->lifter_id;
+        $order->service_id = $sOrder->service_id;
+        $order->qty = $sOrder->qty;
+        $order->price = $sOrder->service->s_price;
+        $order->note = "";
+        $order->address = $sOrder->address;
+        $order->longitude = $sOrder->longitude;
+        $order->latitude = $sOrder->latitude;
+        $charges = $sOrder->qty <= $sOrder->service->min_qty ? $sOrder->service->min_qty_charges : 0;
+        $order->charges = $charges;
+        $order->deliver_time = $sOrder->delivery_time;
+        $order->delivery_time = \Carbon\Carbon::now();
+        $order->type = 2;
+        // $bonus = Bonus::balance($sOrder->consumer_id);
+        // $bonusDeducted = 0;
+        // if($bonus != null){
+        //     $deductable = $sOrder->qty * 10;  
+        //     if($bonus->balance >= $deductable){
+        //         $bonusDeducted = $deductable;
+        //         $order->bonus = $bonusDeducted;
+        //         Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
+        //     }else if($bonus->balance >= 0){
+        //         $bonusDeducted = $bonus->balance;
+        //         $order->bonus = $bonusDeducted;
+        //         Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
+        //     }
+        // }
+        $order->status = 'assigned';
+        $order->payable_amount = (($sOrder->qty * $sOrder->service->s_price) + $charges ) - $bonusDeducted;
+        $order->save();
+        
+        $data = ['order_id' => $order->id, 'type' => 'order'];
+        AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
     }
 }
