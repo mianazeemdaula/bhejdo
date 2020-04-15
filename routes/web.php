@@ -215,6 +215,7 @@ Route::get('created_schedule_order', function(){
 
 
 Route::get('whereTime', function(){
+    date_default_timezone_set('Asia/Karachi');
     $time = new DateTime(date('Y-m-d H:i:s'));
     $time2 = new DateTime(date('Y-m-d H:i:s'));
     $minutes1 = $time->format('i');
