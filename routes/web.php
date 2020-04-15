@@ -215,14 +215,19 @@ Route::get('created_schedule_order', function(){
 
 
 Route::get('whereTime', function(){
-    $now = time();
-    $date = new DateTime($now);
-    $minutes = $date->format('i');
-    if ($minutes > 0) {
-        $date->modify("+1 hour");
-        $date->modify('-'.$minutes.' minutes');
+    $time = new DateTime(date('Y-m-d H:i:s'));
+    $time2 = new DateTime(date('Y-m-d H:i:s'));
+    $minutes1 = $time->format('i');
+    if ($minutes1 > 0) {
+        $time->modify("+1 hour");
+        $time->modify('-'.$minutes1.' minutes');
     }
-    return $date;
-    return \Carbon\Carbon::now();
-    return \App\ScheduleOrder::whereTime('deliver_time','>=', \Carbon\Carbon::now()->addHour())->get();
+
+    $minutes2 = $time2->format('i');
+    if ($minutes1 > 0) {
+        $time2->modify("+2 hour");
+        $time2->modify('-'.$minutes2.' minutes');
+    }
+
+    return \App\ScheduleOrder::whereTime('delivery_time','>=', $time)->get();
 });
