@@ -213,14 +213,8 @@ Route::get('created_schedule_order', function(){
     return $order;
 });
 
-Route::get('old_orders', function(){
-    $orders = \App\Order::where('created_at', '<', \Carbon\Carbon::now()->subHours(24)->toDateTimeString())
-        ->where('lifter_id',2)->where('status','created')->get();
-        return $orders;
-});
 
-
-Route::get('event/{id}', function($id){
-    $order = \App\Order::find($id);
-    return event(new \App\Events\OrderProcessEvent($order->id,$order));
+Route::get('whereTime', function(){
+    return \Carbon\Carbon::now();
+    return \App\ScheduleOrder::whereTime('deliver_time','>=', \Carbon\Carbon::now()->addHour())->get();
 });
