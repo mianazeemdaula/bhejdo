@@ -229,5 +229,5 @@ Route::get('whereTime', function(){
         $time2->modify('-'.$minutes2.' minutes');
     }
 
-    return \App\ScheduleOrder::whereTime('delivery_time','>=', $time)->get();
+    return \App\ScheduleOrder::whereTime('delivery_time','>=', $time)->whereTime('delivery_time','<=', $time2)->get();
 });
