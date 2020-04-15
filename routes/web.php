@@ -215,6 +215,14 @@ Route::get('created_schedule_order', function(){
 
 
 Route::get('whereTime', function(){
+    $now = time();
+    $date = new DateTime($now);
+    $minutes = $date->format('i');
+    if ($minutes > 0) {
+        $date->modify("+1 hour");
+        $date->modify('-'.$minutes.' minutes');
+    }
+    return $date;
     return \Carbon\Carbon::now();
     return \App\ScheduleOrder::whereTime('deliver_time','>=', \Carbon\Carbon::now()->addHour())->get();
 });
