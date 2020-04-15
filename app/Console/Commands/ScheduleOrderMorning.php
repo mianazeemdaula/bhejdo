@@ -47,17 +47,17 @@ class ScheduleOrderMorning extends Command
         $t1 = "$nextHour:00:00";
         $t2 = "$nextHour:59:00";
 
-        $daily = \App\ScheduleOrder::where('status',1)->where('type','daily')->whereBetween('delivery_time', [$t1, $t2])->get();
+        $daily = \App\ScheduleOrder::where('status',1)->where('subscribe_type','daily')->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($daily as $sOrder){
             $this->createOrder($sOrder);
         }
 
-        $weekdays = \App\ScheduleOrder::where('status',1)->where('type','weekdays')->whereJsonContains('days',$date->dayOfWeek)->whereBetween('delivery_time', [$t1, $t2])->get();
+        $weekdays = \App\ScheduleOrder::where('status',1)->where('subscribe_type','weekdays')->whereJsonContains('days',$date->dayOfWeek)->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($weekdays as $sOrder){
             $this->createOrder($sOrder);
         }
 
-        $monthly = \App\ScheduleOrder::where('status',1)->where('type','monthly')->whereJsonContains('days',$date->day)->whereBetween('delivery_time', [$t1, $t2])->get();
+        $monthly = \App\ScheduleOrder::where('status',1)->where('subscribe_type','monthly')->whereJsonContains('days',$date->day)->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($monthly as $sOrder){
             $this->createOrder($sOrder);
         }
