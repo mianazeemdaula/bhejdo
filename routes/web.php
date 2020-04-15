@@ -220,6 +220,6 @@ Route::get('whereTime', function(){
     $nextHour = $date->hour + 1;
     $t1 = "$nextHour:00:00";
     $t2 = "$nextHour:59:00";
-    return \App\ScheduleOrder::whereJsonContains('days',$date->dayOfWeek)->get();
-    return \App\ScheduleOrder::whereBetween('delivery_time', [$t1, $t2])->get();
+    $orders =  \App\ScheduleOrder::where('status',0)->get();
+    return $orders->whereJsonContains('days',$date->dayOfWeek)->get();
 });
