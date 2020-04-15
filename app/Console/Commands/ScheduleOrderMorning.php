@@ -83,20 +83,20 @@ class ScheduleOrderMorning extends Command
             $order->deliver_time = $sOrder->delivery_time;
             $order->delivery_time = \Carbon\Carbon::now();
             $order->type = 2;
-            // $bonus = Bonus::balance($sOrder->consumer_id);
+            $bonus = Bonus::balance($sOrder->consumer_id);
             $bonusDeducted = 0;
-            // if($bonus != null){
-            //     $deductable = $sOrder->qty * 10;  
-            //     if($bonus->balance >= $deductable){
-            //         $bonusDeducted = $deductable;
-            //         $order->bonus = $bonusDeducted;
-            //         Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
-            //     }else if($bonus->balance >= 0){
-            //         $bonusDeducted = $bonus->balance;
-            //         $order->bonus = $bonusDeducted;
-            //         Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
-            //     }
-            // }
+            if($bonus != null){
+                $deductable = $sOrder->qty * 10;  
+                if($bonus->balance >= $deductable){
+                    $bonusDeducted = $deductable;
+                    $order->bonus = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
+                }else if($bonus->balance >= 0){
+                    $bonusDeducted = $bonus->balance;
+                    $order->bonus = $bonusDeducted;
+                    Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
+                }
+            }
             $order->status = 'assigned';
             $order->payable_amount = (($sOrder->qty * $sOrder->service->s_price) + $charges ) - $bonusDeducted;
             $order->save();
