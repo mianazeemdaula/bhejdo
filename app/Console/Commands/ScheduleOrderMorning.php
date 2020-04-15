@@ -102,6 +102,7 @@ class ScheduleOrderMorning extends Command
             $order->save();
             DB::commit();
             $data = ['order_id' => $order->id, 'type' => 'order'];
+            $message = "Schedlue order assigned to you please deliver at time.";
             AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
         } catch(Exception $e){
             DB::rollBack();
