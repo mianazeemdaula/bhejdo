@@ -216,9 +216,10 @@ Route::get('created_schedule_order', function(){
 
 Route::get('whereTime', function(){
     date_default_timezone_set('Asia/Karachi');
-    $hour = \Carbon\Carbon::now()->hour;
-    $nextHour = $hour+1;
+    $date = \Carbon\Carbon::now();
+    $nextHour = $date->hour + 1;
     $t1 = "$nextHour:00:00";
     $t2 = "$nextHour:59:00";
+    return \App\ScheduleOrder::whereJsonContains('days',$date->day)->get();
     return \App\ScheduleOrder::whereBetween('delivery_time', [$t1, $t2])->get();
 });
