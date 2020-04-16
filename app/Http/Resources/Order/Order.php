@@ -32,6 +32,7 @@ class Order extends JsonResource
             'collecable' => $this->collected_amount,
             'address' => $this->address,
             'delivery_time' => $this->delivery_time,
+            'preferredTime' => $this->deliver_time,
             'address' => $this->address,
             'type' => $this->type,
             'note' => $this->note,
