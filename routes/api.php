@@ -61,9 +61,9 @@ Route::prefix('consumer')->group(function () {
         });
 
         Route::prefix('wallet')->group(function () {
-            Route::resource('/', 'Api\Lifter\WalletController');
-            Route::get('/balance', 'Api\Lifter\WalletController@balance');
-            Route::post('/fetchaccount', 'Api\Lifter\WalletController@fetchaccount');
+            Route::resource('/', 'Api\Consumer\WalletController');
+            Route::get('/balance', 'Api\Consumer\WalletController@balance');
+            Route::post('/fetchaccount', 'Api\Consumer\WalletController@fetchaccount');
         });
 
         Route::prefix('review')->group(function () {
