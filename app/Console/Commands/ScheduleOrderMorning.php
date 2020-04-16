@@ -78,7 +78,7 @@ class ScheduleOrderMorning extends Command
             $order->address = $sOrder->address;
             $order->longitude = $sOrder->longitude;
             $order->latitude = $sOrder->latitude;
-            $charges = $sOrder->qty <= $sOrder->service->min_qty ? $sOrder->service->min_qty_charges : 0;
+            $charges = $sOrder->qty < $sOrder->service->min_qty ? $sOrder->service->min_qty_charges : 0;
             $order->charges = $charges;
             $order->deliver_time = $sOrder->delivery_time;
             $order->delivery_time = \Carbon\Carbon::now();
