@@ -66,7 +66,7 @@ class OrderController extends Controller
             $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
             $message = "Congratulations! order assigned to you.";
-            return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
+            event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
             return view('pages.api.order.accept',compact('message'));
         }catch(Exception $ex){
             DB::rollBack();
@@ -115,7 +115,7 @@ class OrderController extends Controller
             $message = "Order of {$order->service->s_name} for {$order->qty} is accepted.";
             $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
-            return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
+            event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
             return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource ], 200);
         }catch(Exception $ex){
             DB::rollBack();
@@ -270,7 +270,7 @@ class OrderController extends Controller
             $message = "Your order of {$order->service->s_name} is {$status}.";
             $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
-            return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
+            event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
             return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource, 'wallet' => $Walletdeduction], 200);
         }catch(Exception $ex){
             DB::rollBack();

@@ -107,7 +107,7 @@ class OrderController extends Controller
             $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order Accepted", $message, $order->consumer->pushToken, $data);
             AndroidNotifications::toLifter("Order Assigned", $message, $order->lifter->pushToken, $data);
-            return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
+            event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
             return redirect()->back()->with('status', 'Order updated!');
         }catch(Exception $ex){
             DB::rollBack();
