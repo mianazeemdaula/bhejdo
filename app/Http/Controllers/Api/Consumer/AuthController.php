@@ -79,9 +79,9 @@ class AuthController extends Controller
                 $referrBy = User::where('mobile', $request->referred)->first();
                 if($referrBy != null){
                     if($referrBy->hasRole('store|lifter')){
-                        ServiceCharge::add($referrBy->id, "Referr bonus of {$user->name}", "referr", 100);
+                        ServiceCharge::add($referrBy->id, "You have reffered to Mr {$user->name}. He is added in your referral list after starts of his shopping you would get bonus", "referr", 0);
                     }else{
-                        Bonus::add($referrBy->id,"Referr bonus of {$user->name}",'referr', 100);
+                        Bonus::add($referrBy->id,"You have reffered to Mr {$user->name}. He is added in your referral list after starts of his shopping you would get bonus",'referr', 0);
                     }
                 }
             }
