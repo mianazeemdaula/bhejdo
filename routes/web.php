@@ -224,3 +224,10 @@ Route::get('whereTime', function(){
     return \App\ScheduleOrder::whereJsonContains('days',$date->day)->get();
     return \App\ScheduleOrder::whereBetween('delivery_time', [$t1, $t2])->get();
 });
+
+Route::get('event/{id}', function($id){
+
+    $order = \App\Order::find($id);
+    $orderResource = new \App\Http\Resources\Order\Order($order);
+    return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
+});

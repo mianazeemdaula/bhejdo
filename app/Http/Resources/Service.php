@@ -19,6 +19,7 @@ class Service extends JsonResource
             'name' => $this->s_name,
             'icon' => $this->img_url == null ? null : asset("services/".$this->img_url),
             'scale' => $this->scale,
+            'cross_price' => $this->cross_price,
         ];
     }
 }

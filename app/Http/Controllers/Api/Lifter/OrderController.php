@@ -268,7 +268,7 @@ class OrderController extends Controller
             $message = "Your order of {$order->service->s_name} is {$status}.";
             $data = ['order_id' => $order->id, 'type' => 'order', 'lifter_id' => $order->lifter_id, 'order' => $orderResource];
             AndroidNotifications::toConsumer("Order status #{$order->id}", $message, $order->consumer->pushToken, $data);
-            //event(new UpdateLifterEvent($order->lifter_id, $order));
+            event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
             return response()->json(['status'=>true, 'data' => "Order Accepted", 'order' => $orderResource, 'wallet' => $Walletdeduction], 200);
         }catch(Exception $ex){
             DB::rollBack();
