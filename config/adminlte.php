@@ -220,7 +220,7 @@ return [
         ],
         [
             'text'        => 'Products',
-            'route'         => 'product.index',
+            'route'         => 'admin.product.index',
             'icon'        => 'far fa-fw fa-file',
             'permission' => 'super-admin|admin'
         ],
