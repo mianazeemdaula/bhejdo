@@ -15,7 +15,7 @@ class StoresController extends Controller
     public function index(Request $request)
     {
         try{
-            $stores = LifterLocation::where('location', 'near', [
+            $stores = \App\LifterLocation::where('location', 'near', [
                 '$geometry' => [
                     'type' => 'Point',
                     'coordinates' => [
