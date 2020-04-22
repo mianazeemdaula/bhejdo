@@ -47,7 +47,7 @@ class StoresController extends Controller
                 '$maxDistance' => intval(3 * 1000),
             ])
             ->where("onwork","1")->get();
-            return ['status' => true, 'data' => ['stores' => $request->all(),]];
+            return ['status' => true, 'data' => ['stores' => $stores]];
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }
