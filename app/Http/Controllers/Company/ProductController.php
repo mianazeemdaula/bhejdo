@@ -27,7 +27,7 @@ class ProductController extends Controller
         $form = $this->form(ProductForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('store_product.update', $id),
+            'url' => route('company_product.update', $id),
             'model' => $service
         ]);
         return view('pages.store.product.edit', compact('form'));
@@ -67,7 +67,7 @@ class ProductController extends Controller
         $form = $this->form(ServiceCreateForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => route('store_product.store'),
+            'url' => route('company_product.store'),
         ]);
         return view('pages.store.product.store', compact('form'));
     }
