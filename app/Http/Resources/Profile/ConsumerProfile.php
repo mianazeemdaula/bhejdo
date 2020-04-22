@@ -30,6 +30,7 @@ class ConsumerProfile extends JsonResource
             'dob' => $this->profile->dob,
             'wallet' => $wallet ==  null ? 0 : $wallet->balance,
             'bonus' => $bonus ==  null ? 0 : $bonus->balance,
+            'addresses' => $this->addresses,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

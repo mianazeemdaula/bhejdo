@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->hasMany(Bonus::class);
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
     public function orders()
     {
         return $this->hasMany('App\Order','lifter_id','id');
