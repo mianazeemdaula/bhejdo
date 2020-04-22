@@ -16,9 +16,15 @@ Route::prefix('consumer')->group(function () {
     Route::post('login', 'Api\Consumer\AuthController@login');
     Route::post('register', 'Api\Consumer\AuthController@register');
     Route::post('forgetpassword', 'Api\Consumer\AuthController@updateForgetPassword');
+    
 
-    Route::group(['middleware' => ['auth:api']], function(){
+    Route::group(['middleware' => ['auth:api'],], function(){
 
+        Route::prefix('v2')->group(function () {
+            Route::namespace('Api\Consumer')->group(function () {
+                Route::resource('product','ProductController');
+            });
+        });
         
         // User Info (Profile)
         Route::post('/updatePushToken', 'Api\Consumer\AuthController@pushToken');
