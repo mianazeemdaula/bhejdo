@@ -18,7 +18,7 @@ class ProductController extends Controller
             // Query products according to city of consumer
             $products = Product::where('city_id', $auth->city_id)->where('status',1)->get();
             // Convert collection to resource
-            $products = \App\Http\Resource\ProductResource::collection($products);
+            $products = \App\Http\Resource\V2\Consumer\ProductResource::collection($products);
             // return resouce data to consumer
             return response()->json(['status'=>true, 'data' => ['products' => $products]], 200);
         }catch(Exception $ex){
