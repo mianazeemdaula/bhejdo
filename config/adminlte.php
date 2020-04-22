@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>OhYes</b>DO',
+    'logo' => '<b>OhYes</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image-xl',
     'logo_img_xl' => null,
@@ -181,6 +181,7 @@ return [
         [
             'text'        => 'Users',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin|support',
             'submenu' => [
                 [
                     'text' => 'Admin',
@@ -190,15 +191,17 @@ return [
                 [
                     'text' => 'Consumer',
                     'url'  => 'user/type/consumer',
+                    'permission' => 'super-admin|admin|support'
                 ],
                 [
                     'text' => 'Lifters',
                     'url'  => 'user/type/lifter',
+                    'permission' => 'super-admin|admin|support'
                 ],
                 [
                     'text' => 'Stores',
                     'url'  => 'user/type/store',
-                    'permission' => 'super-admin|admin'
+                    'permission' => 'super-admin|admin|support'
                 ],
             ],
             
