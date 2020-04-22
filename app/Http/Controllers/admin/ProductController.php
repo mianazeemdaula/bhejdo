@@ -39,21 +39,25 @@ class ProductController extends Controller
     {
         try {
             DB::beginTransaction();
-            $form = $this->form(ProductForm::class);
+            $form = $this->form(UpdateProductForm::class);
 
             if (!$form->isValid()) {
                 return redirect()->back()->withErrors($form->getErrors())->withInput();
             }
             $product = Product::findOrFail($id);
             $product->category_id = $request->category_id;
-            $product->city_id = Auth::user()->city_id;
-            $product->company_id = Auth::id();
             $product->name = $request->name;
             $product->urdu_name = $request->urdu_name;
+            $product->min_qty_charges = $request->min_qty_charges;
             $product->contract_price = $request->contract_price;
+            $product->sale_price = $request->sale_price;
             $product->markeet_price = $request->markeet_price;
+            $product->store_commission = $request->store_commission;
+            $product->lifter_commission = $request->lifter_commission;
+            $product->status = $request->status;
             $product->weight = $request->weight;
             $product->unit = $request->unit;
+
             if($request->has('image')){
                 $cover = $request->file('image');
                 $imageName = time().'.'.$request->image->extension();
