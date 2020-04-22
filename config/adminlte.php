@@ -214,9 +214,15 @@ return [
         ],
         [
             'text'        => 'Products',
+            'route'         => 'company.product.index',
+            'icon'        => 'far fa-fw fa-file',
+            'permission' => 'company'
+        ],
+        [
+            'text'        => 'Products',
             'route'         => 'product.index',
             'icon'        => 'far fa-fw fa-file',
-            'permission' => 'super-admin|admin|company'
+            'permission' => 'super-admin|admin'
         ],
         [
             'text'        => 'Orders',
