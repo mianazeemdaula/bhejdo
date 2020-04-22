@@ -17,6 +17,10 @@ class ConsumerProfile extends JsonResource
         $rating = \App\Order::leftJoin('reviews','reviews.order_id','=','orders.id')->where('orders.consumer_id',$this->id)->where('reviews.type','consumer')->avg('reviews.starts');
         $wallet = $this->wallet()->orderBy('id','desc')->first();
         $bonus = $this->bonus()->orderBy('id','desc')->first();
+        $addresses = [];
+        foreach ($this->addresses as $address) {
+            $addresses[] = ['id'=>$address->id, 'title', $address->titel, 'address' => $address->address, 'location' => $address->location['coordinates']];
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -30,7 +34,7 @@ class ConsumerProfile extends JsonResource
             'dob' => $this->profile->dob,
             'wallet' => $wallet ==  null ? 0 : $wallet->balance,
             'bonus' => $bonus ==  null ? 0 : $bonus->balance,
-            'addresses' => $this->addresses,
+            'addresses' => $addresses,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
