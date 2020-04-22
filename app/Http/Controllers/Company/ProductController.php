@@ -79,29 +79,25 @@ class ProductController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        return $request->all();
+        
         $service = new Product();
-        $service->s_name = $request->s_name;
-        $service->s_price = $request->s_price;
-        $service->s_status = $request->s_status;
+        $service->category_id = $request->category_id;
+        $service->city_id = Auth::user()->city_id;
+        $service->name = $request->name;
         $service->urdu_name = $request->urdu_name;
-        $service->cross_price = $request->cross_price;
-        $service->lifter_price = $request->lifter_price;
-        $service->description = $request->description;
-        $service->scale = $request->scale;
-        $service->min_qty_charges = $request->min_qty_charges;
-        $service->s_charges = 10;
-        $service->max_qty = $request->max_qty;
-        $service->min_qty = $request->min_qty;
+        $service->contract_price = $request->contract_price;
+        $service->markeet_price = $request->markeet_price;
+        $service->weight = $request->weight;
+        $service->unit = $request->unit;
         if($request->has('image')){
             $cover = $request->file('image');
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('services'), $imageName);
+            $request->image->move(public_path('product'), $imageName);
             //\Storage::disk('public')->put($imageName, $cover);
             $service->img_url = $imageName;
         }
         $service->save();
-        return redirect()->back()->with('status', 'Service Created!');
+        return redirect()->back()->with('status', 'Product Created!');
     }
 
     public function setservice()
