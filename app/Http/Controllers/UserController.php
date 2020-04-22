@@ -81,7 +81,7 @@ class UserController extends Controller
         $user->account_type = $request->role;
         $user->save();
         $user->assignRole($request->role);
-        return redirect()->back()->with('status', 'Role Created!');
+        return redirect()->back()->with('status', 'User Created!');
     }
 
     /**
