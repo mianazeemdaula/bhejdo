@@ -3,6 +3,8 @@
 namespace App\Forms\Admin\User;
 
 use Kris\LaravelFormBuilder\Form;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class CreateUserForm extends Form
 {
@@ -26,7 +28,7 @@ class CreateUserForm extends Form
             'choices' => \App\City::all()->pluck('name', 'id')->toArray(),
             'label' => 'City'
         ])->add('role', 'select',  [
-            'choices' => \App\Role::all()->pluck('name', 'name')->toArray(),
+            'choices' => Role::all()->pluck('name', 'name')->toArray(),
             'label' => 'Rols'
         ]);
     }

@@ -187,15 +187,19 @@ class SeedController extends Controller
 
     public function test()
     {
-        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Part Time', 'order_qty' => 25]);
-        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Full Time', 'order_qty' => 50]);
-        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Over Time', 'order_qty' => 75]);
-        $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Dual Time', 'order_qty' => 100]);
+        $city = new \App\City();
+        $city->name = 'Lahore';
+        $city->save();
+        return $city;
+        // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Part Time', 'order_qty' => 25]);
+        // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Full Time', 'order_qty' => 50]);
+        // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Over Time', 'order_qty' => 75]);
+        // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Dual Time', 'order_qty' => 100]);
 
-        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Part Time', 'order_qty' => 25]);
-        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Full Time', 'order_qty' => 50]);
-        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Over Time', 'order_qty' => 75]);
-        $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Dual Time', 'order_qty' => 100]);
+        // $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Part Time', 'order_qty' => 25]);
+        // $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Full Time', 'order_qty' => 50]);
+        // $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Over Time', 'order_qty' => 75]);
+        // $level = Level::firstOrCreate(['service_id' => 6,'l_name' => 'Dual Time', 'order_qty' => 100]);
         // $ue = "";
         // $balance = \App\Bonus::deduct(2, "Test Fee", "reffer", 20);
 
