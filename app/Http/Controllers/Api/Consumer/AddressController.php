@@ -45,7 +45,7 @@ class AddressController extends Controller
             $address->user_id = $user->id;
             $address->title = $request->title;
             $address->address = $request->address;
-            $address->location = \DB::raw("POINT({$request->lat} {$request->lon})");
+            $address->location = \DB::raw("POINT({$request->lat},{$request->lon})");
             $address->save();
             DB::commit();
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
