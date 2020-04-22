@@ -221,6 +221,12 @@ return [
             'permission' => 'super-admin|admin|support'
         ],
         [
+            'text'        => 'Orders',
+            'route'         => 'order.index',
+            'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin|support'
+        ],
+        [
             'text'        => 'Subscriptions',
             'route'         => 'subscription.index',
             'icon'        => 'far fa-fw fa-file',
