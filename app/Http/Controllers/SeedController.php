@@ -188,7 +188,7 @@ class SeedController extends Controller
     public function test()
     {
         $user = \App\User::find(2);
-        return $user;
+        return $user->city;
         // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Part Time', 'order_qty' => 25]);
         // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Full Time', 'order_qty' => 50]);
         // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Over Time', 'order_qty' => 75]);
