@@ -13,17 +13,17 @@ class CreateUserForm extends Form
         $this
         ->add('name', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'CNIC'
+            'label' => 'Name'
         ])
         ->add('email', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'Date of birth'
+            'label' => 'Email'
         ])->add('phone', 'text',  [
             'rules' => 'required|min:11|max:11',
             'label' => 'Mobile'
         ])->add('password', 'password',  [
             'rules' => 'required|min:5',
-            'label' => 'Vehicle'
+            'label' => 'Password'
         ])->add('city_id', 'select',  [
             'choices' => \App\City::all()->pluck('name', 'id')->toArray(),
             'label' => 'City'

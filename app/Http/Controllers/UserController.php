@@ -57,7 +57,7 @@ class UserController extends Controller
             'class' => 'form-horizontal',
             'url' => route('user.store')
         ]);
-        return view('pages.admin.role.create', compact('form'));
+        return view('pages.admin.user.create', compact('form'));
     }
 
     /**
