@@ -214,6 +214,11 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         [
+            'text'        => 'Products',
+            'route'         => 'store_product.index',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
             'text'        => 'Orders',
             'route'         => 'order.index',
             'icon'        => 'far fa-fw fa-file',
