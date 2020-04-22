@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Consumer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 
 use App\Address;
 use DB;
@@ -45,7 +46,7 @@ class AddressController extends Controller
             $address->user_id = $user->id;
             $address->title = $request->title;
             $address->address = $request->address;
-            $address->location = \DB::raw("POINT({$request->lat},{$request->lon})");
+            $address->location = new Point($request->lat, $request->lon);
             $address->save();
             DB::commit();
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
