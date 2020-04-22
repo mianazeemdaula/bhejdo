@@ -13,6 +13,7 @@ use App\Helpers\AndroidNotifications;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\UserEditForm;
+use App\Forms\Admin\User\CreateUserForm;
 use App\Forms\Admin\UserProfileEditForm;
 
 
@@ -51,7 +52,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $form = $this->form(CreateUserForm::class, [
+            'method' => 'POST',
+            'class' => 'form-horizontal',
+            'url' => route('user.store')
+        ]);
+        return view('pages.admin.role.create', compact('form'));
     }
 
     /**
@@ -62,7 +68,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form = $this->form(CreateUserForm::class);
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
+        $user->password = bcrypt($request->password);
+        $user->account_type = $request->role;
+        $user->save();
+        $user->assignRole($request->role);
+        return redirect()->back()->with('status', 'Role Created!');
     }
 
     /**
