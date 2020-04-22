@@ -103,9 +103,9 @@ class ProductController extends Controller
             $service->save();
             DB::commit();
             return redirect()->back()->with('status', 'Product Created!');
-        } catch (\Throwable $th) {
+        } catch (Exception $ex) {
             DB::rollBack();
-            return redirect()->back()->with('status', 'Exception Problem');
+            return redirect()->back()->with('status', "Exception Problem $ex")->withInput();
         }
     }
 
