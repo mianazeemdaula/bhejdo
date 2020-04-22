@@ -81,6 +81,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('notification', 'NotificationController');
 
 
+    
+
     Route::prefix('store')->group(function () {
         Route::resource('product', 'Store\ProductController');
     });
