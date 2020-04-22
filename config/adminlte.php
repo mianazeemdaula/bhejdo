@@ -181,7 +181,6 @@ return [
         [
             'text'        => 'Users',
             'icon'        => 'far fa-fw fa-file',
-            'permission' => 'super-admin|admin',
             'submenu' => [
                 [
                     'text' => 'Admin',
@@ -219,7 +218,7 @@ return [
             'text'        => 'Orders',
             'route'         => 'order.index',
             'icon'        => 'far fa-fw fa-file',
-            'permission' => 'super-admin|admin'
+            'permission' => 'super-admin|admin|support'
         ],
         [
             'text'        => 'Subscriptions',
