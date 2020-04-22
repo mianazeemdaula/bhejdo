@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Product;
-
+use App\Http\Resources\V2\Consumer\ProductResource;
 class ProductController extends Controller
 {
 
@@ -18,7 +18,7 @@ class ProductController extends Controller
             // Query products according to city of consumer
             $products = Product::where('city_id', $auth->city_id)->where('status',1)->get();
             // Convert collection to resource
-            $products = \App\Http\Resource\V2\Consumer\ProductResource::collection($products);
+            $products = ProductResource::collection($products);
             // return resouce data to consumer
             return response()->json(['status'=>true, 'data' => ['products' => $products]], 200);
         }catch(Exception $ex){
