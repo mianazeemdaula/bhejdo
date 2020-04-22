@@ -20,7 +20,7 @@ class StoreResource extends JsonResource
             'last_update' => $this->last_update,
             'avatar' => $this->avatar,
             'name' => $this->name,
-            'location' => [$this->location->coordinates[0], $this->location->coordinates[1]],
+            'location' => $this->location,
         ];
     }
 }
