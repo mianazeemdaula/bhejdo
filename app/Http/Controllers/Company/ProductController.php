@@ -12,6 +12,8 @@ use Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Store\ProductForm;
 
+use DB;
+
 class ProductController extends Controller
 {
     use FormBuilderTrait;
@@ -74,30 +76,37 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $form = $this->form(ProductForm::class);
+        try {
+            DB::beginTransaction();
+            $form = $this->form(ProductForm::class);
 
-        if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            if (!$form->isValid()) {
+                return redirect()->back()->withErrors($form->getErrors())->withInput();
+            }
+
+            $service = new Product();
+            $service->category_id = $request->category_id;
+            $service->city_id = Auth::user()->city_id;
+            $service->name = $request->name;
+            $service->urdu_name = $request->urdu_name;
+            $service->contract_price = $request->contract_price;
+            $service->markeet_price = $request->markeet_price;
+            $service->weight = $request->weight;
+            $service->unit = $request->unit;
+            if($request->has('image')){
+                $cover = $request->file('image');
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move(public_path('product'), $imageName);
+                //\Storage::disk('public')->put($imageName, $cover);
+                $service->img_url = $imageName;
+            }
+            $service->save();
+            DB::commit();
+            return redirect()->back()->with('status', 'Product Created!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('status', 'Exception Problem');
         }
-        
-        $service = new Product();
-        $service->category_id = $request->category_id;
-        $service->city_id = Auth::user()->city_id;
-        $service->name = $request->name;
-        $service->urdu_name = $request->urdu_name;
-        $service->contract_price = $request->contract_price;
-        $service->markeet_price = $request->markeet_price;
-        $service->weight = $request->weight;
-        $service->unit = $request->unit;
-        if($request->has('image')){
-            $cover = $request->file('image');
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('product'), $imageName);
-            //\Storage::disk('public')->put($imageName, $cover);
-            $service->img_url = $imageName;
-        }
-        $service->save();
-        return redirect()->back()->with('status', 'Product Created!');
     }
 
     public function setservice()
