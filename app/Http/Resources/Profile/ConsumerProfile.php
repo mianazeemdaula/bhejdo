@@ -26,6 +26,7 @@ class ConsumerProfile extends JsonResource
             'status' => $this->status,
             'cnic' => $this->profile->cnic,
             'dob' => $this->profile->dob,
+            'wallet' => $this->walletBalance,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

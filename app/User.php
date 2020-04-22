@@ -72,6 +72,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wallet::class);
     }
+    public function walletBalance()
+    {
+        return $this->wallet()->orderby('id','desc')->first();
+    }
 
     public function bonus()
     {
