@@ -36,11 +36,10 @@ Route::prefix('consumer')->group(function () {
         
         Route::prefix('order')->group(function () {
             Route::post('/place-order', 'Api\Consumer\OrderController@create');
-            
-            Route::get('open', 'Api\Consumer\OrderController@open'); 
+            Route::get('open', 'Api\Consumer\OrderController@open');
             Route::get('inprocess', 'Api\Consumer\OrderController@inprocess'); 
             Route::get('all', 'Api\Consumer\OrderController@all'); 
-            Route::get('schedule', 'Api\Consumer\OrderController@schedule'); 
+            Route::get('schedule', 'Api\Consumer\OrderController@schedule');
             Route::get('get/{id}', 'Api\Consumer\OrderController@getOrder'); 
             Route::post('update', 'Api\Consumer\OrderController@update'); 
         });
