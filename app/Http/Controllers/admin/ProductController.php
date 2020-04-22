@@ -19,7 +19,7 @@ class ProductController extends Controller
     use FormBuilderTrait;
     public function index()
     {
-        $products = Product::where('company_id',Auth::id())->get();
+        $products = Product::all();
         return view('pages.company.product.index', compact('products'));
     }
 
