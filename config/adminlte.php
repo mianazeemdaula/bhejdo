@@ -215,7 +215,7 @@ return [
         ],
         [
             'text'        => 'Products',
-            'route'         => 'storeProduct.index',
+            'route'         => 'prodcut.index',
             'icon'        => 'far fa-fw fa-file',
             'permission' => 'super-admin|admin|store'
         ],
