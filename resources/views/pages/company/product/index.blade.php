@@ -25,12 +25,12 @@
                             <tr>
                                 <th>Sr #</th>
                                 <th>Name</th>
-                                <th>Min Qty</th>
-                                <th>Max Qty</th>
-                                <th>Min Qty Charges</th>
-                                <th>Price</th>
-                                <th>Charges</th>
-                                <th>Sample Qty</th>
+                                <th>Urdu Name</th>
+                                <th>Contract Price</th>
+                                <th>Markeet Price</th>
+                                <th>City</th>
+                                <th>Weight</th>
+                                <th>Unit</th>
                                 <th>Icon</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -40,15 +40,15 @@
                             @foreach ($products as $item)
                                 <tr>
                                     <td> {{ $item->id}} </td>
-                                    <td> {{ $item->s_name}} </td>
-                                    <td> {{ $item->min_qty}} </td>
-                                    <td> {{ $item->max_qty}} </td>
-                                    <td> {{ $item->min_qty_charges }} </td>
-                                    <td> {{ $item->s_price }} </td>
-                                    <td> {{ $item->s_charges }} </td>
-                                    <td> {{ $item->s_sample_qty }} </td>
-                                    <td> <a href='{{ asset("services/$item->img_url") }}'>Icon</a></td>
-                                    <td> {{ $item->s_status }} </td>
+                                    <td> {{ $item->name}} </td>
+                                    <td> {{ $item->urdu_name}} </td>
+                                    <td> {{ $item->contract_price}} </td>
+                                    <td> {{ $item->markeet_price }} </td>
+                                    <td> {{ $item->city->name }} </td>
+                                    <td> {{ $item->weight }} </td>
+                                    <td> {{ $item->unit }} </td>
+                                    <td> <a href='{{ asset("product/$item->img_url") }}'>Icon</a></td>
+                                    <td> {{ $item->status }} </td>
                                     <td> 
                                       <div class="btn-group">
                                         <a href="{{ route('service.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>

@@ -37,31 +37,36 @@ class ProductController extends Controller
 
     public function update(Request $request, Service $service)
     {
-        $form = $this->form(ProductForm::class);
+        try {
+            DB::beginTransaction();
+            $form = $this->form(ProductForm::class);
 
-        if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            if (!$form->isValid()) {
+                return redirect()->back()->withErrors($form->getErrors())->withInput();
+            }
+            $service->category_id = $request->category_id;
+            $service->city_id = Auth::user()->city_id;
+            $service->company_id = Auth::id();
+            $service->name = $request->name;
+            $service->urdu_name = $request->urdu_name;
+            $service->contract_price = $request->contract_price;
+            $service->markeet_price = $request->markeet_price;
+            $service->weight = $request->weight;
+            $service->unit = $request->unit;
+            if($request->has('image')){
+                $cover = $request->file('image');
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move(public_path('product'), $imageName);
+                //\Storage::disk('public')->put($imageName, $cover);
+                $service->img_url = $imageName;
+            }
+            $service->save();
+            DB::commit();
+            return redirect()->back()->with('status', 'Product Updated!');
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return redirect()->back()->with('status', "Exception Problem $ex")->withInput();
         }
-        $service->s_name = $request->s_name;
-        $service->s_price = $request->s_price;
-        $service->s_status = $request->s_status;
-        $service->urdu_name = $request->urdu_name;
-        $service->cross_price = $request->cross_price;
-        $service->lifter_price = $request->lifter_price;
-        $service->description = $request->description;
-        $service->scale = $request->scale;
-        $service->min_qty_charges = $request->min_qty_charges;
-        $service->max_qty = $request->max_qty;
-        $service->min_qty = $request->min_qty;
-        if($request->has('image')){
-            $cover = $request->file('image');
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('services'), $imageName);
-            //\Storage::disk('public')->put($imageName, $cover);
-            $service->img_url = $imageName;
-        }
-        $service->save();
-        return redirect()->back()->with('status', 'Service Updated!');
     }
 
     public function create()
