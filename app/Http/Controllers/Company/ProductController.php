@@ -74,7 +74,7 @@ class ProductController extends Controller
         $form = $this->form(ProductForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => route('company.product.update'),
+            'url' => route('company.product.store'),
         ]);
         return view('pages.company.product.create', compact('form'));
     }
