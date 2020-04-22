@@ -215,7 +215,7 @@ return [
         ],
         [
             'text'        => 'Products',
-            'route'         => 'store_product.index',
+            'route'         => 'storeProduct.index',
             'icon'        => 'far fa-fw fa-file',
             'permission' => 'super-admin|admin|store'
         ],

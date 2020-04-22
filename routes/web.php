@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth']], function () {
     
 
     Route::prefix('store')->group(function () {
-        Route::resource('product', 'Store\ProductController')->name('store_product');
+        Route::resource('product', 'Store\ProductController')->name('storeProduct');
     });
 
 
