@@ -44,7 +44,7 @@ class UpdateProductForm extends Form
             'rules' => 'required|max:3',
             'label' => 'Unit'
         ])->add('status', 'choice', [
-            'choices' => ['0' => 'Active', '1' => 'Deactive'],
+            'choices' => ['1' => 'Active', '0' => 'Deactive'],
             'expanded' => true,
             'multiple' => false
         ])->add('image','file',[
