@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->string('thumbnil_url')->nullable();
             $table->string('img_url')->nullable();
             $table->string('unit')->default('ltr');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
