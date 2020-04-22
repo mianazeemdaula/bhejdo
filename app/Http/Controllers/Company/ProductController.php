@@ -10,7 +10,7 @@ use App\Product;
 use Auth;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use App\Forms\Store\ProductForm;
+use App\Forms\Company\ProductForm;
 
 use DB;
 
@@ -29,7 +29,7 @@ class ProductController extends Controller
         $form = $this->form(ProductForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('product.update', $id),
+            'url' => route('company.product.update', $id),
             'model' => $service
         ]);
         return view('pages.company.product.edit', compact('form'));
@@ -74,7 +74,7 @@ class ProductController extends Controller
         $form = $this->form(ProductForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => route('product.store'),
+            'url' => route('company.product.update'),
         ]);
         return view('pages.company.product.create', compact('form'));
     }
