@@ -248,17 +248,17 @@ return [
         //     'icon'        => 'far fa-fw fa-file',
         //     'permission' => 'super-admin|admin'
         // ],
-        [
-            'text'        => 'Online',
-            'url'         => '/online',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        // [
+        //     'text'        => 'Online',
+        //     'url'         => '/online',
+        //     'icon'        => 'far fa-fw fa-file',
+        // ],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
     //     [
     //         'text' => 'change_password',
     //         'url'  => 'admin/settings',
