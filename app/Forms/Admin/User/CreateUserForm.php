@@ -18,7 +18,7 @@ class CreateUserForm extends Form
         ->add('email', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Email'
-        ])->add('phone', 'text',  [
+        ])->add('mobile', 'text',  [
             'rules' => 'required|min:11|max:11',
             'label' => 'Mobile'
         ])->add('password', 'password',  [
