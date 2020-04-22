@@ -54,6 +54,11 @@ class User extends Authenticatable
         ]);
     }
 
+    public function city()
+    {
+        return $this->belongsTo('App\City');
+    }
+
     
     public function storLifter()
     {

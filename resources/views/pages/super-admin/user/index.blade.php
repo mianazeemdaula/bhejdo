@@ -31,6 +31,7 @@
                                 <th>Email</th>
                                 <th>Rols</th>
                                 <th>Status</th>
+                                <th>City</th>
                                 <th>Created</th>
                                 <th>Last Update</th>
                                 <th>Action</th>
@@ -45,6 +46,7 @@
                                     <td> {{ $item->email}} </td>
                                     <td> {{ $item->getRoleNames()[0] }} </td>
                                     <td> {{ $item->status }} </td>
+                                    <td> {{ $item->city->name }} </td>
                                     <td> {{ $item->created_at}} </td>
                                     <td> {{ $item->updated_at}} </td>
                                     <td> 
