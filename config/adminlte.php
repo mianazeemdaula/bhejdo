@@ -216,12 +216,7 @@ return [
             'text'        => 'Products',
             'route'         => 'product.index',
             'icon'        => 'far fa-fw fa-file',
-        ],
-        [
-            'text'        => 'Orders',
-            'route'         => 'order.index',
-            'icon'        => 'far fa-fw fa-file',
-            'permission' => 'super-admin|admin|support'
+            'permission' => 'super-admin|admin|company'
         ],
         [
             'text'        => 'Orders',
