@@ -16,11 +16,11 @@ class StoreResource extends JsonResource
     {
         return [
             'id' => $this->lifter_id,
-            'onwork' => $this->onwork,
+            'onwork' => (int) $this->onwork,
             'last_update' => $this->last_update,
             'avatar' => $this->avatar,
             'name' => $this->name,
-            'location' => $this->location,
+            'location' => $this->location['coordinates'],
         ];
     }
 }
