@@ -80,6 +80,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user.wallet', 'WalletController');
     Route::resource('notification', 'NotificationController');
 
+
+    Route::prefix('store')->group(function () {
+        Route::resource('product', 'Store\ProductController')->name('store_product');
+    });
+
+
+
+
+
+
     Route::get('online', function(){
         $lifters = \App\LifterLocation::where("onwork","1")->get();
         return view('pages.admin.lifters.index', compact('lifters'));

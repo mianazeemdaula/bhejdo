@@ -9,27 +9,27 @@ use App\Service;
 
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use App\Forms\Admin\ServiceCreateForm;
+use App\Forms\Store\ProductForm;
 
 class ProductController extends Controller
 {
     use FormBuilderTrait;
     public function index()
     {
-        $services = Service::all();
-        return view('pages.admin.services.index', compact('services'));
+        $products = Product::where('company_id',Auth::id())->get();
+        return view('pages.store.product.index', compact('products'));
     }
 
     public function edit($id)
     {
         $service = Service::findOrFail($id);
-        $form = $this->form(ServiceCreateForm::class, [
+        $form = $this->form(ProductForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('service.update', $id),
+            'url' => route('store_product.update', $id),
             'model' => $service
         ]);
-        return view('pages.admin.services.edit', compact('form'));
+        return view('pages.store.product.edit', compact('form'));
     }
 
     public function update(Request $request, Service $service)
@@ -66,9 +66,9 @@ class ProductController extends Controller
         $form = $this->form(ServiceCreateForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => route('service.store'),
+            'url' => route('store_product.store'),
         ]);
-        return view('pages.admin.services.edit', compact('form'));
+        return view('pages.store.product.store', compact('form'));
     }
 
     public function store(Request $request)
