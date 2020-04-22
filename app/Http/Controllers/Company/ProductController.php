@@ -87,6 +87,7 @@ class ProductController extends Controller
             $service = new Product();
             $service->category_id = $request->category_id;
             $service->city_id = Auth::user()->city_id;
+            $service->company_id = Auth::id();
             $service->name = $request->name;
             $service->urdu_name = $request->urdu_name;
             $service->contract_price = $request->contract_price;
