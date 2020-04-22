@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms\Store;
+namespace App\Forms\Company;
 
 use Kris\LaravelFormBuilder\Form;
 
