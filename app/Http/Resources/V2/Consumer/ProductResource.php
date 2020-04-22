@@ -19,7 +19,15 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'urduname' => $this->urdu_name,
             'category' => ['id'=>$this->category->id, 'name' => $this->category->name],
-            'company' => ['id'=>$this->company->id, 'name' => $this->company->name]
+            'company' => ['id'=>$this->company->id, 'name' => $this->company->name],
+            'min_qty' => $this->min_qty,
+            'max_qty' => $this->max_qty,
+            'min_qty_charges' => $this->min_qty_charges,
+            'sale_price' => $this->sale_price,
+            'markeet_price' => $this->markeet_price,
+            'weight' => $this->weight,
+            'img_url' => $this->img_url == null ? null : asset("product/".$this->img_url),
+            'unit' => $this->unit,
         ];
     }
 }
