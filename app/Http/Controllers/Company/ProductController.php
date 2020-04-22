@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Service;
-
+use Auth;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Store\ProductForm;
