@@ -179,13 +179,9 @@ return [
             'topnav' => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'Users',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin',
             'submenu' => [
                 [
                     'text' => 'Admin',
@@ -212,6 +208,7 @@ return [
             'text'        => 'Role',
             'route'         => 'role.index',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
         ],
         [
             'text'        => 'Products',
@@ -222,11 +219,13 @@ return [
             'text'        => 'Orders',
             'route'         => 'order.index',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
         ],
         [
             'text'        => 'Subscriptions',
             'route'         => 'subscription.index',
             'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
         ],
         [
             'text'        => 'Services',
