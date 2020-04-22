@@ -16,7 +16,7 @@ class RoleController extends Controller
     public function index()
     {
         $collection = Role::all();
-        return view('admin.role.index', compact('collection'));   
+        return view('pages.admin.role.index', compact('collection'));   
     }
 
     public function create()
@@ -26,7 +26,7 @@ class RoleController extends Controller
             'class' => 'form-horizontal',
             'url' => route('role.store')
         ]);
-        return view('admin.role.create', compact('form'));
+        return view('pages.admin.role.create', compact('form'));
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class RoleController extends Controller
             'url' => route('role.update', [$id]),
             'model' => $Role
         ]);
-        return view('admin.role.edit', compact('form'));
+        return view('pages.admin.role.edit', compact('form'));
     }
 
     public function update(Request $request, $id)
