@@ -79,6 +79,7 @@ class UserController extends Controller
         $user->mobile = $request->mobile;
         $user->password = bcrypt($request->password);
         $user->account_type = $request->role;
+        $user->city_id = $request->city_id;
         $user->save();
         $user->assignRole($request->role);
         return redirect()->back()->with('status', 'User Created!');
