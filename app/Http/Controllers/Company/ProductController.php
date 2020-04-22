@@ -69,7 +69,7 @@ class ProductController extends Controller
             'class' => 'form-horizontal',
             'url' => route('product.store'),
         ]);
-        return view('pages.company.product.store', compact('form'));
+        return view('pages.company.product.create', compact('form'));
     }
 
     public function store(Request $request)
