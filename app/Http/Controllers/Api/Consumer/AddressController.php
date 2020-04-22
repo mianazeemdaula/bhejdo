@@ -49,7 +49,7 @@ class AddressController extends Controller
             $address->save();
             DB::commit();
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
-            return response()->json(['status'=>true, 'data' => $profile], 200);
+            return response()->json(['status'=>true, 'data' => $address], 200);
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
