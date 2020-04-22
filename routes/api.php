@@ -24,6 +24,7 @@ Route::prefix('consumer')->group(function () {
             Route::namespace('Api\Consumer')->group(function () {
                 Route::resource('product','ProductController');
                 Route::resource('stores','StoresController');
+                Route::resource('address','AddressController');
                 Route::get('profile','AuthController@profile');
             });
         });
