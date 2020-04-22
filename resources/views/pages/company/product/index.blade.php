@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-body">
                     <div class="py-2">
-                        <a href="{{ route('company_product.create') }}" class="btn btn-primary" > Create Prodcut</a>
+                        <a href="{{ route('product.create') }}" class="btn btn-primary" > Create Prodcut</a>
                     </div>
                     <table class="table table-bordered table-striped dataTable" id="example1">
                         <thead>

@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::where('company_id',Auth::id())->get();
-        return view('pages.store.product.index', compact('products'));
+        return view('pages.company.product.index', compact('products'));
     }
 
     public function edit($id)
@@ -27,10 +27,10 @@ class ProductController extends Controller
         $form = $this->form(ProductForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('company_product.update', $id),
+            'url' => route('product.update', $id),
             'model' => $service
         ]);
-        return view('pages.store.product.edit', compact('form'));
+        return view('pages.company.product.edit', compact('form'));
     }
 
     public function update(Request $request, Service $service)
@@ -67,9 +67,9 @@ class ProductController extends Controller
         $form = $this->form(ServiceCreateForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => route('company_product.store'),
+            'url' => route('product.store'),
         ]);
-        return view('pages.store.product.store', compact('form'));
+        return view('pages.company.product.store', compact('form'));
     }
 
     public function store(Request $request)
