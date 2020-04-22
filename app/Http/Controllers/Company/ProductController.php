@@ -79,7 +79,8 @@ class ProductController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        $service = new Service();
+        return $request->all();
+        $service = new Product();
         $service->s_name = $request->s_name;
         $service->s_price = $request->s_price;
         $service->s_status = $request->s_status;
