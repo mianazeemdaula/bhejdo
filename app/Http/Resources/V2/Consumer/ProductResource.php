@@ -18,8 +18,8 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'urduname' => $this->urdu_name,
-            'category' => [$this->category->id, $this->category->name],
-            'company' => $this->company->name
+            'category' => ['id'=>$this->category->id, 'name' => $this->category->name],
+            'company' => ['id'=>$this->company->id, 'name' => $this->company->name]
         ];
     }
 }
