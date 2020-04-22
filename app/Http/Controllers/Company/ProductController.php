@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     public function update(Request $request, Service $service)
     {
-        $form = $this->form(ServiceCreateForm::class);
+        $form = $this->form(ProductForm::class);
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
@@ -64,7 +64,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $form = $this->form(ServiceCreateForm::class, [
+        $form = $this->form(ProductForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
             'url' => route('product.store'),
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $form = $this->form(ServiceCreateForm::class);
+        $form = $this->form(ProductForm::class);
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
