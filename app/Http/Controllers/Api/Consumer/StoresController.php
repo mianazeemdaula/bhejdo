@@ -14,22 +14,7 @@ class StoresController extends Controller
      */
     public function index(Request $request)
     {
-        try{
-            $stores = \App\LifterLocation::where('location', 'near', [
-                '$geometry' => [
-                    'type' => 'Point',
-                    'coordinates' => [
-                        floatval($request->lat), // longitude
-                        floatval($request->lon), // latitude
-                    ],
-                ],
-                '$maxDistance' => intval(3 * 1000),
-            ])
-            ->where("onwork","1")->get();
-            return ['status' => true, 'data' => ['stores' => $request->all(),]];
-        }catch(Exception $ex){
-            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
-        }
+        
     }
 
     /**
@@ -50,7 +35,22 @@ class StoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $stores = \App\LifterLocation::where('location', 'near', [
+                '$geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [
+                        floatval($request->lat), // longitude
+                        floatval($request->lon), // latitude
+                    ],
+                ],
+                '$maxDistance' => intval(3 * 1000),
+            ])
+            ->where("onwork","1")->get();
+            return ['status' => true, 'data' => ['stores' => $request->all(),]];
+        }catch(Exception $ex){
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
     }
 
     /**
