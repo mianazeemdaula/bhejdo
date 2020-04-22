@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('order/manualSampleConfirm/{id}','OrderController@manualSampleConfirm');
     
     Route::resource('role', 'RoleController');
+    Route::resource('permission','PermissionController');
     Route::resource('user', 'UserController');
     Route::get('user/type/consumer', 'UserController@consumer');
     Route::get('user/type/lifter', 'UserController@lifter');
