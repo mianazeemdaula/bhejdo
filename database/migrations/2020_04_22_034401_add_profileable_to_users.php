@@ -14,8 +14,8 @@ class AddProfileableToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('profileable_id');
-            $table->string('profileable_type');
+            $table->integer('profileable_id')->nullable();
+            $table->string('profileable_type')->nullable();
         });
     }
 
