@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'BhaijDo',
+    'title' => 'OhYes',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Bhaij</b>DO',
+    'logo' => '<b>OhYes</b>DO',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image-xl',
     'logo_img_xl' => null,
