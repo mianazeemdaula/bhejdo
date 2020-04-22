@@ -83,8 +83,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     
 
+    Route::resource('product', 'Company\ProductController');
     Route::prefix('company')->group(function () {
-        Route::resource('product', 'Company\ProductController');
     });
 
 
