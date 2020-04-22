@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('pages.company.product.index', compact('products'));
+        return view('pages.admin.product.index', compact('products'));
     }
 
     public function edit($id)
@@ -32,7 +32,7 @@ class ProductController extends Controller
             'url' => route('admin.product.update', $id),
             'model' => $product
         ]);
-        return view('pages.company.product.edit', compact('form'));
+        return view('pages.admin.product.edit', compact('form'));
     }
 
     public function update(Request $request, $id)
@@ -77,7 +77,7 @@ class ProductController extends Controller
             'class' => 'form-horizontal',
             'url' => route('product.store'),
         ]);
-        return view('pages.company.product.create', compact('form'));
+        return view('pages.admin.product.create', compact('form'));
     }
 
     public function store(Request $request)
@@ -114,14 +114,5 @@ class ProductController extends Controller
             DB::rollBack();
             return redirect()->back()->with('status', "Exception Problem $ex")->withInput();
         }
-    }
-
-    public function setservice()
-    {
-        $user = User::find(1);
-        $user->services()->sync([1,3]);
-        $user->storelifter()->sync([2,3]);
-        $service = Service::find(1);
-        return $user->storelifter;
     }
 }
