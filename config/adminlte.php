@@ -209,6 +209,11 @@ return [
             
         ],
         [
+            'text'        => 'Role',
+            'route'         => 'role.index',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
             'text'        => 'Orders',
             'route'         => 'order.index',
             'icon'        => 'far fa-fw fa-file',

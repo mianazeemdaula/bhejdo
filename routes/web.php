@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('order/livepartners/{id}','OrderController@livePartners');
     Route::get('order/manualSampleConfirm/{id}','OrderController@manualSampleConfirm');
     
+    Route::resource('role', 'RoleController');
     Route::resource('user', 'UserController');
     Route::get('user/type/consumer', 'UserController@consumer');
     Route::get('user/type/lifter', 'UserController@lifter');
