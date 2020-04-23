@@ -187,8 +187,8 @@ class SeedController extends Controller
 
     public function test()
     {
-        $city = new \App\Category();
-        $city->name = 'Dairy Items';
+        $city = new \App\City();
+        $city->name = 'Sargodha';
         $city->save();
         return $city;
         // $level = Level::firstOrCreate(['service_id' => 5,'l_name' => 'Part Time', 'order_qty' => 25]);
