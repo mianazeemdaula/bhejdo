@@ -61,8 +61,9 @@ class CartOrderController extends Controller
             $produts = \App\Product::whereIn('id',$productIds)->get();
 
             $productDetails = [];
-            foreach( $produts as $product){
-                $productDetails[] = ['order_id' => 2, 'product_id' => $product->id, 'price' => $product->sale_price, 'qty' => 1];
+            foreach( $cartItems as $id => $qty){
+                $product = $product::find($id);
+                $productDetails[] = ['order_id' => 2, 'product_id' => $product->id, 'price' => $product->sale_price, 'qty' => $qty];
             }
             return response()->json(['status'=>true, 'data' => $productDetails ], 200);
 
