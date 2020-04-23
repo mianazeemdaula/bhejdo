@@ -25,6 +25,7 @@ class ProductResource extends JsonResource
             'min_qty_charges' => $this->min_qty_charges,
             'sale_price' => $this->sale_price,
             'markeet_price' => $this->markeet_price,
+            'bonus_deduction' => $this->bonus_deduction,
             'weight' => $this->weight,
             'img_url' => $this->img_url == null ? null : asset("product/".$this->img_url),
             'unit' => $this->unit,
