@@ -54,6 +54,30 @@ class CartOrderController extends Controller
             //     return response()->json(['error'=>$validator->errors()], 401);
             // }
             return response()->json(['status'=>true, 'data' => $request->all()], 200);
+
+            // +-----------------+---------------------+------+-----+---------+----------------+
+// | Field           | Type                | Null | Key | Default | Extra          |
+// +-----------------+---------------------+------+-----+---------+----------------+
+// | id              | bigint(20) unsigned | NO   | PRI | NULL    | auto_increment |
+// | consumer_id     | bigint(20) unsigned | NO   |     | NULL    |                |
+// | sotre_id        | bigint(20) unsigned | YES  |     | NULL    |                |
+// | lifter_id       | bigint(20) unsigned | YES  |     | NULL    |                |
+// | payment_id      | bigint(20) unsigned | NO   |     | 1       |                |
+// | address_id      | int(11)             | NO   |     | NULL    |                |
+// | charges         | int(11)             | NO   |     | 0       |                |
+// | delivery_time   | time                | NO   |     | NULL    |                |
+// | note            | varchar(255)        | YES  |     | NULL    |                |
+// | type            | int(11)             | NO   |     | 1       |                |
+// | consumer_bonus  | int(11)             | NO   |     | NULL    |                |
+// | store_amount    | int(11)             | NO   |     | NULL    |                |
+// | lifter_amount   | int(11)             | NO   |     | NULL    |                |
+// | payable_amount  | int(11)             | NO   |     | NULL    |                |
+// | status          | varchar(15)         | NO   |     | NULL    |                |
+// | created_at      | timestamp           | YES  |     | NULL    |                |
+// | updated_at      | timestamp           | YES  |     | NULL    |                |
+// | consumer_wallet | int(11)             | YES  |     | 0       |                |
+// +-----------------+---------------------+------+-----+---------+----------------+
+
             $order = new CartOrder();
             $order->consumer_id = $request->user()->id;
             $order->lifter_id = 2;
