@@ -62,7 +62,7 @@ class CartOrderController extends Controller
 
             $productDetails = [];
             foreach( $cartItems as $id => $qty){
-                $product = $produts::find($id);
+                $product = $produts->find($id);
                 $productDetails[] = ['order_id' => 2, 'product_id' => $product->id, 'price' => $product->sale_price, 'qty' => $qty];
             }
             return response()->json(['status'=>true, 'data' => $productDetails ], 200);
