@@ -53,11 +53,13 @@ class CartOrderController extends Controller
             // if ($validator->fails()) {
             //     return response()->json(['error'=>$validator->errors()], 401);
             // }
-            $products =  [];
-            foreach( json_decode($request->items) as $id => $qty){
-                $products[] = \App\Product::find($id);
+            $cartItems =  json_decode($request->items);
+            $productIds = [];
+            foreach( $cartItems as $id => $qty){
+                $productIds[] = $id;
             }
-            return response()->json(['status'=>true, 'data' => $products ], 200);
+
+            return response()->json(['status'=>true, 'data' => $productIds ], 200);
 
             $order = new CartOrder();
             $order->consumer_id = $request->user()->id;
