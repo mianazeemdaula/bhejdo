@@ -53,63 +53,25 @@ class CartOrderController extends Controller
             // if ($validator->fails()) {
             //     return response()->json(['error'=>$validator->errors()], 401);
             // }
-            return response()->json(['status'=>true, 'data' => $request->all()], 200);
-
-            // +-----------------+---------------------+------+-----+---------+----------------+
-// | Field           | Type                | Null | Key | Default | Extra          |
-// +-----------------+---------------------+------+-----+---------+----------------+
-// | id              | bigint(20) unsigned | NO   | PRI | NULL    | auto_increment |
-// | consumer_id     | bigint(20) unsigned | NO   |     | NULL    |                |
-// | sotre_id        | bigint(20) unsigned | YES  |     | NULL    |                |
-// | lifter_id       | bigint(20) unsigned | YES  |     | NULL    |                |
-// | payment_id      | bigint(20) unsigned | NO   |     | 1       |                |
-// | address_id      | int(11)             | NO   |     | NULL    |                |
-// | charges         | int(11)             | NO   |     | 0       |                |
-// | delivery_time   | time                | NO   |     | NULL    |                |
-// | note            | varchar(255)        | YES  |     | NULL    |                |
-// | type            | int(11)             | NO   |     | 1       |                |
-// | consumer_bonus  | int(11)             | NO   |     | NULL    |                |
-// | store_amount    | int(11)             | NO   |     | NULL    |                |
-// | lifter_amount   | int(11)             | NO   |     | NULL    |                |
-// | payable_amount  | int(11)             | NO   |     | NULL    |                |
-// | status          | varchar(15)         | NO   |     | NULL    |                |
-// | created_at      | timestamp           | YES  |     | NULL    |                |
-// | updated_at      | timestamp           | YES  |     | NULL    |                |
-// | consumer_wallet | int(11)             | YES  |     | 0       |                |
-// +-----------------+---------------------+------+-----+---------+----------------+
+            return response()->json(['status'=>true, 'data' => json_decode($request->items)], 200);
 
             $order = new CartOrder();
             $order->consumer_id = $request->user()->id;
-            $order->lifter_id = 2;
-            $order->service_id = $request->service_id;
-            $order->qty = $request->qty;
-            $order->price = $service->s_price;
+            $order->payment_id = $request->paymentType;
+            $order->address_id = $request->address;
+            $order->charges = $request->charges;
             $order->note = $request->note;
-            
-            $order->address = $request->address;
-            $order->longitude = $request->longitude;
-            $order->latitude = $request->latitude;
-            $order->deliver_time = \App\Helpers\TimeHelper::parseTime($request->preffer_time);
-            if($request->has('sample')){
-                $order->type = 3;
-                $order->charges = 0;
-            }
-            else if($request->qty < $service->min_qty){
-                $order->charges = $service->min_qty_charges;
-            }else{
-                $order->charges = 0;
-            }
-
-            if($request->has('shift')){
-                $order->shift = $request->shift;
-                
-                $order->delivery_time = Carbon::now();
-            }else{
-                $order->delivery_time = $request->delivery_time;
-            }
+            $order->type = 1;
+            $order->consumer_bonus = $request->consumer_bonus;
+            $order->store_amount = 0;
+            $order->lifter_amount = 0;
+            $order->payable_amount = $request->payable;
+            $order->status = 'created';
+            $order->consumer_wallet = $request->address;
+            $order->deliver_time = \App\Helpers\TimeHelper::parseTime($request->deliveryTime);
             $order->save();
             // $response = OrderProcess::orderAssign($order);
-            // DB::commit();
+            DB::commit();
             // $data = ['msg' => 'Order has placed successfully', 'response' => $response];
             return response()->json(['status'=>true, 'data' => $data], 200);
         }catch(Exception $ex){
