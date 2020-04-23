@@ -234,7 +234,7 @@ return [
             'text'        => 'Subscriptions',
             'route'         => 'subscription.index',
             'icon'        => 'far fa-fw fa-file',
-            'permission' => 'super-admin|admin'
+            'permission' => 'super-admin|admin|support'
         ],
         [
             'text'        => 'Services',
