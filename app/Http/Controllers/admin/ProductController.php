@@ -54,6 +54,11 @@ class ProductController extends Controller
             $product->markeet_price = $request->markeet_price;
             $product->store_commission = $request->store_commission;
             $product->lifter_commission = $request->lifter_commission;
+            $product->bonus_deduction = $request->bonus_deduction;
+            $product->oy_commission = $request->oy_commission;
+            $product->city_leader_commission = $request->city_leader_commission;
+            $product->oyfee_store = $request->oyfee_store;
+            $product->oyfee_lifter = $request->oyfee_lifter;
             $product->status = $request->status;
             $product->weight = $request->weight;
             $product->unit = $request->unit;

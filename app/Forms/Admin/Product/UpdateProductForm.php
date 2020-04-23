@@ -36,8 +36,22 @@ class UpdateProductForm extends Form
         ->add('lifter_commission', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Lifter Comission'
-        ])
-        ->add('weight', 'number',  [
+        ])->add('oyfee_lifter', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'OY Lifter Fee'
+        ])->add('oyfee_store', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'OY Store Fee'
+        ])->add('city_leader_commission', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'City Leader Commission'
+        ])->add('oy_commission', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'OY Commission'
+        ])->add('bonus_deduction', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Bonus Deduction (Consumer)'
+        ])->add('weight', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Weight (in grams)'
         ])->add('unit', 'text',  [
