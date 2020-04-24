@@ -107,7 +107,6 @@ class CartOrderController extends Controller
                 $payableAmount += ($product->sale_price * $qty);
                 $bonusDeduction +=  ( $product->bonus_deduction  * $qty);
             }
-            $payableAmount = ($payableAmount - $bonusAmount) + $charges;
             CartOrderDetail::insert($productDetails);
             // Payable ammount Sale Price + Charges - Bonus
             $charges = 0;
@@ -117,22 +116,6 @@ class CartOrderController extends Controller
                 $charges = 30;
             }else{
                 $charges = 0;
-            }
-
-
-            // Caculate wallet amount on wallet payment
-            $walletAmount = 0;
-            if($order->payment_id == 2){
-                $wallet = Wallet::balance($order->consumer_id);
-                if($wallet != null){
-                    if($wallet->balance >= $payableAmount){
-                        $walletAmount = $payableAmount;
-                        Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$payableAmount);
-                    }else{
-                        $walletAmount = $wallet->balance - $payableAmount;
-                        Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$walletAmount);
-                    }
-                }
             }
 
             // Caculate bonus amount on bonus deduction
@@ -150,6 +133,22 @@ class CartOrderController extends Controller
                 }
             }
             
+            $payableAmount = ($payableAmount - $bonusAmount) + $charges;
+
+            // Caculate wallet amount on wallet payment
+            $walletAmount = 0;
+            if($order->payment_id == 2){
+                $wallet = Wallet::balance($order->consumer_id);
+                if($wallet != null){
+                    if($wallet->balance >= $payableAmount){
+                        $walletAmount = $payableAmount;
+                        Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$payableAmount);
+                    }else{
+                        $walletAmount = $wallet->balance - $payableAmount;
+                        Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$walletAmount);
+                    }
+                }
+            }
             
             $order->store_amount = ($payableAmount - $bonusAmount) - $charges;
             $order->charges = $charges;
