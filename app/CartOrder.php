@@ -23,7 +23,7 @@ class CartOrder extends Model
 
     public function address()
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class,'address_id','id');
     }
 
     public function details()
