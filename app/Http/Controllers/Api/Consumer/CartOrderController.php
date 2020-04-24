@@ -18,9 +18,16 @@ class CartOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $orders = CartOrder::with(['consumer','lifter','store'])->where('consumer_id',$request->user()->id)->get();
+            return response()->json(['status'=>true, 'data' => $orders], 200);
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
     }
 
     /**
