@@ -22,8 +22,9 @@ class CartOrderController extends Controller
     {
         DB::beginTransaction();
         try{
-            $orders = CartOrder::with(['consumer','lifter','store'])->where('consumer_id',$request->user()->id)->get();
-            return response()->json(['status'=>true, 'data' => $orders], 200);
+            $orders = CartOrder::where('consumer_id',$request->user()->id)->get();
+            $orders = \App\Http\Resources\V2\Consumer\OrderResource::collection($orders);
+            return response()->json(['status'=>true, 'data' => ['orders' => $orders]], 200);
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
