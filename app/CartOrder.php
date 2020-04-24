@@ -21,6 +21,11 @@ class CartOrder extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+
     public function details()
     {
         return $this->hasMany('App\CartOrderDetail','order_id','id');

@@ -3,6 +3,9 @@
 namespace App\Http\Resources\V2\Consumer;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\User\Consumer;
+use App\Http\Resources\User\Lifter;
+use App\Http\Resources\V2\Consumer\OrderDetailResource;
 
 class OrderResource extends JsonResource
 {
@@ -16,20 +19,22 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'urduname' => $this->urdu_name,
             'consumer' => new Consumer($this->consumer),
             'lifter' => new Lifter($this->lifter),
             'store' => new Lifter($this->store),
-            'store' => new Lifter($this->details),
-            'min_qty' => $this->min_qty,
-            'max_qty' => $this->max_qty,
-            'min_qty_charges' => $this->min_qty_charges,
-            'sale_price' => $this->sale_price,
-            'markeet_price' => $this->markeet_price,
+            'details' => new OrderDetailResource($this->details),
+            'type' => $this->type,
+            'address' => $this->address,
+            'charges' => $this->charges,
+            'delivery_time' => $this->delivery_time,
+            'note' => $this->note,
             'bonus_deduction' => $this->bonus_deduction,
-            'weight' => $this->weight,
-            'status' => $this->unit,
+            'payable_amount' => $this->payable_amount,
+            'consumer_wallet' => $this->consumer_wallet,
+            'status' => $this->status,
+            'bullet_delivery' => $this->bullet_delivery,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
