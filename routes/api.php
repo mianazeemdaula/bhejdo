@@ -27,6 +27,7 @@ Route::prefix('consumer')->group(function () {
                 Route::resource('address','AddressController');
                 Route::resource('order','CartOrderController');
                 Route::resource('wallet', 'WalletController');
+                Route::resource('bonus', 'BonusController');
                 Route::get('profile','AuthController@profile');
             });
         });
