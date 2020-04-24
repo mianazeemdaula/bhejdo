@@ -87,7 +87,7 @@ class CartOrderController extends Controller
             $order->status = 'created';
             $order->consumer_wallet = 0;
             $order->bullet_delivery = $request->bulletDelivery;
-            $order->deliver_time = \App\Helpers\TimeHelper::parseTime($request->deliveryTime);
+            $order->delivery_time = \App\Helpers\TimeHelper::parseTime($request->deliveryTime);
             $order->save();
             
             // Order Details Entry
