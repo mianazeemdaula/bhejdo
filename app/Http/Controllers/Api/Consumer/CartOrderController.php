@@ -128,7 +128,7 @@ class CartOrderController extends Controller
                         $walletAmount = $payableAmount;
                         Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$payableAmount);
                     }else{
-                        $walletAmount = $payableAmount - $wallet->balance;
+                        $walletAmount = $wallet->balance - $payableAmount;
                         Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$walletAmount);
                     }
                 }
@@ -143,7 +143,7 @@ class CartOrderController extends Controller
                         $bonusAmount = $bonusDeduction;
                         Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
                     }else{
-                        $bonusAmount = $bonusDeduction - $bonus->balance;
+                        $bonusAmount = $bonus->balance - $bonusDeduction;
                         Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
                     }
                 }
