@@ -188,7 +188,7 @@ class SeedController extends Controller
     public function test()
     {
         $order = \App\CartOrder::find(1);
-        return new App\Http\Resources\V2\Consume\OrderResource($order);
+        return new \App\Http\Resources\V2\Consume\OrderResource($order);
         $order = \App\CartOrder::find(1);
         return $orders = \App\CartOrder::with(['consumer','lifter','store', 'details'])->where('consumer_id',5)->get();
         return \App\CartOrder::find(1);
