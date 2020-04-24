@@ -123,13 +123,8 @@ class CartOrderController extends Controller
             if($bonusDeduction > 0){
                 $bonus = Bonus::balance($order->consumer_id);
                 if($bonus != null){
-                    if($bonus->balance >= $bonusDeduction){
-                        $bonusAmount = $bonusDeduction;
-                        Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
-                    }else{
-                        $bonusAmount = $bonus->balance - $bonusDeduction;
-                        Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
-                    }
+                    $bonusAmount = $bonus->balance >= $bonusDeduction ? $bonusDeduction :  $bonus->balance;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
                 }
             }
             
@@ -140,16 +135,11 @@ class CartOrderController extends Controller
             if($order->payment_id == 2){
                 $wallet = Wallet::balance($order->consumer_id);
                 if($wallet != null){
-                    if($wallet->balance >= $payableAmount){
-                        $walletAmount = $payableAmount;
-                        Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$payableAmount);
-                    }else{
-                        $walletAmount = $wallet->balance - $payableAmount;
-                        Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$walletAmount);
-                    }
+                    $walletAmount = $wallet->balance >= $payableAmount ? $payableAmount :  $wallet->balance;
+                    Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$walletAmount);
                 }
             }
-            
+
             $order->store_amount = ($payableAmount - $bonusAmount) - $charges;
             $order->charges = $charges;
             $order->lifter_amount = $payableAmount;
