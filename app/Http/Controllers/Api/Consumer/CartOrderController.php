@@ -157,9 +157,10 @@ class CartOrderController extends Controller
             $order->consumer_bonus = $bonusAmount;
             $order->consumer_wallet = $order->payment_id == 2 ? $walletAmount : 0;
             $order->save();
+            $profile = new \App\Http\Resources\Profile\ConsumerProfile($request->user());
             DB::commit();
             // $data = ['msg' => 'Order has placed successfully', 'response' => $response];
-            return response()->json(['status'=>true, 'data' => "profile"], 200);
+            return response()->json(['status'=>true, 'data' => $order, 'profile' => $profile], 200);
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
