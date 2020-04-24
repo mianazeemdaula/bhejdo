@@ -107,6 +107,7 @@ class CartOrderController extends Controller
                 $payableAmount += ($product->sale_price * $qty);
                 $bonusDeduction +=  ( $product->bonus_deduction  * $qty);
             }
+            $payableAmount = ($payableAmount - $bonusAmount) + $charges;
             CartOrderDetail::insert($productDetails);
             // Payable ammount Sale Price + Charges - Bonus
             $charges = 0;
@@ -149,7 +150,7 @@ class CartOrderController extends Controller
                 }
             }
             
-            $payableAmount = ($payableAmount - $bonusAmount) + $charges;
+            
             $order->store_amount = ($payableAmount - $bonusAmount) - $charges;
             $order->charges = $charges;
             $order->lifter_amount = $payableAmount;
