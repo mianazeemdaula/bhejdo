@@ -147,7 +147,7 @@ class CartOrderController extends Controller
                 }
             }
 
-            $order->store_amount = ($payableAmount - $bonusAmount) - $charges;
+            $order->store_amount = $payableAmount - $charges;
             $order->charges = $charges;
             $order->lifter_amount = $payableAmount;
             $order->payable_amount = $payableAmount;
