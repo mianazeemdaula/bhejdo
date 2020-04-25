@@ -46,6 +46,7 @@ class CartOrderController extends Controller
             $form->add('status', 'choice', [
                 'choices' => ['assigned' => 'Assigned', 'declined' => 'Declined'],
                 'expanded' => true,
+                'selected' => 'assigned',
                 'multiple' => false
             ]);
         }else if($order->status == 'assigned'){
