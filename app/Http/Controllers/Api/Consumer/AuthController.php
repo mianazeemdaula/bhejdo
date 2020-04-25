@@ -31,7 +31,8 @@ class AuthController extends Controller
             if($user->hasRole('consumer')){
                 $success['user'] = new \App\Http\Resources\Profile\ConsumerProfile($user); 
                 $success['token'] = $user->createToken($user->account_type)->accessToken; 
-                return response()->json(['status'=>true, 'data' => $success], 200);
+                $settings = config('ohyes.consumer');
+                return response()->json(['status'=>true, 'data' => $success, 'settings' => $settings], 200);
             }
             return response()->json(['error'=>'Not authorized to login'], 401);
         }
@@ -90,7 +91,8 @@ class AuthController extends Controller
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
             $success['user'] = $profile;
             DB::commit();
-            return response()->json(['status'=>true, 'data' => $success], 200);
+            $settings = config('ohyes.consumer');
+            return response()->json(['status'=>true, 'data' => $success, 'settings' => $settings], 200);
         }catch(Expection $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
