@@ -20,6 +20,9 @@ class UpdateProductForm extends Form
         ])->add('contract_price', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Contract Price (Company)' 
+        ])->add('description', 'textarea',  [
+            'rules' => 'required|min:1',
+            'label' => 'Description' 
         ])->add('min_qty_charges', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Delivery Charges on min qty' 

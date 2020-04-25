@@ -48,6 +48,7 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->name = $request->name;
             $product->urdu_name = $request->urdu_name;
+            $product->description = $request->description;
             $product->min_qty_charges = $request->min_qty_charges;
             $product->contract_price = $request->contract_price;
             $product->sale_price = $request->sale_price;
