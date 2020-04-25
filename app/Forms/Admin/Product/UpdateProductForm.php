@@ -51,7 +51,7 @@ class UpdateProductForm extends Form
             'rules' => 'required|min:1',
             'label' => 'Weight (in grams)'
         ])->add('unit', 'text',  [
-            'rules' => 'required|max:3',
+            'rules' => 'required|min:2',
             'label' => 'Unit'
         ])->add('status', 'choice', [
             'choices' => ['1' => 'Active', '0' => 'Deactive'],
