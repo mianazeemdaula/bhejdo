@@ -22,6 +22,12 @@ class CartOrderController extends Controller
         return view('pages.admin.cartorder.index', compact('collection'));
     }
 
+    public function show($id)
+    {
+        $order = CartOrder::find($id);
+        return view('pages.admin.cartorder.show', compact('order'));
+    }
+
     public function edit($id)
     {
         $product = Product::findOrFail($id);
