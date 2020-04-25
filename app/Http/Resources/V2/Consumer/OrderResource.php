@@ -19,9 +19,9 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'consumer' => new Consumer($this->consumer),
-            'lifter' => new Lifter($this->lifter),
-            'store' => new Lifter($this->store),
+            'consumer' => null, //new Consumer($this->consumer),
+            'lifter' => null, // new Lifter($this->lifter),
+            'store' => null , // new Lifter($this->store),
             'details' => new OrderDetailResource($this->details),
             'type' => $this->type,
             'address' => $this->address,
