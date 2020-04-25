@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('admin')->group(function () {
         Route::resource('product', 'admin\ProductController',['as' => 'admin']);
+        Route::resource('order', 'admin\CartOrderController',['as' => 'admin']);
     });
 
 

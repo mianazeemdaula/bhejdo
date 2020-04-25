@@ -230,6 +230,13 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'permission' => 'super-admin|admin|support'
         ],
+
+        [
+            'text'        => 'Cart Orders',
+            'route'         => 'admin.order.index',
+            'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin|support'
+        ],
         [
             'text'        => 'Subscriptions',
             'route'         => 'subscription.index',
