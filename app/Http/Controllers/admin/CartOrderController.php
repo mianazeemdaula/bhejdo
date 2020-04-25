@@ -91,6 +91,7 @@ class CartOrderController extends Controller
                 'multiple' => false
             ]);
         }
+        return $form;
         return view('pages.admin.cartorder.edit', compact('form'));
     }
 
