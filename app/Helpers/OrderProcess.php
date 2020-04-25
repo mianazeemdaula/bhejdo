@@ -184,6 +184,7 @@ class OrderProcess {
         $order = CartOrder::find($orderid);
         if(strtolower($status) == 'assigned' && $user->hasRole('store')){
             $order->status = 'assigned';
+            $order->store_id = $user->id;
             $order->save();
             return $order;
         }else if(strtolower($status) == 'canceled' && $user->hasRole('consumer')){
