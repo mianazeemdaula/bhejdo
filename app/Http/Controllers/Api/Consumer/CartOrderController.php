@@ -162,7 +162,7 @@ class CartOrderController extends Controller
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($request->user());
             DB::commit();
 
-            $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}";
+            $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}\n";
             $msg .= $smsmessage;
             $msgresponse = \App\Helpers\SmsHelper::send("03088608825", $msg);
             $msgresponse = \App\Helpers\SmsHelper::send("03017374750", $msg);
