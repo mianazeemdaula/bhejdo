@@ -51,7 +51,9 @@
               </p>
               <hr>
               <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-              <p class="text-muted">{{ $user->address }}</p>
+                @foreach ($user->addresses as $address)
+                <p class="text-muted">{{ $address }}</p>
+                @endforeach
               <hr>
               <strong><i class="fas fa-map-marker-alt mr-1"></i> CNIC</strong>
               {{-- <p class="text-muted">{{ $user->profile->cnic }}</p>
