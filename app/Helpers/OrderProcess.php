@@ -179,7 +179,8 @@ class OrderProcess {
         return $lifters;
     }
 
-    static public function updateCartOrder(CartOrder $order, $status, User $user){
+    static public function updateCartOrder(CartOrder $order, $status, $user){
+        $user = User::find($user);
         if(strtolower($status) == 'assigned' && $user->hasRole('store')){
             return true;
         }else if(strtolower($status) == 'declined'){
