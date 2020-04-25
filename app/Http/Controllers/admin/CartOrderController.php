@@ -55,6 +55,17 @@ class CartOrderController extends Controller
                 'selected' => 'packed',
                 'multiple' => false
             ]);
+        }else if($order->status == 'assigned'){
+            $form->add('lifter_id', 'select', [
+                'choices' => User::role('lifter')->get()->pluck('name','id')->toArray(),
+                'label' => 'Lifter'
+            ]);
+            $form->add('status', 'choice', [
+                'choices' => ['picket' => 'Picked'],
+                'expanded' => true,
+                'selected' => 'picket',
+                'multiple' => false
+            ]);
         }
         return view('pages.admin.cartorder.edit', compact('form'));
     }
