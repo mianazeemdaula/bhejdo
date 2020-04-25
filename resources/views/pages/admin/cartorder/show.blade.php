@@ -28,17 +28,29 @@
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-4 invoice-col">
-                    LIFTER
+                    STORE
                     <address>
-                        <strong>{{ $order->lifter->name }}</strong><br>
-                        Phone: {{ $order->lifter->mobile }}<br>
-                        Email: {{ $order->lifter->email }}
-                      </address>
+                        @isset($order->store)
+                          <strong>{{ $order->store->name }}</strong><br>
+                          Phone: {{ $order->store->mobile }}<br>
+                          Email: {{ $order->store->email }}
+                        @else
+                          NOT ASSIGNED
+                        @endisset
+                    </address>
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-4 invoice-col">
-                    <b>Order ID:</b> {{ $order->id }}<br>
-                    <b>Payment:</b> {{ $order->payable_amount }}<br>
+                    LIFTER
+                    <address>
+                        @isset($order->lifter)
+                          <strong>{{ $order->lifter->name }}</strong><br>
+                          Phone: {{ $order->lifter->mobile }}<br>
+                          Email: {{ $order->lifter->email }}
+                        @else
+                          NOT ASSIGNED
+                        @endisset
+                    </address>
                   </div>
                   <!-- /.col -->
                 </div>
@@ -50,6 +62,7 @@
                     <table class="table table-striped">
                       <thead>
                       <tr>
+                        <th>#</th>
                         <th>Product</th>
                         <th>Qty</th>
                         <th>Price</th>
@@ -57,12 +70,14 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                        <td>{{ $order->service->s_name }}</td>
-                        <td>{{ $order->qty }}</td>
-                        <td>{{ $order->price }}</td>
-                        <td>{{ $order->price * $order->qty }}</td>
-                      </tr>
+                      @foreach ($order->details as $item)
+                        <tr>
+                          <td>{{ $item->product->name }}</td>
+                          <td>{{ $item->qty }}</td>
+                          <td>{{ $item->price }}</td>
+                          <td>{{ $item->price * $order->qty }}</td>
+                        </tr>
+                      @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -82,22 +97,18 @@
                       <table class="table">
                         <tbody><tr>
                           <th style="width:50%">Subtotal:</th>
-                          <td>{{ $order->qty * $order->price }}</td>
+                          <td></td>
                         </tr>
                         <tr>
                           <th>Delivery Charges</th>
                           <td>{{ $order->charges }}</td>
                         </tr>
                         <tr>
-                          <th>Service Charges</th>
-                          <td>{{ $order->qty * $order->service->s_charges  }}</td>
-                        </tr>
-                        <tr>
-                            <th>Consumer Bonus</th>
-                            <td>-{{ $order->qty * 10 }}</td>
+                            <th>Store Amount</th>
+                            <td>-{{ $order->store_amount }}</td>
                           </tr>
                         <tr>
-                          <th>Total:</th>
+                          <th>Total Pay by customer:</th>
                           <td>{{ $order->payable_amount }}</td>
                         </tr>
                       </tbody></table>
