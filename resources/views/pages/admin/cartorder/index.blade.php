@@ -60,6 +60,7 @@
                                     <td> {{ $item->address->address }} </td>
                                     <td> {{ $item->payable_amount }} </td>
                                     <td> {{ $item->status }} </td>
+                                    {!! dd($item->address) !!}
                                     <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->address->coordinates[0] }},{{ $item->address->coordinates[0] }}">Map</a></td>
                                     <td> {{ $item->created_at }} </td>
                                     <td> {{ $item->updated_at }} </td>
