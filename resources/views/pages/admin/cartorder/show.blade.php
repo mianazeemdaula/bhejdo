@@ -75,7 +75,7 @@
                           <td>{{ $item->product->name }}</td>
                           <td>{{ $item->qty }}</td>
                           <td>{{ $item->price }}</td>
-                          <td>{!! $total += $item->price * $item->qty !!}</td>
+                          <td><?php $total += $item->price * $item->qty; ?> {{$item->price * $item->qty }}</td>
                         </tr>
                       @endforeach
                       </tbody>
