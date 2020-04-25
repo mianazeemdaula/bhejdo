@@ -69,12 +69,13 @@
                       </tr>
                       </thead>
                       <tbody>
+                        <?php $total = 0;?>
                       @foreach ($order->details as $item)
                         <tr>
                           <td>{{ $item->product->name }}</td>
                           <td>{{ $item->qty }}</td>
                           <td>{{ $item->price }}</td>
-                          <td>{{ $item->price * $item->qty }}</td>
+                          <td>{!! $total += $item->price * $item->qty !!}</td>
                         </tr>
                       @endforeach
                       </tbody>
@@ -96,7 +97,7 @@
                       <table class="table">
                         <tbody><tr>
                           <th style="width:50%">Subtotal:</th>
-                          <td></td>
+                          <td>{{ $total }}</td>
                         </tr>
                         <tr>
                           <th>Delivery Charges</th>
