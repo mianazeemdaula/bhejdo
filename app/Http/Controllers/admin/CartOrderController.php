@@ -56,8 +56,9 @@ class CartOrderController extends Controller
     {
         try {
             DB::beginTransaction();
-            
-            return $request->all();
+            $order = CartOrder::find($id);
+            $response = \App\Helpers\OrderProcess::updateCartOrder($order, $request->status, 'store');
+            return $response;
             DB::commit();
             return redirect()->back()->with('status', 'Product Updated!');
         } catch (Exception $ex) {
