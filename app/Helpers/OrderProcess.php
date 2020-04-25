@@ -184,7 +184,7 @@ class OrderProcess {
         if(strtolower($status) == 'assigned' && $user->hasRole('store')){
             $order->status = 'assigned';
             $order->save();
-            return $stats." store";
+            return $order;
         }else if(strtolower($status) == 'canceled' && $user->hasRole('consumer')){
             $order->status = 'canceled';
             $order->save();
