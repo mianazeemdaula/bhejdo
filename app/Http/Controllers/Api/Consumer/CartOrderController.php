@@ -81,6 +81,8 @@ class CartOrderController extends Controller
             // }
             //return response()->json(['status'=>true, 'data' => $productDetails ], 200);
 
+            $settings = config('ohyes.consumer');
+
             $order = new CartOrder();
             $order->consumer_id = $request->user()->id;
             $order->payment_id = $request->paymentType;
@@ -119,9 +121,9 @@ class CartOrderController extends Controller
             // Payable ammount Sale Price + Charges - Bonus
             $charges = 0;
             if($order->bullet_delivery == 1){
-                $charges = 50;
-            }else if($payableAmount < 1000){
-                $charges = 30;
+                $charges = $settings['bullet_service_charges'];
+            }else if($payableAmount < $settings['delivery_free_shopping']){
+                $charges = $settings['normal_delivery_fee'];;
             }else{
                 $charges = 0;
             }
