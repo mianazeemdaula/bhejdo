@@ -57,10 +57,15 @@ class CartOrderController extends Controller
         try {
             DB::beginTransaction();
             $order = CartOrder::find($id);
-            $response = \App\Helpers\OrderProcess::updateCartOrder($order, $request->status, $request->store_id );
-            return $response;
+            $status = strtolower($request->status);
+            if($status == 'assigned'){
+                $user = $request->store_id;
+            }
+
+            $response = \App\Helpers\OrderProcess::updateCartOrder($order, $status, $user);
+            return (string) $request;
             DB::commit();
-            return redirect()->back()->with('status', 'Product Updated!');
+            return redirect()->back()->with('status', 'Order updated successfully!');
         } catch (Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('status', "Exception Problem $ex")->withInput();
