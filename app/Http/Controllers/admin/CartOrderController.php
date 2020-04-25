@@ -55,11 +55,24 @@ class CartOrderController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            /**
+             *created -> order created by conusmer
+             *assigned -> order assigned to a sotre
+             *packed -> order packed by the sotre
+             *findrider -> find rider for delivery
+             *picked -> order picked by rider
+             *drop -> order dorp at door step of consumer
+             *complete -> order completed and reviewd by consumer
+             *declined -> service not availabe on that area
+             *canceled -> order canceled by the customer
+             */
             DB::beginTransaction();
             $order = CartOrder::find($id);
             $status = strtolower($request->status);
             if($status == 'assigned'){
                 $user = $request->store_id;
+            }else if($status == 'picked'){
+                $user = $request->lifter_id;
             }
 
             $response = \App\Helpers\OrderProcess::updateCartOrder($order, $status, $user);

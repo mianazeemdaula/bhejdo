@@ -182,12 +182,32 @@ class OrderProcess {
     static public function updateCartOrder(CartOrder $order, $status, $user){
         $user = User::find($user);
         if(strtolower($status) == 'assigned' && $user->hasRole('store')){
+            $order->status = 'assigned';
+            $order->save();
+            return true;
+        }else if(strtolower($status) == 'canceled' && $user->hasRole('consumer')){
+            $order->status = 'canceled';
+            $order->save();
             return true;
         }else if(strtolower($status) == 'declined'){
+            $order->status = 'declined';
+            $order->save();
+            return true;
+        }else if(strtolower($status) == 'packed'){
+            $order->status = 'packed';
+            $order->save();
             return true;
         }else if(strtolower($status) == 'picked' && $user->hasRole('lifter')){
+            $order->status = 'picked';
+            $order->save();
             return true;
-        }else if(strtolower($status) == 'drop' && $user->hasRole('lifter')){
+        }else if(strtolower($status) == 'drop'){
+            $order->status = 'drop';
+            $order->save();
+            return true;
+        }else if(strtolower($status) == 'completed'){
+            $order->status = 'completed';
+            $order->save();
             return true;
         }
         return false;
