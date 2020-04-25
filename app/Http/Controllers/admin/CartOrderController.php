@@ -118,8 +118,7 @@ class CartOrderController extends Controller
             }
             $response = \App\Helpers\OrderProcess::updateCartOrder($id, $status, $user);
             DB::commit();
-            return (string) $response;
-            return redirect()->back()->with('status', 'Order updated successfully!');
+            return redirect()->back()->with('status', "Order $status successfully!");
         } catch (Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('status', "Exception Problem $ex")->withInput();
