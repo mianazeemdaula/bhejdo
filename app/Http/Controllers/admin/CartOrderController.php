@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\CartOrder;
 use Auth;
+use DB;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\Order\UpdateOrderForm;
@@ -55,11 +56,7 @@ class CartOrderController extends Controller
     {
         try {
             DB::beginTransaction();
-            $form = $this->form(UpdateOrderForm::class);
-
-            if (!$form->isValid()) {
-                return redirect()->back()->withErrors($form->getErrors())->withInput();
-            }
+            
             return $request->all();
             DB::commit();
             return redirect()->back()->with('status', 'Product Updated!');

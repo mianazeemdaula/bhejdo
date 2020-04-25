@@ -177,4 +177,8 @@ class OrderProcess {
         //->where('last_update', '>', Carbon::now()->subSeconds(120)->timestamp)
         return $lifters;
     }
+
+    static public function updateCartOrder(CartOrder $order, $status, $user){
+        return $order;
+    }
 }
