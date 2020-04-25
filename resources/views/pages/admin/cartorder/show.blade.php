@@ -62,7 +62,6 @@
                     <table class="table table-striped">
                       <thead>
                       <tr>
-                        <th>#</th>
                         <th>Product</th>
                         <th>Qty</th>
                         <th>Price</th>
@@ -75,7 +74,7 @@
                           <td>{{ $item->product->name }}</td>
                           <td>{{ $item->qty }}</td>
                           <td>{{ $item->price }}</td>
-                          <td>{{ $item->price * $order->qty }}</td>
+                          <td>{{ $item->price * $item->qty }}</td>
                         </tr>
                       @endforeach
                       </tbody>
