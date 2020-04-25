@@ -16,7 +16,7 @@ class ProductController extends Controller
             // Get author
             $auth = $request->user();
             // Query products according to city of consumer
-            $products = Product::where('city_id', $auth->city_id)->where('status',1)->get();
+            $products = Product::where('city_id', $auth->city_id)->where('status',1)->orderBy('category_id','asc')->get();
             // Convert collection to resource
             $products = ProductResource::collection($products);
             // return resouce data to consumer
