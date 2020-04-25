@@ -111,11 +111,13 @@ class CartOrderController extends Controller
             $productDetails = [];
             $payableAmount = 0;
             $bonusDeduction = 0;
+            $smsmessage = "";
             foreach( $cartItems as $id => $qty){
                 $product = $produts->find($id);
                 $productDetails[] = ['order_id' => $order->id, 'product_id' => $product->id, 'price' => $product->sale_price, 'qty' => $qty];
                 $payableAmount += ($product->sale_price * $qty);
                 $bonusDeduction +=  ( $product->bonus_deduction  * $qty);
+                $smsmessage .= "{$product->name} x $qty\n";
             }
             CartOrderDetail::insert($productDetails);
             // Payable ammount Sale Price + Charges - Bonus
@@ -161,7 +163,9 @@ class CartOrderController extends Controller
             DB::commit();
 
             $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}";
-            $msgresponse = \App\Helpers\SmsHelper::send("03004103160", $msg);
+            $msg .= $smsmessage;
+            $msgresponse = \App\Helpers\SmsHelper::send("03088608825", $msg);
+            $msgresponse = \App\Helpers\SmsHelper::send("03017374750", $msg);
             // $data = ['msg' => 'Order has placed successfully', 'response' => $response];
             return response()->json(['status'=>true, 'data' => $order, 'profile' => $profile], 200);
         }catch(Exception $ex){
