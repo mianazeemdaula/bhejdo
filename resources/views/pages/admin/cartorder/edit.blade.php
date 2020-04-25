@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Service Form
+                        Order Proceed Form
                     </h3>
                 </div>
                 {!! form_start($form) !!}
@@ -21,7 +21,7 @@
                     {!! form_rest($form) !!}
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info">Transfer</button>
+                    <button type="submit" class="btn btn-info">Proceed</button>
                     <button type="submit" class="btn btn-default float-right">Cancel</button>
                 </div>
                 {!! form_end($form) !!}
