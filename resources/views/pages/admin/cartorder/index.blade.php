@@ -25,9 +25,9 @@
                                 <th>Store</th>
                                 <th>Lifter</th>
                                 <th>Bullet?</th>
-                                <th>Price</th>
-                                <th>Charges</th>
-                                <th>Type</th>
+                                <th>charges</th>
+                                <th>Address</th>
+                                <th>Payable</th>
                                 <th>Status</th>
                                 <th>Location</th>
                                 <th>Created</th>
@@ -60,7 +60,7 @@
                                     <td> {{ $item->address->address }} </td>
                                     <td> {{ $item->payable_amount }} </td>
                                     <td> {{ $item->status }} </td>
-                                    {{-- <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->latitude }},{{ $item->longitude }}">Map</a></td> --}}
+                                    <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->address['coordinates'][0] }},{{ $item->address['coordinates'][0] }}">Map</a></td>
                                     <td> {{ $item->created_at }} </td>
                                     <td> {{ $item->updated_at }} </td>
                                     <td> 
