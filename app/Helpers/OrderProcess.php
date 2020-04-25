@@ -189,13 +189,30 @@ class OrderProcess {
             return $order;
         }else if(strtolower($status) == 'canceled' && $user->hasRole('consumer')){
             $order->status = 'canceled';
+            if($order->consumer_bonus > 0){
+                \App\Bonus::add($order->consumer_id,"Order #{$order->id} canceled reversal",'order',$order->consumer_bonus);
+            }
+            if($order->consumer_wallet > 0){
+                \App\Wallet::add($order->consumer_id,"Order #{$order->id} canceled reversal",'order',$order->consumer_wallet);
+            }
             $order->save();
             return true;
         }else if(strtolower($status) == 'declined'){
             $order->status = 'declined';
+            if($order->consumer_bonus > 0){
+                \App\Bonus::add($order->consumer_id,"Order #{$order->id} declined reversal",'order',$order->consumer_bonus);
+            }
+            if($order->consumer_wallet > 0){
+                \App\Wallet::add($order->consumer_id,"Order #{$order->id} declined reversal",'order',$order->consumer_wallet);
+            }
             $order->save();
             return true;
         }else if(strtolower($status) == 'packed'){
+            $serviceCharge = 0;
+            foreach($order->details as $product){
+                $serviceCharge += $product->qty * $product->product->oyfee_store;
+            }
+            \App\ServiceCharge::deduct($order->store_id,"Service charges of order #{$order->id}", "order", $serviceCharge);
             $order->status = 'packed';
             $order->save();
             return true;
@@ -203,8 +220,8 @@ class OrderProcess {
             $order->status = 'picked';
             $order->save();
             return true;
-        }else if(strtolower($status) == 'drop'){
-            $order->status = 'drop';
+        }else if(strtolower($status) == 'droped'){
+            $order->status = 'droped';
             $order->save();
             return true;
         }else if(strtolower($status) == 'completed'){
