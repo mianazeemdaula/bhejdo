@@ -78,9 +78,9 @@ class CartOrderController extends Controller
                 'label' => 'Lifter'
             ]);
             $form->add('status', 'choice', [
-                'choices' => ['picket' => 'Picked'],
+                'choices' => ['picked' => 'Picked'],
                 'expanded' => true,
-                'selected' => 'picket',
+                'selected' => 'picked',
                 'multiple' => false
             ]);
         }
