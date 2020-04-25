@@ -11,7 +11,7 @@ use App\CartOrder;
 use Auth;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use App\Forms\Admin\Product\UpdateProductForm;
+use App\Forms\Admin\Order\UpdateOrderForm;
 
 class CartOrderController extends Controller
 {
@@ -30,53 +30,36 @@ class CartOrderController extends Controller
 
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        $form = $this->form(UpdateProductForm::class, [
+        $order = CartOrder::findOrFail($id);
+        $form = $this->form(UpdateOrderForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
-            'url' => route('admin.product.update', $id),
-            'model' => $product
+            'url' => route('admin.order.update', $id),
+            'model' => $order
         ]);
-        return view('pages.admin.product.edit', compact('form'));
+        if($order->status == 'created'){
+            $form->add('lifter_id', 'select', [
+                'choices' => User::role('store')->pluck('name','id')
+            ]);
+            $form->add('status', 'choice', [
+                'choices' => ['assigned' => 'Assigned', 'declined' => 'Declined'],
+                'expanded' => true,
+                'multiple' => false
+            ]);
+        }
+        return view('pages.admin.cartorder.edit', compact('form'));
     }
 
     public function update(Request $request, $id)
     {
         try {
             DB::beginTransaction();
-            $form = $this->form(UpdateProductForm::class);
+            $form = $this->form(UpdateOrderForm::class);
 
             if (!$form->isValid()) {
                 return redirect()->back()->withErrors($form->getErrors())->withInput();
             }
-            $product = Product::findOrFail($id);
-            $product->category_id = $request->category_id;
-            $product->name = $request->name;
-            $product->urdu_name = $request->urdu_name;
-            $product->description = $request->description;
-            $product->min_qty_charges = $request->min_qty_charges;
-            $product->contract_price = $request->contract_price;
-            $product->sale_price = $request->sale_price;
-            $product->markeet_price = $request->markeet_price;
-            $product->store_commission = $request->store_commission;
-            $product->lifter_commission = $request->lifter_commission;
-            $product->bonus_deduction = $request->bonus_deduction;
-            $product->oy_commission = $request->oy_commission;
-            $product->city_leader_commission = $request->city_leader_commission;
-            $product->oyfee_store = $request->oyfee_store;
-            $product->oyfee_lifter = $request->oyfee_lifter;
-            $product->status = $request->status;
-            $product->weight = $request->weight;
-            $product->unit = $request->unit;
-
-            if($request->has('image')){
-                $cover = $request->file('image');
-                $imageName = time().'.'.$request->image->extension();
-                $request->image->move(public_path('product'), $imageName);
-                //\Storage::disk('public')->put($imageName, $cover);
-                $product->img_url = $imageName;
-            }
-            $product->save();
+            return $request->all();
             DB::commit();
             return redirect()->back()->with('status', 'Product Updated!');
         } catch (Exception $ex) {
