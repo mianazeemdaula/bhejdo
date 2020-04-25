@@ -187,10 +187,14 @@ class SeedController extends Controller
 
     public function test()
     {
-        $cat = new \App\Category();
-        $cat->name = 'Frozen items';
-        $cat->save();
-        return $cat;
+        $user = \App\User::find(110);
+        $user->password = bcrypt('123456');
+        $user->save();
+        return $user;
+        // $cat = new \App\Category();
+        // $cat->name = 'Frozen items';
+        // $cat->save();
+        // return $cat;
         // $order = \App\CartOrder::find(1);
         // $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}";
         // $msgresponse = \App\Helpers\SmsHelper::send("03004103160", $msg);
