@@ -56,6 +56,23 @@ class CartOrderController extends Controller
                 'multiple' => false
             ]);
         }else if($order->status == 'packed'){
+            $lifters = \App\LifterLocation::where('location', 'near', [
+                '$geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [
+                        floatval($order->address->location->getLat()),
+                        floatval($order->address->location->getLng()),
+                    ],
+                ],
+                '$maxDistance' => intval(3 * 1000),
+            ])->pluck('name','lifter_id');
+            $_lifters = [];
+            
+            foreach($lifters as $key => $value){
+                $id = (int) $key;
+                $_lifters[$id] = "$value ($key)";
+            }
+
             $form->add('lifter_id', 'select', [
                 'choices' => User::role('lifter')->get()->pluck('name','id')->toArray(),
                 'label' => 'Lifter'
