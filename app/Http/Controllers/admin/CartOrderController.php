@@ -83,6 +83,13 @@ class CartOrderController extends Controller
                 'selected' => 'picked',
                 'multiple' => false
             ]);
+        }else if($order->status == 'picked'){
+            $form->add('status', 'choice', [
+                'choices' => ['droped' => 'Droped'],
+                'expanded' => true,
+                'selected' => 'droped',
+                'multiple' => false
+            ]);
         }
         return view('pages.admin.cartorder.edit', compact('form'));
     }
