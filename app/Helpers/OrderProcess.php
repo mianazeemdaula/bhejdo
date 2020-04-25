@@ -179,7 +179,16 @@ class OrderProcess {
         return $lifters;
     }
 
-    static public function updateCartOrder(CartOrder $order, $status, $user){
-        return $order;
+    static public function updateCartOrder(CartOrder $order, $status, User $user){
+        if(strtolower($status) == 'assigned' && $user->hasRole('store')){
+            return true;
+        }else if(strtolower($status) == 'declined'){
+            return true;
+        }else if(strtolower($status) == 'picked' && $user->hasRole('lifter')){
+            return true;
+        }else if(strtolower($status) == 'drop' && $user->hasRole('lifter')){
+            return true;
+        }
+        return false;
     }
 }
