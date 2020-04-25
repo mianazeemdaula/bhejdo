@@ -65,7 +65,7 @@ class CartOrderController extends Controller
                     ],
                 ],
                 '$maxDistance' => intval(3 * 1000),
-            ])->where('type','lifter')->pluck('name','lifter_id');
+            ])->where('account_type','lifter')->pluck('name','lifter_id');
             $_lifters = [];
             
             foreach($lifters as $key => $value){
