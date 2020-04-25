@@ -187,17 +187,21 @@ class SeedController extends Controller
 
     public function test()
     {
-        $order = \App\CartOrder::find(1);
-        $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}";
-        $msgresponse = \App\Helpers\SmsHelper::send("03004103160", $msg);
-        return $msgresponse;
-        $value = config('ohyes.consumer');
-        return $value;
-        $order = \App\CartOrder::find(5);
-        return new \App\Http\Resources\V2\Consumer\OrderResource($order);
-        $order = \App\CartOrder::find(1);
-        return $orders = \App\CartOrder::with(['consumer','lifter','store', 'details'])->where('consumer_id',5)->get();
-        return \App\CartOrder::find(1);
+        $cat = new \App\Category();
+        $cat->name = 'Frozen items';
+        $cat->save();
+        return $cat;
+        // $order = \App\CartOrder::find(1);
+        // $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}";
+        // $msgresponse = \App\Helpers\SmsHelper::send("03004103160", $msg);
+        // return $msgresponse;
+        // $value = config('ohyes.consumer');
+        // return $value;
+        // $order = \App\CartOrder::find(5);
+        // return new \App\Http\Resources\V2\Consumer\OrderResource($order);
+        // $order = \App\CartOrder::find(1);
+        // return $orders = \App\CartOrder::with(['consumer','lifter','store', 'details'])->where('consumer_id',5)->get();
+        // return \App\CartOrder::find(1);
         // $city = new \App\Category();
         // $city->name = 'Ramzan Special';
         // $city->save();
