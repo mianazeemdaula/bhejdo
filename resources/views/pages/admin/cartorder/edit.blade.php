@@ -16,6 +16,7 @@
                         Order Proceed Form
                     </h3>
                 </div>
+                @if(count($form->fields) > 0)
                 {!! form_start($form) !!}
                 <div class="card-body">
                     {!! form_rest($form) !!}
@@ -25,6 +26,11 @@
                     <button type="submit" class="btn btn-default float-right">Cancel</button>
                 </div>
                 {!! form_end($form) !!}
+                @else
+                    <div class="row">
+                        <h1> ORDER PROCEED COMPLETED </h1>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
