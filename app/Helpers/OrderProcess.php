@@ -216,8 +216,9 @@ class OrderProcess {
             $order->status = 'packed';
             $order->save();
             return true;
-        }else if(strtolower($status) == 'picked' && $user->hasRole('lifter')){
+        }else if(strtolower($status) == 'picked' && $user != null && $user->hasRole('lifter')){
             $order->status = 'picked';
+            $order->lifter_id = $user->id;
             $order->save();
             return true;
         }else if(strtolower($status) == 'droped'){

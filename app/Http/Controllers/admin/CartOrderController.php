@@ -68,6 +68,7 @@ class CartOrderController extends Controller
              */
             DB::beginTransaction();
             $status = strtolower($request->status);
+            $user = null;
             if($status == 'assigned'){
                 $user = $request->store_id;
             }else if($status == 'picked'){
