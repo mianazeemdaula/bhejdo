@@ -187,6 +187,8 @@ class SeedController extends Controller
 
     public function test()
     {
+        $value = config('ohyes.consumer');
+        return $value;
         $order = \App\CartOrder::find(5);
         return new \App\Http\Resources\V2\Consumer\OrderResource($order);
         $order = \App\CartOrder::find(1);

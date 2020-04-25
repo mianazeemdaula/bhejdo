@@ -153,8 +153,9 @@ class AuthController extends Controller
     {
         try{
             $user = $request->user();
+            $settings = config('ohyes.consumer');
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
-            return response()->json(['status'=>true, 'data' => $profile], 200);
+            return response()->json(['status'=>true, 'data' => $profile, 'settings' => $settings], 200);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
         }
