@@ -38,8 +38,9 @@ class CartOrderController extends Controller
             'model' => $order
         ]);
         if($order->status == 'created'){
-            $form->add('lifter_id', 'select', [
-                'choices' => User::role('store')->get()->pluck('name','id')->toArray()
+            $form->add('store_id', 'select', [
+                'choices' => User::role('store')->get()->pluck('name','id')->toArray(),
+                'label' => 'Store'
             ]);
             $form->add('status', 'choice', [
                 'choices' => ['assigned' => 'Assigned', 'declined' => 'Declined'],
