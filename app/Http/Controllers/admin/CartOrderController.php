@@ -48,6 +48,13 @@ class CartOrderController extends Controller
                 'expanded' => true,
                 'multiple' => false
             ]);
+        }else if($order->status == 'assigned'){
+            $form->add('status', 'choice', [
+                'choices' => ['packed' => 'Packed'],
+                'expanded' => true,
+                'selected' => 'packed',
+                'multiple' => false
+            ]);
         }
         return view('pages.admin.cartorder.edit', compact('form'));
     }
