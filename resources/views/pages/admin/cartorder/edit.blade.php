@@ -28,7 +28,9 @@
                 {!! form_end($form) !!}
                 @else
                     <div class="row">
-                        <h1> ORDER PROCEED COMPLETED </h1>
+                        <div class="col-md-6">
+                            <h1> ORDER PROCEED COMPLETED </h1>
+                        </div>
                     </div>
                 @endif
             </div>
