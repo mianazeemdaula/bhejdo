@@ -22,9 +22,9 @@
                             <tr>
                                 <th>Sr #</th>
                                 <th>Consumer</th>
+                                <th>Store</th>
                                 <th>Lifter</th>
-                                <th>Service</th>
-                                <th>Qty</th>
+                                <th>Bullet?</th>
                                 <th>Price</th>
                                 <th>Charges</th>
                                 <th>Type</th>
@@ -40,6 +40,21 @@
                                 <tr>
                                     <td> {{ $item->id}} </td>
                                     <td> {{ $item->consumer->mobile}} <br/> {{ $item->consumer->name}} </td>
+                                    <td>
+                                        @isset($item->store)
+                                        {{ $item->store->mobile}} <br/> {{ $item->store->name}}
+                                        @else
+                                            Not Assigned
+                                        @endisset
+                                    </td>
+                                    <td>
+                                        @isset($item->lifter)
+                                        {{ $item->lifter->mobile}} <br/> {{ $item->lifter->name}}
+                                        @else
+                                            Not Assigned
+                                        @endisset
+                                    </td>
+                                    <td> {{ $item->bullet_delivery }} </td>
                                     <td> {{ $item->charges }} </td>
                                     <td> {{ $item->delivery_time }} </td>
                                     <td> {{ $item->address->address }} </td>
@@ -50,9 +65,9 @@
                                     <td> {{ $item->updated_at }} </td>
                                     <td> 
                                       <div class="btn-group">
-                                        <a href="{{ route('order.show',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('order.edit',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ url('order/livepartners/'.$item->id) }}" class="btn-sm btn-default"><i class="fas fa-trash"></i></a>
+                                        <a href="{{ route('admin.order.show',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-eye"></i></a>
+                                        {{-- <a href="{{ route('order.edit',[$item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ url('order/livepartners/'.$item->id) }}" class="btn-sm btn-default"><i class="fas fa-trash"></i></a> --}}
                                         
                                       </div>
                                     </td>
