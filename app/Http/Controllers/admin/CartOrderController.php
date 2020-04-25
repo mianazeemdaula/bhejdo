@@ -67,15 +67,13 @@ class CartOrderController extends Controller
              *canceled -> order canceled by the customer
              */
             DB::beginTransaction();
-            $order = CartOrder::find($id);
             $status = strtolower($request->status);
             if($status == 'assigned'){
                 $user = $request->store_id;
             }else if($status == 'picked'){
                 $user = $request->lifter_id;
             }
-
-            $response = \App\Helpers\OrderProcess::updateCartOrder($order, $status, $user);
+            $response = \App\Helpers\OrderProcess::updateCartOrder($id, $status, $user);
             return (string) $response;
             DB::commit();
             return redirect()->back()->with('status', 'Order updated successfully!');
