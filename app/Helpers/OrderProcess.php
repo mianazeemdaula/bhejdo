@@ -8,6 +8,7 @@ use App\Helpers\AndroidNotifications;
 use App\User;
 use App\Http\Resources\Order\Order as OrderResource;
 use App\LifterLocation;
+use App\CartOrder;
 use Illuminate\Support\Facades\Cache;
 
 class OrderProcess {
