@@ -26,6 +26,7 @@
                                 <th>Lifter</th>
                                 <th>Bullet?</th>
                                 <th>charges</th>
+                                <th>Delivery Time</th>
                                 <th>Address</th>
                                 <th>Payable</th>
                                 <th>Status</th>
