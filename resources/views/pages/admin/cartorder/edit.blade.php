@@ -16,7 +16,7 @@
                         Order Proceed Form
                     </h3>
                 </div>
-                @if(count($form->fields) > 0)
+                @if($form->fields->count() > 0)
                 {!! form_start($form) !!}
                 <div class="card-body">
                     {!! form_rest($form) !!}
