@@ -160,7 +160,7 @@ class CartOrderController extends Controller
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($request->user());
             DB::commit();
 
-            $msg = "New Order #{$order->id} - {$order->created_at} {$order->consumer->name} ${$order->consumer->mobile}";
+            $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}";
             $msgresponse = \App\Helpers\SmsHelper::send("0300410310", $msg);
             // $data = ['msg' => 'Order has placed successfully', 'response' => $response];
             return response()->json(['status'=>true, 'data' => $order, 'profile' => $profile], 200);
