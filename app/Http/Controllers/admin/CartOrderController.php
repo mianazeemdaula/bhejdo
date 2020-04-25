@@ -55,7 +55,7 @@ class CartOrderController extends Controller
                 'selected' => 'packed',
                 'multiple' => false
             ]);
-        }else if($order->status == 'assigned'){
+        }else if($order->status == 'packed'){
             $form->add('lifter_id', 'select', [
                 'choices' => User::role('lifter')->get()->pluck('name','id')->toArray(),
                 'label' => 'Lifter'
