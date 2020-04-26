@@ -20,7 +20,7 @@ class OrderResource extends JsonResource
         return [
             'id' => $this->id,
             'consumer' => new Consumer($this->consumer),
-            'lifter' => new Consumer($this->lifter),
+            'lifter' => null, // new Consumer($this->lifter),
             'store' => null , // new Lifter($this->store),
             'details' => OrderDetailResource::collection($this->details),
             'type' => $this->type,
