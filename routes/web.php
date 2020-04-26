@@ -252,7 +252,7 @@ Route::get('event/{id}', function($id){
 });
 
 
-Route::get('setStore', function(){
+Route::get('setStore/{distance}', function($distance){
     $user = \App\User::find(2);
     // $store =  new \App\Store();
     // $store->user_id = $user->id;
@@ -262,7 +262,6 @@ Route::get('setStore', function(){
 
     // $store->user()->save($user);
     $point = new Point(31.522160, 74.274438);
-    $stores = \App\Store::distance('location',$point, 5);
-    dd($stores);
+    $stores = \App\Store::distance('location',$point, $distance5)->get();
     return $stores;
 });
