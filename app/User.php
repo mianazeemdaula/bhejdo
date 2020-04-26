@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Profile');
     }
 
+    public function profileable()
+    {
+        return $this->morphTo();
+    }
+
     public function services()
     {
         return $this->belongsToMany('App\Service')->using('App\ServiceUser')->withPivot([

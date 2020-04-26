@@ -12,7 +12,7 @@
 */
 
 //use Illuminate\Support\Facades\Redis;
-
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 Route::get('/redis', function () {
     //$app = PRedis::connection();
     //$app->set('user', App\User::with('services')->get()->toJson());
@@ -249,4 +249,17 @@ Route::get('event/{id}', function($id){
     $order = \App\Order::find($id);
     $orderResource = new \App\Http\Resources\Order\Order($order);
     return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
+});
+
+
+Route::get('setStore', function(){
+    $user = \App\User::find(2);
+    if($user->profileable == null){
+        $user->profileable->create([
+            'location' => new Point(31.520961, 74.270154),
+            'radius' => 4
+        ]);
+    }
+
+    return $user->profileable;
 });
