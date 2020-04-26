@@ -254,13 +254,13 @@ Route::get('event/{id}', function($id){
 
 Route::get('setStore', function(){
     $user = \App\User::find(2);
-    $store = \App\Store::create([
-        'user_id' => $user->id,
-        'location' => new Point(31.520961, 74.270154),
-        'radius' => 4
-    ]);
-    
-    $user->profileable = $store;
+    $store =  new \App\Store();
+    $store->user_id = $user->id;
+    $store->location = new Point(31.520961, 74.270154);
+    $store->radius = 4;
+    $store->save();
+
+    $store->user()->save($user);
 
     return $user->profileable;
 });
