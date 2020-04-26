@@ -263,6 +263,6 @@ Route::get('setStore', function(){
     // $store->user()->save($user);
     $point = new Point(31.522160, 74.274438);
     $stores = \App\Store::distance('location',$point, 5);
-
+    dd($stores);
     return $stores;
 });
