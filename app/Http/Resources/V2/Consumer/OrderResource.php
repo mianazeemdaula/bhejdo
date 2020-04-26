@@ -28,7 +28,7 @@ class OrderResource extends JsonResource
             'charges' => $this->charges,
             'delivery_time' => $this->delivery_time,
             'note' => $this->note,
-            'bonus_deduction' => $this->bonus_deduction,
+            'bonus_deduction' => $this->consumer_bonus,
             'payable_amount' => $this->payable_amount,
             'consumer_wallet' => $this->consumer_wallet,
             'status' => $this->status,
