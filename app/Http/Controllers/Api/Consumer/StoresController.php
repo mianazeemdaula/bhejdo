@@ -44,7 +44,7 @@ class StoresController extends Controller
                         floatval($request->lon), // latitude
                     ],
                 ],
-                '$maxDistance' => intval(3 * 1000),
+                '$maxDistance' => intval(4 * 1000),
             ])
             ->where("onwork","1")->get();
             $stores = \App\Http\Resources\V2\Consumer\StoreResource::collection($stores);
