@@ -255,7 +255,8 @@ Route::get('event/{id}', function($id){
 Route::get('setStore', function(){
     $user = \App\User::find(2);
     if($user->profileable == null){
-        $user->profileable->create([
+        \App\Store::create([
+            'user_id' => $user->id,
             'location' => new Point(31.520961, 74.270154),
             'radius' => 4
         ]);

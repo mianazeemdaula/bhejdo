@@ -8,7 +8,7 @@ use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 class Store extends Model
 {
     use SpatialTrait;
-    protected $fillable = ['location', 'radius'];
+    protected $fillable = ['user_id','location', 'radius'];
     protected $spatialFields = [
         'location',
     ];
