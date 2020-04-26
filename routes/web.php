@@ -246,7 +246,6 @@ Route::get('whereTime', function(){
 });
 
 Route::get('event/{id}', function($id){
-
     $order = \App\Order::find($id);
     $orderResource = new \App\Http\Resources\Order\Order($order);
     return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
