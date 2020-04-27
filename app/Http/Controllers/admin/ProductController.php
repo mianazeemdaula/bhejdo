@@ -11,6 +11,7 @@ use Auth;
 // Forms
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\Product\UpdateProductForm;
+use App\Forms\Admin\Product\CreateProductForm;
 
 use DB;
 
@@ -82,44 +83,55 @@ class ProductController extends Controller
 
     public function create()
     {
-        $form = $this->form(ProductForm::class, [
+        $form = $this->form(CreateProductForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
-            'url' => route('product.store'),
+            'url' => route('admin.product.store'),
         ]);
-        return view('pages.admin.product.create', compact('form'));
+        return view('pages.admin.product.edit', compact('form'));
     }
 
     public function store(Request $request)
     {
         try {
             DB::beginTransaction();
-            $form = $this->form(ProductForm::class);
+
+            $form = $this->form(CreateProductForm::class);
 
             if (!$form->isValid()) {
                 return redirect()->back()->withErrors($form->getErrors())->withInput();
             }
+            $product = new Product();
+            $product->category_id = $request->category_id;
+            $product->city_id = $request->city_id;
+            $product->company_id = $request->company_id;
+            $product->name = $request->name;
+            $product->urdu_name = $request->urdu_name;
+            $product->description = $request->description;
+            $product->min_qty_charges = $request->min_qty_charges;
+            $product->contract_price = $request->contract_price;
+            $product->sale_price = $request->sale_price;
+            $product->markeet_price = $request->markeet_price;
+            $product->store_commission = $request->store_commission;
+            $product->lifter_commission = $request->lifter_commission;
+            $product->bonus_deduction = $request->bonus_deduction;
+            $product->oy_commission = $request->oy_commission;
+            $product->city_leader_commission = $request->city_leader_commission;
+            $product->oyfee_store = $request->oyfee_store;
+            $product->oyfee_lifter = $request->oyfee_lifter;
+            $product->status = $request->status;
+            $product->weight = $request->weight;
+            $product->unit = $request->unit;
 
-            $service = new Product();
-            $service->category_id = $request->category_id;
-            $service->city_id = Auth::user()->city_id;
-            $service->company_id = Auth::id();
-            $service->name = $request->name;
-            $service->urdu_name = $request->urdu_name;
-            $service->contract_price = $request->contract_price;
-            $service->markeet_price = $request->markeet_price;
-            $service->weight = $request->weight;
-            $service->unit = $request->unit;
             if($request->has('image')){
                 $cover = $request->file('image');
                 $imageName = time().'.'.$request->image->extension();
                 $request->image->move(public_path('product'), $imageName);
-                //\Storage::disk('public')->put($imageName, $cover);
-                $service->img_url = $imageName;
+                $product->img_url = $imageName;
             }
-            $service->save();
+            $product->save();
             DB::commit();
-            return redirect()->back()->with('status', 'Product Created!');
+            return redirect()->back()->with('status', 'Product added successfully!');
         } catch (Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('status', "Exception Problem $ex")->withInput();
