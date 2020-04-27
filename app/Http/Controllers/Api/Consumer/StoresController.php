@@ -14,10 +14,10 @@ class StoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function near(Request $request)
+    public function near(Request $request, $lat, $lon)
     {
         try{
-            $point = new Point($request->lat, $request->lon);
+            $point = new Point($lat, $lon);
             $stores = \App\Store::distance('location',$point, 2)->orderByDistance('location', $point,'asc')->get();
             $stores = \App\Http\Resources\V2\Consumer\NearStoreResource::collection($stores);
             return response()->json(['status'=>true, 'stores' => $stores], 200);

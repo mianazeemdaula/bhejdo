@@ -23,7 +23,7 @@ Route::prefix('consumer')->group(function () {
         Route::prefix('v2')->group(function () {
             Route::namespace('Api\Consumer')->group(function () {
                 Route::resource('product','ProductController');
-                Route::post('stores/near','StoresController@near');
+                Route::get('stores/near/{lat}/{lon}','StoresController@near');
                 Route::resource('stores','StoresController');
                 Route::resource('address','AddressController');
                 Route::resource('order','CartOrderController');
