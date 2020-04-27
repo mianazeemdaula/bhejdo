@@ -18,7 +18,7 @@ class StoresController extends Controller
     {
         try{
             $point = new Point($lat, $lon);
-            $stores = \App\Store::distance('location',$point, 2)->orderByDistance('location', $point,'asc')->get();
+            $stores = \App\Store::distance('location',$point, 10)->orderByDistance('location', $point,'asc')->get();
             $stores = \App\Http\Resources\V2\Consumer\NearStoreResource::collection($stores);
             return response()->json(['status'=>true, 'stores' => $stores], 200);
         }catch(Exception $ex){
