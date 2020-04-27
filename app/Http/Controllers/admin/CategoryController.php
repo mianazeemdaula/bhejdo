@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $product = Category::findOrFail($id);
-        $form = $this->form(UpdateCategoryForm::class, [
+        $form = $this->form(UpdateProductForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
             'url' => route('admin.category.update', $id),
