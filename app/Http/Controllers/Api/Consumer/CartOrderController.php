@@ -22,7 +22,7 @@ class CartOrderController extends Controller
     {
         DB::beginTransaction();
         try{
-            $orders = CartOrder::where('consumer_id',$request->user()->id)->get();
+            $orders = CartOrder::where('consumer_id',$request->user()->id)->orderBy('id','desc')->get();
             $orders = \App\Http\Resources\V2\Consumer\OrderResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders]], 200);
         }catch(Exception $ex){
