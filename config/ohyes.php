@@ -7,5 +7,7 @@ return [
         'normal_delivery_fee' => 20,
         'normal_delivery_fee_cross' => 50,
         'delivery_free_shopping' => 400,
+        'bullet_delivery_tme' => 90, // minutes
+        'normal_delivery_tme' => 240, // minutes
     ]
 ];
