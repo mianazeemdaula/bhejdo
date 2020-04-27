@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $product = Category::findOrFail($id);
-        $form = $this->form(UpdateProductForm::class, [
+        $form = $this->form(UpdateCategoryForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
             'url' => route('admin.category.update', $id),
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $form = $this->form(UpdateProductForm::class);
+            $form = $this->form(UpdateCategoryForm::class);
 
             if (!$form->isValid()) {
                 return redirect()->back()->withErrors($form->getErrors())->withInput();
