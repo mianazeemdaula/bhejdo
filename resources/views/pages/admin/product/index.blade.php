@@ -17,6 +17,11 @@
                     </h3>
                 </div>
                 <div class="card-body">
+                    @role('super-admin|admin')
+                    <div class="py-2">
+                        <a href="{{ route('admin.product.create') }}" class="btn btn-primary" > Create Product</a>
+                    </div>
+                    @endrole
                     <table class="table table-bordered table-striped dataTable" id="example1">
                         <thead>
                             <tr>
