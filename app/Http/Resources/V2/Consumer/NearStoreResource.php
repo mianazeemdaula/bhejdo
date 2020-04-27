@@ -17,7 +17,7 @@ class NearStoreResource extends JsonResource
         return [
             'id' => $this->user_id,
             'name' => $this->user->name,
-            'location' => $this->location,
+            'location' => [$this->location->getLat(), $this->location->getLon()],
             'radius' => $this->radius,
         ];
     }
