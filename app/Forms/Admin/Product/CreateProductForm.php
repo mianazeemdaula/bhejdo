@@ -4,7 +4,7 @@ namespace App\Forms\Admin\Product;
 
 use Kris\LaravelFormBuilder\Form;
 
-class UpdateProductForm extends Form
+class CreateProductForm extends Form
 {
     public function buildForm()
     {
