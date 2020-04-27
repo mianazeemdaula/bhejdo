@@ -24,6 +24,7 @@ Route::prefix('consumer')->group(function () {
             Route::namespace('Api\Consumer')->group(function () {
                 Route::resource('product','ProductController');
                 Route::resource('stores','StoresController');
+                Route::get('stores/near/{lat}/{lon}','StoresController@near');
                 Route::resource('address','AddressController');
                 Route::resource('order','CartOrderController');
                 Route::resource('wallet', 'WalletController');
