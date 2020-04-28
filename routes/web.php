@@ -257,6 +257,7 @@ Route::get('setStore/{distance}', function($distance){
     $user = \App\User::find(2);
     // $store =  new \App\Store();
     // $store->user_id = $user->id;
+    $store = $user->profileable;
     $store->location = new Point(31.519106, 74.323332);
     $store->radius = $distance;
     $store->save();
