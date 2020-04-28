@@ -257,13 +257,11 @@ Route::get('setStore/{distance}', function($distance){
     $user = \App\User::find(2);
     // $store =  new \App\Store();
     // $store->user_id = $user->id;
-    // $store->location = new Point(31.520961, 74.270154);
-    // $store->radius = 4;
-    // $store->save();
+    $store->location = new Point(31.519106, 74.323332);
+    $store->radius = 10;
+    $store->save();
 
     // $store->user()->save($user);
-    $point = new Point(31.522160, 74.274438);
-    $stores = \App\Store::distance('location',$point, 2)->orderByDistance('location', $point,'asc')->get();
     //$stores = \App\Http\Resources\V2\Consumer\NearStoreResource::collection($stores);
-    return $stores;
+    return $user;
 });
