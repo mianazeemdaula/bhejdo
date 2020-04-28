@@ -107,6 +107,10 @@
                             <th>Store Amount</th>
                             <td>-{{ $order->store_amount }}</td>
                           </tr>
+                          <tr>
+                            <th>Bonus Consuming</th>
+                            <td>-{{ $order->consumer_bonus }}</td>
+                          </tr>
                         <tr>
                           <th>Total Pay by customer:</th>
                           <td>{{ $order->payable_amount }}</td>
