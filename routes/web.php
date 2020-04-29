@@ -268,3 +268,12 @@ Route::get('setStore/{distance}', function($distance){
     //$stores = \App\Http\Resources\V2\Consumer\NearStoreResource::collection($stores);
     return $user;
 });
+
+Route::get('sendmsg', function(){
+    $seonds = 5;
+    $users = \App\User::all();
+    foreach($users as $user){
+        \App\Jobs\SendSmsJob::dispatch($user->mobile, $user->name)->delay(now()->addSeconds($seonds));
+        $seonds += 5; 
+    }
+});
