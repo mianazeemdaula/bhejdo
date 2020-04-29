@@ -34,6 +34,6 @@ class SmsEvent
      */
     public function broadcastOn()
     {
-        return new Channel('sms');
+        return new Channel('SMS');
     }
 }
