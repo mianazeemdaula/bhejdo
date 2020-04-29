@@ -248,8 +248,9 @@ Route::get('whereTime', function(){
 
 Route::get('event/{id}', function($id){
     $order = \App\Order::find($id);
-    $orderResource = new \App\Http\Resources\Order\Order($order);
-    return event(new \App\Events\SmsEvent("03334103160", $order->service->name));
+    //$orderResource = new \App\Http\Resources\Order\Order($order);
+    $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}\n";
+    return event(new \App\Events\SmsEvent("03334103160", $msg));
     //return event(new \App\Events\OrderProcessEvent($order->id, $orderResource));
 });
 
