@@ -114,10 +114,10 @@ Route::get('/pages/terms', function(){
 });
 
 
-// Route::get('deduct', function(){
-//     $user = \App\User::find(19);
-//     return \App\ServiceCharge::deduct($user->id,"Adjustment of order #88,96,99,101 & 111", "order", 370);
-// });
+Route::get('deduct', function(){
+    $user = \App\User::find(7);
+    return \App\Bonus::add($user->id,"Topup", "topup", 5000);
+});
 
 // Route::get('usercreate', function(){
 //     $user = new \App\User();
