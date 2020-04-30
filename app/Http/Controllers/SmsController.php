@@ -29,6 +29,14 @@ class SmsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
         $users = User::role($request->user)->get();
+        $message = $request->message;
+        $seonds = 0;
+        foreach($users as $user){
+            $msg = str_replace("%name",$user->name,$message);
+            //\App\Jobs\SendSmsJob::dispatch($user->mobile, $msg)->delay(now()->addSeconds($seonds));
+            $seonds += 15;
+            dd($msg); 
+        }
         return $users->count();
         return redirect()->back()->with('status', 'Job for sms created successfully!');
     }
