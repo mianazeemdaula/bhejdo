@@ -30,5 +30,6 @@ class SmsController extends Controller
         }
         $users = User::role($request->user)->get();
         return $users->count();
+        return redirect()->back()->with('status', 'Job for sms created successfully!');
     }
 }
