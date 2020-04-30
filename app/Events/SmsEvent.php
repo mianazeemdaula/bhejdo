@@ -20,11 +20,11 @@ class SmsEvent implements ShouldBroadcast
      * @return void
      */
     public $mobile;
-    public $sms;
-    public function __construct($mobile, $sms)
+    public $msg;
+    public function __construct($mobile, $msg)
     {
         $this->mobile = $mobile;
-        $this->sms = $sms;
+        $this->msg = $msg;
     }
 
     /**
