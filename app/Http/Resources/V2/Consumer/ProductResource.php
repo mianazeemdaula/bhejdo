@@ -28,6 +28,7 @@ class ProductResource extends JsonResource
             'markeet_price' => $this->markeet_price,
             'bonus_deduction' => $this->bonus_deduction,
             'weight' => $this->weight,
+            'stock' => $this->stock,
             'img_url' => $this->img_url == null ? null : asset("product/".$this->img_url),
             'unit' => $this->unit,
         ];
