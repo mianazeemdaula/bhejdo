@@ -261,6 +261,12 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'permission' => 'super-admin|admin'
         ],
+        [
+            'text'        => 'SMS',
+            'route'         => 'sms.index',
+            'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
+        ],
         // [
         //     'text'        => 'Wallet',
         //     'route'         => 'wallet.index',
