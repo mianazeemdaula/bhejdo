@@ -63,6 +63,7 @@ class ProductController extends Controller
             $product->oyfee_lifter = $request->oyfee_lifter;
             $product->status = $request->status;
             $product->weight = $request->weight;
+            $product->stock = $request->stock;
             $product->unit = $request->unit;
 
             if($request->has('image')){
@@ -121,6 +122,7 @@ class ProductController extends Controller
             $product->oyfee_lifter = $request->oyfee_lifter;
             $product->status = $request->status;
             $product->weight = $request->weight;
+            $product->stock = $request->stock;
             $product->unit = $request->unit;
 
             if($request->has('image')){

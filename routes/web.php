@@ -274,6 +274,6 @@ Route::get('sendmsg', function(){
     $users = \App\User::all();
     foreach($users as $user){
         \App\Jobs\SendSmsJob::dispatch($user->mobile, $user->name)->delay(now()->addSeconds($seonds));
-        $seonds += 5; 
+        $seonds += 10; 
     }
 });
