@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user.bonus', 'BonusController');
     Route::resource('user.wallet', 'WalletController');
     Route::resource('notification', 'NotificationController');
+    Route::resource('SMS', 'SmsController');
 
 
     

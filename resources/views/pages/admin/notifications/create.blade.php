@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Doctor Form
+                        Notificatinos/SMS Form
                     </h3>
                 </div>
                 {!! form_start($form) !!}
@@ -21,7 +21,7 @@
                     {!! form_rest($form) !!}
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="submit" class="btn btn-info">Send</button>
                     <button type="submit" class="btn btn-default float-right">Cancel</button>
                 </div>
                 {!! form_end($form) !!}
