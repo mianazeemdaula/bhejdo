@@ -29,6 +29,6 @@ class SmsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
         $users = User::role($request->user)->get();
-        return $request->$users->count();
+        return $users->count();
     }
 }
