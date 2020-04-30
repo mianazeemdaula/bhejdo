@@ -272,8 +272,8 @@ Route::get('setStore/{distance}', function($distance){
 Route::get('sendmsg', function(){
     $seonds = 5;
     $users = \App\User::all();
-    foreach($users as $user){
-        \App\Jobs\SendSmsJob::dispatch($user->mobile, $user->name)->delay(now()->addSeconds($seonds));
+    for($i = 0; $i <= 2; $i++){
+        \App\Jobs\SendSmsJob::dispatch("03334103160", "Message $i")->delay(now()->addSeconds($seonds));
         $seonds += 10; 
     }
 });
