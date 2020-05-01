@@ -34,7 +34,7 @@ class SmsController extends Controller
         foreach($users as $user){
             $msg = str_replace("%name",$user->name,$message);
             \App\Jobs\SendSmsJob::dispatch($user->mobile, $msg)->delay(now()->addSeconds($seonds));
-            $seonds += 15; 
+            $seonds += 20; 
         }
         return redirect()->back()->with('status', 'Job for sms created successfully!');
     }
