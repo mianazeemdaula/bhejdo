@@ -179,7 +179,13 @@ class CartOrderController extends Controller
         DB::beginTransaction();
         try{
             DB::commit();
-            return response()->json(['status'=>true, 'data' => $request->all()], 200);
+            $status = strtolower($request->status);
+            $user = null;
+            if($status == 'canceled'){
+                $user = $request->user()->id;
+            }
+            $response = \App\Helpers\OrderProcess::updateCartOrder($id, $status, $user);
+            return response()->json(['status'=>true, 'data' => $response], 200);
         }catch(Exception $ex){
             DB::rollBack();
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
