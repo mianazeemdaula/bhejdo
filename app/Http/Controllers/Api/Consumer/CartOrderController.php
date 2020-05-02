@@ -51,36 +51,7 @@ class CartOrderController extends Controller
     {
         DB::beginTransaction();
         try{
-            // $validator = Validator::make( $request->all(), [
-            //     'consumer_id' => 'required',
-            //     'qty' => 'required',
-            //     'price' => 'required',
-            //     'address' => 'required',
-            //     'latitude' => 'required',
-            //     'longitude' => 'required',
-            //     'service_id' => 'required'
-            // ]);
-    
-            // if ($validator->fails()) {
-            //     return response()->json(['error'=>$validator->errors()], 401);
-            // }
-            // $cartItems =  json_decode($request->items);
-            // $productIds = [];
-            // foreach( $cartItems as $id => $qty){
-            //     $productIds[] = $id;
-            // }
-            // $produts = \App\Product::whereIn('id',$productIds)->get();
-
-            // $productDetails = [];
-            // $lifterAmount = 0;
-            // $storeAmount = 0;
-            // foreach( $cartItems as $id => $qty){
-            //     $product = $produts->find($id);
-            //     $productDetails[] = ['order_id' => 2, 'product_id' => $product->id, 'price' => $product->sale_price, 'qty' => $qty];
-            //     $storeAmount += ($product->sale_price * $qty);
-            // }
-            //return response()->json(['status'=>true, 'data' => $productDetails ], 200);
-
+            
             $settings = config('ohyes.consumer');
 
             $order = new CartOrder();
@@ -193,7 +164,7 @@ class CartOrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -205,7 +176,14 @@ class CartOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try{
+            DB::commit();
+            return response()->json(['status'=>true, 'data' => $request->all()], 200);
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
     }
 
     /**
