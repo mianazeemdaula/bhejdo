@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                           <th>Payment Type</th>
-                          <td>{{ $order->payment_type }}</td>
+                          <td>{{ $order->payment_id }}</td>
                         </tr>
                         
                       </tbody></table>
