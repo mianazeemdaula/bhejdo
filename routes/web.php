@@ -271,13 +271,16 @@ Route::get('setStore/{distance}', function($distance){
 });
 
 Route::get('sendmsg', function(){
-    $seonds = 0;
-    $users = \App\User::all();
-    $text = "Ramazan Mubarak!
-    Get it delivered new OHYES exciting grocery essentials at your doorstep with upto 30% off and using bonus offer. For details, please instal. http://t.ly/e3q1b";
-    $text = preg_replace("/\r|\n/", "", $text);
-    for($i = 0; $i <= 2; $i++){
-        \App\Jobs\SendSmsJob::dispatch("03334103160",$text)->delay(now()->addSeconds($seonds));
-        $seonds += 10; 
-    }
+    // $seonds = 0;
+    // $users = \App\User::all();
+    // $text = "Ramazan Mubarak!
+    // Get it delivered new OHYES exciting grocery essentials at your doorstep with upto 30% off and using bonus offer. For details, please instal. http://t.ly/e3q1b";
+    // $text = preg_replace("/\r|\n/", "", $text);
+    // for($i = 0; $i <= 2; $i++){
+    //     \App\Jobs\SendSmsJob::dispatch("03334103160",$text)->delay(now()->addSeconds($seonds));
+    //     $seonds += 10; 
+    // }
+    $text = 'this is the message form api';
+    \App\Jobs\SendSmsJob::dispatch("03334103160",$text)->delay(now()->addSeconds(5));
+    \App\Jobs\SendSmsJob::dispatch("03004103160",$text)->delay(now()->addSeconds(5));
 });
