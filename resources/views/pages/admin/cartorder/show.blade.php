@@ -88,7 +88,20 @@
                 <div class="row">
                   <!-- accepted payments column -->
                   <div class="col-6">
-                    <p class="lead">Payment Details:</p>
+                    <p class="lead">Order Details:</p>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody><tr>
+                          <th style="width:50%">Delivery Time:</th>
+                          <td>{{ $order->delivery_time }}</td>
+                        </tr>
+                        <tr>
+                          <th>Payment Type</th>
+                          <td>{{ $order->payment_type }}</td>
+                        </tr>
+                        
+                      </tbody></table>
+                    </div>
                   </div>
                   <!-- /.col -->
                   <div class="col-6">
