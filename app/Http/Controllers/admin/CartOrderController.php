@@ -75,7 +75,7 @@ class CartOrderController extends Controller
             }
 
             $form->add('lifter_id', 'select', [
-                'choices' => $_lifters,
+                'choices' => \App\User::role('lifter')->get()->pluck('name', 'id'),
                 'label' => 'Lifter'
             ]);
             $form->add('status', 'choice', [
