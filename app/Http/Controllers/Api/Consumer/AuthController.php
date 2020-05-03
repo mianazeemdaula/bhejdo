@@ -91,6 +91,7 @@ class AuthController extends Controller
             $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
             $success['user'] = $profile;
             DB::commit();
+            \App\Jobs\SendSmsJob::dispatch("0300410310","New signup {$user->name}")->delay(now()->addSeconds(5));
             $settings = config('ohyes.consumer');
             return response()->json(['status'=>true, 'data' => $success, 'settings' => $settings], 200);
         }catch(Expection $ex){
