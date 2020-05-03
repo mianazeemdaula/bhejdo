@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
     {
         //$schedule->command('every:mintue')->everyMinute();
         //$schedule->command('openorder:notifications')->cron("*/3 * * * *");
-        $schedule->command('openorder:notifications')->everyMinute();
-        $schedule->command('scheduleorder:morning')->cron("0 * * * *");
+        // $schedule->command('openorder:notifications')->everyMinute();
+        // $schedule->command('scheduleorder:morning')->cron("0 * * * *");
         //$schedule->command('openorder:notifications')->everyFiveMinutes();
         
         // Backup 
