@@ -101,8 +101,10 @@ class UserController extends Controller
         ]);
         if($user->hasRole('consumer'))
             return view('pages.super-admin.user.profile', compact('user', 'profileForm'));
-        else
+        else if($user->hasRole('lifter'))
             return view('pages.super-admin.user.show', compact('user', 'profileForm'));
+        else if($user->hasRole('store'))
+            return view('pages.super-admin.user.showstore', compact('user', 'profileForm'));
     }
 
     /**
