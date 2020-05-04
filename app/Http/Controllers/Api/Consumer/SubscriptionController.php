@@ -37,7 +37,7 @@ class SubscriptionController extends Controller
             $subscription->delivery_time = $deliveryTime.":00:00";
             $subscription->subscribe_type = $subscriptionType;
             if($subscriptionType == 'daily'){
-                $subscription->days = "";
+                $subscription->days = null;
             }else if($subscriptionType == 'weekdays'){
                 $subscription->days = $request->weekDays;
             }else if($subscriptionType == 'monthly'){
