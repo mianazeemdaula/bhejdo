@@ -19,7 +19,7 @@ class SubscriptionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'order' => new OrderResource($this->order),
+            //'order' => new OrderResource($this->order),
             'deliveryTime' => $this->delivery_time,
             'subscriptionType' => $this->subscribe_type,
             'days' => $this->days,
