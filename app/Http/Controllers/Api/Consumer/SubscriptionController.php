@@ -53,4 +53,19 @@ class SubscriptionController extends Controller
             return response()->json(['status'=>false, 'error' => "$e" ], 405);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try{
+            DB::commit();
+            $subscription = Subscription::find($id);
+            $subscription->status = $request->status;
+            $subscription->save();
+            return response()->json(['status'=>true, 'data' => true], 200);
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
+    }
 }
