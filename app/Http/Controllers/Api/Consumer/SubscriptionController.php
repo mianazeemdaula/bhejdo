@@ -30,7 +30,7 @@ class SubscriptionController extends Controller
         try {
             DB::beginTransaction();
             $deliveryTime = strlen($request->deliveryTime) == 2 ? $request->deliveryTime :  "0".$request->deliveryTime;
-            $subscriptionType = strtolower(str_replace(' ', '',$request->subscribe_type));
+            $subscriptionType = "daily";
             $subscription = new Subscription();
             $subscription->order_id = $request->order;
             $subscription->shift = $request->shift;
