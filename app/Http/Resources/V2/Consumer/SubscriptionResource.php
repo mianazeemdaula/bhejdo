@@ -22,7 +22,7 @@ class SubscriptionResource extends JsonResource
             'order' => new OrderResource($this->order),
             'deliveryTime' => $this->delivery_time,
             'subscriptionType' => $this->subscribe_type,
-            'days' => json_encode($this->days),
+            'days' => $this->days,
             'shift' => $this->shift,
             'status' => $this->status,
             'created_at' => $this->created_at,
