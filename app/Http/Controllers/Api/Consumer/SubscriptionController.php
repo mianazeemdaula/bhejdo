@@ -18,7 +18,7 @@ class SubscriptionController extends Controller
                 $join->on('subscription.order_id', '=', 'cart_orders.consumer_id')
                 ->where('cart_orders.consumer_id',  $request->user()->id);
             })->get();
-            //$orders = SubscriptionResource::collection($orders);
+            $orders = \App\Http\Resources\V2\Consumer\SubscriptionResource::collection($orders);
             return response()->json(['status'=>true, 'data' => ['orders' => $orders ]], 200);
         }catch(Exception $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
