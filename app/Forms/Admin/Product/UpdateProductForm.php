@@ -51,7 +51,7 @@ class UpdateProductForm extends Form
             'rules' => 'required|min:1',
             'label' => 'Weight (in grams)'
         ])->add('stock', 'number',  [
-            'rules' => 'required|min:1',
+            'rules' => 'required',
             'label' => 'Stock'
         ])->add('unit', 'text',  [
             'rules' => 'required|min:2',
