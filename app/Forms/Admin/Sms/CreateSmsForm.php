@@ -17,8 +17,10 @@ class CreateSmsForm extends Form
             'label' => 'Message'
         ])->add('user', 'select',  [
             'choices' => Role::all()->pluck('name', 'name')->toArray(),
-            'rules' => 'required',
             'label' => 'Users'
+        ])->add('number', 'text',  [
+            'placeholder' => '03001234567-03001234569',
+            'label' => 'Numbers (Range)'
         ]);
     }
 }
