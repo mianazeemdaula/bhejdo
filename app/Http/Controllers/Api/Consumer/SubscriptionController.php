@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
     public function index(Request $request)
     {
         try{
-            $orders = Subscription::join('cart_orders', function($join)
+            $orders = Subscription::join('cart_orders', function($join) use($request)
             {
                 $join->on('subscription.order_id', '=', 'cart_orders.consumer_id')
                 ->where('cart_orders.consumer_id',  $request->user()->id);
