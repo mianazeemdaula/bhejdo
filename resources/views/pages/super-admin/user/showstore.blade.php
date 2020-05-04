@@ -32,7 +32,7 @@
                   @endisset  0 </a>
                 </li>
               </ul>
-              <a href="https://www.google.com/maps/search/?api=1&query={{ $user->profileable->location->getLat() }},{{ $user->profileable->location->getLong() }}" class="btn btn-primary btn-block"><b>Shop Location</b></a>
+              <a href="https://www.google.com/maps/search/?api=1&query={{ $user->profileable->location->getLat() }},{{ $user->profileable->location->getLng() }}" class="btn btn-primary btn-block"><b>Shop Location</b></a>
             </div>
             <!-- /.card-body -->
           </div>
