@@ -30,19 +30,19 @@ class SubscriptionController extends Controller
         try {
             DB::beginTransaction();
             $deliveryTime = strlen($request->deliveryTime) == 2 ? $request->deliveryTime :  "0".$request->deliveryTime;
-            $subscriptionType = "daily";
+            $subscriptionType = strtolower(str_replace(' ', '',$request->subscribe_type));
             $subscription = new Subscription();
             $subscription->order_id = $request->order;
             $subscription->shift = $request->shift;
             $subscription->delivery_time = $deliveryTime.":00:00";
             $subscription->subscribe_type = $subscriptionType;
-            if($subscriptionType == 'daily'){
-                $subscription->days = [];
-            }else if($subscriptionType == 'weekdays'){
-                $subscription->days = json_decode($request->weekDays);
-            }else if($subscriptionType == 'monthly'){
-                $subscription->days = json_decode($request->monthDays);
-            }
+            // if($subscriptionType == 'daily'){
+            //     $subscription->days = [];
+            // }else if($subscriptionType == 'weekdays'){
+            //     $subscription->days = json_decode($request->weekDays);
+            // }else if($subscriptionType == 'monthly'){
+            //     $subscription->days = json_decode($request->monthDays);
+            // }
             $subscription->status = 1;
             $subscription->save();
             DB::commit();
