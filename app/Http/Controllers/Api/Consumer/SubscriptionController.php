@@ -36,13 +36,13 @@ class SubscriptionController extends Controller
             $subscription->shift = $request->shift;
             $subscription->delivery_time = $deliveryTime.":00:00";
             $subscription->subscribe_type = $subscriptionType;
-            // if($subscriptionType == 'daily'){
-            //     $subscription->days = [];
-            // }else if($subscriptionType == 'weekdays'){
-            //     $subscription->days = json_decode($request->weekDays);
-            // }else if($subscriptionType == 'monthly'){
-            //     $subscription->days = json_decode($request->monthDays);
-            // }
+            if($subscriptionType == 'daily'){
+                $subscription->days = [];
+            }else if($subscriptionType == 'weekdays'){
+                $subscription->days = json_decode($request->weekDays);
+            }else if($subscriptionType == 'monthly'){
+                $subscription->days = json_decode($request->monthDays);
+            }
             $subscription->status = 1;
             $subscription->save();
             DB::commit();
