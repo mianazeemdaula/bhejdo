@@ -39,9 +39,9 @@ class SubscriptionController extends Controller
             if($subscriptionType == 'daily'){
                 $subscription->days = [];
             }else if($subscriptionType == 'weekdays'){
-                $subscription->days = json_decode($request->weekDays);
+                $subscription->days = $request->weekDays;
             }else if($subscriptionType == 'monthly'){
-                $subscription->days = json_decode($request->monthDays);
+                $subscription->days = $request->monthDays;
             }
             $subscription->status = 1;
             $subscription->save();
