@@ -15,7 +15,7 @@ class SubscriptionController extends Controller
         try{
             $orders = Subscription::join('cart_orders', function($join) use($request)
             {
-                $join->on('subscription.order_id', '=', 'cart_orders.consumer_id')
+                $join->on('subscriptions.order_id', '=', 'cart_orders.id')
                 ->where('cart_orders.consumer_id',  $request->user()->id);
             })->get();
             $orders = \App\Http\Resources\V2\Consumer\SubscriptionResource::collection($orders);
