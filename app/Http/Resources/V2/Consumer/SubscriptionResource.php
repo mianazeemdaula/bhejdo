@@ -24,7 +24,7 @@ class SubscriptionResource extends JsonResource
             'subscriptionType' => $this->subscribe_type,
             'days' => $this->days,
             'shift' => $this->shift,
-            'status' => $this->status,
+            'subscriptionStatus' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
