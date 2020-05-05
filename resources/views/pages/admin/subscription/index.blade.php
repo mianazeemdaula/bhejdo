@@ -40,12 +40,12 @@
                                 <tr>
                                     <td> {{ $item->id}} </td>
                                     <td> {{ $item->order->consumer->mobile}} <br/> {{ $item->order->consumer->name}} </td>
-                                    <td> {{ $item->order->lifter->mobile}} <br/> {{ $item->order->lifter->name}} </td>=
+                                    <td> {{ $item->order->lifter->mobile}} <br/> {{ $item->order->lifter->name}} </td>
                                     <td> {{ $item->qty }} </td>
                                     <td> {{ $item->shift }} </td>
                                     <td> {{ $item->delivery_time }} </td>
                                     <td> {{ $item->subscribe_type }} </td>
-                                    <td> @json($item->days) </td>
+                                    <td> {{ $item->days }} </td>
                                     <td> {{ $item->status }} </td>
                                     <td><a href="https://www.google.com/maps/search/?api=1&query={{ $item->latitude }},{{ $item->longitude }}">Map</a></td>
                                     <td> {{ $item->created_at }} </td>
