@@ -23,7 +23,6 @@
                                 <th>Sr #</th>
                                 <th>Consumer</th>
                                 <th>Lifter</th>
-                                <th>Service</th>
                                 <th>Qty</th>
                                 <th>Shift</th>
                                 <th>Delivery Time</th>
@@ -40,9 +39,8 @@
                             @foreach ($collection as $item)
                                 <tr>
                                     <td> {{ $item->id}} </td>
-                                    <td> {{ $item->consumer->mobile}} <br/> {{ $item->consumer->name}} </td>
-                                    <td> {{ $item->lifter->mobile}} <br/> {{ $item->lifter->name}} </td>
-                                    <td> {{ $item->service->s_name}} </td>
+                                    <td> {{ $item->order->consumer->mobile}} <br/> {{ $item->order->consumer->name}} </td>
+                                    <td> {{ $item->order->lifter->mobile}} <br/> {{ $item->order->lifter->name}} </td>=
                                     <td> {{ $item->qty }} </td>
                                     <td> {{ $item->shift }} </td>
                                     <td> {{ $item->delivery_time }} </td>
