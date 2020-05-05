@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('service', 'ServiceController');
     Route::resource('wallet', 'WalletController');
     Route::resource('order', 'OrderController');
-    Route::resource('subscription', 'ScheduleOrderController');
+    Route::resource('subscription', 'SubscriptionController');
 
     Route::get('order/transfer/{id}','OrderController@getTransfer');
     Route::post('order/transfer/{id}','OrderController@postTransfer');
