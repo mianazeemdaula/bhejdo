@@ -29,27 +29,31 @@ class SmsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
+        $messages = [];
+        $onQueue = $request->api;
         if(strlen($request->number) >= 11){
             if(strpos($request->number, "-") !== false){
                 $ranges =  explode("-",$request->number);
-                $seonds = 0;
                 for ($i = (int) $ranges[0]; $i < (int) $ranges[1] ; $i++) {
-                    \App\Jobs\SendSmsJob::dispatch("0".$i, $request->message)->delay(now()->addSeconds($seonds));
-                    $seonds += 5;
+                    $messages[] = ['mobile' =>  "0".$i, 'message' => $request->message];
                 }
             }else{
-                \App\Jobs\SendSmsJob::dispatch($request->number, $request->message);
+                $messages[] = ['mobile' =>  $request->number, 'message' => $request->message];
             }
-        }
-        else{
+        }else{
             $users = User::role($request->user)->get();
             $message = $request->message;
-            $seonds = 0;
             foreach($users as $user){
                 $msg = str_replace("%name",$user->name,$message);
-                \App\Jobs\SendSmsJob::dispatch($user->mobile, $msg)->delay(now()->addSeconds($seonds));
-                $seonds += 20; 
+                $messages[] = ['mobile' =>  $user->mobile, 'message' => $msg];
+                
             }
+        }
+
+        $seconds = 0;
+        foreach ($messages as $message) {
+            \App\Jobs\SendSmsJob::dispatch($messag['mobile'], $message['message'])->onQueue($onQueue)->delay(now()->addSeconds($seonds));
+            $seconds += 6;
         }
         return redirect()->back()->with('status', 'Job for sms created successfully!');
     }

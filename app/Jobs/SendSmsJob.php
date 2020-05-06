@@ -32,6 +32,10 @@ class SendSmsJob implements ShouldQueue
      */
     public function handle()
     {
-        event(new \App\Events\SmsEvent($this->mobile, $this->msg));
+        if($this->type == 'smsapi'){
+            \App\Helpers\SmsHelper::send($this->mobile, $this->msg);
+        }else{
+            event(new \App\Events\SmsEvent($this->mobile, $this->msg));
+        }
     }
 }
