@@ -52,7 +52,7 @@ class SmsController extends Controller
 
         $seconds = 0;
         foreach ($messages as $message) {
-            \App\Jobs\SendSmsJob::dispatch($message['mobile'], $message['message'])->onQueue($onQueue)->delay(now()->addSeconds($seonds));
+            \App\Jobs\SendSmsJob::dispatch($message['mobile'], $message['message'])->onQueue($onQueue)->delay(now()->addSeconds($seconds));
             $seconds += 6;
         }
         return redirect()->back()->with('status', 'Job for sms created successfully!');
