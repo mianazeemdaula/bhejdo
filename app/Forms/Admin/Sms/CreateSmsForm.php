@@ -21,7 +21,7 @@ class CreateSmsForm extends Form
         ])->add('number', 'text',  [
             'placeholder' => '03001234567-03001234569',
             'label' => 'Numbers (Range)'
-        ])->add('api', 'text',  [
+        ])->add('api', 'choice',  [
             'choices' => ['oyapi' => 'Oy APi', 'smsapi' => 'SMS Api'],
             'selected' => 'oyapi',
             'label' => 'API Type'
