@@ -19,10 +19,12 @@ class SendSmsJob implements ShouldQueue
      */
     public $mobile;
     public $msg;
-    public function __construct($mobile, $msg)
+    public $api;
+    public function __construct($mobile, $msg, $api)
     {
         $this->mobile = $mobile;
         $this->msg = $msg;
+        $this->api = $api;
     }
 
     /**
@@ -32,12 +34,10 @@ class SendSmsJob implements ShouldQueue
      */
     public function handle()
     {
-        if($this->queue == 'smsapi'){
+        if($this->api == 'smsapi'){
             \App\Helpers\SmsHelper::send($this->mobile, $this->msg);
         }else{
             event(new \App\Events\SmsEvent($this->mobile, $this->msg));
         }
-
-       // event(new \App\Events\SmsEvent($this->mobile, $this->msg));
     }
 }
