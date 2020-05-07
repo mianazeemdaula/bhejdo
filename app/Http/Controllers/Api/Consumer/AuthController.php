@@ -176,7 +176,8 @@ class AuthController extends Controller
                 $user = $request->user();
                 $user->avatar = $avatarImageName;
                 $user->save();
-                return response()->json(['status'=>true, 'data' => $avatarImageName], 200);
+                $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
+                return response()->json(['status'=>true, 'data' => $avatarImageName, 'profile' => $profile], 200);
             }
             return response()->json(['status'=>false, 'error' => "Update Type Error" ], 401);
         }catch(Exception $e){
