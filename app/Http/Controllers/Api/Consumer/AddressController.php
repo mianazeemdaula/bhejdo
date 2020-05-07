@@ -44,7 +44,7 @@ class AddressController extends Controller
             $user = $request->user();
             $address = new Address();
             $address->user_id = $user->id;
-            $address->title = $request->title;
+            $address->title = strlen(trim($request->title)) == 0 ? "Not Set" : $request->title;
             $address->address = $request->address;
             $address->location = new Point($request->lat, $request->lon);
             $address->save();
