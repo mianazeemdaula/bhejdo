@@ -56,7 +56,7 @@ class SmsController extends Controller
             if($onQueue == 'smsapi'){
                 $seconds += 3;
             }else{
-                $seconds += 10;
+                $seconds += 20; // time
             }
         }
         return redirect()->back()->with('status', 'Job for sms created successfully!');
