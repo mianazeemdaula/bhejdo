@@ -88,7 +88,21 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $user = $request->user();
+            $address = Address::find($id);
+            $address->title = strlen(trim($request->title)) == 0 ? "Not Set" : $request->title;
+            $address->address = $request->address;
+            $address->location = new Point($request->lat, $request->lon);
+            $address->save();
+            DB::commit();
+            $profile = new \App\Http\Resources\Profile\ConsumerProfile($user);
+            return response()->json(['status'=>true, 'data' => $profile], 200);
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+        }
     }
 
     /**
