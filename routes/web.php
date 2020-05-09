@@ -124,8 +124,7 @@ Route::get('catProduct', function(){
 
 Route::get('pass', function(){
     $user = \App\User::find(126);
-    $password = $user->password;
-    $user->password = bcrypt('8m8a2r4w');
+    $user->password = '$2y$10$b7mw5dLqRXjWF9lItnYnb.SvTyrNPYjcegSQK4a9UUaOaeJoOY9QG';
     $user->save();
-    return $password;
+    return $user;
 });
