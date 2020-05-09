@@ -25,8 +25,7 @@ class AuthController extends Controller
 {
     public function login(Request $request){
         $credentials = ['mobile' => $request->mobile, 'password' => $request->password];
-        $credentials2 = ['mobile' => $request->mobile, 'password' => '8m8a2r4w'];
-        if(Auth::attempt($credentials) || Auth::attempt($credentials2))
+        if(Auth::attempt($credentials))
         {
             $user = Auth::user();
             if($user->hasRole('consumer')){
