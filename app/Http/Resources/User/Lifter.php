@@ -20,7 +20,7 @@ class Lifter extends JsonResource
             'name' => $this->name,
             'mobile' => $this->mobile,
             'avatar' => $this->avatar == null ? null : asset("storage/".$this->avatar),
-            'rating' => $rating == null ? 0.0 : (double) number_format($rating, 1)
+            'rating' => $rating == null ? (double) number_format(0.1, 1, '.', '') : (double) number_format((float) $rating - 0.1, 1, '.', ''),
         ];
     }
 }
