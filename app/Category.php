@@ -13,6 +13,6 @@ class Category extends Model
 
     public function cityProducts($city)
     {
-        return $this->hasMany('App\Product')->where('city_id',$city);
+        return $this->products()->where('city_id',$city);
     }
 }
