@@ -116,5 +116,5 @@ Route::get('/pages/terms', function(){
 
 Route::get('catProduct', function(){
     $cat = \App\Category::find(2);
-    return $cat;
+    return $cat->products;
 });
