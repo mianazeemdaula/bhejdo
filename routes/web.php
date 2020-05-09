@@ -115,6 +115,9 @@ Route::get('/pages/terms', function(){
 
 
 Route::get('catProduct', function(){
-    $cat = \App\Category::find(2);
-    return $cat->cityProducts(1)->get();
+    $city = 1;
+    $cat = \App\Category::with('products', function($q) use($city){
+        $q->where('city_id', $city);
+    })->get();
+    return $cat;
 });
