@@ -96,7 +96,7 @@ class ScheduleOrderMorning extends Command
             $bonusDeduction = 0;
             $smsmessage = "";
             foreach( $myOrder->details as $detail){
-                $product = $produts->find($detail->product_id);
+                $product = \App\Product::find($detail->product_id);
                 $qty = $detail->qty;
                 $productDetails[] = ['order_id' => $order->id, 'product_id' => $product->id, 'price' => $product->sale_price, 'qty' => $qty];
                 $payableAmount += ($product->sale_price * $qty);
