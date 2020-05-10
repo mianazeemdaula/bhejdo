@@ -6,8 +6,10 @@ use Illuminate\Console\Command;
 use App\Helpers\AndroidNotifications;
 
 use App\Bonus;
-use App\ScheduleOrder;
+use App\Wallet;
+use App\Subscription;
 use DB;
+
 class ScheduleOrderMorning extends Command
 {
     /**
@@ -15,7 +17,7 @@ class ScheduleOrderMorning extends Command
      *
      * @var string
      */
-    protected $signature = 'scheduleorder:morning';
+    protected $signature = 'subscription:orders';
 
     /**
      * The console command description.
@@ -47,17 +49,17 @@ class ScheduleOrderMorning extends Command
         $t1 = "$nextHour:00:00";
         $t2 = "$nextHour:59:00";
 
-        $daily = \App\ScheduleOrder::where('status',1)->where('subscribe_type','daily')->whereBetween('delivery_time', [$t1, $t2])->get();
+        $daily = \App\Subscription::where('status',1)->where('subscribe_type','daily')->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($daily as $sOrder){
             $this->createOrder($sOrder);
         }
 
-        $weekdays = \App\ScheduleOrder::where('status',1)->where('subscribe_type','weekdays')->whereJsonContains('days',$date->dayOfWeek)->whereBetween('delivery_time', [$t1, $t2])->get();
+        $weekdays = \App\Subscription::where('status',1)->where('subscribe_type','weekdays')->whereJsonContains('days',$date->dayOfWeek)->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($weekdays as $sOrder){
             $this->createOrder($sOrder);
         }
 
-        $monthly = \App\ScheduleOrder::where('status',1)->where('subscribe_type','monthly')->whereJsonContains('days',$date->day)->whereBetween('delivery_time', [$t1, $t2])->get();
+        $monthly = \App\Subscription::where('status',1)->where('subscribe_type','monthly')->whereJsonContains('days',$date->day)->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($monthly as $sOrder){
             $this->createOrder($sOrder);
         }
@@ -65,48 +67,87 @@ class ScheduleOrderMorning extends Command
         $this->info('Orders Created');
     }
 
-    public function createOrder(ScheduleOrder $sOrder){
+    public function createOrder($id){
         try {
             DB::beginTransaction();
-            $order = new \App\Order();
-            $order->consumer_id = $sOrder->consumer_id;
-            $order->lifter_id = $sOrder->lifter_id;
-            $order->service_id = $sOrder->service_id;
-            $order->qty = $sOrder->qty;
-            $order->price = $sOrder->service->s_price;
-            $order->note = "";
-            $order->address = $sOrder->address;
-            $order->longitude = $sOrder->longitude;
-            $order->latitude = $sOrder->latitude;
-            $charges = $sOrder->qty < $sOrder->service->min_qty ? $sOrder->service->min_qty_charges : 0;
-            $order->charges = $charges;
-            $order->deliver_time = $sOrder->delivery_time;
-            $order->delivery_time = \Carbon\Carbon::now();
+            $settings = config('ohyes.consumer');
+            $myOrder = \App\CartOrder::find($id);
+            $order = new \App\CartOrder();
+            $order->consumer_id = $myOrder->consumer_id;
+            $order->payment_id = $myOrder->payment_id;
+            $order->address_id = $myOrder->address_id;
+            $order->charges = $myOrder->charges;
+            $order->note = $myOrder->note;
             $order->type = 2;
-            $bonus = Bonus::balance($sOrder->consumer_id);
-            $bonusDeducted = 0;
-            if($bonus != null){
-                $deductable = $sOrder->qty * 10;  
-                if($bonus->balance >= $deductable){
-                    $bonusDeducted = $deductable;
-                    $order->bonus = $bonusDeducted;
-                    Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
-                }else if($bonus->balance >= 0){
-                    $bonusDeducted = $bonus->balance;
-                    $order->bonus = $bonusDeducted;
-                    Bonus::deduct($order->consumer_id, "Deduction of subsribed order #{$sOrder->id}","order", $bonusDeducted);
+            $order->consumer_bonus = 0;
+            $order->store_amount = 0;
+            $order->lifter_amount = 0;
+            $order->payable_amount = 0;
+            $order->status = 'created';
+            $order->consumer_wallet = 0;
+            $order->bullet_delivery = $myOrder->bullet_delivery;
+            $order->delivery_time = $myOrder->delivery_time;
+            $order->save();
+            
+            // Order Details Entry
+            
+            $productDetails = [];
+            $payableAmount = 0;
+            $bonusDeduction = 0;
+            $smsmessage = "";
+            foreach( $myOrder->details as $detail){
+                $product = $produts->find($detail->product_id);
+                $qty = $detail->qty;
+                $productDetails[] = ['order_id' => $order->id, 'product_id' => $product->id, 'price' => $product->sale_price, 'qty' => $qty];
+                $payableAmount += ($product->sale_price * $qty);
+                $bonusDeduction +=  ( $product->bonus_deduction  * $qty);
+                $smsmessage .= "{$product->name} x $qty\n";
+            }
+            \App\CartOrderDetail::insert($productDetails);
+            // Payable ammount Sale Price + Charges - Bonus
+            $charges = 0;
+            if($order->bullet_delivery == 1){
+                $charges = $settings['bullet_service_charges'];
+            }else if($payableAmount < $settings['delivery_free_shopping']){
+                $charges = $settings['normal_delivery_fee'];;
+            }else{
+                $charges = 0;
+            }
+
+            // Caculate bonus amount on bonus deduction
+            $bonusAmount = 0;
+            if($bonusDeduction > 0){
+                $bonus = Bonus::balance($order->consumer_id);
+                if($bonus != null){
+                    $bonusAmount = $bonus->balance >= $bonusDeduction ? $bonusDeduction :  $bonus->balance;
+                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
                 }
             }
-            $order->status = 'assigned';
-            $order->payable_amount = (($sOrder->qty * $sOrder->service->s_price) + $charges ) - $bonusDeducted;
+            
+            $payableAmount = ($payableAmount - $bonusAmount) + $charges;
+
+            // Caculate wallet amount on wallet payment
+            $walletAmount = 0;
+            if($order->payment_id == 2){
+                $wallet = Wallet::balance($order->consumer_id);
+                if($wallet != null){
+                    $walletAmount = $wallet->balance >= $payableAmount ? $payableAmount :  $wallet->balance;
+                    Wallet::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$walletAmount);
+                }
+            }
+
+            $order->store_amount = $payableAmount - $charges;
+            $order->charges = $charges;
+            $order->lifter_amount = $payableAmount;
+            $order->payable_amount = $payableAmount;
+            $order->consumer_bonus = $bonusAmount;
+            $order->consumer_wallet = $order->payment_id == 2 ? $walletAmount : 0;
             $order->save();
             DB::commit();
-            $data = ['order_id' => $order->id, 'type' => 'order'];
-            $message = "Schedlue order assigned to you please deliver at time.";
-            AndroidNotifications::toLifter("Schedule Order", $message, $order->lifter->pushToken, $data);
+            return true;
         } catch(Exception $e){
             DB::rollBack();
-            return response()->json(['status'=>false, 'error' => "Internal Server Error" ], 405);
+            return false;
         }
     }
 }
