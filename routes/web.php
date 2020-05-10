@@ -123,8 +123,6 @@ Route::get('catProduct', function(){
 });
 
 Route::get('pass', function(){
-    $user = \App\User::find(126);
-    $user->password = '$2y$10$b7mw5dLqRXjWF9lItnYnb.SvTyrNPYjcegSQK4a9UUaOaeJoOY9QG';
-    $user->save();
-    return $user;
+    $monthly = \App\Subscription::where('status',1)->where('subscribe_type','monthly')->whereJsonContains('days',10)->get();
+    return $monthly;
 });
