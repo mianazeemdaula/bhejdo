@@ -45,7 +45,7 @@ class ScheduleOrderMorning extends Command
     {
         date_default_timezone_set('Asia/Karachi');
         $date = \Carbon\Carbon::now();
-        $nextHour = $date->hour + 1;
+        $nextHour = $date->hour + 2;
         $t1 = "$nextHour:00:00";
         $t2 = "$nextHour:59:00";
 
