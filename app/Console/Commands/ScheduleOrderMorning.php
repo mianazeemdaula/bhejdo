@@ -144,6 +144,11 @@ class ScheduleOrderMorning extends Command
             $order->consumer_wallet = $order->payment_id == 2 ? $walletAmount : 0;
             $order->save();
             DB::commit();
+            $msg = "Subscribe Order #{$order->id}\n {$order->consumer->name} {$order->consumer->mobile}\n";
+            $msg .= $smsmessage;
+            $msg .= "Time: {$order->delivery_time}";
+            $msgresponse = \App\Helpers\SmsHelper::send("03088608825", $msg);
+            $msgresponse = \App\Helpers\SmsHelper::send("03017374750", $msg);
             return true;
         } catch(Exception $e){
             DB::rollBack();
