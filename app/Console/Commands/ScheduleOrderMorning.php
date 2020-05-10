@@ -51,17 +51,17 @@ class ScheduleOrderMorning extends Command
 
         $daily = \App\Subscription::where('status',1)->where('subscribe_type','daily')->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($daily as $sOrder){
-            $this->createOrder($sOrder);
+            $this->createOrder($sOrder->order_id);
         }
 
         $weekdays = \App\Subscription::where('status',1)->where('subscribe_type','weekdays')->whereJsonContains('days',$date->dayOfWeek)->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($weekdays as $sOrder){
-            $this->createOrder($sOrder);
+            $this->createOrder($sOrder->order_id);
         }
 
         $monthly = \App\Subscription::where('status',1)->where('subscribe_type','monthly')->whereJsonContains('days',$date->day)->whereBetween('delivery_time', [$t1, $t2])->get();
         foreach($monthly as $sOrder){
-            $this->createOrder($sOrder);
+            $this->createOrder($sOrder->order_id);
         }
 
         $this->info('Orders Created');
