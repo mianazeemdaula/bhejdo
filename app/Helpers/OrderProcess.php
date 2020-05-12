@@ -227,7 +227,7 @@ class OrderProcess {
             $order->status = 'droped';
             $order->save();
             $offer = $settings['bonus_saving_offer'];
-            $bonusAmount = (($order->payable - $order->consumer_bonus - $order->charges) * $offer) / 100;
+            $bonusAmount = (($order->payable_amount - $order->consumer_bonus - $order->charges) * $offer) / 100;
             \App\Bonus::add($order->consumer_id, "Bonus discount on order #{$order->id}","order",round($bonusAmount));
             return true;
         }else if(strtolower($status) == 'completed'){
