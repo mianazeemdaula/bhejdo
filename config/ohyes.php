@@ -9,5 +9,6 @@ return [
         'delivery_free_shopping' => 1500,
         'bullet_delivery_tme' => 90, // minutes
         'normal_delivery_tme' => 240, // minutes
+        'bonus_saving_offer' => 10, // percentage
     ]
 ];
