@@ -51,7 +51,7 @@ class OfferController extends Controller
                 }
                 $data = [
                     'msg' => "Congratulation! You have to save {$offer->amount}{$offer->type} on {$offer->category}.",
-                    'amount' => $amount
+                    'amount' => $request->amount
                 ];
                 return response()->json(['status'=>true, 'data' => $data], 200);
             }
