@@ -21,7 +21,7 @@ class createOfferForm extends Form
         ])->add('type', 'select',  [
             'choices' => ['%' => 'Percentage', 's' => 'Solid'],
             'label' => 'Type'
-        ])->add('code', 'text',  [
+        ])->add('promo_code', 'text',  [
             'rules' => 'required|min:5|max:5',
             'label' => 'Promo Code'
         ])->add('amount', 'number',  [

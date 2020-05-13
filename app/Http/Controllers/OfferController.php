@@ -45,7 +45,7 @@ class OfferController extends Controller
     public function edit($id)
     {
         $offer = Offer::find($id);
-        $form = $this->form(ServiceCreateForm::class, [
+        $form = $this->form(createOfferForm::class, [
             'method' => 'PUT',
             'class' => 'form-horizontal',
             'url' => route('offer.update', $id),
@@ -61,7 +61,8 @@ class OfferController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-
-        return $request->all();
+        $offer = Offer::find($id);
+        $offer->update($request->all());
+        return redirect()->back()->with('status', 'Offer updated successfully!');
     }
 }
