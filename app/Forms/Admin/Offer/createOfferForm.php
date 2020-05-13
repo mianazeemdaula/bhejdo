@@ -16,7 +16,7 @@ class createOfferForm extends Form
             'rules' => 'required|min:5',
             'label' => 'Description'
         ])->add('category', 'select',  [
-            'choices' => ['bonus' => 'Bonus', 'wallet' => 'Wallet'],
+            'choices' => ['bonus' => 'Bonus', 'wallet' => 'Wallet', 'cash' => 'Cash'],
             'label' => 'Category'
         ])->add('type', 'select',  [
             'choices' => ['%' => 'Percentage', 's' => 'Solid'],
