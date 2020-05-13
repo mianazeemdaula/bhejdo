@@ -17,7 +17,7 @@ class ReferralResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'date_of_signup' => $this->created_at,
+            'dateOfSignup' => $this->created_at,
             'recentShopping' => 250,
             'totalShopping' => 52500,
             'recentCommission' => 250,
