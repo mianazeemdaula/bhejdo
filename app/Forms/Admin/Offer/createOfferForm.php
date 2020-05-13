@@ -30,6 +30,13 @@ class createOfferForm extends Form
         ])->add('expiry_date', 'date',  [
             'rules' => 'required',
             'label' => 'Expiry Date'
+        ])->add('shopping_limit', 'number',  [
+            'rules' => 'required',
+            'label' => 'Shopping Limit'
+        ])->add('credit', 'choice',  [
+            'choices' => ['1' => 'Credit', '0' => 'Debit'],
+            'expanded' => true,
+            'multiple' => false
         ])->add('status', 'choice', [
             'choices' => ['1' => 'Active', '0' => 'Deactive'],
             'expanded' => true,
