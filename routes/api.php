@@ -31,6 +31,7 @@ Route::prefix('consumer')->group(function () {
                 Route::resource('wallet', 'WalletController');
                 Route::resource('bonus', 'BonusController');
                 Route::resource('offer', 'OfferController');
+                Route::resource('referral', 'ReferralController');
                 Route::get('profile','AuthController@profile');
             });
         });
