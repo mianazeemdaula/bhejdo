@@ -47,11 +47,11 @@ class OfferController extends Controller
                 if($offer->type == '%'){
                     $amount = round($request->amount * $offer->amount / 100);
                 }else if($offer->type == 's'){
-                    $amount = $request->amount - $offer->amount;
+                    $amount = $offer->amount;
                 }
                 $data = [
                     'msg' => "Congratulation! You have to save {$offer->amount}{$offer->type} on {$offer->category}.",
-                    'amount' => $request->amount
+                    'amount' => $amount
                 ];
                 return response()->json(['status'=>true, 'data' => $data], 200);
             }
