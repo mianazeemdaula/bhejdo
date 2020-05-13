@@ -22,7 +22,7 @@ class createOfferForm extends Form
             'choices' => ['%' => 'Percentage', 's' => 'Solid'],
             'label' => 'Type'
         ])->add('promo_code', 'text',  [
-            'rules' => 'required|min:5|max:5',
+            'rules' => 'required|min:5|max:10',
             'label' => 'Promo Code'
         ])->add('amount', 'number',  [
             'rules' => 'required|min:1',
