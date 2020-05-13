@@ -22,7 +22,7 @@ class ReferralResource extends JsonResource
             'totalShopping' => 52500,
             'recentCommission' => 250,
             'totalCommission' => 6520,
-            'expiry' => $this->created_at,
+            'expiry' => \Carbon\Carbon::parse($this->created_at)->addYears(1),
         ];
     }
 }
