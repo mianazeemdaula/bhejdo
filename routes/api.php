@@ -30,6 +30,7 @@ Route::prefix('consumer')->group(function () {
                 Route::resource('subscription','SubscriptionController');
                 Route::resource('wallet', 'WalletController');
                 Route::resource('bonus', 'BonusController');
+                Route::resource('offer', 'OfferController');
                 Route::get('profile','AuthController@profile');
             });
         });
