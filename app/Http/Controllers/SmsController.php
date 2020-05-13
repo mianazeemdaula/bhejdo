@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\Admin\Sms\CreateSmsForm;
 use App\User;
+
 class SmsController extends Controller
 {
     use FormBuilderTrait;
