@@ -46,7 +46,6 @@
                                     <td> {{ $item->category}} </td>
                                     <td> {{ $item->expiry_date}} </td>
                                     <td> {{ $item->status}} </td>
-                                    <td> {{ $item->created_at}} </td>
                                     <td> {{ $item->updated_at}} </td>
                                     <td> 
                                       <div class="btn-group">
