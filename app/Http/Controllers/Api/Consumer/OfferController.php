@@ -49,7 +49,7 @@ class OfferController extends Controller
                     $amount = $request->amount - $offer->amount;
                 }
                 $data = [
-                    'msg' => "You can save upto {$offer->amount}{$offer->type}.",
+                    'msg' => "Congratulation! You can save upto {$offer->amount}{$offer->type} on {$offer->category}.",
                     'amount' => $amount
                 ];
                 return response()->json(['status'=>true, 'data' => $data], 200);
