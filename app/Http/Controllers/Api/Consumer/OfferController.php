@@ -38,7 +38,7 @@ class OfferController extends Controller
                 return response()->json(['status'=>false, 'data' => $data], 200);
             }else if($offer->credit == 1){
                 $data = [
-                    'msg' => "You can save upto {$offer->amount}{$offer->type}.",
+                    'msg' => "Congratulation! You can save upto {$offer->amount}{$offer->type} on {$offer->category}.",
                 ];
                 return response()->json(['status'=>true, 'data' => $data], 200);
             }else if($offer->credit == 0){
@@ -49,7 +49,7 @@ class OfferController extends Controller
                     $amount = $request->amount - $offer->amount;
                 }
                 $data = [
-                    'msg' => "Congratulation! You can save upto {$offer->amount}{$offer->type} on {$offer->category}.",
+                    'msg' => "Congratulation! You have to save {$offer->amount}{$offer->type} on {$offer->category}.",
                     'amount' => $amount
                 ];
                 return response()->json(['status'=>true, 'data' => $data], 200);
