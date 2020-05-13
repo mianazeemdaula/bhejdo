@@ -231,10 +231,10 @@ return [
             'permission' => 'super-admin|admin|support'
         ],
         [
-            'text'        => 'Orders',
-            'route'         => 'order.index',
+            'text'        => 'Offers',
+            'route'         => 'offer.index',
             'icon'        => 'far fa-fw fa-file',
-            'permission' => 'super-admin|admin|support'
+            'permission' => 'super-admin|admin'
         ],
 
         [
