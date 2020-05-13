@@ -36,7 +36,8 @@ class createOfferForm extends Form
         ])->add('credit', 'choice',  [
             'choices' => ['1' => 'Credit', '0' => 'Debit'],
             'expanded' => true,
-            'multiple' => false
+            'multiple' => false,
+            'label' => 'Credit/Debit'
         ])->add('status', 'choice', [
             'choices' => ['1' => 'Active', '0' => 'Deactive'],
             'expanded' => true,
