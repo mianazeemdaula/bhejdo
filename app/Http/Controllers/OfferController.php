@@ -15,12 +15,18 @@ class OfferController extends Controller
 
     public function index()
     {
+        $collection = Offer::all();
+        return view('pages.admin.offer.index', compact('collection'));
+    }
+
+    public function create()
+    {
         $form = $this->form(createOfferForm::class, [
             'method' => 'POST',
             'class' => 'form-horizontal',
             'url' => route("offer.store"),
         ]);
-        return view('pages.admin.notifications.create', compact('form'));
+        return view('pages.admin.offer.create', compact('form'));
     }
 
     public function store(Request $request)
@@ -45,7 +51,7 @@ class OfferController extends Controller
             'url' => route('offer.update', $id),
             'model' => $offer
         ]);
-        return view('pages.admin.super-admin.eprofile_edit.blade', compact('form'));
+        return view('pages.admin.offer.create', compact('form'));
     }
 
     public function update(Request $request, $id)
@@ -55,7 +61,7 @@ class OfferController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        
+
         return $request->all();
     }
 }
