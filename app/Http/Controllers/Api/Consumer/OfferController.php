@@ -32,8 +32,9 @@ class OfferController extends Controller
                 return response()->json(['status'=>false, 'data' => $data], 200);
             }
             else if($request->amount < $offer->shopping_limit){
+                $amount = $offer->shopping_limit - $request->amount;
                 $data = [
-                    'msg' => "Please shop for RS{$offer->shopping_limit} for avaling this offer."
+                    'msg' => "You have to shop more RS{$amount} to avail this offer."
                 ];
                 return response()->json(['status'=>false, 'data' => $data], 200);
             }else if($offer->credit == 1){
