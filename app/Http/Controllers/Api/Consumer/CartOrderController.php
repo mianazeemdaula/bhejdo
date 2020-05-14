@@ -112,6 +112,7 @@ class CartOrderController extends Controller
                     if(in_array('amount', $response['data'])){
                         $bonusAmount = $response['data']['amount'];
                     }
+                    $order->coupon = $promoCode;
                 }
             }else{
                 if($bonusDeduction > 0){
