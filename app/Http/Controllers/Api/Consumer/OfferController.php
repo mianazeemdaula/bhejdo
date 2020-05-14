@@ -31,6 +31,16 @@ class OfferController extends Controller
                 ];
                 return response()->json(['status'=>false, 'data' => $data], 200);
             }
+            $isAvail = \App\CartOrder::where('consumer_id', $request->user()->id)->where(function($query) {
+                $query->where('status', 'droped')
+                      ->orWhere('status', 'confirmed');
+            })->where('coupon',$id)->count();
+            if($isAvail > 0){
+                $data = [
+                    'msg' => "You have already avail this offer."
+                ];
+                return response()->json(['status'=>false, 'data' => $data], 200);
+            }
             else if($request->amount < $offer->shopping_limit){
                 $amount = $offer->shopping_limit - $request->amount;
                 $data = [
