@@ -226,9 +226,23 @@ class OrderProcess {
         }else if(strtolower($status) == 'droped'){
             $order->status = 'droped';
             $order->save();
-            $offer = $settings['bonus_saving_offer'];
-            $bonusAmount = (($order->payable_amount - $order->consumer_bonus - $order->charges) * $offer) / 100;
-            \App\Bonus::add($order->consumer_id, "Bonus discount on order #{$order->id}","order",round($bonusAmount));
+            if($order->coupon != null){
+                $offer = \App\Offer::where('promo_code', $order->coupon)->first();
+                if($offer->credit == 1){
+                    $amount = 0;
+                    if($offer->type == 's'){
+                        $amount = $offer->amount;
+                    }else if($offer->type == '%'){
+                        $amount = round((($order->payable_amount - $order->consumer_bonus - $order->charges) * $offer->amount) / 100);
+                    }
+                    // Addition
+                    if($offer->category == 'wallet'){
+                        \App\Wallet::add($order->consumer_id, "Promotion addition {$offer->title}", 'offer', $amount);
+                    }else if($offer->category == 'bonus'){
+                        \App\Bonus::add($order->consumer_id, "Promotion addition {$offer->title}", 'offer', $amount);
+                    }
+                }
+            }
             return true;
         }else if(strtolower($status) == 'completed'){
             $order->status = 'completed';
