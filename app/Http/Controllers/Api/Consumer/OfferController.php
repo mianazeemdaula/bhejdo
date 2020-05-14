@@ -24,7 +24,7 @@ class OfferController extends Controller
     public function update(Request $request, $coupon)
     {
         try{
-            $response = App\Helpers\OfferProcess::processOffer($request->user()->id, $coupon, $request->amount);
+            $response = \App\Helpers\OfferProcess::processOffer($request->user()->id, $coupon, $request->amount);
             return response()->json( $response, 200);
             // $offer = Offer::where('promo_code', $id)->where('status',1)->first();
             // if($offer == null){
