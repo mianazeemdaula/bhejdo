@@ -33,6 +33,9 @@ class createOfferForm extends Form
         ])->add('shopping_limit', 'number',  [
             'rules' => 'required',
             'label' => 'Shopping Limit'
+        ])->add('statement', 'text',  [
+            'rules' => 'required|min:5',
+            'label' => 'Acceptance Statement'
         ])->add('credit', 'choice',  [
             'choices' => ['1' => 'Credit', '0' => 'Debit'],
             'expanded' => true,
