@@ -32,7 +32,7 @@ class OfferProcess {
                 return ['status'=>false, 'data' => $data];
             }else if($offer->credit == 1){
                 $data = [
-                    'msg' => "Congratulation! You can save upto {$offer->amount}{$offer->type} on {$offer->category}.",
+                    'msg' => "{$offer->statement}",
                 ];
                 return ['status'=>true, 'data' => $data];
             }else if($offer->credit == 0){
@@ -43,7 +43,7 @@ class OfferProcess {
                     $amount = $offer->amount;
                 }
                 $data = [
-                    'msg' => "Congratulation! You have to save {$offer->amount}{$offer->type} on {$offer->category}.",
+                    'msg' => "{$offer->statement}",
                     'amount' => $amount
                 ];
                 return ['status'=>true, 'data' => $data];
