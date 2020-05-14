@@ -103,11 +103,23 @@ class CartOrderController extends Controller
 
             // Caculate bonus amount on bonus deduction
             $bonusAmount = 0;
-            if($bonusDeduction > 0){
-                $bonus = Bonus::balance($order->consumer_id);
-                if($bonus != null){
-                    $bonusAmount = $bonus->balance >= $bonusDeduction ? $bonusDeduction :  $bonus->balance;
-                    Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
+
+            // Check if user aplied coupon elase deduct bonus if have
+            if($request->has('coupon') && strlen(trim($request->coupon)) > 0){
+                $promoCode = trim($request->coupon);
+                $response = \App\Helpers\OfferProcess::processOffer($request->user()->id,$promoCode, $payableAmount);
+                if($request['status'] == true){
+                    if(in_array('amount', $response['data'])){
+                        $bonusAmount = $response['data']['amount'];
+                    }
+                }
+            }else{
+                if($bonusDeduction > 0){
+                    $bonus = Bonus::balance($order->consumer_id);
+                    if($bonus != null){
+                        $bonusAmount = $bonus->balance >= $bonusDeduction ? $bonusDeduction :  $bonus->balance;
+                        Bonus::deduct($order->consumer_id, "Deduction of order #{$order->id}","order",$bonusAmount);
+                    }
                 }
             }
             
