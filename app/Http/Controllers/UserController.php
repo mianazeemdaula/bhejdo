@@ -170,7 +170,7 @@ class UserController extends Controller
         $users = User::role($type)->get();
         $columns = array('id', 'name', 'mobile', 'email');
     
-        $callback = function() use ($reviews, $columns)
+        $callback = function() use ($users, $columns)
         {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
