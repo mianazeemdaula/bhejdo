@@ -180,7 +180,7 @@ class UserController extends Controller
             }
             fclose($file);
         };
-        return Response::stream($callback, 200, $headers);
+        return \Response::stream($callback, 200, $headers);
     }
 
     /**
