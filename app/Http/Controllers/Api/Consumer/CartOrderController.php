@@ -105,10 +105,10 @@ class CartOrderController extends Controller
             $bonusAmount = 0;
 
             // Check if user aplied coupon elase deduct bonus if have
-            if($request->has('coupon') && strlen(trim($request->coupon)) > 0){
+            if($request->has('coupon')){
                 $promoCode = trim($request->coupon);
                 $response = \App\Helpers\OfferProcess::processOffer($request->user()->id,$promoCode, $payableAmount);
-                if($request['status'] == true){
+                if($response['status'] == true){
                     if(in_array('amount', $response['data'])){
                         $bonusAmount = $response['data']['amount'];
                     }
