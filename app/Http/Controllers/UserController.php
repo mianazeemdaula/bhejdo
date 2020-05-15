@@ -153,6 +153,32 @@ class UserController extends Controller
         return $data;
     }
 
+    public function download($type, $format)
+    {
+        $headers = array(
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=file.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        );
+    
+        $users = User::role($type)->get();
+        $columns = array('id', 'name', 'mobile', 'email');
+    
+        $callback = function() use ($reviews, $columns)
+        {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+    
+            foreach($users as $user) {
+                fputcsv($file, array($user->id, $user->name, $user->mobile, $user->email));
+            }
+            fclose($file);
+        };
+        return Response::stream($callback, 200, $headers);
+    }
+
     /**
      * Update the specified resource in storage.
      *

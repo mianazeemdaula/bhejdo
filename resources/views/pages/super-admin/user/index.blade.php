@@ -18,8 +18,13 @@
                 </div>
                 <div class="card-body">
                     @role('super-admin|admin')
-                    <div class="py-2">
-                        <a href="{{ route('user.create') }}" class="btn btn-primary" > Create User</a>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <a href="{{ route('user.create') }}" class="btn btn-primary" > Create User</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{{ url("user/$type/download/csv") }}" class="btn btn-default float-right" >CSV Download</a>
+                        </div>
                     </div>
                     @endrole
                     <table class="table table-bordered table-striped dataTable" id="example1">
