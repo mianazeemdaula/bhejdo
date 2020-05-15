@@ -33,6 +33,7 @@ class OfferProcess {
             }else if($offer->credit == 1){
                 $data = [
                     'msg' => "{$offer->statement}",
+                    'credit' => $offer->credit
                 ];
                 return ['status'=>true, 'data' => $data];
             }else if($offer->credit == 0){
@@ -44,7 +45,8 @@ class OfferProcess {
                 }
                 $data = [
                     'msg' => "{$offer->statement}",
-                    'amount' => $amount
+                    'amount' => $amount,
+                    'credit' => $offer->credit
                 ];
                 return ['status'=>true, 'data' => $data];
             }

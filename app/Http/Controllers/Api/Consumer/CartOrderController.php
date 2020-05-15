@@ -109,7 +109,7 @@ class CartOrderController extends Controller
                 $promoCode = strtoupper(trim($request->coupon));
                 $response = \App\Helpers\OfferProcess::processOffer($request->user()->id,$promoCode, $payableAmount);
                 if($response['status'] == true){
-                    if(in_array('amount', $response['data'])){
+                    if($response['data']['credit'] == 0){
                         $bonusAmount = $response['data']['amount'];
                     }
                     $order->coupon = $promoCode;
