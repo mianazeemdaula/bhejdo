@@ -24,25 +24,29 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('pages.super-admin.user.index', compact('users'));
+        $type = 'admin|support|consumer|lifter|store';
+        return view('pages.super-admin.user.index', compact('users', 'type'));
     }
 
     public function consumer()
     {
         $users = User::role('consumer')->get();
-        return view('pages.super-admin.user.index', compact('users'));
+        $type = 'consumer';
+        return view('pages.super-admin.user.index', compact('users', 'type'));
     }
 
     public function lifter()
     {
         $users = User::role('lifter')->get();
-        return view('pages.super-admin.user.index', compact('users'));
+        $type = 'lifter';
+        return view('pages.super-admin.user.index', compact('users', 'type'));
     }
 
     public function stores()
     {
         $users = User::role('store')->get();
-        return view('pages.super-admin.user.index', compact('users'));
+        $type = 'store';
+        return view('pages.super-admin.user.index', compact('users', 'type'));
     }
 
     /**
