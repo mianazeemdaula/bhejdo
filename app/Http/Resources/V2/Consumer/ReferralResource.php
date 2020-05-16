@@ -14,13 +14,14 @@ class ReferralResource extends JsonResource
      */
     public function toArray($request)
     {
+        $recent = \App\CartOrder::where('consumer_id',$this->id)->latest()->first();
         return [
             'id' => $this->id,
             'name' => $this->name,
             'dateOfSignup' => $this->created_at,
-            'recentShopping' => 250,
+            'recentShopping' => $recent == null ? 0 : $recent->payable_amount,
             'totalShopping' => 52500,
-            'recentCommission' => 250,
+            'recentCommission' => $recent == null ? 0 : (($recent->payable_amount - $recent->charges - $recent->consumer_bonus) * 2 ) / 100,
             'totalCommission' => 6520,
             'expiry' => \Carbon\Carbon::parse($this->created_at)->addYears(1),
         ];
