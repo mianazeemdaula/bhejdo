@@ -17,6 +17,11 @@
                     </h3>
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{{ url("user/purchase/download/csv") }}" class="btn btn-default float-right" >CSV Download</a>
+                        </div>
+                    </div>
                     <table class="table table-sm dataTable" id="example1">
                         <thead>
                             <tr>

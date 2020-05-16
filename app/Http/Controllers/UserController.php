@@ -166,8 +166,15 @@ class UserController extends Controller
             "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
             "Expires" => "0"
         );
+
+        $users = null;
+        if($type == 'purchase'){
+            $purchasers = \App\CartOrder::groupBy('consumer_id')->get()->pluck('consumer_id')->toArray();
+            $users = User::find($purchasers);
+        }else{
+            $users = User::role($type)->get();
+        }
     
-        $users = User::role($type)->get();
         $columns = array('id', 'name', 'mobile', 'email');
     
         $callback = function() use ($users, $columns)
