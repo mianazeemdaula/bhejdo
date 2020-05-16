@@ -20,9 +20,9 @@ class ReferralResource extends JsonResource
             'name' => $this->name,
             'dateOfSignup' => $this->created_at,
             'recentShopping' => $recent == null ? 0 : $recent->payable_amount,
-            'totalShopping' => 52500,
+            'totalShopping' => 0,
             'recentCommission' => $recent == null ? 0 : (($recent->payable_amount - $recent->charges - $recent->consumer_bonus) * 2 ) / 100,
-            'totalCommission' => 6520,
+            'totalCommission' => \App\CartOrder::where('consumer_id', $this->id)->where('status','droped')->sum('payable_amount'),
             'expiry' => \Carbon\Carbon::parse($this->created_at)->addYears(1),
         ];
     }
