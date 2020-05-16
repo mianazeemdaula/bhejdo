@@ -125,6 +125,6 @@ Route::get('catProduct', function(){
 });
 
 Route::get('pass', function(){
-    $monthly = \App\Subscription::where('status',1)->where('subscribe_type','monthly')->whereJsonContains('days',10)->get();
-    return $monthly;
+    $payable = \App\CartOrder::where('consumer_id', 7)->where('status','droped')->sum('payable_amount');
+    return $payable;
 });
