@@ -14,7 +14,7 @@ class ReferralResource extends JsonResource
      */
     public function toArray($request)
     {
-        $recent = \App\CartOrder::where('consumer_id',$this->id)->latest()->first();
+        $recent = \App\CartOrder::where('consumer_id',$this->id)->where('status','droped')->latest()->first();
         return [
             'id' => $this->id,
             'name' => $this->name,
