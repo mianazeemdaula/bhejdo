@@ -183,8 +183,8 @@ class UserController extends Controller
             fputcsv($file, $columns);
     
             foreach($users as $user) {
-                $mobile = substr($user->mobile,1);
-                fputcsv($file, array($user->id, $user->name, "=(+92".$mobile.")", $user->email));
+                $mobile = "+92".substr($user->mobile,1);
+                fputcsv($file, array($user->id, $user->name, '="'. $mobile .'"', $user->email));
             }
             fclose($file);
         };
