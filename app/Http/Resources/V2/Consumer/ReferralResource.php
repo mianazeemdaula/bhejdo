@@ -21,9 +21,9 @@ class ReferralResource extends JsonResource
             'name' => $this->name,
             'dateOfSignup' => $this->created_at,
             'recentShopping' => $recent == null ? 0 : $recent->payable_amount,
-            'totalShopping' => $payable == null ? 0 : round($payable),
+            'totalShopping' => $payable == null ? 0 : round($payable->amount),
             'recentCommission' => $recent == null ? 0 : round((($recent->payable_amount - $recent->charges - $recent->consumer_bonus) * 2 ) / 100),
-            'totalCommission' => $payable == null ? 0 : round(($payable * 2) / 100),
+            'totalCommission' => $payable == null ? 0 : round(($payable->amount * 2) / 100),
             'expiry' => \Carbon\Carbon::parse($this->created_at)->addYears(1),
         ];
     }
