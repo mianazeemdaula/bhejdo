@@ -20,7 +20,7 @@ class ReferralResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'dateOfSignup' => $this->created_at,
-            'recentShopping' => $recent == null ? 0 : $recent->payable_amount,
+            'recentShopping' => $recent == null ? 0 : $recent->payable_amount - $recent->charges - $recent->consumer_bonus,
             'totalShopping' => $payable == null ? 0 : round($payable->amount),
             'recentCommission' => $recent == null ? 0 : round((($recent->payable_amount - $recent->charges - $recent->consumer_bonus) * 2 ) / 100),
             'totalCommission' => $payable == null ? 0 : round(($payable->amount * 2) / 100),
