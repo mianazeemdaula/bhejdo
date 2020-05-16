@@ -125,6 +125,6 @@ Route::get('catProduct', function(){
 });
 
 Route::get('pass', function(){
-    $payable = \App\CartOrder::where('consumer_id', 7)->where('status','droped')->select(\DB::raw("(payable_amount-charges) as amount"))->groupBy('consumer_id')->get();
+    $payable = \App\CartOrder::where('consumer_id', 7)->where('status','droped')->select(\DB::raw("SUM(payable_amount-charges) as amount"))->groupBy('consumer_id')->get();
     return $payable;
 });
