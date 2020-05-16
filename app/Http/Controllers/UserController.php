@@ -169,7 +169,7 @@ class UserController extends Controller
 
         $users = null;
         if($type == 'purchase'){
-            $purchasers = \App\CartOrder::groupBy('consumer_id')->get()->pluck('consumer_id')->toArray();
+            $purchasers = \App\CartOrder::groupBy('consumer_id')->select('consumer_id')->get()->toArray();
             $users = User::find($purchasers);
         }else{
             $users = User::role($type)->get();
