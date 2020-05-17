@@ -149,10 +149,10 @@ class CartOrderController extends Controller
 
             $msg = "New Order\n #{$order->id} - {$order->created_at}\n {$order->consumer->name} {$order->consumer->mobile}\n";
             $msg .= $smsmessage;
-            $msgresponse = \App\Helpers\SmsHelper::send("03088608825", $msg);
-            $msgresponse = \App\Helpers\SmsHelper::send("03017374750", $msg);
-            //\App\Jobs\SendSmsJob::dispatch("03017374750", $msg, 'smsapi')->delay(now()->addSeconds(2);
-            //\App\Jobs\SendSmsJob::dispatch("03088608825", $msg, 'smsapi')->delay(now()->addSeconds(10);
+            // $msgresponse = \App\Helpers\SmsHelper::send("03088608825", $msg);
+            // $msgresponse = \App\Helpers\SmsHelper::send("03017374750", $msg);
+            \App\Jobs\SendSmsJob::dispatch("03017374750", $msg, 'smsapi')->delay(now()->addSeconds(2));
+            \App\Jobs\SendSmsJob::dispatch("03088608825", $msg, 'smsapi')->delay(now()->addSeconds(10));
             // $data = ['msg' => 'Order has placed successfully', 'response' => $response];
             return response()->json(['status'=>true, 'data' => $order, 'profile' => $profile], 200);
         }catch(Exception $ex){
