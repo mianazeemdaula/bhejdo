@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::prefix('admin')->group(function () {
+        Route::resource('city', 'admin\CityController',['as' => 'admin']);
         Route::resource('product', 'admin\ProductController',['as' => 'admin']);
         Route::resource('category', 'admin\CategoryController',['as' => 'admin']);
         Route::resource('order', 'admin\CartOrderController',['as' => 'admin']);
