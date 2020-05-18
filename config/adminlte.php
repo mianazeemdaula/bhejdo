@@ -225,6 +225,12 @@ return [
             'permission' => 'super-admin|admin|support'
         ],
         [
+            'text'        => 'City',
+            'route'         => 'city.index',
+            'icon'        => 'far fa-fw fa-file',
+            'permission' => 'super-admin|admin'
+        ],
+        [
             'text'        => 'Category',
             'route'         => 'admin.category.index',
             'icon'        => 'far fa-fw fa-file',
