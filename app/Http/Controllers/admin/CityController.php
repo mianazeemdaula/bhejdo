@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use App\Forms\Admin\Category\CreateCityForm;
+use App\Forms\Admin\City\CreateCityForm;
 
 use App\City;
 
