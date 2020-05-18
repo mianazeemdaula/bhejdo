@@ -26,7 +26,6 @@ class OfferController extends Controller
         try{
             $response = \App\Helpers\OfferProcess::processOffer($request->user()->id, $coupon, $request->amount);
             return response()->json( $response, 200);
-            
         }catch(Expection $ex){
             return response()->json(['status'=>false, 'data'=>"$ex"], 401);
         }

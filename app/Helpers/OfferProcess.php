@@ -15,8 +15,7 @@ class OfferProcess {
                 return ['status'=>false, 'data' => $data];
             }
             $isAvail = \App\CartOrder::where('consumer_id', $user)->where(function($query) {
-                $query->where('status', 'droped')
-                      ->orWhere('status', 'confirmed');
+                $query->where('status', '!=' ,'canceled')->orWhere('status','!=','declined');
             })->where('coupon',$code)->count();
             if($isAvail > 0){
                 $data = [
