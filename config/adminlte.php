@@ -226,7 +226,7 @@ return [
         ],
         [
             'text'        => 'City',
-            'route'         => 'city.index',
+            'route'         => 'admin.city.index',
             'icon'        => 'far fa-fw fa-file',
             'permission' => 'super-admin|admin'
         ],
