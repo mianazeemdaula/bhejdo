@@ -33,6 +33,8 @@ class ConsumerProfile extends JsonResource
             'addresses' => $this->addresses,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'open_time' => $this->city->open_time,
+            'close_time' => $this->city->close_time,
         ];
     }
 }
