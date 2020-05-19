@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            {!! form_row($form->voucher) !!}
+                            {!! form_row($form->coupon) !!}
                         </div>
                         <div class="col-md-6">
                             {!! form_row($form->delivery_time) !!}
