@@ -54,7 +54,7 @@ class AddressController extends Controller
             $address->location = new Point($request->latitude, $request->longitude);
             $address->save();
             DB::commit();
-            return redirect()->back()->with('status', 'Address created successfully!');
+            return redirect()->route('user.address.index',[$user])->with('status', 'Address created successfully!');
         }catch(Exception $ex){
             DB::rollBack();
             return redirect()->back()->with('status', 'Something went wrong');
