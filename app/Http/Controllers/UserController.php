@@ -92,7 +92,7 @@ class UserController extends Controller
                 'longitude' => 0,
                 'latitude' => 0
             ]);
-            Bonus::add($user->id,'Signup bonus','signup', 100);
+            \App\Bonus::add($user->id,'Signup bonus','signup', 100);
             $user->status = 'verified';
             $user->save();
         }
