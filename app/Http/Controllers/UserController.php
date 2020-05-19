@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\ServiceCharge;
 use Carbon\Carbon;
-
+use DB;
 use App\Helpers\AndroidNotifications;
 
 // Forms
@@ -72,31 +72,38 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $form = $this->form(CreateUserForm::class);
+        try{
+            DB::beginTransaction();
+            $form = $this->form(CreateUserForm::class);
 
-        if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
-        }
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->mobile = $request->mobile;
-        $user->password = bcrypt($request->password);
-        $user->account_type = $request->role;
-        $user->address = 'Lahore';
-        $user->city_id = $request->city_id;
-        $user->save();
-        $user->assignRole($request->role);
-        if($request->role == 'consumer'){
-            $profile = $user->profile()->create([
-                'longitude' => 0,
-                'latitude' => 0
-            ]);
-            \App\Bonus::add($user->id,'Signup bonus','signup', 100);
-            $user->status = 'verified';
+            if (!$form->isValid()) {
+                return redirect()->back()->withErrors($form->getErrors())->withInput();
+            }
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->mobile = $request->mobile;
+            $user->password = bcrypt($request->password);
+            $user->account_type = $request->role;
+            $user->address = 'Lahore';
+            $user->city_id = $request->city_id;
             $user->save();
+            $user->assignRole($request->role);
+            if($request->role == 'consumer'){
+                $profile = $user->profile()->create([
+                    'longitude' => 0,
+                    'latitude' => 0
+                ]);
+                \App\Bonus::add($user->id,'Signup bonus','signup', 100);
+                $user->status = 'verified';
+                $user->save();
+            }
+            DB::commit();
+            return redirect()->back()->with('status', 'User Created!');
+        }catch(Expection $ex){
+            DB::rollBack();
+            return redirect()->back()->with('status', 'Something went wrong!');
         }
-        return redirect()->back()->with('status', 'User Created!');
     }
 
     /**
