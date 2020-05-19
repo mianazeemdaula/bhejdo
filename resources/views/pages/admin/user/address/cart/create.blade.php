@@ -22,8 +22,11 @@
                 {!! form_start($form) !!}
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             {!! form_row($form->voucher) !!}
+                        </div>
+                        <div class="col-md-6">
+                            {!! form_row($form->delivery_time) !!}
                         </div>
                     </div>
                     
