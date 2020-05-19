@@ -10,7 +10,7 @@ class CreateOrderForm extends Form
     {
         $this
         ->add('coupon', 'text',  [
-            'rules' => 'required|min:2',
+            'rules' => 'min:5',
             'label' => 'Coupon'
         ])->add('delivery_time', 'time',  [
             'rules' => 'required|min:2',
