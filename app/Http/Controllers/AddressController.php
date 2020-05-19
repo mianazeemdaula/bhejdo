@@ -87,7 +87,7 @@ class AddressController extends Controller
     {
         $address = Address::find($id);
         $form = $this->form(CreateAddressForm::class, [
-            'method' => 'POST',
+            'method' => 'PUT',
             'class' => 'form-horizontal',
             'model' => $address,
             'url' => route('user.address.update',[$user, $id])
