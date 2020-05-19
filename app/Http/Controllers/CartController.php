@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Address;
+use App\User;
+use App\CartOrder;
+use DB;
+
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use App\Forms\Admin\Cart\CreateOrderForm;
+
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use FormBuilderTrait;
+
     public function index($user, $address)
     {
 
@@ -23,7 +28,15 @@ class CartController extends Controller
      */
     public function create($user, $address)
     {
-        return "cart create".$user."-".$address;
+        $user = User::find($user);
+        $address = Address::find($address);
+        $form = $this->form(CreateOrderForm::class, [
+            'method' => 'POST',
+            'class' => 'form-horizontal',
+            'url' => route('user.address.cart.store',[$user->id, $address->id])
+        ]);
+        $products = \App\Product::where('city_id',$user->city_id)->get();
+        return view('pages.admin.user.address.create', compact('form','user','address','products'));
     }
 
     /**
