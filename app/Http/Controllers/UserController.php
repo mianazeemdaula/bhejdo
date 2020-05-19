@@ -83,9 +83,19 @@ class UserController extends Controller
         $user->mobile = $request->mobile;
         $user->password = bcrypt($request->password);
         $user->account_type = $request->role;
+        $user->address = 'Lahore';
         $user->city_id = $request->city_id;
         $user->save();
         $user->assignRole($request->role);
+        if($request->role == 'consumer'){
+            $profile = $user->profile()->create([
+                'longitude' => 0,
+                'latitude' => 0
+            ]);
+            Bonus::add($user->id,'Signup bonus','signup', 100);
+            $user->status = 'verified';
+            $user->save();
+        }
         return redirect()->back()->with('status', 'User Created!');
     }
 
