@@ -105,7 +105,7 @@
             var qty = $("#qty").val();
             var title = $("#labs option:selected").html();
             var price = $("#labs option:selected").data('price');
-            var markup = "<tr><td><input value='"+id+"' type='hidden' name='products[]'><input value='"+price+"' type='hidden' name='prices[]'>" + title + "</td><td>" + price + "</td><td><a class='cancel' href='#'>X</a></td></tr>";
+            var markup = "<tr><td><input value='"+id+"' type='hidden' name='products[]'><input value='"+price+"' type='hidden' name='prices[]'>" + title + "</td><td>"+qty+"</td><td>" + price * qty + "</td><td><a class='cancel' href='#'>X</a></td></tr>";
             $("#labs-table tbody").append(markup);
             calculateTotal();
         });
