@@ -151,10 +151,10 @@ class CartController extends Controller
             \App\Jobs\SendSmsJob::dispatch("03017374750", $msg, 'smsapi')->delay(now()->addSeconds(2));
             \App\Jobs\SendSmsJob::dispatch("03088608825", $msg, 'smsapi')->delay(now()->addSeconds(10));
             // $data = ['msg' => 'Order has placed successfully', 'response' => $response];
-            return response()->json(['status'=>true, 'data' => $order, 'profile' => $profile], 200);
-        }catch(Exception $ex){
+            return redirect()->route('admin.order.index')->with('status', 'Order created Successfully');
+        }catch(Expection $ex){
             DB::rollBack();
-            return response()->json(['status'=>false, 'data'=>"$ex"], 401);
+            return redirect()->back()->with('status', 'Something went wrong!');
         }
     }
 
