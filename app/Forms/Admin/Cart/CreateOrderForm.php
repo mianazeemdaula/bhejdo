@@ -12,6 +12,9 @@ class CreateOrderForm extends Form
         ->add('voucher', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Voucher'
+        ])->add('delivery_time', 'time',  [
+            'rules' => 'required|min:2',
+            'label' => 'Delivery Time'
         ]);
     }
 }
