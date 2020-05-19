@@ -36,7 +36,7 @@ class CartController extends Controller
             'url' => route('user.address.cart.store',[$user->id, $address->id])
         ]);
         $products = \App\Product::where('city_id',$user->city_id)->get();
-        return view('pages.admin.user.address.create', compact('form','user','address','products'));
+        return view('pages.admin.user.address.cart.create', compact('form','user','address','products'));
     }
 
     /**
