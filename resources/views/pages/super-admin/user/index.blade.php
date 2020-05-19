@@ -17,7 +17,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    @role('super-admin|admin')
+                    @role('super-admin|admin|support')
                     <div class="row">
                         <div class="col-md-10">
                             <a href="{{ route('user.create') }}" class="btn btn-primary" > Create User</a>
