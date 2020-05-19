@@ -117,6 +117,7 @@
             $("#labs-table tbody").find("tr").each(function(){
                 qty = parseInt($(this).find("td:nth-child(1)").text());
                 price = parseInt($(this).find("td:nth-child(2)").text());
+                console.log(price);
                 sum += qty * price;
             });
             $("#total").html(sum);
