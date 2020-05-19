@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-md-2">
                             <label for="medicine" class="control-label required">Qty</label>
-                            <input type="text" name="qty" id="qty" class="">
+                            <input type="text" name="qty" id="qty" class="form-control">
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
