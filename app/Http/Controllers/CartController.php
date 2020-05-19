@@ -73,14 +73,14 @@ class CartController extends Controller
             $order->save();
             
             // Order Details Entry
-            $cartItems =  json_decode($request->products);
+            $cartItems = $request->products;
             $produts = \App\Product::whereIn('id',$cartItems)->get();
 
             $productDetails = [];
             $payableAmount = 0;
             $bonusDeduction = 0;
             $smsmessage = "";
-            $quantities = json_decode($request->qty);
+            $quantities = $request->qty;
             for($i = 0; $i < count($cartItems) ; $i++ ){
                 $product = $produts->find($cartItems[$i]);
                 $qty = $quantities[$i];
