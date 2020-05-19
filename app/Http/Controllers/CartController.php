@@ -11,9 +11,9 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user, $address)
     {
-        //
+
     }
 
     /**
@@ -21,9 +21,9 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($user)
+    public function create($user, $address)
     {
-        return "cart create".$user;
+        return "cart create".$user."-".$address;
     }
 
     /**

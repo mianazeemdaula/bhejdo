@@ -43,7 +43,7 @@
                                     <td> {{ $item->updated_at}} </td>
                                     <td> 
                                       <div class="btn-group">
-                                        <a href="#" class="btn-sm btn-default"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('user.address.cart.create',[$user->id, $item->id]) }}" class="btn-sm btn-default"><i class="fas fa-shopping-cart"></i></a>
                                         <a href="{{ route('user.address.edit',[$user->id, $item->id]) }}" type="button" class="btn-sm btn-default"><i class="fas fa-edit"></i></a>
                                         <a href="#" class="btn-sm btn-default"><i class="fas fa-trash"></i></a>
                                       </div>
