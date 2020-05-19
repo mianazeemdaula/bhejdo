@@ -8,6 +8,10 @@ class CreateOrderForm extends Form
 {
     public function buildForm()
     {
-        // Add fields here...
+        $this
+        ->add('voucher', 'text',  [
+            'rules' => 'required|min:2',
+            'label' => 'Voucher'
+        ]);
     }
 }
