@@ -105,17 +105,19 @@
             var qty = $("#qty").val();
             var title = $("#labs option:selected").html();
             var price = $("#labs option:selected").data('price');
-            var markup = "<tr><td><input value='"+id+"' type='hidden' name='products[]'><input value='"+price+"' type='hidden' name='prices[]'>" + title + "</td><td>"+qty+"</td><td>" + price * qty + "</td><td><a class='cancel' href='#'>X</a></td></tr>";
+            var markup = "<tr><td><input value='"+id+"' type='hidden' name='products[]'><input value='"+qty+"' type='hidden' name='qty[]'>" + title + "</td><td>"+qty+"</td><td>" + price * qty + "</td><td><a class='cancel' href='#'>X</a></td></tr>";
             $("#labs-table tbody").append(markup);
             calculateTotal();
         });
         
         function calculateTotal(){
             var sum = 0;
+            var price = 0;
             var qty = 0;
             $("#labs-table tbody").find("tr").each(function(){
-                qty += parseInt($(this).find("td:nth-child(1)").text());
-                sum += parseInt($(this).find("td:nth-child(2)").text());
+                qty = parseInt($(this).find("td:nth-child(1)").text());
+                price = parseInt($(this).find("td:nth-child(2)").text());
+                sum += qty * price;
             });
             $("#total").html(sum);
         }
