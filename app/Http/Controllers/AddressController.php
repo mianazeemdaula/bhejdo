@@ -51,7 +51,7 @@ class AddressController extends Controller
             $address->user_id = $user;
             $address->title = strlen(trim($request->title)) == 0 ? "Not Set" : $request->title;
             $address->address = $request->address;
-            $address->location = new Point($request->lat, $request->lon);
+            $address->location = new Point($request->latitude, $request->longitude);
             $address->save();
             DB::commit();
             return redirect()->back()->with('status', 'Address created successfully!');

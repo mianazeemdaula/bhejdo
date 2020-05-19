@@ -17,11 +17,11 @@ class CreateAddressForm extends Form
             'rules' => 'required|min:2',
             'label' => 'Address'
         ])
-        ->add('latitude', 'number',  [
-            'rules' => 'required|min:2',
+        ->add('latitude', 'text',  [
+            'rules' => 'required|min:2|',
             'label' => 'Latitude'
         ])
-        ->add('longitude', 'number',  [
+        ->add('longitude', 'text',  [
             'rules' => 'required|min:2',
             'label' => 'Longitude'
         ]);
