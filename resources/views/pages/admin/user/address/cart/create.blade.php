@@ -84,7 +84,7 @@
                     <!-- /.col -->
                   </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="submit" class="btn btn-info">Create Order</button>
                     <button type="submit" class="btn btn-default float-right">Cancel</button>
                 </div>
                 {!! form_end($form) !!}
