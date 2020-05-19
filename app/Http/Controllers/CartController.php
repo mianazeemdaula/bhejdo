@@ -23,7 +23,7 @@ class CartController extends Controller
      */
     public function create($user)
     {
-        return "cart create";
+        return "cart create".$user;
     }
 
     /**
