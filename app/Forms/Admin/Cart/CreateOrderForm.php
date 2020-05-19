@@ -9,9 +9,9 @@ class CreateOrderForm extends Form
     public function buildForm()
     {
         $this
-        ->add('voucher', 'text',  [
+        ->add('coupon', 'text',  [
             'rules' => 'required|min:2',
-            'label' => 'Voucher'
+            'label' => 'Coupon'
         ])->add('delivery_time', 'time',  [
             'rules' => 'required|min:2',
             'label' => 'Delivery Time'
