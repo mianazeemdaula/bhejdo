@@ -56,7 +56,7 @@
                                     <td> {{ $item->updated_at}} </td>
                                     <td> 
                                       <div class="btn-group">
-                                        @if($item->hasRole('consumer'))<a href="{{ route('user.cart.create',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-shopping-cart"></i></a>@endif
+                                        @if($item->hasRole('consumer'))<a href="{{ route('user.address.index',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-shopping-cart"></i></a>@endif
                                         <a href="{{ route('user.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('user.edit',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-edit"></i></a>
                                         <a href="{{ url('user/notification/'.$item->id) }}" class="btn-sm btn-default"><i class="fas fa-trash"></i></a>

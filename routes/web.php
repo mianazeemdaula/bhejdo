@@ -79,7 +79,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user.charges', 'ServiceChargeController');
     Route::resource('user.bonus', 'BonusController');
     Route::resource('user.wallet', 'WalletController');
-    Route::resource('user.cart', 'CartController');
+    Route::resource('user.address', 'AddressController');
+    Route::resource('user.address.cart', 'CartController');
     Route::resource('notification', 'NotificationController');
     Route::resource('sms', 'SmsController');
     Route::resource('offer', 'OfferController');
