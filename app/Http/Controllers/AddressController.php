@@ -46,6 +46,11 @@ class AddressController extends Controller
     public function store(Request $request, $user)
     {
         try{
+            $form = $this->form(CreateAddressForm::class);
+
+            if (!$form->isValid()) {
+                return redirect()->back()->withErrors($form->getErrors())->withInput();
+            }
             DB::beginTransaction();
             $address = new Address();
             $address->user_id = $user;
@@ -78,9 +83,16 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user,$id)
     {
-        //
+        $address = Address::find($id);
+        $form = $this->form(CreateAddressForm::class, [
+            'method' => 'POST',
+            'class' => 'form-horizontal',
+            'model' => $address,
+            'url' => route('user.address.store',[$user, $id])
+        ]);
+        return view('pages.admin.user.address.create', compact('form'));
     }
 
     /**
@@ -90,9 +102,27 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user, $id)
     {
-        //
+        try{
+            $form = $this->form(CreateAddressForm::class);
+
+            if (!$form->isValid()) {
+                return redirect()->back()->withErrors($form->getErrors())->withInput();
+            }
+            DB::beginTransaction();
+            $address = Address::find($id);
+            $address->user_id = $user;
+            $address->title = strlen(trim($request->title)) == 0 ? "Not Set" : $request->title;
+            $address->address = $request->address;
+            $address->location = new Point($request->latitude, $request->longitude);
+            $address->save();
+            DB::commit();
+            return redirect()->route('user.address.index',[$user])->with('status', 'Address updated successfully!');
+        }catch(Exception $ex){
+            DB::rollBack();
+            return redirect()->back()->with('status', 'Something went wrong');
+        }
     }
 
     /**
