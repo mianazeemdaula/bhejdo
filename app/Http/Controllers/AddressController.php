@@ -90,7 +90,7 @@ class AddressController extends Controller
             'method' => 'POST',
             'class' => 'form-horizontal',
             'model' => $address,
-            'url' => route('user.address.store',[$user, $id])
+            'url' => route('user.address.update',[$user, $id])
         ]);
         return view('pages.admin.user.address.create', compact('form'));
     }
