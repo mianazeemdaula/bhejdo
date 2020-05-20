@@ -29,6 +29,10 @@
                                 <th>Name</th>
                                 <th>Open Time</th>
                                 <th>Close Time</th>
+                                <th>Bullet</th>
+                                <th>Normal</th>
+                                <th>Bullet Time</th>
+                                <th>Normal Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -39,6 +43,10 @@
                                     <td> {{ $item->name }} </td>
                                     <td> {{ $item->open_time }} </td>
                                     <td> {{ $item->close_time }} </td>
+                                    <td> {{ $item->bullet_delivery_charges }} </td>
+                                    <td> {{ $item->delivery_charges }} </td>
+                                    <td> {{ $item->bullet_delivery_time }} </td>
+                                    <td> {{ $item->normal_delivery_time }} </td>
                                     <td> 
                                       <div class="btn-group">
                                         <a href="{{ route('admin.city.show',[$item->id]) }}" type="button" class="btn btn-default"><i class="fas fa-eye"></i></a>
