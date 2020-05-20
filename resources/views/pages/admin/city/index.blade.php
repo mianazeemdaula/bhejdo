@@ -43,7 +43,7 @@
                                     <td> {{ $item->name }} </td>
                                     <td> {{ $item->open_time }} </td>
                                     <td> {{ $item->close_time }} </td>
-                                    <td> {{ $item->bullet_delivery_charges }} </td>
+                                    <td> {{ $item->bullet_charges }} </td>
                                     <td> {{ $item->delivery_charges }} </td>
                                     <td> {{ $item->bullet_delivery_time }} </td>
                                     <td> {{ $item->normal_delivery_time }} </td>
