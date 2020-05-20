@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Category Form
+                        City Form
                     </h3>
                 </div>
                 {!! form_start($form) !!}
