@@ -36,6 +36,9 @@ class CreateCityForm extends Form
         ])->add('bullet_delivery_time', 'number',  [
             'rules' => 'required|min:1',
             'label' => 'Bullet Delivery Time (in minutes)'
+        ])->add('free_delivery_shopping', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Free Delivery on Shopping'
         ])->add('status', 'choice', [
             'choices' => ['1' => 'Active', '0' => 'Deactive'],
             'expanded' => true,

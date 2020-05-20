@@ -60,6 +60,7 @@ class CityController extends Controller
             $city->delivery_charges = $request->delivery_charges;
             $city->normal_delivery_time = $request->normal_delivery_time;
             $city->bullet_delivery_time = $request->bullet_delivery_time;
+            $city->free_delivery_shopping = $request->free_delivery_shopping;
             $city->status = $request->status;
             $city->save();
             DB::commit();
@@ -126,6 +127,7 @@ class CityController extends Controller
             $city->delivery_charges = $request->delivery_charges;
             $city->normal_delivery_time = $request->normal_delivery_time;
             $city->bullet_delivery_time = $request->bullet_delivery_time;
+            $city->free_delivery_shopping = $request->free_delivery_shopping;
             $city->status = $request->status;
             $city->save();
             DB::commit();
