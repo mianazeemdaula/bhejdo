@@ -54,6 +54,12 @@ class CityController extends Controller
             $city->name = $request->name;
             $city->open_time = $request->open_time;
             $city->close_time = $request->close_time;
+            $city->bullet_charges_cross = $request->bullet_charges_cross;
+            $city->bullet_charges = $request->bullet_charges;
+            $city->delivery_charges_cross = $request->delivery_charges_cross;
+            $city->delivery_charges = $request->delivery_charges;
+            $city->normal_delivery_time = $request->normal_delivery_time;
+            $city->bullet_delivery_time = $request->bullet_delivery_time;
             $city->status = $request->status;
             $city->save();
             DB::commit();
@@ -114,6 +120,12 @@ class CityController extends Controller
             $city->name = $request->name;
             $city->open_time = $request->open_time;
             $city->close_time = $request->close_time;
+            $city->bullet_charges_cross = $request->bullet_charges_cross;
+            $city->bullet_charges = $request->bullet_charges;
+            $city->delivery_charges_cross = $request->delivery_charges_cross;
+            $city->delivery_charges = $request->delivery_charges;
+            $city->normal_delivery_time = $request->normal_delivery_time;
+            $city->bullet_delivery_time = $request->bullet_delivery_time;
             $city->status = $request->status;
             $city->save();
             DB::commit();

@@ -18,6 +18,24 @@ class CreateCityForm extends Form
         ])->add('close_time', 'time',  [
             'rules' => 'required',
             'label' => 'Close Time'
+        ])->add('bullet_charges_cross', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Bullet Delivery Charges Cross'
+        ])->add('bullet_charges', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Bullet Delivery Charges'
+        ])->add('delivery_charges_cross', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Noraml Delivery Charge Cross'
+        ])->add('delivery_charges', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Normal Delivery Charges'
+        ])->add('normal_delivery_time', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Normal Delivery Time (in minutes)'
+        ])->add('bullet_delivery_time', 'number',  [
+            'rules' => 'required|min:1',
+            'label' => 'Bullet Delivery Time (in minutes)'
         ])->add('status', 'choice', [
             'choices' => ['1' => 'Active', '0' => 'Deactive'],
             'expanded' => true,
