@@ -10,6 +10,7 @@ use App\Forms\Admin\City\CreateCityForm;
 
 use App\City;
 use DB;
+
 class CityController extends Controller
 {
     use FormBuilderTrait;
