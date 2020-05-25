@@ -97,6 +97,13 @@ class UserController extends Controller
                 \App\Bonus::add($user->id,'Signup bonus','signup', 100);
                 $user->status = 'verified';
                 $user->save();
+            }else if($request->role == 'advertiser'){
+                $profile = $user->profile()->create([
+                    'longitude' => 0,
+                    'latitude' => 0
+                ]);
+                $user->status = 'verified';
+                $user->save();
             }
             DB::commit();
             return redirect()->back()->with('status', 'User Created!');
