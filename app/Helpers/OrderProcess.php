@@ -243,6 +243,17 @@ class OrderProcess {
                     }
                 }
             }
+            // Add Bonus to the reffered on first order
+            $user = User::find($order->consumer_id);
+            if($user != null){
+                if($user->referred_by != null && $user->referr_paid == 0){
+                    $amount = 50;
+                    $referrBy = User::where('mobile', $user->referred_by)->first();
+                    \App\Bonus::add($referrBy->id, "Referr bonus of {$offer->title}", 'referr', $amount);
+                    $user->referr_paid = 1;
+                    $user->save();
+                }
+            }
             return true;
         }else if(strtolower($status) == 'completed'){
             $order->status = 'completed';
