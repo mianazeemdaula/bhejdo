@@ -28,7 +28,7 @@ class AuthController extends Controller
         if(Auth::attempt($credentials))
         {
             $user = Auth::user();
-            if($user->hasRole('consumer')){
+            if($user->hasRole('consumer|advertiser')){
                 $success['user'] = new \App\Http\Resources\Profile\ConsumerProfile($user); 
                 $success['token'] = $user->createToken($user->account_type)->accessToken; 
                 $settings = config('ohyes.consumer');
